@@ -5,7 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Admob {
   static int _numBannerLoadAttempts = 0;
-  static int _maxFailedLoadAttempts = 3;
+  static const int _maxFailedLoadAttempts = 3;
 
   static late int anchoredBannerHeightAd;
   static late int anchoredBannerWidthAd;
@@ -29,7 +29,7 @@ class Admob {
 
     final BannerAd banner = BannerAd(
       size: _size,
-      request: AdRequest(),
+      request: const AdRequest(),
       adUnitId: _bannerAdUnitId,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) => debugPrint('$BannerAd loaded.'),
@@ -37,14 +37,15 @@ class Admob {
           debugPrint('Ad failed to load: $error');
           _numBannerLoadAttempts++;
 
-          if (_numBannerLoadAttempts != _maxFailedLoadAttempts)
+          if (_numBannerLoadAttempts != _maxFailedLoadAttempts) {
             createAnchoredBanner(context);
-          else
+          } else {
             ad.dispose();
+          }
         },
         onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
         onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
-        onAdImpression: (Ad ad) => debugPrint('Success \o/ .'),
+        onAdImpression: (Ad ad) => debugPrint('Success|o| .'),
       ),
     );
     return banner;
@@ -55,20 +56,21 @@ class Admob {
     final BannerAd banner = BannerAd(
       adUnitId: _bannerAdUnitId,
       size: AdSize.mediumRectangle,
-      request: AdRequest(),
+      request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) => debugPrint('Ad loaded.'),
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           debugPrint('Ad failed to load: $error');
           _numBannerLoadAttempts++;
-          if (_numBannerLoadAttempts != _maxFailedLoadAttempts)
+          if (_numBannerLoadAttempts != _maxFailedLoadAttempts) {
             createBannerRetanguleAd();
-          else
+          } else {
             ad.dispose();
+          }
         },
         onAdOpened: (Ad ad) => debugPrint('Ad opened.'),
         onAdClosed: (Ad ad) => debugPrint('Ad closed'),
-        onAdImpression: (Ad ad) => debugPrint('Success \o/ .'),
+        onAdImpression: (Ad ad) => debugPrint('Success |O| .'),
       ),
     );
     return banner;

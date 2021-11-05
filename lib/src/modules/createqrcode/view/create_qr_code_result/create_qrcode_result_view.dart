@@ -12,28 +12,29 @@ import 'package:easy_localization/easy_localization.dart';
 class CreateQRCodeResult extends StatefulWidget {
   final String dataQRCode;
 
-  const CreateQRCodeResult({required this.dataQRCode});
+  const CreateQRCodeResult({required this.dataQRCode, Key? key})
+      : super(key: key);
 
   @override
   _CreateQRCodeResultState createState() => _CreateQRCodeResultState();
 }
 
 class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
-  ScreenshotController _screenshotController = ScreenshotController();
+  final ScreenshotController _screenshotController = ScreenshotController();
   bool _loadingAnchoredBanner = false;
   final ValueNotifier<AdWidget?> _adWidget = ValueNotifier<AdWidget?>(null);
 
   @override
   void didChangeDependencies() {
-    if (!_loadingAnchoredBanner)
+    if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {
           _adWidget.value = AdWidget(key: UniqueKey(), ad: banner..load());
           Admob.anchoredBannerHeightAd = banner.size.height;
           Admob.anchoredBannerWidthAd = banner.size.width;
         }
-      })
-        ..whenComplete(() => _loadingAnchoredBanner = true);
+      }).whenComplete(() => _loadingAnchoredBanner = true);
+    }
     super.didChangeDependencies();
   }
 
@@ -44,7 +45,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   }
 
   void _popupQRCodeSave() {
-    Future.delayed(Duration(milliseconds: 500), () => Navigator.pop(context));
+    Future.delayed(
+        const Duration(milliseconds: 500), () => Navigator.pop(context));
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -54,7 +56,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   }
 
   void _popupError() {
-    Future.delayed(Duration(seconds: 1), () => Navigator.pop(context));
+    Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -67,10 +69,10 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         title: Text('createResultQRCodeAppBarTitle'.tr()),
       ),
-      body: Container(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -110,7 +112,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 40.h,
                           width: 95.w,
                           child: Center(
@@ -133,7 +135,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 40.h,
                           width: 95.w,
                           child: Center(
@@ -160,7 +162,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
             _loadingAnchoredBanner == true
-                ? Container(
+                ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),
                     child: value,

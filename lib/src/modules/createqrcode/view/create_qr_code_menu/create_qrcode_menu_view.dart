@@ -4,11 +4,11 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code_menu/
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateQRCodeMenu extends StatelessWidget {
-  const CreateQRCodeMenu();
+  const CreateQRCodeMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: GridView.builder(

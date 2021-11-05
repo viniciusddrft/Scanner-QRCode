@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/home/view/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp();
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

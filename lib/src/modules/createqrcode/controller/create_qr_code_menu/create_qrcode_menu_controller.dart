@@ -33,32 +33,32 @@ class MenuItens {
       'icon': Icon(FontAwesomeIcons.github, size: 40.sp),
       'text': 'createQRCodeMenuGithub'.tr(),
       'typeQRCode': 'github',
-      'color': Color(0xff2B2D30)
+      'color': const Color(0xff2B2D30)
     },
     {
       'icon': Icon(FontAwesomeIcons.whatsapp, size: 40.sp),
       'text': 'createQRCodeMenuWhatsapp'.tr(),
       'typeQRCode': 'whatsapp',
-      'color': Color(0xff30DD50)
+      'color': const Color(0xff30DD50)
     },
     {
       'icon':
           Icon(FontAwesomeIcons.instagram, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuInstagram'.tr(),
       'typeQRCode': 'instagram',
-      'color': Color(0xffD23F98)
+      'color': const Color(0xffD23F98)
     },
     {
       'icon': Icon(FontAwesomeIcons.tiktok, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuTiktok'.tr(),
       'typeQRCode': 'tiktok',
-      'color': Color(0xff010101)
+      'color': const Color(0xff010101)
     },
     {
       'icon': Icon(FontAwesomeIcons.facebook, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuFacebook'.tr(),
       'typeQRCode': 'facebook',
-      'color': Color(0xff3b5998)
+      'color': const Color(0xff3b5998)
     },
     {
       'icon': Icon(FontAwesomeIcons.youtube, color: Colors.white, size: 40.sp),
@@ -70,19 +70,19 @@ class MenuItens {
       'icon': Icon(FontAwesomeIcons.twitter, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuTwitter'.tr(),
       'typeQRCode': 'twitter',
-      'color': Color(0xff1DA1F2)
+      'color': const Color(0xff1DA1F2)
     },
     {
       'icon': Icon(FontAwesomeIcons.twitch, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuTwitch'.tr(),
       'typeQRCode': 'twitch',
-      'color': Color(0xff9146FF)
+      'color': const Color(0xff9146FF)
     },
     {
       'icon': Icon(FontAwesomeIcons.reddit, color: Colors.white, size: 40.sp),
       'text': 'createQRCodeMenuReddit'.tr(),
       'typeQRCode': 'reddit',
-      'color': Color(0xffFF4500)
+      'color': const Color(0xffFF4500)
     },
   ];
 }

@@ -3,13 +3,13 @@ import 'package:scannerqrcode/src/modules/help/components/button_help_widget.dar
 import 'package:easy_localization/easy_localization.dart';
 
 class HelpView extends StatelessWidget {
-  const HelpView();
+  const HelpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         title: Text('settingsFrequentProblems'.tr()),
       ),
       body: SingleChildScrollView(

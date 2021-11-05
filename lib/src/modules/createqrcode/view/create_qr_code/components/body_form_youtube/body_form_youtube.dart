@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class BodyFormYoutube extends BaseForm {
+  BodyFormYoutube({Key? key}) : super(key: key);
+
   @override
   _BodyFormYoutubeState createState() => _BodyFormYoutubeState();
 }
@@ -26,61 +28,60 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Form(
-        key: widget.getKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 15.sp),
-                    child: Text(
-                      'createQRCodeYoutubeMsg1'.tr(),
-                      style: TextStyle(fontSize: 14.sp),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.sp),
-                    child: Text(
-                      'createQRCodeYoutubeMsg2'.tr(),
-                      style: TextStyle(fontSize: 14.sp),
-                    ),
-                  ),
-                  Text(
-                    'createQRCodeYoutubeMsg3'.tr(),
+    return Form(
+      key: widget.getKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 15.sp),
+                  child: Text(
+                    'createQRCodeYoutubeMsg1'.tr(),
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
-              child: TextFormField(
-                validator: (value) {
-                  if (value != null && value.isNotEmpty)
-                    return null;
-                  else
-                    return 'createQRCodeYoutubeValidatorError'.tr();
-                },
-                controller: _textEditingController,
-                decoration: InputDecoration(
-                  labelText: 'createQRCodeYoutubeLabelDecorate'.tr() + ' ...',
-                  border: OutlineInputBorder(),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.sp),
+                  child: Text(
+                    'createQRCodeYoutubeMsg2'.tr(),
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                ),
+                Text(
+                  'createQRCodeYoutubeMsg3'.tr(),
+                  style: TextStyle(fontSize: 14.sp),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            child: TextFormField(
+              validator: (value) {
+                if (value != null && value.isNotEmpty) {
+                  return null;
+                } else {
+                  return 'createQRCodeYoutubeValidatorError'.tr();
+                }
+              },
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                labelText: 'createQRCodeYoutubeLabelDecorate'.tr() + ' ...',
+                border: const OutlineInputBorder(),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 90.w),
-              child: widget.makeButtoncreateQRCode(
-                  context: context, filter: _filterToCreateQrcodeYoutube),
-            ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 90.w),
+            child: widget.makeButtoncreateQRCode(
+                context: context, filter: _filterToCreateQrcodeYoutube),
+          ),
+        ],
       ),
     );
   }

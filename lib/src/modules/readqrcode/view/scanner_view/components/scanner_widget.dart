@@ -6,8 +6,8 @@ import 'package:scannerqrcode/src/modules/readqrcode/view/resultreadcode/resultr
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScannerWidget extends StatefulWidget {
-  final List<CameraDescription> camera;
-  const ScannerWidget({required this.camera});
+  final List<CameraDescription> cameras;
+  const ScannerWidget({required this.cameras, Key? key}) : super(key: key);
 
   @override
   _ScannerWidgetState createState() => _ScannerWidgetState();
@@ -16,41 +16,63 @@ class ScannerWidget extends StatefulWidget {
 class _ScannerWidgetState extends State<ScannerWidget>
     with WidgetsBindingObserver {
   final BarcodeScanner _scanner = GoogleMlKit.vision.barcodeScanner();
-  final ValueNotifier<bool> _loadCam = ValueNotifier<bool>(false);
   CameraController? _controller;
+  final ValueNotifier<bool> _isLoadCam = ValueNotifier<bool>(false);
 
   @override
   void initState() {
-    _controller =
-        CameraController(widget.camera.first, ResolutionPreset.medium);
-    _controller!.initialize().then(
-      (_) {
-        _controller!
-            .startImageStream((CameraImage image) => _processImage(image));
-        _loadCam.value = _controller!.value.isInitialized;
-      },
-    );
+    onNewCameraSelected(widget.cameras[0]);
     super.initState();
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (_controller == null || !_controller!.value.isInitialized) {
-      return;
-    }
-    if (state == AppLifecycleState.inactive) {
-      _controller?.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      if (_controller != null) {
-        return;
-      }
-    }
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
   }
 
   @override
-  void dispose() {
-    disposeAll();
-    super.dispose();
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = _controller;
+
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    } else if (state == AppLifecycleState.resumed) {
+      onNewCameraSelected(cameraController.description);
+    }
+  }
+
+  void onNewCameraSelected(CameraDescription cameraDescription) async {
+    final previousCameraController = _controller;
+
+    final CameraController cameraController = CameraController(
+      cameraDescription,
+      ResolutionPreset.medium,
+    );
+    await previousCameraController?.dispose();
+
+    if (mounted) {
+      setState(() => _controller = cameraController);
+    }
+    cameraController.addListener(() {
+      if (mounted) setState(() {});
+    });
+
+    try {
+      await cameraController.initialize();
+      cameraController
+          .startImageStream((CameraImage image) => _processImage(image));
+    } on CameraException catch (e) {
+      debugPrint('Error initializing camera: $e');
+    }
+
+    if (mounted) {
+      setState(() => _isLoadCam.value = _controller!.value.isInitialized);
+    }
   }
 
   void _showResult(String code, BarcodeType type) async {
@@ -83,7 +105,7 @@ class _ScannerWidgetState extends State<ScannerWidget>
 
       final InputImageRotation _imageRotation =
           InputImageRotationMethods.fromRawValue(
-                  widget.camera.first.sensorOrientation) ??
+                  widget.cameras.first.sensorOrientation) ??
               InputImageRotation.Rotation_0deg;
       final InputImageFormat _inputImageFormat =
           InputImageFormatMethods.fromRawValue(cameraImage.format.raw) ??
@@ -125,20 +147,10 @@ class _ScannerWidgetState extends State<ScannerWidget>
     }
   }
 
-  void disposeAll() async {
-    await _scanner.close();
-    if (_controller!.value.isStreamingImages) {
-      await _controller!.stopImageStream();
-    }
-    await _controller!.dispose();
-    _controller = null;
-    _loadCam.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: _loadCam,
+      valueListenable: _isLoadCam,
       builder: (BuildContext context, bool value, Widget? child) => value
           ? SizedBox(
               height: MediaQuery.of(context).size.height,
@@ -149,7 +161,7 @@ class _ScannerWidgetState extends State<ScannerWidget>
               child: SizedBox(
                 height: 200.h,
                 width: 200.w,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   strokeWidth: 7,
                 ),
               ),

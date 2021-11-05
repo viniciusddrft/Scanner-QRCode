@@ -16,21 +16,21 @@ class ButtonCreateQRCodeSetShape extends StatefulWidget {
   //this class has a constructor to change the qr code's body or eye parameters
   //and though booleans it sets the texts and popup options
 
-  const ButtonCreateQRCodeSetShape.eye({
-    required this.eyeShape,
-    required this.colorEyeShape,
-  })  : isEye = true,
+  const ButtonCreateQRCodeSetShape.eye(
+      {required this.eyeShape, required this.colorEyeShape, Key? key})
+      : isEye = true,
         bodyShape = null,
         colorBodyShape = null,
-        isBody = false;
+        isBody = false,
+        super(key: key);
 
-  const ButtonCreateQRCodeSetShape.body({
-    required this.bodyShape,
-    required this.colorBodyShape,
-  })  : this.isBody = true,
+  const ButtonCreateQRCodeSetShape.body(
+      {required this.bodyShape, required this.colorBodyShape, Key? key})
+      : isBody = true,
         eyeShape = null,
         colorEyeShape = null,
-        isEye = false;
+        isEye = false,
+        super(key: key);
 
   @override
   State<ButtonCreateQRCodeSetShape> createState() =>
@@ -61,7 +61,7 @@ class _ButtonCreateQRCodeSetShapeState
         title: widget.isEye && !widget.isBody
             ? Text('settingsPopupColorEyeTitle'.tr())
             : Text('settingsPopupColorShapeTitle'.tr()),
-        content: Container(
+        content: SizedBox(
           height: MediaQuery.of(context).size.height / 4,
           width: MediaQuery.of(context).size.width / 1.5,
           child: Padding(
@@ -70,7 +70,7 @@ class _ButtonCreateQRCodeSetShapeState
               itemCount: widget.isEye && !widget.isBody
                   ? QrEyeShape.values.length
                   : QrDataModuleShape.values.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 30,
                 mainAxisSpacing: 30,
@@ -139,7 +139,7 @@ class _ButtonCreateQRCodeSetShapeState
       builder: (BuildContext context, Widget? child) => Padding(
         padding:
             EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-        child: Container(
+        child: SizedBox(
           height: 45.h,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(

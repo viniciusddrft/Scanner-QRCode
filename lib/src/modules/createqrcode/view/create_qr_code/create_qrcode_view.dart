@@ -18,7 +18,8 @@ import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart'
 
 class CreateQRCodeView extends StatefulWidget {
   final String typeQRCode;
-  const CreateQRCodeView({required this.typeQRCode});
+  const CreateQRCodeView({required this.typeQRCode, Key? key})
+      : super(key: key);
 
   @override
   _CreateQRCodeViewState createState() => _CreateQRCodeViewState();
@@ -77,15 +78,15 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
 
   @override
   void didChangeDependencies() {
-    if (!_loadingAnchoredBanner)
+    if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {
           _adWidget.value = AdWidget(key: UniqueKey(), ad: banner..load());
           Admob.anchoredBannerHeightAd = banner.size.height;
           Admob.anchoredBannerWidthAd = banner.size.width;
         }
-      })
-        ..whenComplete(() => _loadingAnchoredBanner = true);
+      }).whenComplete(() => _loadingAnchoredBanner = true);
+    }
     super.didChangeDependencies();
   }
 
@@ -99,7 +100,7 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         title: Text(_titleAppBar),
       ),
       body: _bodyFormQRCodeWidget,
@@ -107,7 +108,7 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
             _loadingAnchoredBanner == true
-                ? Container(
+                ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),
                     child: value,

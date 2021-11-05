@@ -12,22 +12,24 @@ class ReadQrCodeController {
     PermissionStatus _statusCamera = await Permission.camera.status;
     PermissionStatus _statusMicrophone = await Permission.microphone.status;
 
-    if (_statusCamera.isDenied)
+    if (_statusCamera.isDenied) {
       _statusCamera = await Permission.camera.request();
+    }
 
     if (_statusCamera.isDenied) return;
 
-    if (_statusMicrophone.isDenied)
+    if (_statusMicrophone.isDenied) {
       _statusMicrophone = await Permission.microphone.request();
+    }
 
     if (_statusMicrophone.isDenied || _statusCamera.isDenied) return;
 
-    final List<CameraDescription> camera = await availableCameras();
+    final List<CameraDescription> cameras = await availableCameras();
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ScannerViewPage(camera: camera),
+        builder: (context) => ScannerViewPage(cameras: cameras),
       ),
     );
   }
@@ -42,8 +44,9 @@ class ReadQrCodeController {
         );
 
     PermissionStatus _statusStorage = await Permission.storage.status;
-    if (_statusStorage.isDenied)
+    if (_statusStorage.isDenied) {
       _statusStorage = await Permission.storage.request();
+    }
 
     if (_statusStorage.isDenied) return;
 

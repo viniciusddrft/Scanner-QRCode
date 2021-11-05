@@ -5,19 +5,19 @@ import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_pa
 import 'package:easy_localization/easy_localization.dart';
 
 class ButtonHelp extends StatelessWidget {
-  const ButtonHelp();
+  const ButtonHelp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
           EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-      child: Container(
+      child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
           onPressed: () => Navigator.of(context).push(
             AnimatedPageRouteBuilderScale(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 route: const HelpView(),
                 curve: Curves.elasticOut),
           ),

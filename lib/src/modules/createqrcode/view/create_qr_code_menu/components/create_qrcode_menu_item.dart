@@ -8,11 +8,13 @@ class CreateQRCodeItemMenu extends StatelessWidget {
   final Icon icon;
   final String text;
   final String typeQRCode;
-  CreateQRCodeItemMenu(
+  const CreateQRCodeItemMenu(
       {required this.icon,
       required this.text,
       required this.typeQRCode,
-      required this.color});
+      required this.color,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class CreateQRCodeItemMenu extends StatelessWidget {
           onPressed: () => Navigator.push(
             context,
             AnimatedPageRouteBuilderScale(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               curve: Curves.elasticOut,
               route: CreateQRCodeView(
                 typeQRCode: typeQRCode,

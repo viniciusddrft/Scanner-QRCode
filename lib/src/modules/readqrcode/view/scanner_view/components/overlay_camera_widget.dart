@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/component
 import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/components/top_and_botton_bar_overlay_widget.dart';
 
 class OverlayCameraWidget extends StatelessWidget {
-  const OverlayCameraWidget();
+  const OverlayCameraWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,14 @@ class OverlayCameraWidget extends StatelessWidget {
       child: Row(
         children: [
           const SideBar(),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width / 1.6669,
             child: Column(
               children: const [
-                const TopAndBottonBar(),
-                const CenterOfScreen(),
-                const TopAndBottonBar()
+                TopAndBottonBar(),
+                CenterOfScreen(),
+                TopAndBottonBar()
               ],
             ),
           ),

@@ -5,87 +5,85 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ReadQRCodePage extends StatefulWidget {
-  const ReadQRCodePage();
+  const ReadQRCodePage({Key? key}) : super(key: key);
   @override
   _ReadQRCodePageState createState() => _ReadQRCodePageState();
 }
 
 class _ReadQRCodePageState extends State<ReadQRCodePage> {
   void popupError() {
-    Future.delayed(Duration(seconds: 1), () => Navigator.pop(context));
+    Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
     showDialog<void>(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('Error' + ' :/'),
+      builder: (BuildContext context) => const AlertDialog(
+        title: Text('Error  :/'),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/icons/logo.png',
-            height: 220.sp,
-            width: 220.sp,
-          ),
-          Text(
-            'Scanner QRCode',
-            style: GoogleFonts.roboto(
-                color: Colors.red, textStyle: TextStyle(fontSize: 22.sp)),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () async => ReadQrCodeController.scanCamera(context),
-                child: Container(
-                  height: 40.h,
-                  width: 150.w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'readQRCodeTextButtonReadCamera'.tr(),
-                        style: TextStyle(fontSize: 14.sp),
-                      ),
-                      Icon(
-                        Icons.camera_alt,
-                        size: 24.sp,
-                      )
-                    ],
-                  ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/icons/logo.png',
+          height: 220.sp,
+          width: 220.sp,
+        ),
+        Text(
+          'Scanner QRCode',
+          style: GoogleFonts.roboto(
+              color: Colors.red, textStyle: TextStyle(fontSize: 22.sp)),
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height / 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () async => ReadQrCodeController.scanCamera(context),
+              child: SizedBox(
+                height: 40.h,
+                width: 150.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'readQRCodeTextButtonReadCamera'.tr(),
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
+                    Icon(
+                      Icons.camera_alt,
+                      size: 24.sp,
+                    )
+                  ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () async =>
-                    ReadQrCodeController.scanFile(context, popupError),
-                child: Container(
-                  height: 40.h,
-                  width: 150.w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'readQRCodeTextButtonReadGallery'.tr(),
-                        style: TextStyle(fontSize: 14.sp),
-                      ),
-                      Icon(
-                        Icons.photo,
-                        size: 24.sp,
-                      )
-                    ],
-                  ),
+            ),
+            ElevatedButton(
+              onPressed: () async =>
+                  ReadQrCodeController.scanFile(context, popupError),
+              child: SizedBox(
+                height: 40.h,
+                width: 150.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'readQRCodeTextButtonReadGallery'.tr(),
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
+                    Icon(
+                      Icons.photo,
+                      size: 24.sp,
+                    )
+                  ],
                 ),
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

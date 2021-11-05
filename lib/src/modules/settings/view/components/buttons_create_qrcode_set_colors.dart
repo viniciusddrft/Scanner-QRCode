@@ -10,7 +10,9 @@ class ButtonCreateQRCodeSetColor extends StatefulWidget {
   const ButtonCreateQRCodeSetColor(
       {required this.colorChange,
       required this.textButton,
-      required this.savePreferenceKey});
+      required this.savePreferenceKey,
+      Key? key})
+      : super(key: key);
 
   @override
   State<ButtonCreateQRCodeSetColor> createState() =>
@@ -52,7 +54,7 @@ class _ButtonCreateQRCodeSetColorState
             child: Text('settingsPopupButtonCancel'.tr()),
           )
         ],
-        content: Container(
+        content: SizedBox(
           height: MediaQuery.of(context).size.height / 1.7,
           width: MediaQuery.of(context).size.width / 1.5,
           child: GridView.builder(
@@ -92,7 +94,7 @@ class _ButtonCreateQRCodeSetColorState
       builder: (BuildContext context, value, Widget? child) => Padding(
         padding:
             EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-        child: Container(
+        child: SizedBox(
           height: 45.h,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(

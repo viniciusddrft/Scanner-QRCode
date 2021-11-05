@@ -5,16 +5,17 @@ class SolutionView extends StatelessWidget {
   final String problem;
   final String solution;
 
-  const SolutionView({required this.problem, required this.solution});
+  const SolutionView({required this.problem, required this.solution, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         title: Text(problem),
       ),
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Padding(

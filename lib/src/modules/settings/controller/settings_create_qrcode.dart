@@ -23,16 +23,20 @@ class SettingsCreateQRCode {
   static void getPreferenceShape() {
     SharedPreferences.getInstance().then((preference) {
       int? response = preference.getInt('shapeQRCodeEye');
-      if (response == 0)
+      if (response == 0) {
         shapeQRCodeEye.value = QrEyeShape.square;
-      else if (response == 1) shapeQRCodeEye.value = QrEyeShape.circle;
+      } else if (response == 1) {
+        shapeQRCodeEye.value = QrEyeShape.circle;
+      }
     });
 
     SharedPreferences.getInstance().then((preference) {
       int? response = preference.getInt('shapeQRCode');
-      if (response == 0)
+      if (response == 0) {
         shapeQRCode.value = QrDataModuleShape.square;
-      else if (response == 1) shapeQRCode.value = QrDataModuleShape.circle;
+      } else if (response == 1) {
+        shapeQRCode.value = QrDataModuleShape.circle;
+      }
     });
   }
 

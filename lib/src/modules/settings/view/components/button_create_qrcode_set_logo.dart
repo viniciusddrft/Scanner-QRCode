@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ButtonCreateQRCodeSetLogo extends StatefulWidget {
-  const ButtonCreateQRCodeSetLogo();
+  const ButtonCreateQRCodeSetLogo({Key? key}) : super(key: key);
 
   @override
   State<ButtonCreateQRCodeSetLogo> createState() =>
@@ -19,7 +19,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        content: Container(
+        content: SizedBox(
           height: MediaQuery.of(context).size.height / 5,
           width: MediaQuery.of(context).size.width / 4,
           child: Row(
@@ -39,6 +39,9 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                 tooltip: 'settingsImageTooltipRemove'.tr(),
                 onPressed: () {
                   SettingsCreateQRCode.logoPath.value = null;
+                  SharedPreferences.getInstance().then(
+                    (SharedPreferences preference) => preference.remove('logo'),
+                  );
                   Navigator.pop(context);
                 },
                 icon: Icon(
@@ -77,7 +80,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
     return Padding(
       padding:
           EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-      child: Container(
+      child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(
@@ -93,7 +96,8 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 15.w),
-                  child: Text('settingsImage'.tr(), style: TextStyle(fontSize: 18.sp)),
+                  child: Text('settingsImage'.tr(),
+                      style: TextStyle(fontSize: 18.sp)),
                 ),
                 ValueListenableBuilder(
                   valueListenable: SettingsCreateQRCode.logoPath,
@@ -101,7 +105,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                       SettingsCreateQRCode.logoPath.value != null
                           ? Padding(
                               padding: EdgeInsets.only(right: 15.w),
-                              child: Container(
+                              child: SizedBox(
                                 height: 25.sp,
                                 width: 25.sp,
                                 child: Image.file(
@@ -112,10 +116,10 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                             )
                           : Padding(
                               padding: EdgeInsets.only(right: 15.w),
-                              child: Container(
+                              child: SizedBox(
                                 height: 25.sp,
                                 width: 25.sp,
-                                child: Icon(Icons.photo),
+                                child: const Icon(Icons.photo),
                               ),
                             ),
                 )

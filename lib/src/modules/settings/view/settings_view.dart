@@ -14,7 +14,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class SettingsPage extends StatelessWidget {
   final Locale locale;
-  SettingsPage({required this.locale});
+  const SettingsPage({required this.locale, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: Container(
+              child: SizedBox(
                 height: 650.h,
                 child: Column(
                   children: [
@@ -83,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   height: 180.h,
                   width: double.maxFinite,
                   child: Column(
@@ -107,7 +107,7 @@ class SettingsPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   height: 180.h,
                   width: double.maxFinite,
                   child: Column(
@@ -131,7 +131,7 @@ class SettingsPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   height: 180.h,
                   width: double.maxFinite,
                   child: Column(
@@ -155,7 +155,7 @@ class SettingsPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   height: 180.h,
                   width: double.maxFinite,
                   child: Column(
@@ -167,7 +167,7 @@ class SettingsPage extends StatelessWidget {
                           style: TextStyle(fontSize: 22.sp),
                         ),
                       ),
-                      ButtonContact()
+                      const ButtonContact()
                     ],
                   ),
                 ),
@@ -176,7 +176,7 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                'settingsVersion'.tr() + ' 2.0.0',
+                'settingsVersion'.tr() + ' 2.0.1',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

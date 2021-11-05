@@ -11,7 +11,7 @@ import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart'
 import 'package:easy_localization/easy_localization.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage();
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -35,15 +35,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void didChangeDependencies() {
-    if (!_loadingAnchoredBanner)
+    if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {
           _adWidget.value = AdWidget(key: UniqueKey(), ad: banner..load());
           Admob.anchoredBannerHeightAd = banner.size.height;
           Admob.anchoredBannerWidthAd = banner.size.width;
         }
-      })
-        ..whenComplete(() => _loadingAnchoredBanner = true);
+      }).whenComplete(() => _loadingAnchoredBanner = true);
+    }
     super.didChangeDependencies();
   }
 
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff202020),
+        backgroundColor: const Color(0xff202020),
         flexibleSpace: Container(
           padding: EdgeInsets.only(top: 35.h),
           child: Row(
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 tooltip: 'homeToolTipView1'.tr(),
                 onPressed: () => _pageController.animateToPage(0,
-                    duration: Duration(
+                    duration: const Duration(
                       milliseconds: 500,
                     ),
                     curve: Curves.decelerate),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 tooltip: 'homeToolTipView2'.tr(),
                 onPressed: () => _pageController.animateToPage(1,
-                    duration: Duration(
+                    duration: const Duration(
                       milliseconds: 500,
                     ),
                     curve: Curves.decelerate),
@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 tooltip: 'homeToolTipView3'.tr(),
                 onPressed: () => _pageController.animateToPage(2,
-                    duration: Duration(
+                    duration: const Duration(
                       milliseconds: 500,
                     ),
                     curve: Curves.decelerate),
@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
             _loadingAnchoredBanner == true
-                ? Container(
+                ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),
                     child: value,

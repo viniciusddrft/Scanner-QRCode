@@ -25,11 +25,13 @@ class HomeController {
   }
 
   static void appBarControlleIconsColors(int valueControllerPage) {
-    if (valueControllerPage == 0)
+    if (valueControllerPage == 0) {
       _selectIcon1();
-    else if (valueControllerPage == 1)
+    } else if (valueControllerPage == 1) {
       _selectIcon2();
-    else if (valueControllerPage == 2) _selectIcon3();
+    } else if (valueControllerPage == 2) {
+      _selectIcon3();
+    }
   }
 
   static void dispose() {

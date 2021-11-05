@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class ButtonSetLanguage extends StatefulWidget {
   final Locale locale;
-  const ButtonSetLanguage({required this.locale});
+  const ButtonSetLanguage({required this.locale, Key? key}) : super(key: key);
 
   @override
   State<ButtonSetLanguage> createState() => _ButtonSetLanguageState();
@@ -32,12 +32,13 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
 
   @override
   void initState() {
-    if (widget.locale == const Locale('pt', 'BR'))
+    if (widget.locale == const Locale('pt', 'BR')) {
       _iconPath = 'assets/icons_translations/brazil.png';
-    else if (widget.locale == const Locale('en', 'US'))
+    } else if (widget.locale == const Locale('en', 'US')) {
       _iconPath = 'assets/icons_translations/unitedstates.png';
-    else if (widget.locale == const Locale('zh', 'CN'))
+    } else if (widget.locale == const Locale('zh', 'CN')) {
       _iconPath = 'assets/icons_translations/china.png';
+    }
     super.initState();
   }
 
@@ -48,9 +49,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Container(
-            child: Text('settingsPopupLanguageNotice'.tr()),
-          ),
+          content: Text('settingsPopupLanguageNotice'.tr()),
           actions: [
             TextButton(
               onPressed: () {
@@ -82,7 +81,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
             child: Text('settingsPopupButtonCancel'.tr()),
           )
         ],
-        content: Container(
+        content: SizedBox(
           height: MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width / 1.5,
           child: ListView.builder(
@@ -123,7 +122,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
     return Padding(
       padding:
           EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-      child: Container(
+      child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
           onPressed: _popupLanguageMenu,

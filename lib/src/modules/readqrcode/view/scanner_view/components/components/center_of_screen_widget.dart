@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class CenterOfScreen extends StatefulWidget {
-  const CenterOfScreen();
+  const CenterOfScreen({Key? key}) : super(key: key);
 
   @override
   State<CenterOfScreen> createState() => _CenterOfScreenState();

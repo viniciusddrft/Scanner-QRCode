@@ -5,14 +5,14 @@ import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/component
 import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/scanner_widget.dart';
 
 class ScannerViewPage extends StatelessWidget {
-  final List<CameraDescription> camera;
-  const ScannerViewPage({required this.camera});
+  final List<CameraDescription> cameras;
+  const ScannerViewPage({required this.cameras, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        ScannerWidget(camera: camera),
+        ScannerWidget(cameras: cameras),
         const OverlayCameraWidget(),
         const BurronsBarWidget()
       ]),

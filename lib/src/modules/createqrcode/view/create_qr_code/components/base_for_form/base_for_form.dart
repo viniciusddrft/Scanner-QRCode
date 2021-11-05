@@ -7,45 +7,46 @@ import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_pa
 abstract class BaseForm extends StatefulWidget {
   final _formkey = GlobalKey<FormState>();
 
+  BaseForm({Key? key}) : super(key: key);
+
   GlobalKey<FormState> get getKey => _formkey;
 
   void _onPressed(
       {required BuildContext context, required String Function() filter}) {
     final _isValid = _formkey.currentState!.validate();
-    if (_isValid)
+    if (_isValid) {
       Navigator.pushReplacement(
         context,
         AnimatedPageRouteBuilderScale(
           curve: Curves.elasticOut,
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           route: CreateQRCodeResult(
             dataQRCode: filter(),
           ),
         ),
       );
+    }
   }
 
   Widget makeButtoncreateQRCode(
           {required BuildContext context, required String Function() filter}) =>
-      Container(
+      SizedBox(
         height: 40.h,
         width: 250.w,
         child: ElevatedButton(
           onPressed: () => _onPressed(context: context, filter: filter),
-          child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  'createQRCodeALLButton'.tr(),
-                  style: TextStyle(fontSize: 14.sp),
-                ),
-                Icon(
-                  Icons.qr_code_2,
-                  size: 24.sp,
-                )
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                'createQRCodeALLButton'.tr(),
+                style: TextStyle(fontSize: 14.sp),
+              ),
+              Icon(
+                Icons.qr_code_2,
+                size: 24.sp,
+              )
+            ],
           ),
         ),
       );

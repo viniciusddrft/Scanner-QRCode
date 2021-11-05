@@ -4,14 +4,14 @@ import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ButtonContact extends StatelessWidget {
-  const ButtonContact();
+  const ButtonContact({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding:
           EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-      child: Container(
+      child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
           onPressed: () => launchLink('mailto:ScannerQRCode@protonmail.com'),
