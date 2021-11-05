@@ -21,7 +21,7 @@ class _ScannerWidgetState extends State<ScannerWidget>
 
   @override
   void initState() {
-    onNewCameraSelected(widget.cameras[0]);
+    onNewCameraSelected(widget.cameras.first);
     super.initState();
   }
 

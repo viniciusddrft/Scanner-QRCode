@@ -18,7 +18,6 @@ abstract class BaseForm extends StatefulWidget {
       Navigator.pushReplacement(
         context,
         AnimatedPageRouteBuilderScale(
-          curve: Curves.elasticOut,
           duration: const Duration(milliseconds: 500),
           route: CreateQRCodeResult(
             dataQRCode: filter(),

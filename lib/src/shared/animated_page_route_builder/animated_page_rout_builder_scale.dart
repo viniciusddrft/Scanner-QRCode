@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 class AnimatedPageRouteBuilderScale extends PageRouteBuilder {
   final Widget route;
   final Duration duration;
-  final Curve curve;
 
-  AnimatedPageRouteBuilderScale(
-      {required this.route, required this.duration, required this.curve})
+  AnimatedPageRouteBuilderScale({required this.route, required this.duration})
       : super(
           transitionDuration: duration,
           reverseTransitionDuration: duration,
@@ -18,7 +16,8 @@ class AnimatedPageRouteBuilderScale extends PageRouteBuilder {
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
-            animation = CurvedAnimation(parent: animation, curve: curve);
+            animation =
+                CurvedAnimation(parent: animation, curve: Curves.elasticOut);
             return ScaleTransition(
                 alignment: Alignment.center, scale: animation, child: child);
           },

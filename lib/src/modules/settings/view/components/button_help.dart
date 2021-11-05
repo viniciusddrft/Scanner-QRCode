@@ -17,9 +17,9 @@ class ButtonHelp extends StatelessWidget {
         child: OutlinedButton(
           onPressed: () => Navigator.of(context).push(
             AnimatedPageRouteBuilderScale(
-                duration: const Duration(milliseconds: 500),
-                route: const HelpView(),
-                curve: Curves.elasticOut),
+              duration: const Duration(milliseconds: 500),
+              route: const HelpView(),
+            ),
           ),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,

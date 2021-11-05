@@ -33,7 +33,6 @@ class CreateQRCodeItemMenu extends StatelessWidget {
             context,
             AnimatedPageRouteBuilderScale(
               duration: const Duration(milliseconds: 500),
-              curve: Curves.elasticOut,
               route: CreateQRCodeView(
                 typeQRCode: typeQRCode,
               ),
