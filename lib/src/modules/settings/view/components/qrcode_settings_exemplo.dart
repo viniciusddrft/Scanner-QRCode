@@ -24,6 +24,7 @@ class _QRCodeExemploSettingsState extends State<QRCodeExemploSettings> {
         SettingsCreateQRCode.logoPath
       ]),
       builder: (BuildContext context, Widget? child) => QrImage(
+        padding: EdgeInsets.all(10.sp),
         version: QrVersions.auto,
         data: 'viniciusddtft',
         size: 100.sp,

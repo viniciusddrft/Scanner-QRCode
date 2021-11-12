@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/resultreadcode/resultreadcode_view.dart';
+import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
+
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_view.dart';
 import 'package:camera/camera.dart';

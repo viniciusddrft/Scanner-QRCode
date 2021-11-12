@@ -105,21 +105,18 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                       SettingsCreateQRCode.logoPath.value != null
                           ? Padding(
                               padding: EdgeInsets.only(right: 15.w),
-                              child: SizedBox(
-                                height: 25.sp,
-                                width: 25.sp,
-                                child: Image.file(
-                                  File(SettingsCreateQRCode.logoPath.value
-                                      as String),
-                                ),
+                              child: Image.file(
+                                File(SettingsCreateQRCode.logoPath.value
+                                    as String),
+                                width: 25.w,
+                                height: 25.h,
                               ),
                             )
                           : Padding(
                               padding: EdgeInsets.only(right: 15.w),
-                              child: SizedBox(
-                                height: 25.sp,
-                                width: 25.sp,
-                                child: const Icon(Icons.photo),
+                              child: Icon(
+                                Icons.photo,
+                                size: 25.sp,
                               ),
                             ),
                 )

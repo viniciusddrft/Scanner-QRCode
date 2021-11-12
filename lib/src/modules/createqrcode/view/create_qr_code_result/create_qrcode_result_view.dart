@@ -81,6 +81,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
             Screenshot(
               controller: _screenshotController,
               child: QrImage(
+                padding: EdgeInsets.all(10.sp),
                 version: QrVersions.auto,
                 data: widget.dataQRCode,
                 size: 220.sp,

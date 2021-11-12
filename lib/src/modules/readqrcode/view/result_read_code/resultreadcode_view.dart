@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/resultreadcode/components/buttonopen/button_url.dart';
+import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/buttonopen/button_url.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:clipboard/clipboard.dart';
@@ -22,14 +22,19 @@ class _ResultReadCodeState extends State<ResultReadCode> {
   late final Widget _button;
 
   @override
-  void didChangeDependencies() {
-    _adWidget =
-        AdWidget(key: UniqueKey(), ad: Admob.createBannerRetanguleAd()..load());
+  void initState() {
     if (widget.typecode == BarcodeType.url) {
       _button = ButtonUrl(link: widget.result);
     } else {
       _button = Container();
     }
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _adWidget =
+        AdWidget(key: UniqueKey(), ad: Admob.createBannerRetanguleAd()..load());
     super.didChangeDependencies();
   }
 
