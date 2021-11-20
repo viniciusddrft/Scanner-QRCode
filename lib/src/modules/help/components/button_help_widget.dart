@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/help/solution_view.dart';
-import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_page_rout_builder_slide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ButtonHelpWidget extends StatelessWidget {
@@ -14,15 +12,11 @@ class ButtonHelpWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        AnimatedPageRouteBuilderSlide(
-          duration: const Duration(milliseconds: 300),
-          route: SolutionView(
-            problem: problem,
-            solution: solution,
-          ),
-        ),
-      ),
+      onTap: () => Navigator.pushNamed(context, '/Solution',
+          arguments: <String, String>{
+            'problem': problem,
+            'solution': solution
+          }),
       child: Column(
         children: [
           Container(

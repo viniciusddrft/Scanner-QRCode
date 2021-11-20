@@ -10,8 +10,8 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 
 class ResultReadCode extends StatefulWidget {
   final String result;
-  final BarcodeType typecode;
-  const ResultReadCode({required this.result, required this.typecode, Key? key})
+  final BarcodeType typeCode;
+  const ResultReadCode({required this.result, required this.typeCode, Key? key})
       : super(key: key);
   @override
   _ResultReadCodeState createState() => _ResultReadCodeState();
@@ -23,7 +23,7 @@ class _ResultReadCodeState extends State<ResultReadCode> {
 
   @override
   void initState() {
-    if (widget.typecode == BarcodeType.url) {
+    if (widget.typeCode == BarcodeType.url) {
       _button = ButtonUrl(link: widget.result);
     } else {
       _button = Container();

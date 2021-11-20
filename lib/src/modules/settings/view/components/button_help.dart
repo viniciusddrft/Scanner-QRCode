@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:scannerqrcode/src/modules/help/help_view.dart';
-import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_page_rout_builder_scale.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ButtonHelp extends StatelessWidget {
@@ -15,12 +13,7 @@ class ButtonHelp extends StatelessWidget {
       child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
-          onPressed: () => Navigator.of(context).push(
-            AnimatedPageRouteBuilderScale(
-              duration: const Duration(milliseconds: 500),
-              route: const HelpView(),
-            ),
-          ),
+          onPressed: () => Navigator.pushNamed(context, '/Help'),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,
               shape: RoundedRectangleBorder(

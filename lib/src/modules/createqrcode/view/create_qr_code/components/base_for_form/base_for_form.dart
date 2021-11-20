@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code_result/create_qrcode_result_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_page_rout_builder_scale.dart';
 
 abstract class BaseForm extends StatefulWidget {
   final _formkey = GlobalKey<FormState>();
@@ -15,15 +13,10 @@ abstract class BaseForm extends StatefulWidget {
       {required BuildContext context, required String Function() filter}) {
     final _isValid = _formkey.currentState!.validate();
     if (_isValid) {
-      Navigator.pushReplacement(
-        context,
-        AnimatedPageRouteBuilderScale(
-          duration: const Duration(milliseconds: 500),
-          route: CreateQRCodeResult(
-            dataQRCode: filter(),
-          ),
-        ),
-      );
+      Navigator.pushReplacementNamed(context, '/CreateQRCodeResult',
+          arguments: <String, String>{
+            'dataQRCode': filter(),
+          });
     }
   }
 

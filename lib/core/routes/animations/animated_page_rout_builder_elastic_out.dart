@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AnimatedPageRouteBuilderSlide extends PageRouteBuilder {
+class AnimatedPageRouteBuilderElasticOut extends PageRouteBuilder {
   final Widget route;
   final Duration duration;
 
-  AnimatedPageRouteBuilderSlide({required this.route, required this.duration})
+  AnimatedPageRouteBuilderElasticOut(
+      {required this.route, required this.duration})
       : super(
           transitionDuration: duration,
           reverseTransitionDuration: duration,
@@ -16,13 +17,10 @@ class AnimatedPageRouteBuilderSlide extends PageRouteBuilder {
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
-            return SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(1, 0),
-                end: Offset.zero,
-              ).animate(animation),
-              child: child,
-            );
+            animation =
+                CurvedAnimation(parent: animation, curve: Curves.elasticOut);
+            return ScaleTransition(
+                alignment: Alignment.center, scale: animation, child: child);
           },
         );
 }

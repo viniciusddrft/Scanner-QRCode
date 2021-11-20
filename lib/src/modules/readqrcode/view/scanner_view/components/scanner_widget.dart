@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
 
 class ScannerWidget extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -81,15 +80,8 @@ class _ScannerWidgetState extends State<ScannerWidget>
       await _scanner.close();
     }
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResultReadCode(
-          result: code,
-          typecode: type,
-        ),
-      ),
-    );
+    Navigator.popAndPushNamed(context, '/ReadQRCodeResult',
+        arguments: <String, dynamic>{'result': code, 'typeCode': type});
   }
 
   void _processImage(CameraImage cameraImage) {

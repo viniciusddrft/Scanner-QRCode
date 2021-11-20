@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
-
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_view.dart';
 import 'package:camera/camera.dart';
 
 class ReadQrCodeController {
@@ -27,22 +24,15 @@ class ReadQrCodeController {
 
     final List<CameraDescription> cameras = await availableCameras();
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ScannerViewPage(cameras: cameras),
-      ),
-    );
+    Navigator.pushNamed(context, '/ScannerCamera',
+        arguments: <String, dynamic>{'cameras': cameras});
   }
 
   static Future<void> scanFile(
       BuildContext context, VoidCallback popupError) async {
-    Future<void> _showResult(String code, BarcodeType type) => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ResultReadCode(result: code, typecode: type),
-          ),
-        );
+    Future<void> _showResult(String code, BarcodeType type) =>
+        Navigator.pushNamed(context, '/ReadQRCodeResult',
+            arguments: <String, dynamic>{'result': code, 'typeCode': type});
 
     PermissionStatus _statusStorage = await Permission.storage.status;
     if (_statusStorage.isDenied) {

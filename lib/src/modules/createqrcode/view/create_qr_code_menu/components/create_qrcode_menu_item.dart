@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/create_qrcode_view.dart';
-import 'package:scannerqrcode/src/shared/animated_page_route_builder/animated_page_rout_builder_scale.dart';
 
 class CreateQRCodeItemMenu extends StatelessWidget {
   final Color color;
@@ -29,15 +27,10 @@ class CreateQRCodeItemMenu extends StatelessWidget {
               borderRadius: BorderRadius.circular(360),
             ),
           ),
-          onPressed: () => Navigator.push(
-            context,
-            AnimatedPageRouteBuilderScale(
-              duration: const Duration(milliseconds: 500),
-              route: CreateQRCodeView(
-                typeQRCode: typeQRCode,
-              ),
-            ),
-          ),
+          onPressed: () => Navigator.pushNamed(context, '/CreateQRCode',
+              arguments: <String, String>{
+                'typeQRCode': typeQRCode,
+              }),
           child: Center(
             child: icon,
           ),
