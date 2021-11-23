@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_contact.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_create_qrcode_set_shape.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_help.dart';
+import 'package:scannerqrcode/src/modules/settings/view/components/button_premium.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_rate_app.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_set_language.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_create_qrcode_set_logo.dart';
@@ -115,6 +116,30 @@ class SettingsPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
                         child: Text(
+                          'settingsQRCodePremiumVersion'.tr(),
+                          style: TextStyle(fontSize: 22.sp),
+                        ),
+                      ),
+                      const ButtonPremium()
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: SizedBox(
+                  height: 180.h,
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
+                        child: Text(
                           'settingsHelp'.tr(),
                           style: TextStyle(fontSize: 22.sp),
                         ),
@@ -176,7 +201,7 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                'settingsVersion'.tr() + ' 2.0.1',
+                'settingsVersion'.tr() + ' 2.0.2',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),
