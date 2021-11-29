@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ButtonContact extends StatelessWidget {
+class ButtonContact extends StatelessWidget with OpenLink {
   const ButtonContact({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class ButtonContact extends StatelessWidget {
       child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
-          onPressed: () => launchLink('mailto:ScannerQRCode@protonmail.com'),
+          onPressed: () => openLink('mailto:ScannerQRCode@protonmail.com'),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,
               shape: RoundedRectangleBorder(

@@ -11,7 +11,7 @@ class ButtonUrl extends StatefulWidget {
   State<ButtonUrl> createState() => _ButtonUrlState();
 }
 
-class _ButtonUrlState extends State<ButtonUrl> {
+class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
   void _popupError() async {
     Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
     showDialog<void>(
@@ -27,7 +27,7 @@ class _ButtonUrlState extends State<ButtonUrl> {
     return Container(
       padding: EdgeInsets.only(top: 10.h, bottom: 100.h, left: 20.w),
       child: ElevatedButton(
-        onPressed: () => launchLink(widget.link, onError: _popupError),
+        onPressed: () => openLink(widget.link, onError: _popupError),
         child: SizedBox(
           width: 130.w,
           child:

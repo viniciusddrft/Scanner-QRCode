@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class ButtonPremium extends StatelessWidget {
+class ButtonPremium extends StatelessWidget with OpenLink {
   const ButtonPremium({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class ButtonPremium extends StatelessWidget {
       child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
-          onPressed: () => launchLink(
+          onPressed: () => openLink(
               'https://play.google.com/store/apps/details?id=com.scannerqrcode_premium'),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,
