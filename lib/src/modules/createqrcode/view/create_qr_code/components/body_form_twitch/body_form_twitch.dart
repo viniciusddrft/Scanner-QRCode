@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormTwitch extends BaseForm {
   BodyFormTwitch({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
           Padding(
             padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
             child: Text(
-              'createQRCodeTwitchMsg'.tr(),
+              AppLocalizations.of(context)!.createQRCodeTwitchMsg,
               style: TextStyle(fontSize: 14.sp),
             ),
           ),
@@ -45,12 +45,15 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeTwitchValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeTwitchValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeTwitchLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeTwitchLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

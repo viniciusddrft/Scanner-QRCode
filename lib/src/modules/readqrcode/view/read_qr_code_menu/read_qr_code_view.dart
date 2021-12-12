@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/controller/read_qr_code_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReadQRCodePage extends StatefulWidget {
   const ReadQRCodePage({Key? key}) : super(key: key);
@@ -49,7 +49,8 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'readQRCodeTextButtonReadCamera'.tr(),
+                      AppLocalizations.of(context)!
+                          .readQRCodeTextButtonReadCamera,
                       style: TextStyle(fontSize: 14.sp),
                     ),
                     Icon(
@@ -70,7 +71,8 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'readQRCodeTextButtonReadGallery'.tr(),
+                      AppLocalizations.of(context)!
+                          .readQRCodeTextButtonReadGallery,
                       style: TextStyle(fontSize: 14.sp),
                     ),
                     Icon(

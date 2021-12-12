@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormContact extends BaseForm {
   BodyFormContact({Key? key}) : super(key: key);
@@ -44,12 +44,15 @@ class _BodyFormContactState extends State<BodyFormContact> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeContactNameValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeContactNameValidatorError;
                 }
               },
               controller: _textEditingControllerName,
               decoration: InputDecoration(
-                labelText: 'createQRCodeContactNameLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeContactNameLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -62,13 +65,15 @@ class _BodyFormContactState extends State<BodyFormContact> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeContactPhoneValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeContactPhoneValidatorError;
                 }
               },
               controller: _textEditingControllerNumber,
               decoration: InputDecoration(
-                labelText:
-                    'createQRCodeContactPhoneLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeContactPhoneLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

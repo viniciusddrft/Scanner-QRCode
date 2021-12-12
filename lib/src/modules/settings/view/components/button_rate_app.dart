@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonRateApp extends StatelessWidget {
   final InAppReview _inAppReview = InAppReview.instance;
@@ -29,7 +29,7 @@ class ButtonRateApp extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
-                  'settingsRateTheApp'.tr(),
+                  AppLocalizations.of(context)!.settingsRateTheApp,
                   style: TextStyle(fontSize: 18.sp),
                 ),
               ),

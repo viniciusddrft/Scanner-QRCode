@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormWhatsapp extends BaseForm {
   BodyFormWhatsapp({Key? key}) : super(key: key);
@@ -37,12 +37,15 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeWhatsappValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeWhatsappValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeWhatsappLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeWhatsappLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

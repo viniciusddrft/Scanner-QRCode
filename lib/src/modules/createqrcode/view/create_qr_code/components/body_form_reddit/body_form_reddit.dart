@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormReddit extends BaseForm {
   BodyFormReddit({Key? key}) : super(key: key);
@@ -39,11 +39,11 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.sp),
                   child: Text(
-                    'createQRCodeRedditMsg1'.tr(),
+                    AppLocalizations.of(context)!.createQRCodeRedditMsg1,
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
-                Text('createQRCodeRedditMsg2'.tr(),
+                Text(AppLocalizations.of(context)!.createQRCodeRedditMsg2,
                     style: TextStyle(fontSize: 14.sp))
               ],
             ),
@@ -55,12 +55,15 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeRedditValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeRedditValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeRedditLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeRedditLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

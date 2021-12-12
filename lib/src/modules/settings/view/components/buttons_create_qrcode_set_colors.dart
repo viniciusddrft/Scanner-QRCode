@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonCreateQRCodeSetColor extends StatefulWidget {
   final String textButton;
@@ -45,13 +45,14 @@ class _ButtonCreateQRCodeSetColorState
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Text(
-          'settingsPopupColorTitle'.tr(),
+          AppLocalizations.of(context)!.settingsPopupColorTitle,
           style: TextStyle(fontSize: 22.sp),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('settingsPopupButtonCancel'.tr()),
+            child:
+                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
           )
         ],
         content: SizedBox(

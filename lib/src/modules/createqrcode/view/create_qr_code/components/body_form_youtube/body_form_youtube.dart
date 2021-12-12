@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormYoutube extends BaseForm {
   BodyFormYoutube({Key? key}) : super(key: key);
@@ -41,19 +41,19 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.sp),
                   child: Text(
-                    'createQRCodeYoutubeMsg1'.tr(),
+                    AppLocalizations.of(context)!.createQRCodeYoutubeMsg1,
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.sp),
                   child: Text(
-                    'createQRCodeYoutubeMsg2'.tr(),
+                    AppLocalizations.of(context)!.createQRCodeYoutubeMsg2,
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 Text(
-                  'createQRCodeYoutubeMsg3'.tr(),
+                  AppLocalizations.of(context)!.createQRCodeYoutubeMsg3,
                   style: TextStyle(fontSize: 14.sp),
                 ),
               ],
@@ -66,12 +66,15 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeYoutubeValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeYoutubeValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeYoutubeLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeYoutubeLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

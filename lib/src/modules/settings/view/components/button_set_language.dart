@@ -1,70 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/locale/locale.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ButtonSetLanguage extends StatefulWidget {
-  final Locale locale;
-  const ButtonSetLanguage({required this.locale, Key? key}) : super(key: key);
+  const ButtonSetLanguage({Key? key}) : super(key: key);
 
   @override
   State<ButtonSetLanguage> createState() => _ButtonSetLanguageState();
 }
 
 class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
-  late String _iconPath;
-  final List<Map<String, dynamic>> _allLocales = [
-    {
-      'text': 'settingsLanguageNameBrasil'.tr(),
-      'icon': 'assets/icons_translations/brazil.png',
-      'locale': const Locale('pt', 'BR')
-    },
-    {
-      'text': 'settingsLanguageNameUnitedStates'.tr(),
-      'icon': 'assets/icons_translations/unitedstates.png',
-      'locale': const Locale('en', 'US')
-    },
-    {
-      'text': 'settingsLanguageNameChina'.tr(),
-      'icon': 'assets/icons_translations/china.png',
-      'locale': const Locale('zh', 'CN'),
-    },
-  ];
+  final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
+
+  List<Map<String, dynamic>> _allLocales(context) {
+    return [
+      {
+        'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
+        'icon': 'assets/icons_translations/brazil.png',
+        'locale': const Locale('pt', 'BR')
+      },
+      {
+        'text': AppLocalizations.of(context)!.settingsLanguageNameUnitedStates,
+        'icon': 'assets/icons_translations/unitedstates.png',
+        'locale': const Locale('en', 'US')
+      },
+      {
+        'text': AppLocalizations.of(context)!.settingsLanguageNameChina,
+        'icon': 'assets/icons_translations/china.png',
+        'locale': const Locale('zh', 'CN'),
+      },
+    ];
+  }
+
+  List<Map<String, dynamic>> get allLocales => _allLocales(context);
 
   @override
   void initState() {
-    if (widget.locale == const Locale('pt', 'BR')) {
-      _iconPath = 'assets/icons_translations/brazil.png';
-    } else if (widget.locale == const Locale('en', 'US')) {
-      _iconPath = 'assets/icons_translations/unitedstates.png';
-    } else if (widget.locale == const Locale('zh', 'CN')) {
-      _iconPath = 'assets/icons_translations/china.png';
+    if (LocaleApp.localeApp.value == const Locale('pt', 'BR')) {
+      _iconPath.value = 'assets/icons_translations/brazil.png';
+    } else if (LocaleApp.localeApp.value == const Locale('en', 'US')) {
+      _iconPath.value = 'assets/icons_translations/unitedstates.png';
+    } else if (LocaleApp.localeApp.value == const Locale('zh', 'CN')) {
+      _iconPath.value = 'assets/icons_translations/china.png';
     }
     super.initState();
   }
 
-  void _noticeAndChangeLanguage(
-      {required Locale locale, required String icon}) {
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text('settingsPopupLanguageNotice'.tr()),
-          actions: [
-            TextButton(
-              onPressed: () {
-                context.setLocale(locale);
-                _iconPath = icon;
-                Navigator.pop(context);
-              },
-              child: Text(
-                'settingsPupupContinue'.tr(),
-              ),
-            )
-          ],
-        );
-      },
-    );
+  @override
+  void dispose() {
+    _iconPath.dispose();
+    super.dispose();
   }
 
   void _popupLanguageMenu() {
@@ -72,13 +59,14 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Text(
-          'settingsLanguagePopup'.tr(),
+          AppLocalizations.of(context)!.settingsLanguagePopup,
           style: TextStyle(fontSize: 18.sp),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('settingsPopupButtonCancel'.tr()),
+            child:
+                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
           )
         ],
         content: SizedBox(
@@ -86,24 +74,37 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
           width: MediaQuery.of(context).size.width / 1.5,
           child: ListView.builder(
             padding: EdgeInsets.only(top: 20.h),
-            itemCount: _allLocales.length,
+            itemCount: allLocales.length,
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(bottom: 35.h),
-              child: GestureDetector(
-                onTap: () {
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  side: BorderSide(color: Colors.black, width: 2.w),
+                ),
+                onPressed: () {
+                  _iconPath.value = allLocales[index]['icon'];
+                  LocaleApp.localeApp.value = allLocales[index]['locale'];
+                  SharedPreferences.getInstance().then(
+                    (value) => value.setString(
+                      'locale',
+                      allLocales[index]['locale'].toString(),
+                    ),
+                  );
                   Navigator.pop(context);
-                  _noticeAndChangeLanguage(
-                      locale: _allLocales[index]['locale'],
-                      icon: _allLocales[index]['icon']);
                 },
                 child: Container(
+                  height: 45.h,
                   color: Colors.transparent, //para ter hit box no row inteira
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(_allLocales[index]['text']),
+                      Text(allLocales[index]['text']),
                       Image.asset(
-                        _allLocales[index]['icon'],
+                        allLocales[index]['icon'],
                         height: 30.h,
                       ),
                     ],
@@ -127,26 +128,29 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
         child: OutlinedButton(
           onPressed: _popupLanguageMenu,
           style: OutlinedButton.styleFrom(
-              primary: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              side: BorderSide(color: Colors.black, width: 2.w)),
+            primary: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            side: BorderSide(color: Colors.black, width: 2.w),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
-                  'settingsLanguageTitle'.tr(),
+                  AppLocalizations.of(context)!.settingsLanguageTitle,
                   style: TextStyle(fontSize: 18.sp),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 15.w, top: 7.h, bottom: 7.h),
-                child: Image.asset(
-                  _iconPath,
-                  height: 26.h,
+                child: ValueListenableBuilder(
+                  valueListenable: _iconPath,
+                  builder:
+                      (BuildContext context, String? value, Widget? child) =>
+                          Image.asset(value!, height: 26.h),
                 ),
               )
             ],

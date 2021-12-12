@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;
@@ -17,7 +17,8 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('scanResultpopupError'.tr() + ' :/ '),
+        title:
+            Text(AppLocalizations.of(context)!.scanResultpopupError + ' :/ '),
       ),
     );
   }
@@ -33,7 +34,7 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
-              'scanResultQrButtonOpen'.tr(),
+              AppLocalizations.of(context)!.scanResultQrButtonOpen,
               style: TextStyle(fontSize: 14.sp),
             ),
             const Icon(Icons.open_in_browser)

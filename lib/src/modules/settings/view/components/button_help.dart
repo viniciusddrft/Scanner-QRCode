@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonHelp extends StatelessWidget {
   const ButtonHelp({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class ButtonHelp extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
-                  'settingsFrequentProblems'.tr(),
+                  AppLocalizations.of(context)!.settingsFrequentProblems,
                   style: TextStyle(fontSize: 18.sp),
                 ),
               ),

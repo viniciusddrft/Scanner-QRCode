@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonCreateQRCodeSetLogo extends StatefulWidget {
   const ButtonCreateQRCodeSetLogo({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                tooltip: 'settingsImageTooltipAdd'.tr(),
+                tooltip: AppLocalizations.of(context)!.settingsImageTooltipAdd,
                 onPressed: () async => _setLogo().then(
                   (_) => Navigator.pop(context),
                 ),
@@ -36,7 +36,8 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                 ),
               ),
               IconButton(
-                tooltip: 'settingsImageTooltipRemove'.tr(),
+                tooltip:
+                    AppLocalizations.of(context)!.settingsImageTooltipRemove,
                 onPressed: () {
                   SettingsCreateQRCode.logoPath.value = null;
                   SharedPreferences.getInstance().then(
@@ -55,7 +56,8 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('settingsPopupButtonCancel'.tr()),
+            child:
+                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
           )
         ],
       ),
@@ -96,7 +98,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 15.w),
-                  child: Text('settingsImage'.tr(),
+                  child: Text(AppLocalizations.of(context)!.settingsImage,
                       style: TextStyle(fontSize: 18.sp)),
                 ),
                 ValueListenableBuilder(

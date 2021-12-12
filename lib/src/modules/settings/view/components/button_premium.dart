@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonPremium extends StatelessWidget with OpenLink {
   const ButtonPremium({Key? key}) : super(key: key);
@@ -29,7 +29,8 @@ class ButtonPremium extends StatelessWidget with OpenLink {
               Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
-                  'settingsQRCodeDownloadPremiumVersion'.tr(),
+                  AppLocalizations.of(context)!
+                      .settingsQRCodeDownloadPremiumVersion,
                   style: TextStyle(fontSize: 18.sp),
                 ),
               ),

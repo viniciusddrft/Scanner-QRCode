@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonContact extends StatelessWidget with OpenLink {
   const ButtonContact({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class ButtonContact extends StatelessWidget with OpenLink {
               Padding(
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
-                  'settingsContact'.tr(),
+                  AppLocalizations.of(context)!.settingsContact,
                   style: TextStyle(fontSize: 18.sp),
                 ),
               ),

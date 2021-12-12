@@ -12,7 +12,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_twitter/body_form_twitter.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_whatsapp/body_form_whatsapp.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_wifi/body_form_wifi.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_youtube/body_form_youtube.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 
@@ -32,52 +32,47 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
   final ValueNotifier<AdWidget?> _adWidget = ValueNotifier<AdWidget?>(null);
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     if (widget.typeQRCode == 'text') {
       _bodyFormQRCodeWidget = BodyFormText();
-      _titleAppBar = 'createQRCodeTitleText'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleText;
     } else if (widget.typeQRCode == 'wifi') {
       _bodyFormQRCodeWidget = BodyFormWifi();
-      _titleAppBar = 'createQRCodeTitleWifi'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleWifi;
     } else if (widget.typeQRCode == 'link') {
-      _titleAppBar = 'createQRCodeTitleLink'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleLink;
       _bodyFormQRCodeWidget = BodyFormLink();
     } else if (widget.typeQRCode == 'contact') {
-      _titleAppBar = 'createQRCodeTitleContact'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleContact;
       _bodyFormQRCodeWidget = BodyFormContact();
     } else if (widget.typeQRCode == 'github') {
-      _titleAppBar = 'createQRCodeTitleGithub'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleGithub;
       _bodyFormQRCodeWidget = BodyFormGithub();
     } else if (widget.typeQRCode == 'whatsapp') {
-      _titleAppBar = 'createQRCodeTitleWhatsapp'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleWhatsapp;
       _bodyFormQRCodeWidget = BodyFormWhatsapp();
     } else if (widget.typeQRCode == 'instagram') {
       _bodyFormQRCodeWidget = BodyFormIstagram();
-      _titleAppBar = 'createQRCodeTitleInstagram'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleInstagram;
     } else if (widget.typeQRCode == 'tiktok') {
-      _titleAppBar = 'createQRCodeTitleTiktok'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTiktok;
       _bodyFormQRCodeWidget = BodyFormTiktok();
     } else if (widget.typeQRCode == 'facebook') {
-      _titleAppBar = 'createQRCodeTitleFacebook'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleFacebook;
       _bodyFormQRCodeWidget = BodyFormFacebook();
     } else if (widget.typeQRCode == 'youtube') {
-      _titleAppBar = 'createQRCodeTitleYoutube'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleYoutube;
       _bodyFormQRCodeWidget = BodyFormYoutube();
     } else if (widget.typeQRCode == 'twitter') {
-      _titleAppBar = 'createQRCodeTitleTwitter'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTwitter;
       _bodyFormQRCodeWidget = BodyFormTwitter();
     } else if (widget.typeQRCode == 'twitch') {
-      _titleAppBar = 'createQRCodeTitleTwitch'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTwitch;
       _bodyFormQRCodeWidget = BodyFormTwitch();
     } else if (widget.typeQRCode == 'reddit') {
-      _titleAppBar = 'createQRCodeTitleReddit'.tr();
+      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleReddit;
       _bodyFormQRCodeWidget = BodyFormReddit();
     }
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
     if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {

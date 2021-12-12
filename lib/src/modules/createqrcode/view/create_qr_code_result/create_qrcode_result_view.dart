@@ -7,7 +7,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/controller/create_qr_code
 import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateQRCodeResult extends StatefulWidget {
   final String dataQRCode;
@@ -50,7 +50,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('createResultQrPopupSave'.tr() + ' !'),
+        title:
+            Text(AppLocalizations.of(context)!.createResultQrPopupSave + ' !'),
       ),
     );
   }
@@ -60,7 +61,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: Text('createResultQrPopupError'.tr() + ' :/'),
+        title: Text(
+            AppLocalizations.of(context)!.createResultQrPopupError + ' :/'),
       ),
     );
   }
@@ -70,7 +72,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff202020),
-        title: Text('createResultQRCodeAppBarTitle'.tr()),
+        title:
+            Text(AppLocalizations.of(context)!.createResultQRCodeAppBarTitle),
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -118,7 +121,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                           width: 95.w,
                           child: Center(
                             child: Text(
-                              'createResultQrCodeButtonSave'.tr(),
+                              AppLocalizations.of(context)!
+                                  .createResultQrCodeButtonSave,
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ),
@@ -141,7 +145,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                           width: 95.w,
                           child: Center(
                             child: Text(
-                              'createResultQrCodeButtonShare'.tr(),
+                              AppLocalizations.of(context)!
+                                  .createResultQrCodeButtonShare,
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ),

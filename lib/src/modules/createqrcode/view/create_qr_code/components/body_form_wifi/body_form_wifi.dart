@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormWifi extends BaseForm {
   BodyFormWifi({Key? key}) : super(key: key);
@@ -52,7 +52,7 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
           Padding(
             padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
             child: Text(
-              'createQRCodeWiFiMsg'.tr(),
+              AppLocalizations.of(context)!.createQRCodeWiFiMsg,
               style: TextStyle(fontSize: 14.sp),
             ),
           ),
@@ -63,12 +63,15 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
                 if (input != null && input.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeWiFiValidatorError1'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeWiFiValidatorError1;
                 }
               },
               controller: _textEditingControllerSSID,
               decoration: InputDecoration(
-                labelText: 'createQRCodeWiFiLabelDecorate1'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeWiFiLabelDecorate1 +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -103,15 +106,19 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
                   if (input.length > 7) {
                     return null;
                   } else {
-                    return 'createQRCodeWiFiValidatorError2'.tr();
+                    return AppLocalizations.of(context)!
+                        .createQRCodeWiFiValidatorError2;
                   }
                 } else {
-                  return 'createQRCodeWiFiValidatorError1'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeWiFiValidatorError1;
                 }
               },
               controller: _textEditingControllerPASS,
               decoration: InputDecoration(
-                labelText: 'createQRCodeWiFiLabelDecorate2'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeWiFiLabelDecorate2 +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

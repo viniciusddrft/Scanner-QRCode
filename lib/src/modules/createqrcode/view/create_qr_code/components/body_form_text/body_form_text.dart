@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormText extends BaseForm {
   BodyFormText({Key? key}) : super(key: key);
@@ -35,12 +35,15 @@ class _BodyFormState extends State<BodyFormText> {
                 if (input != null && input.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeTextValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeTextValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeTextLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeTextLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

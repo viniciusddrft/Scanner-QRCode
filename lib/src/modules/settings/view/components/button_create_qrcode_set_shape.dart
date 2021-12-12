@@ -3,7 +3,7 @@ import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qr
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonCreateQRCodeSetShape extends StatefulWidget {
   final ValueNotifier<QrDataModuleShape>? bodyShape;
@@ -59,8 +59,8 @@ class _ButtonCreateQRCodeSetShapeState
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: widget.isEye && !widget.isBody
-            ? Text('settingsPopupColorEyeTitle'.tr())
-            : Text('settingsPopupColorShapeTitle'.tr()),
+            ? Text(AppLocalizations.of(context)!.settingsPopupColorEyeTitle)
+            : Text(AppLocalizations.of(context)!.settingsPopupColorShapeTitle),
         content: SizedBox(
           height: MediaQuery.of(context).size.height / 4,
           width: MediaQuery.of(context).size.width / 1.5,
@@ -125,7 +125,8 @@ class _ButtonCreateQRCodeSetShapeState
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('settingsPopupButtonCancel'.tr()),
+            child:
+                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
           )
         ],
       ),
@@ -157,8 +158,9 @@ class _ButtonCreateQRCodeSetShapeState
                     padding: EdgeInsets.only(left: 15.w),
                     child: Text(
                       widget.isEye && !widget.isBody
-                          ? 'settingsButtonShapeEyeQR'.tr()
-                          : 'settingsButtonShapeQR'.tr(),
+                          ? AppLocalizations.of(context)!
+                              .settingsButtonShapeEyeQR
+                          : AppLocalizations.of(context)!.settingsButtonShapeQR,
                       style: TextStyle(fontSize: 18.sp),
                     ),
                   ),

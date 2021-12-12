@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormFacebook extends BaseForm {
   BodyFormFacebook({Key? key}) : super(key: key);
@@ -39,19 +39,19 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 15.sp),
                   child: Text(
-                    'createQRCodeFacebookMsg1'.tr(),
+                    AppLocalizations.of(context)!.createQRCodeFacebookMsg1,
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.sp),
                   child: Text(
-                    'createQRCodeFacebookMsg2'.tr(),
+                    AppLocalizations.of(context)!.createQRCodeFacebookMsg2,
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 Text(
-                  'createQRCodeFacebookMsg3'.tr(),
+                  AppLocalizations.of(context)!.createQRCodeFacebookMsg3,
                   style: TextStyle(fontSize: 14.sp),
                 ),
               ],
@@ -64,12 +64,15 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
                 if (value != null && value.isNotEmpty) {
                   return null;
                 } else {
-                  return 'createQRCodeFacebookValidatorError'.tr();
+                  return AppLocalizations.of(context)!
+                      .createQRCodeFacebookValidatorError;
                 }
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: 'createQRCodeFacebookLabelDecorate'.tr() + ' ...',
+                labelText: AppLocalizations.of(context)!
+                        .createQRCodeFacebookLabelDecorate +
+                    ' ...',
                 border: const OutlineInputBorder(),
               ),
             ),

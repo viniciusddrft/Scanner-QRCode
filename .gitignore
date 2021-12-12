@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# my files
+lib/src/shared/admob/controller/admob_controller.dart
+

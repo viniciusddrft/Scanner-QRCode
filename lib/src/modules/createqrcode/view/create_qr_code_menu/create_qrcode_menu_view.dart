@@ -12,17 +12,18 @@ class CreateQRCodeMenu extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: GridView.builder(
-        itemCount: MenuItens.allOptionsQRCodeCreate.length,
+        itemCount: MenuItens.allOptionsQRCodeCreate(context).length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 10.sp,
           mainAxisSpacing: 22.sp,
         ),
         itemBuilder: (context, index) => CreateQRCodeItemMenu(
-          typeQRCode: MenuItens.allOptionsQRCodeCreate[index]['typeQRCode'],
-          icon: MenuItens.allOptionsQRCodeCreate[index]['icon'],
-          text: MenuItens.allOptionsQRCodeCreate[index]['text'],
-          color: MenuItens.allOptionsQRCodeCreate[index]['color'],
+          typeQRCode: MenuItens.allOptionsQRCodeCreate(context)[index]
+              ['typeQRCode'],
+          icon: MenuItens.allOptionsQRCodeCreate(context)[index]['icon'],
+          text: MenuItens.allOptionsQRCodeCreate(context)[index]['text'],
+          color: MenuItens.allOptionsQRCodeCreate(context)[index]['color'],
         ),
       ),
     );
