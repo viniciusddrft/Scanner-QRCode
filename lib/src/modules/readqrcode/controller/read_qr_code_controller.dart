@@ -53,10 +53,10 @@ class ReadQrCodeController {
       _scanner.processImage(_inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
-            if (!code.first.value.displayValue!.contains('typeNumber')) {
-              if (!code.first.value.displayValue!.contains('errorCode')) {
-                _showResult(code.first.value.displayValue as String,
-                    code.first.value.type);
+            if (!code.first.value.rawValue!.contains('typeNumber')) {
+              if (!code.first.value.rawValue!.contains('errorCode')) {
+                _showResult(
+                    code.first.value.rawValue as String, code.first.value.type);
               } else {
                 popupError();
               }

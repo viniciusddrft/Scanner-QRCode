@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/buttonopen/button_url.dart';
+import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/button_url.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:share/share.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -60,9 +61,7 @@ class _ResultReadCodeState extends State<ResultReadCode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xff202020),
-      ),
+      appBar: AppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -70,7 +69,7 @@ class _ResultReadCodeState extends State<ResultReadCode> {
             padding: EdgeInsets.only(top: 50.0.h, left: 30.w, bottom: 10.w),
             child: Text(
               AppLocalizations.of(context)!.scanResultQrTitle,
-              style: TextStyle(fontSize: 20.sp),
+              style: AppTextThemes.readQrcodeResult,
             ),
           ),
           Container(
@@ -117,7 +116,7 @@ class _ResultReadCodeState extends State<ResultReadCode> {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.scanResultQrButtonShare,
-                          style: TextStyle(fontSize: 14.sp),
+                          style: AppTextThemes.readQrcodeButtons,
                         ),
                         const Icon(Icons.share)
                       ],

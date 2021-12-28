@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -54,84 +55,88 @@ class _ButtonCreateQRCodeSetShapeState
     super.initState();
   }
 
-  void _popupChangeShapeQR() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: widget.isEye && !widget.isBody
-            ? Text(AppLocalizations.of(context)!.settingsPopupColorEyeTitle)
-            : Text(AppLocalizations.of(context)!.settingsPopupColorShapeTitle),
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height / 4,
-          width: MediaQuery.of(context).size.width / 1.5,
-          child: Padding(
-            padding: EdgeInsets.only(top: 50.h),
-            child: GridView.builder(
-              itemCount: widget.isEye && !widget.isBody
-                  ? QrEyeShape.values.length
-                  : QrDataModuleShape.values.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 30,
-                mainAxisSpacing: 30,
-              ),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  if (widget.isEye && !widget.isBody) {
-                    SettingsCreateQRCode.shapeQRCodeEye.value =
-                        QrEyeShape.values[index];
+  void _popupChangeShapeQR() => showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: widget.isEye && !widget.isBody
+              ? Text(
+                  AppLocalizations.of(context)!.settingsPopupColorEyeTitle,
+                  style: AppTextThemes.titlePopupSettings,
+                )
+              : Text(
+                  AppLocalizations.of(context)!.settingsPopupColorShapeTitle,
+                  style: AppTextThemes.titlePopupSettings,
+                ),
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height / 4,
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: Padding(
+              padding: EdgeInsets.only(top: 50.h),
+              child: GridView.builder(
+                itemCount: widget.isEye && !widget.isBody
+                    ? QrEyeShape.values.length
+                    : QrDataModuleShape.values.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 30,
+                  mainAxisSpacing: 30,
+                ),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    if (widget.isEye && !widget.isBody) {
+                      SettingsCreateQRCode.shapeQRCodeEye.value =
+                          QrEyeShape.values[index];
 
-                    SharedPreferences.getInstance().then((preference) =>
-                        preference.setInt('shapeQRCodeEye', index));
+                      SharedPreferences.getInstance().then((preference) =>
+                          preference.setInt('shapeQRCodeEye', index));
 
-                    Navigator.pop(context);
-                  } else {
-                    SettingsCreateQRCode.shapeQRCode.value =
-                        QrDataModuleShape.values[index];
+                      Navigator.pop(context);
+                    } else {
+                      SettingsCreateQRCode.shapeQRCode.value =
+                          QrDataModuleShape.values[index];
 
-                    SharedPreferences.getInstance().then((preference) =>
-                        preference.setInt('shapeQRCode', index));
+                      SharedPreferences.getInstance().then((preference) =>
+                          preference.setInt('shapeQRCode', index));
 
-                    Navigator.pop(context);
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: widget.isEye && !widget.isBody
-                        ? BorderRadius.circular(
-                            QrEyeShape.values[index] == QrEyeShape.square
-                                ? 0
-                                : 360)
-                        //type Body
-                        : BorderRadius.circular(
-                            QrDataModuleShape.values[index] ==
-                                    QrDataModuleShape.square
-                                ? 0
-                                : 360),
-                    border: Border.all(
-                      color: widget.isEye && !widget.isBody
-                          ? SettingsCreateQRCode.colorQRCodeEye.value
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: widget.isEye && !widget.isBody
+                          ? BorderRadius.circular(
+                              QrEyeShape.values[index] == QrEyeShape.square
+                                  ? 0
+                                  : 360)
                           //type Body
-                          : SettingsCreateQRCode.colorQRCode.value,
-                      width: 15.w,
+                          : BorderRadius.circular(
+                              QrDataModuleShape.values[index] ==
+                                      QrDataModuleShape.square
+                                  ? 0
+                                  : 360),
+                      border: Border.all(
+                        color: widget.isEye && !widget.isBody
+                            ? SettingsCreateQRCode.colorQRCodeEye.value
+                            //type Body
+                            : SettingsCreateQRCode.colorQRCode.value,
+                        width: 15.w,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child:
+                  Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
+            )
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child:
-                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
-          )
-        ],
-      ),
-    );
-  }
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +166,7 @@ class _ButtonCreateQRCodeSetShapeState
                           ? AppLocalizations.of(context)!
                               .settingsButtonShapeEyeQR
                           : AppLocalizations.of(context)!.settingsButtonShapeQR,
-                      style: TextStyle(fontSize: 18.sp),
+                      style: AppTextThemes.buttonsSettings,
                     ),
                   ),
                   Padding(

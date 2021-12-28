@@ -9,7 +9,6 @@ class HelpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff202020),
         title: Text(AppLocalizations.of(context)!.settingsFrequentProblems),
       ),
       body: SingleChildScrollView(

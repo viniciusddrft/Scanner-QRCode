@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:scannerqrcode/core/theme/theme_app.dart';
 
 class ButtonHelpWidget extends StatelessWidget {
   final String problem;
@@ -38,7 +39,7 @@ class ButtonHelpWidget extends StatelessWidget {
           Container(
             height: 1,
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            color: ThemeApp.isDarkThemeApp ? Colors.white : Colors.black,
           )
         ],
       ),

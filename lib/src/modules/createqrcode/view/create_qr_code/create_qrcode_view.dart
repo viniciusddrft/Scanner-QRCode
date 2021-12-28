@@ -95,7 +95,6 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff202020),
         title: Text(_titleAppBar),
       ),
       body: _bodyFormQRCodeWidget,

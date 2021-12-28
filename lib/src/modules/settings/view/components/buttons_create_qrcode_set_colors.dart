@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -39,54 +40,53 @@ class _ButtonCreateQRCodeSetColorState
     Color(0xff303030)
   ];
   void _popupChangeColorQR(
-      {required ValueNotifier<Color> colorButton,
-      required String savePreferenceKey}) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          AppLocalizations.of(context)!.settingsPopupColorTitle,
-          style: TextStyle(fontSize: 22.sp),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child:
-                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
-          )
-        ],
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height / 1.7,
-          width: MediaQuery.of(context).size.width / 1.5,
-          child: GridView.builder(
-            itemCount: _colors.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 30.sp,
-              mainAxisSpacing: 30.sp,
-            ),
-            itemBuilder: (context, index) => ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: _colors[index],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(360),
-                ),
+          {required ValueNotifier<Color> colorButton,
+          required String savePreferenceKey}) =>
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text(
+            AppLocalizations.of(context)!.settingsPopupColorTitle,
+            style: AppTextThemes.titlePopupSettings,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child:
+                  Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
+            )
+          ],
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height / 1.7,
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: GridView.builder(
+              itemCount: _colors.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 30.sp,
+                mainAxisSpacing: 30.sp,
               ),
-              onPressed: () {
-                colorButton.value = _colors[index];
-                SharedPreferences.getInstance().then(
-                  (preference) => preference.setInt(
-                      savePreferenceKey, _colors[index].value),
-                );
-                Navigator.pop(context);
-              },
-              child: Container(),
+              itemBuilder: (context, index) => ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: _colors[index],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(360),
+                  ),
+                ),
+                onPressed: () {
+                  colorButton.value = _colors[index];
+                  SharedPreferences.getInstance().then(
+                    (preference) => preference.setInt(
+                        savePreferenceKey, _colors[index].value),
+                  );
+                  Navigator.pop(context);
+                },
+                child: Container(),
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +114,7 @@ class _ButtonCreateQRCodeSetColorState
                   Padding(
                     padding: EdgeInsets.only(left: 15.w),
                     child: Text(widget.textButton,
-                        style: TextStyle(fontSize: 18.sp)),
+                        style: AppTextThemes.buttonsSettings),
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: 15.w),

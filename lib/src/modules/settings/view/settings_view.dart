@@ -9,9 +9,11 @@ import 'package:scannerqrcode/src/modules/settings/view/components/button_premiu
 import 'package:scannerqrcode/src/modules/settings/view/components/button_rate_app.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_set_language.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/button_create_qrcode_set_logo.dart';
+import 'package:scannerqrcode/src/modules/settings/view/components/button_set_theme.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/buttons_create_qrcode_set_colors.dart';
 import 'package:scannerqrcode/src/modules/settings/view/components/qrcode_settings_exemplo.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -36,7 +38,7 @@ class SettingsPage extends StatelessWidget {
                       child: Text(
                         AppLocalizations.of(context)!
                             .settingsTitleCardCreateQrCode,
-                        style: TextStyle(fontSize: 22.sp),
+                        style: AppTextThemes.titleCardSettings,
                       ),
                     ),
                     ButtonCreateQRCodeSetColor(
@@ -70,7 +72,7 @@ class SettingsPage extends StatelessWidget {
                       padding: EdgeInsets.only(top: 10.h),
                       child: Text(
                         AppLocalizations.of(context)!.settingsQRCodeExample,
-                        style: TextStyle(fontSize: 18.sp),
+                        style: AppTextThemes.exampleQRCodeSettings,
                       ),
                     ),
                     Padding(
@@ -95,8 +97,32 @@ class SettingsPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
                         child: Text(
+                          AppLocalizations.of(context)!.settingsApptheme,
+                          style: AppTextThemes.titleCardSettings,
+                        ),
+                      ),
+                      const SetTheme(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: SizedBox(
+                  height: 180.h,
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
+                        child: Text(
                           AppLocalizations.of(context)!.settingsLanguageTitle,
-                          style: TextStyle(fontSize: 22.sp),
+                          style: AppTextThemes.titleCardSettings,
                         ),
                       ),
                       const ButtonSetLanguage()
@@ -121,7 +147,7 @@ class SettingsPage extends StatelessWidget {
                         child: Text(
                           AppLocalizations.of(context)!
                               .settingsQRCodePremiumVersion,
-                          style: TextStyle(fontSize: 22.sp),
+                          style: AppTextThemes.titleCardSettings,
                         ),
                       ),
                       const ButtonPremium()
@@ -145,7 +171,7 @@ class SettingsPage extends StatelessWidget {
                         padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
                         child: Text(
                           AppLocalizations.of(context)!.settingsHelp,
-                          style: TextStyle(fontSize: 22.sp),
+                          style: AppTextThemes.titleCardSettings,
                         ),
                       ),
                       const ButtonHelp()
@@ -169,7 +195,7 @@ class SettingsPage extends StatelessWidget {
                         padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
                         child: Text(
                           AppLocalizations.of(context)!.settingsAboutTheApp,
-                          style: TextStyle(fontSize: 22.sp),
+                          style: AppTextThemes.titleCardSettings,
                         ),
                       ),
                       ButtonRateApp()
@@ -193,7 +219,7 @@ class SettingsPage extends StatelessWidget {
                         padding: EdgeInsets.only(top: 15.h, bottom: 40.h),
                         child: Text(
                           AppLocalizations.of(context)!.settingsContact,
-                          style: TextStyle(fontSize: 22.sp),
+                          style: AppTextThemes.titleCardSettings,
                         ),
                       ),
                       const ButtonContact()
@@ -205,7 +231,7 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                AppLocalizations.of(context)!.settingsVersion + ' 2.0.3',
+                AppLocalizations.of(context)!.settingsVersion + ' 2.1.0',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

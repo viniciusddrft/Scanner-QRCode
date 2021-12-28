@@ -135,6 +135,12 @@
     "settingsFrequentProblems":"Problemas frequentes",
     "settingsAboutTheApp":"Sobre o app",
     "settingsRateTheApp":"Avalie o app",
+    "settingsApptheme":"Tema do app",
+    "settingsChooseTheTheme":"Escolha o tema",
+    "settingsChangeTheme":"Trocar tema",
+    "settingsSystemTheme":"Tema do sistema",
+    "settingsLightTheme":"Tema claro",
+    "settingsDarkTheme":"Tema escuro",
 
     "helpProblem1":"O qr code que eu criei não foi lido",
     "helpSolution1":"Quando isso acontece pode ser as cores que foram utilizadas ou o logo, infelizmente isso terá que ser testado por você mas se seu qr code não funcionar basta testar umas modificações e provavelmente conseguira fazer tranquilamente.",

@@ -12,7 +12,6 @@ class SolutionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff202020),
         title: Text(problem),
       ),
       body: SizedBox(

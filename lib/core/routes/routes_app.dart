@@ -57,7 +57,6 @@ class Routes {
             typeCode: (settings.arguments as Map<String, dynamic>)['typeCode'],
           ),
         );
-      default:
     }
   }
 }

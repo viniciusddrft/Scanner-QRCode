@@ -125,11 +125,11 @@ class _ScannerWidgetState extends State<ScannerWidget>
 
       _scanner.processImage(_inputImage).then((List<Barcode> code) =>
           code.isNotEmpty
-              ? !code.first.value.displayValue!
+              ? !code.first.value.rawValue!
                       .contains('typeNumber') // error in scan image :/
-                  ? !code.first.value.displayValue!
+                  ? !code.first.value.rawValue!
                           .contains('errorCode') // error in scan image :/
-                      ? _showResult(code.first.value.displayValue as String,
+                      ? _showResult(code.first.value.rawValue as String,
                           code.first.value.type)
                       : debugPrint('Error in scanner')
                   : debugPrint('Error in scanner')

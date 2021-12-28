@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/controller/create_qr_code/create_qr_code_controller.dart';
 import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -71,7 +72,6 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xff202020),
         title:
             Text(AppLocalizations.of(context)!.createResultQRCodeAppBarTitle),
       ),
@@ -123,7 +123,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .createResultQrCodeButtonSave,
-                              style: TextStyle(fontSize: 14.sp),
+                              style: AppTextThemes.createQrcodeButtons,
                             ),
                           ),
                         ),
@@ -147,7 +147,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .createResultQrCodeButtonShare,
-                              style: TextStyle(fontSize: 14.sp),
+                              style: AppTextThemes.createQrcodeButtons,
                             ),
                           ),
                         ),

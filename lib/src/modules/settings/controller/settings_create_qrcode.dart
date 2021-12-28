@@ -20,47 +20,44 @@ class SettingsCreateQRCode {
 
   static final ValueNotifier<String?> logoPath = ValueNotifier<String?>(null);
 
-  static void getPreferenceShape() {
-    SharedPreferences.getInstance().then((preference) {
-      int? response = preference.getInt('shapeQRCodeEye');
-      if (response == 0) {
-        shapeQRCodeEye.value = QrEyeShape.square;
-      } else if (response == 1) {
-        shapeQRCodeEye.value = QrEyeShape.circle;
-      }
-    });
+  static void getPreferenceShape() => SharedPreferences.getInstance().then(
+        (preference) {
+          int? responseQRCode = preference.getInt('shapeQRCode');
+          if (responseQRCode == 0) {
+            shapeQRCode.value = QrDataModuleShape.square;
+          } else if (responseQRCode == 1) {
+            shapeQRCode.value = QrDataModuleShape.circle;
+          }
+          int? responseQRCodeEye = preference.getInt('shapeQRCodeEye');
+          if (responseQRCodeEye == 0) {
+            shapeQRCodeEye.value = QrEyeShape.square;
+          } else if (responseQRCodeEye == 1) {
+            shapeQRCodeEye.value = QrEyeShape.circle;
+          }
+        },
+      );
 
-    SharedPreferences.getInstance().then((preference) {
-      int? response = preference.getInt('shapeQRCode');
-      if (response == 0) {
-        shapeQRCode.value = QrDataModuleShape.square;
-      } else if (response == 1) {
-        shapeQRCode.value = QrDataModuleShape.circle;
-      }
-    });
-  }
+  static void getPreferencesColors() => SharedPreferences.getInstance().then(
+        (preference) {
+          int? responseBackground = preference.getInt('colorQRBackground');
+          if (responseBackground != null) {
+            colorQRBackground.value = Color(responseBackground);
+          }
+          int? responseQRCode = preference.getInt('colorQRCode');
+          if (responseQRCode != null) {
+            colorQRCode.value = Color(responseQRCode);
+          }
+          int? responseQRCodeEye = preference.getInt('colorQRCodeEye');
+          if (responseQRCodeEye != null) {
+            colorQRCodeEye.value = Color(responseQRCodeEye);
+          }
+        },
+      );
 
-  static void getPreferencesColors() {
-    SharedPreferences.getInstance().then((preference) {
-      int? response = preference.getInt('colorQRCodeEye');
-      if (response != null) colorQRCodeEye.value = Color(response);
-    });
-
-    SharedPreferences.getInstance().then((preference) {
-      int? response = preference.getInt('colorQRBackground');
-      if (response != null) colorQRBackground.value = Color(response);
-    });
-
-    SharedPreferences.getInstance().then((preference) {
-      int? response = preference.getInt('colorQRCode');
-      if (response != null) colorQRCode.value = Color(response);
-    });
-  }
-
-  static getPreferencesLogo() {
-    SharedPreferences.getInstance().then((preference) {
-      String? response = preference.getString('logo');
-      if (response != null) logoPath.value = response;
-    });
-  }
+  static getPreferencesLogo() => SharedPreferences.getInstance().then(
+        (preference) {
+          String? response = preference.getString('logo');
+          if (response != null) logoPath.value = response;
+        },
+      );
 }

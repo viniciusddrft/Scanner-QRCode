@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;
@@ -35,7 +36,7 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
               AppLocalizations.of(context)!.scanResultQrButtonOpen,
-              style: TextStyle(fontSize: 14.sp),
+              style: AppTextThemes.readQrcodeButtons,
             ),
             const Icon(Icons.open_in_browser)
           ]),

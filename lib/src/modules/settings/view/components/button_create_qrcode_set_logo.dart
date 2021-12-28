@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,54 +16,54 @@ class ButtonCreateQRCodeSetLogo extends StatefulWidget {
 }
 
 class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
-  void _popupSetLogo() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height / 5,
-          width: MediaQuery.of(context).size.width / 4,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                tooltip: AppLocalizations.of(context)!.settingsImageTooltipAdd,
-                onPressed: () async => _setLogo().then(
-                  (_) => Navigator.pop(context),
+  void _popupSetLogo() => showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height / 5,
+            width: MediaQuery.of(context).size.width / 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  tooltip:
+                      AppLocalizations.of(context)!.settingsImageTooltipAdd,
+                  onPressed: () async => _setLogo().then(
+                    (_) => Navigator.pop(context),
+                  ),
+                  icon: Icon(
+                    Icons.add_photo_alternate,
+                    size: 30.sp,
+                  ),
                 ),
-                icon: Icon(
-                  Icons.add_photo_alternate,
-                  size: 30.sp,
-                ),
-              ),
-              IconButton(
-                tooltip:
-                    AppLocalizations.of(context)!.settingsImageTooltipRemove,
-                onPressed: () {
-                  SettingsCreateQRCode.logoPath.value = null;
-                  SharedPreferences.getInstance().then(
-                    (SharedPreferences preference) => preference.remove('logo'),
-                  );
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.delete,
-                  size: 30.sp,
-                ),
-              )
-            ],
+                IconButton(
+                  tooltip:
+                      AppLocalizations.of(context)!.settingsImageTooltipRemove,
+                  onPressed: () {
+                    SettingsCreateQRCode.logoPath.value = null;
+                    SharedPreferences.getInstance().then(
+                      (SharedPreferences preference) =>
+                          preference.remove('logo'),
+                    );
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    size: 30.sp,
+                  ),
+                )
+              ],
+            ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child:
+                  Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
+            )
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child:
-                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
-          )
-        ],
-      ),
-    );
-  }
+      );
 
   Future<void> _setLogo() async =>
       ImagePicker().pickImage(source: ImageSource.gallery).then(
@@ -99,7 +100,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                 Padding(
                   padding: EdgeInsets.only(left: 15.w),
                   child: Text(AppLocalizations.of(context)!.settingsImage,
-                      style: TextStyle(fontSize: 18.sp)),
+                      style: AppTextThemes.buttonsSettings),
                 ),
                 ValueListenableBuilder(
                   valueListenable: SettingsCreateQRCode.logoPath,

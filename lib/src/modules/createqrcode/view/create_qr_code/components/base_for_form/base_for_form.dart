@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
 abstract class BaseForm extends StatefulWidget {
   final _formkey = GlobalKey<FormState>();
@@ -32,7 +33,7 @@ abstract class BaseForm extends StatefulWidget {
             children: [
               Text(
                 AppLocalizations.of(context)!.createQRCodeALLButton,
-                style: TextStyle(fontSize: 14.sp),
+                style: AppTextThemes.createQrcodeButtons,
               ),
               Icon(
                 Icons.qr_code_2,

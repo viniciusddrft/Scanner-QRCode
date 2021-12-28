@@ -135,6 +135,12 @@
     "settingsFrequentProblems":"Frequent problems",
     "settingsAboutTheApp":"About the app",
     "settingsRateTheApp":"Rate the app",
+    "settingsApptheme":"App theme",
+    "settingsChooseTheTheme":"Choose the theme",
+    "settingsChangeTheme":"Change theme",
+    "settingsSystemTheme":"System theme",
+    "settingsLightTheme":"Light theme",
+    "settingsDarkTheme":"Dark theme",
 
     "helpProblem1":"The qr code I created was not read",
     "helpSolution1":"When this happens it could be like cores that were used or the logo, unfortunately this will have to be tested by you but if your qr code doesn't work just test some modifications and you will probably be able to do it quietly.",

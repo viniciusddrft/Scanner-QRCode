@@ -135,6 +135,12 @@
     "settingsFrequentProblems":"常见问题",
     "settingsAboutTheApp":"关于应用程序",
     "settingsRateTheApp":"评价应用程序",
+    "settingsApptheme":"应用主题",
+    "settingsChooseTheTheme":"选择主题",
+    "settingsChangeTheme":"更改主题",
+    "settingsSystemTheme":"系统主题",
+    "settingsLightTheme":"轻主题",
+    "settingsDarkTheme":"黑暗主题",
 
     "helpProblem1":"我创建的二维码没有被读取",
     "helpSolution1":"当这种情况发生时，它可能就像使用的内核或徽标一样，不幸的是，这必须由您进行测试，但如果您的二维码不起作用，只需测试一些修改，您可能就可以安静地进行。",

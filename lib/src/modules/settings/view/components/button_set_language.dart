@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/core/locale/locale.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ButtonSetLanguage extends StatefulWidget {
@@ -14,25 +15,24 @@ class ButtonSetLanguage extends StatefulWidget {
 class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
 
-  List<Map<String, dynamic>> _allLocales(context) {
-    return [
-      {
-        'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
-        'icon': 'assets/icons_translations/brazil.png',
-        'locale': const Locale('pt', 'BR')
-      },
-      {
-        'text': AppLocalizations.of(context)!.settingsLanguageNameUnitedStates,
-        'icon': 'assets/icons_translations/unitedstates.png',
-        'locale': const Locale('en', 'US')
-      },
-      {
-        'text': AppLocalizations.of(context)!.settingsLanguageNameChina,
-        'icon': 'assets/icons_translations/china.png',
-        'locale': const Locale('zh', 'CN'),
-      },
-    ];
-  }
+  List<Map<String, dynamic>> _allLocales(context) => [
+        {
+          'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
+          'icon': 'assets/icons_translations/brazil.png',
+          'locale': const Locale('pt', 'BR')
+        },
+        {
+          'text':
+              AppLocalizations.of(context)!.settingsLanguageNameUnitedStates,
+          'icon': 'assets/icons_translations/unitedstates.png',
+          'locale': const Locale('en', 'US')
+        },
+        {
+          'text': AppLocalizations.of(context)!.settingsLanguageNameChina,
+          'icon': 'assets/icons_translations/china.png',
+          'locale': const Locale('zh', 'CN'),
+        },
+      ];
 
   List<Map<String, dynamic>> get allLocales => _allLocales(context);
 
@@ -60,7 +60,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
       builder: (BuildContext context) => AlertDialog(
         title: Text(
           AppLocalizations.of(context)!.settingsLanguagePopup,
-          style: TextStyle(fontSize: 18.sp),
+          style: AppTextThemes.titlePopupSettings,
         ),
         actions: [
           TextButton(
@@ -102,7 +102,10 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(allLocales[index]['text']),
+                      Text(
+                        allLocales[index]['text'],
+                        style: AppTextThemes.buttonsPopupSettings,
+                      ),
                       Image.asset(
                         allLocales[index]['icon'],
                         height: 30.h,
@@ -141,7 +144,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
                 padding: EdgeInsets.only(left: 15.w),
                 child: Text(
                   AppLocalizations.of(context)!.settingsLanguageTitle,
-                  style: TextStyle(fontSize: 18.sp),
+                  style: AppTextThemes.buttonsSettings,
                 ),
               ),
               Padding(

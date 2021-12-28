@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/controller/read_qr_code_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
 class ReadQRCodePage extends StatefulWidget {
   const ReadQRCodePage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
         Text(
           'Scanner QRCode',
           style: GoogleFonts.roboto(
-              color: Colors.red, textStyle: TextStyle(fontSize: 22.sp)),
+              color: Colors.red, textStyle: AppTextThemes.nameApp),
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 10),
         Row(
@@ -51,7 +52,7 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     Text(
                       AppLocalizations.of(context)!
                           .readQRCodeTextButtonReadCamera,
-                      style: TextStyle(fontSize: 14.sp),
+                      style: AppTextThemes.readQrcodeButtons,
                     ),
                     Icon(
                       Icons.camera_alt,
@@ -73,7 +74,7 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     Text(
                       AppLocalizations.of(context)!
                           .readQRCodeTextButtonReadGallery,
-                      style: TextStyle(fontSize: 14.sp),
+                      style: AppTextThemes.readQrcodeButtons,
                     ),
                     Icon(
                       Icons.photo,
