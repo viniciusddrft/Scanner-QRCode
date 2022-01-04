@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
             cardColor: ThemeApp.isDarkThemeApp ? null : const Color(0xffe7e7ee),
           ),
           initialRoute: '/Home',
-          onGenerateRoute: (RouteSettings settings) => Routes.routes(settings),
+          onGenerateRoute: Routes.routes,
         ),
       ),
     );

@@ -154,7 +154,7 @@ class _ButtonCreateQRCodeSetShapeState
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 side: BorderSide(color: Colors.black, width: 2.w)),
-            onPressed: () => _popupChangeShapeQR(),
+            onPressed: _popupChangeShapeQR,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

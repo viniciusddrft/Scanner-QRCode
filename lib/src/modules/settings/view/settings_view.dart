@@ -198,7 +198,7 @@ class SettingsPage extends StatelessWidget {
                           style: AppTextThemes.titleCardSettings,
                         ),
                       ),
-                      ButtonRateApp()
+                      const ButtonRateApp()
                     ],
                   ),
                 ),
@@ -231,7 +231,7 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                AppLocalizations.of(context)!.settingsVersion + ' 2.1.0',
+                AppLocalizations.of(context)!.settingsVersion + ' 2.1.1',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

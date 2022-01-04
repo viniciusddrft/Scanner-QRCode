@@ -28,7 +28,7 @@ class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
                 IconButton(
                   tooltip:
                       AppLocalizations.of(context)!.settingsImageTooltipAdd,
-                  onPressed: () async => _setLogo().then(
+                  onPressed: () => _setLogo().then(
                     (_) => Navigator.pop(context),
                   ),
                   icon: Icon(

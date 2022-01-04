@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
-class ButtonRateApp extends StatelessWidget {
-  final InAppReview _inAppReview = InAppReview.instance;
-
-  ButtonRateApp({Key? key}) : super(key: key);
+class ButtonRateApp extends StatelessWidget with OpenLink {
+  const ButtonRateApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,8 @@ class ButtonRateApp extends StatelessWidget {
       child: SizedBox(
         height: 45.h,
         child: OutlinedButton(
-          onPressed: () => _inAppReview.openStoreListing(),
+          onPressed: () => openLink(
+              'https://play.google.com/store/apps/details?id=com.scannerqrcode'),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,
               shape: RoundedRectangleBorder(
