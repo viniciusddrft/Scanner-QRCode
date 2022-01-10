@@ -2,6 +2,7 @@
 
 
 ## Sobre o app
+
 baixe o app 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode" target="_blank"> <img align="center" height="70" width="70" src="assets/splash/splash.png">
 <a href=#>
   
