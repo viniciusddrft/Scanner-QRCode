@@ -3,8 +3,7 @@
 
 ## Sobre o app
 
-baixe o app 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode" target="_blank"> <img align="center" height="70" width="70" src="assets/splash/splash.png">
-<a href=#>
+baixe o app 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode" target="_blank"> <img align="center" height="70" width="70" src="assets/splash/splash.png"></a>
   
 Esse app é um projeto feito em flutter que lê códigos de barra qr code e outros tipos de código, ele faz isso pela câmera e também pela galeria o app também constroi qr personalizado podendo mudar as cores e formas do qr code podendo até mesmo por um logo no centro, o app tem tema claro e escuro, e possui suporte a 3 idiomas, portugues, ingles e chines.
 
@@ -24,7 +23,7 @@ Se você quiser me apoiar nesse projeto de forma financeira o projeto possui uma
 
 
 App Premium 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode_premium" target="_blank"> <img align="center" height="70" width="70" src="https://github.com/viniciusddrft/Scanner-QRCode-Premium/blob/main/assets/splash/splash.png">
-<a href=#>
+</a>
 
   ##  Flutter links
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
