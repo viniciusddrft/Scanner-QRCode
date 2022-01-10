@@ -3,11 +3,12 @@
 
 ## Sobre o app
 baixe o app 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode" target="_blank"> <img align="center" height="70" width="70" src="assets/splash/splash.png">
+
 <a href=#>
   
 Esse app é um projeto feito em flutter que lê códigos de barra qr code e outros tipos de código, ele faz isso pela câmera e também pela galeria o app também constroi qr personalizado podendo mudar as cores e formas do qr code podendo até mesmo por um logo no centro, o app tem tema claro e escuro, e possui suporte a 3 idiomas, portugues, ingles e chines.
 
-<img  height="100" src="assets/readme/demo.gif">
+<img src="assets/readme/demo.gif">
 
 ## Problemas atuais do projeto
 Hoje o app cria de maneira fácil qr code para wi-fi, contatos e várias outras coisas porém quando você  lê um qr code de um contato por mais que ele leia o qr code ele não abre o app de contatos já adicionando o novo contato no telefone isso acontece pq o flutter precisa se comunicar via intent para fazer todo esse processo que facilita a vida do usuario, mas usar esse tipo de intent no flutter ainda é um misterio pra mim fiz muitas pesquisas e testes e oque dificulta esse processo é ser algo totalmente nativo, até achei packages que fazem isso porém na documentação não mostra como usar para esse proposito especifico.
