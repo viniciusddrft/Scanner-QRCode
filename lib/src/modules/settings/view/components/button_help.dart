@@ -3,8 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
-class ButtonHelp extends StatelessWidget {
+class ButtonHelp extends StatefulWidget {
   const ButtonHelp({Key? key}) : super(key: key);
+
+  @override
+  State<ButtonHelp> createState() => _ButtonHelpState();
+}
+
+class _ButtonHelpState extends State<ButtonHelp> {
+  @override
+  void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

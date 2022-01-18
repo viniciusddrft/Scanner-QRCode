@@ -15,8 +15,19 @@ import 'package:scannerqrcode/src/modules/settings/view/components/qrcode_settin
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  @override
+  void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +112,7 @@ class SettingsPage extends StatelessWidget {
                           style: AppTextThemes.titleCardSettings,
                         ),
                       ),
-                      const SetTheme(),
+                      const ButtonSetTheme(),
                     ],
                   ),
                 ),
@@ -231,7 +242,7 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                AppLocalizations.of(context)!.settingsVersion + ' 2.1.1',
+                AppLocalizations.of(context)!.settingsVersion + ' 2.1.2',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

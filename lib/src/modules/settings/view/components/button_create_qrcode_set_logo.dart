@@ -16,6 +16,12 @@ class ButtonCreateQRCodeSetLogo extends StatefulWidget {
 }
 
 class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
+  @override
+  void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
+    super.initState();
+  }
+
   void _popupSetLogo() => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(

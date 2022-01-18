@@ -4,8 +4,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
-class ButtonRateApp extends StatelessWidget with OpenLink {
+class ButtonRateApp extends StatefulWidget {
   const ButtonRateApp({Key? key}) : super(key: key);
+
+  @override
+  State<ButtonRateApp> createState() => _ButtonRateAppState();
+}
+
+class _ButtonRateAppState extends State<ButtonRateApp> with OpenLink {
+  @override
+  void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

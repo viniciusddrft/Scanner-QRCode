@@ -5,8 +5,19 @@ import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
-class ButtonPremium extends StatelessWidget with OpenLink {
+class ButtonPremium extends StatefulWidget {
   const ButtonPremium({Key? key}) : super(key: key);
+
+  @override
+  State<ButtonPremium> createState() => _ButtonPremiumState();
+}
+
+class _ButtonPremiumState extends State<ButtonPremium> with OpenLink {
+  @override
+  void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

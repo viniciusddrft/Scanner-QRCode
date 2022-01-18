@@ -3,7 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scannerqrcode/core/theme/theme_app.dart';
 
-class AppTextThemes {
+class AppTextThemes extends ChangeNotifier {
+  AppTextThemes._internal();
+
+  static final _instance = AppTextThemes._internal();
+
+  factory AppTextThemes() => _instance;
+
   static TextStyle get buttonsSettings => TextStyle(
         fontSize: 18.sp,
         color: ThemeApp.isDarkThemeApp ? Colors.white : Colors.black,
@@ -36,4 +42,6 @@ class AppTextThemes {
   static TextStyle get readQrcodeButtons => TextStyle(fontSize: 14.sp);
   static TextStyle get readQrcodeResult => TextStyle(fontSize: 20.sp);
   static TextStyle get createQrcodeButtons => TextStyle(fontSize: 14.sp);
+
+  void updateTextsThemeApp() => notifyListeners();
 }

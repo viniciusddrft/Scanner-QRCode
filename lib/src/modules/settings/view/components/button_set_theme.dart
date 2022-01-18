@@ -5,18 +5,19 @@ import 'package:scannerqrcode/core/theme/theme_app.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SetTheme extends StatefulWidget {
-  const SetTheme({Key? key}) : super(key: key);
+class ButtonSetTheme extends StatefulWidget {
+  const ButtonSetTheme({Key? key}) : super(key: key);
 
   @override
-  State<SetTheme> createState() => _SetThemeState();
+  State<ButtonSetTheme> createState() => _ButtonSetThemeState();
 }
 
-class _SetThemeState extends State<SetTheme> {
+class _ButtonSetThemeState extends State<ButtonSetTheme> {
   final ValueNotifier<Icon> icon = ValueNotifier<Icon>(const Icon(Icons.error));
 
   @override
   void initState() {
+    AppTextThemes().addListener(() => setState(() {}));
     ThemeApp.getThemeSaved().then((theme) {
       if (theme != null) {
         if (theme == 'system') {
@@ -125,10 +126,12 @@ class _SetThemeState extends State<SetTheme> {
                         (value) => value.setString('theme', 'light'),
                       );
                     }
+                    AppTextThemes().updateTextsThemeApp();
                   },
                   child: Container(
                     height: 45.h,
-                    color: Colors.transparent, //para ter hit box no row inteira
+                    color:
+                        Colors.transparent, //to have hit box on the entire row
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
