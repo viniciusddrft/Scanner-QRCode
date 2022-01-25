@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormIstagram extends BaseForm {
-  BodyFormIstagram({Key? key}) : super(key: key);
+  const BodyFormIstagram({Key? key}) : super(key: key);
 
   @override
   _BodyFormIstagramState createState() => _BodyFormIstagramState();
@@ -39,7 +39,7 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
@@ -53,7 +53,11 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!
                     .createQRCodeInstagramLabelDecorate,
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

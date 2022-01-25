@@ -38,7 +38,7 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
 
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     if (LocaleApp.localeApp.value == const Locale('pt', 'BR')) {
       _iconPath.value = 'assets/icons_translations/brazil.png';
     } else if (LocaleApp.localeApp.value == const Locale('en', 'US')) {

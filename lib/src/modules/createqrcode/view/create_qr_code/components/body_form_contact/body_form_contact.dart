@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormContact extends BaseForm {
-  BodyFormContact({Key? key}) : super(key: key);
+  const BodyFormContact({Key? key}) : super(key: key);
 
   @override
   _BodyFormContactState createState() => _BodyFormContactState();
@@ -38,7 +38,7 @@ class _BodyFormContactState extends State<BodyFormContact> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
@@ -53,12 +53,16 @@ class _BodyFormContactState extends State<BodyFormContact> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeContactNameLabelDecorate +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               keyboardType: TextInputType.phone,
               validator: (value) {
@@ -74,7 +78,11 @@ class _BodyFormContactState extends State<BodyFormContact> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeContactPhoneLabelDecorate +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

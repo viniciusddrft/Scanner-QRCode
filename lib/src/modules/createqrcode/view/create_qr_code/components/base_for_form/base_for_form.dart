@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
+final formkey = GlobalKey<FormState>();
+
 abstract class BaseForm extends StatefulWidget {
-  final _formkey = GlobalKey<FormState>();
+  const BaseForm({Key? key}) : super(key: key);
 
-  BaseForm({Key? key}) : super(key: key);
-
-  GlobalKey<FormState> get getKey => _formkey;
+  GlobalKey<FormState> get getKey => formkey;
 
   void _onPressed(
       {required BuildContext context, required String Function() filter}) {
-    final _isValid = _formkey.currentState!.validate();
+    final _isValid = formkey.currentState!.validate();
     if (_isValid) {
       Navigator.pushReplacementNamed(context, '/CreateQRCodeResult',
           arguments: <String, String>{
@@ -27,6 +27,11 @@ abstract class BaseForm extends StatefulWidget {
         height: 40.h,
         width: 250.w,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+          ),
           onPressed: () => _onPressed(context: context, filter: filter),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

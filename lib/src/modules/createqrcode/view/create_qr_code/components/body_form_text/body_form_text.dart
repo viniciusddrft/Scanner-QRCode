@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormText extends BaseForm {
-  BodyFormText({Key? key}) : super(key: key);
+  const BodyFormText({Key? key}) : super(key: key);
 
   @override
   _BodyFormState createState() => _BodyFormState();
@@ -29,7 +29,7 @@ class _BodyFormState extends State<BodyFormText> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (input) {
                 if (input != null && input.isNotEmpty) {
@@ -44,7 +44,11 @@ class _BodyFormState extends State<BodyFormText> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeTextLabelDecorate +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

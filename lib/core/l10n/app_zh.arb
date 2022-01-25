@@ -51,7 +51,8 @@
     "createQRCodeInstagramLabelDecorate":"@",
     "createQRCodeInstagramValidatorError":"不能为空",
 
-    "createQRCodeWiFiMsg":"生成的二维码将使您只需扫描二维码即可更轻松地加入 Wi-Fi 网络。",
+    "createQRCodeWiFiMsg1":"生成的二维码将使您只需扫描二维码即可更轻松地加入 Wi-Fi 网络。",
+    "createQRCodeWiFiMsg2":"输入您的网络类型：",
     "createQRCodeWiFiLabelDecorate1":"网络名字",
     "createQRCodeWiFiValidatorError1":"不能为空",
     "createQRCodeWiFiLabelDecorate2":"密码",
@@ -99,6 +100,11 @@
     "createResultQrPopupSave":"已保存",
     "createResultQrPopupError":"错误",
 
+    "scanViewTooltip1":"后退",
+    "scanViewTooltip2":"打开闪光灯",
+    "scanViewTooltip3":"关闭闪光灯",
+    "scanViewTooltip4":"切换镜头",
+
     "scanResultQrTitle":"结果",
     "scanResultQrButtonShare":"分享它",
     "scanResultQrButtonOpen":"打开",
@@ -125,7 +131,6 @@
     "settingsLanguageNameBrasil":"巴西葡萄牙语",
     "settingsLanguageNameUnitedStates":"美国英语",
     "settingsLanguageNameChina":"来自中国的中国人",
-    "settingsPopupLanguageNotice":"关闭并打开应用程序以完全完成语言更改。",
     "settingsPupupContinue":"继续",
     "settingsQRCodeExample":"二维码示例",
     "settingsQRCodePremiumVersion":"高级版",

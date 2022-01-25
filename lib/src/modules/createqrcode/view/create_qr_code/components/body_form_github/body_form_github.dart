@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormGithub extends BaseForm {
-  BodyFormGithub({Key? key}) : super(key: key);
+  const BodyFormGithub({Key? key}) : super(key: key);
 
   @override
   _BodyFormGithubState createState() => _BodyFormGithubState();
@@ -39,7 +39,7 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
@@ -54,7 +54,11 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeGithubLabelDecorate +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

@@ -27,6 +27,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
 
   @override
   void didChangeDependencies() {
+    Admob.createAndShowInterstitialAd();
     if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {
@@ -41,6 +42,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
 
   @override
   void dispose() {
+    _adWidget.value?.ad.dispose();
     _adWidget.dispose();
     super.dispose();
   }
@@ -108,11 +110,16 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                    onPressed: () async =>
-                        await CreateQrCodeController.isTheImageQRSaved(
-                                _screenshotController)
-                            ? _popupQRCodeSave()
-                            : _popupError(),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
+                    onPressed: () => CreateQrCodeController.isTheImageQRSaved(
+                            _screenshotController)
+                        .then(
+                      (value) => value ? _popupQRCodeSave() : _popupError(),
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -135,6 +142,11 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                     ),
                   ),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     onPressed: () => CreateQrCodeController.shareImageQr(
                         _screenshotController),
                     child: Row(
@@ -167,7 +179,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
-            _loadingAnchoredBanner == true
+            _loadingAnchoredBanner
                 ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),

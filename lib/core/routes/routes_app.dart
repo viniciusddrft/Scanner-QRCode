@@ -5,7 +5,7 @@ import 'package:scannerqrcode/src/modules/help/help_view.dart';
 import 'package:scannerqrcode/src/modules/help/solution_view.dart';
 import 'package:scannerqrcode/src/modules/home/view/home_page.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_view.dart';
+import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_camera_view.dart';
 import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_elastic_out.dart';
 import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_left_to_right.dart';
 
@@ -18,7 +18,7 @@ class Routes {
         );
       case '/ScannerCamera':
         return MaterialPageRoute(
-          builder: (BuildContext context) => ScannerViewPage(
+          builder: (BuildContext context) => ScannerCameraView(
             cameras: (settings.arguments as Map<String, dynamic>)['cameras'],
           ),
         );

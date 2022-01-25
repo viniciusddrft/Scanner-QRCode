@@ -14,7 +14,7 @@ class ButtonContact extends StatefulWidget {
 class _ButtonContactState extends State<ButtonContact> with OpenLink {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
   }
 

@@ -14,7 +14,7 @@ class ButtonRateApp extends StatefulWidget {
 class _ButtonRateAppState extends State<ButtonRateApp> with OpenLink {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
   }
 

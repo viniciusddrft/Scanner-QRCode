@@ -41,15 +41,14 @@ class ReadQrCodeController {
 
     if (_statusStorage.isDenied) return;
 
+    final _image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (_image == null) return;
+
+    final InputImage _inputImage = InputImage.fromFilePath(_image.path);
+    final BarcodeScanner _scanner = GoogleMlKit.vision.barcodeScanner();
+
     try {
-      final _image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-      if (_image == null) return;
-
-      final InputImage _inputImage = InputImage.fromFilePath(_image.path);
-      final BarcodeScanner _scanner = GoogleMlKit.vision.barcodeScanner();
-
-      // this function process the image and show result or show error
       _scanner.processImage(_inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
@@ -59,18 +58,25 @@ class ReadQrCodeController {
                     code.first.value.rawValue as String, code.first.value.type);
               } else {
                 popupError();
+                throw Exception('Error in reading => typeNumber in value');
               }
             } else {
               popupError();
+              throw Exception('Error in reading => errorCode in value');
             }
           } else {
             popupError();
+            throw Exception('Error in reading => could not read code');
           }
           _scanner.close();
         },
       );
-    } on PlatformException catch (e) {
-      debugPrint('ERROR --> $e');
+    } on PlatformException catch (error, stackStrace) {
+      debugPrint('ERROR PlatformException --> $error');
+      debugPrint('ERROR PlatformException --> $stackStrace');
+    } catch (error, stackStrace) {
+      debugPrint('ERROR --> $error');
+      debugPrint('ERROR --> $stackStrace');
     }
   }
 }

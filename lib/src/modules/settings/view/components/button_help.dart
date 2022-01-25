@@ -13,7 +13,7 @@ class ButtonHelp extends StatefulWidget {
 class _ButtonHelpState extends State<ButtonHelp> {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
   }
 

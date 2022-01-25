@@ -29,10 +29,10 @@ class _CenterOfScreenState extends State<CenterOfScreen> {
 
 //there is a change of sign to add or subtract without looping and thus control the fps
   void _animeRedLine() {
-    if (_y <= 409) {
+    if (_y <= 273) {
       _y += _speedMove;
     }
-    if (_y >= 409) {
+    if (_y >= 273) {
       _speedMove = -_speedMove;
       _y += _speedMove;
     }
@@ -45,7 +45,7 @@ class _CenterOfScreenState extends State<CenterOfScreen> {
   Widget build(BuildContext context) {
     _animeRedLine();
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height / 3,
       child: Column(
         children: [
           Transform.translate(

@@ -51,7 +51,8 @@
     "createQRCodeInstagramLabelDecorate":"@",
     "createQRCodeInstagramValidatorError":"Can't be empty",
 
-    "createQRCodeWiFiMsg":"The generated QR code will make it easier for you to join the Wi-Fi network simply by scanning the QR code.",
+    "createQRCodeWiFiMsg1":"The generated QR code will make it easier for you to join the Wi-Fi network simply by scanning the QR code.",
+    "createQRCodeWiFiMsg2":"Enter your network type:",
     "createQRCodeWiFiLabelDecorate1":"Network name",
     "createQRCodeWiFiValidatorError1":"Can't be empty",
     "createQRCodeWiFiLabelDecorate2":"Password",
@@ -99,6 +100,11 @@
     "createResultQrPopupSave":"Saved",
     "createResultQrPopupError":"Error",
 
+    "scanViewTooltip1":"Back",
+    "scanViewTooltip2":"Turn on flash",
+    "scanViewTooltip3":"Turn off flash",
+    "scanViewTooltip4":"Change camera",
+
     "scanResultQrTitle":"Result",
     "scanResultQrButtonShare":"Share",
     "scanResultQrButtonOpen":"Open",
@@ -125,7 +131,6 @@
     "settingsLanguageNameBrasil":"Brazilian Portuguese",
     "settingsLanguageNameUnitedStates":"United States English",
     "settingsLanguageNameChina":"Chinese from China",
-    "settingsPopupLanguageNotice":"Close and open the app for the language change to be done completely.",
     "settingsPupupContinue":"Continue",
     "settingsQRCodeExample":"QR code Example",
     "settingsQRCodePremiumVersion":"Premium Version",

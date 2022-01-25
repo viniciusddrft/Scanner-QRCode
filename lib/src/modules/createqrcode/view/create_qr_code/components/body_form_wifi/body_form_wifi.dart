@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormWifi extends BaseForm {
-  BodyFormWifi({Key? key}) : super(key: key);
+  const BodyFormWifi({Key? key}) : super(key: key);
 
   @override
   _BodyFormWifiState createState() => _BodyFormWifiState();
@@ -52,7 +52,7 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
           Padding(
             padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
             child: Text(
-              AppLocalizations.of(context)!.createQRCodeWiFiMsg,
+              AppLocalizations.of(context)!.createQRCodeWiFiMsg1,
               style: TextStyle(fontSize: 14.sp),
             ),
           ),
@@ -72,34 +72,47 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeWiFiLabelDecorate1 +
                     ' ...',
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
-            child: ValueListenableBuilder(
-              valueListenable: _typeWifiCodeName,
-              builder: (BuildContext context, value, Widget? child) =>
-                  DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  value: _typeWifiCodeName.value,
-                  items: items
-                      .map(
-                        (item) => DropdownMenuItem(
-                          child: Text(item),
-                          value: item,
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) =>
-                      _typeWifiCodeName.value = value as String,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 20.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.createQRCodeWiFiMsg2,
+                  style: TextStyle(fontSize: 14.sp),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _typeWifiCodeName,
+                  builder: (BuildContext context, value, Widget? child) =>
+                      DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      value: _typeWifiCodeName.value,
+                      items: items
+                          .map(
+                            (item) => DropdownMenuItem(
+                              child: Text(item),
+                              value: item,
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) =>
+                          _typeWifiCodeName.value = value as String,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (input) {
                 if (input != null && input.isNotEmpty) {
@@ -119,7 +132,11 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeWiFiLabelDecorate2 +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

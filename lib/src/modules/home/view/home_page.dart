@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
-            _loadingAnchoredBanner == true
+            _loadingAnchoredBanner
                 ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),

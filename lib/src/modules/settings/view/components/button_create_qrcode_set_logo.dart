@@ -18,7 +18,7 @@ class ButtonCreateQRCodeSetLogo extends StatefulWidget {
 class _ButtonCreateQRCodeSetLogoState extends State<ButtonCreateQRCodeSetLogo> {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
   }
 

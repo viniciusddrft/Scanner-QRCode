@@ -51,7 +51,8 @@
     "createQRCodeInstagramLabelDecorate":"@",
     "createQRCodeInstagramValidatorError":"Não pode ficar vazio",
 
-    "createQRCodeWiFiMsg":"O código QR gerado tornará mais fácil para você entrar na rede Wi-Fi simplesmente digitalizando o código QR.",
+    "createQRCodeWiFiMsg1":"O código QR gerado tornará mais fácil para você entrar na rede Wi-Fi simplesmente digitalizando o código QR.",
+    "createQRCodeWiFiMsg2":"Coloque o tipo da sua rede:",
     "createQRCodeWiFiLabelDecorate1":"Nome da rede",
     "createQRCodeWiFiValidatorError1":"Não pode ficar vazio",
     "createQRCodeWiFiLabelDecorate2":"Senha",
@@ -99,6 +100,11 @@
     "createResultQrPopupSave":"Salvo",
     "createResultQrPopupError":"Erro",
 
+    "scanViewTooltip1":"Voltar",
+    "scanViewTooltip2":"Ligar flash",
+    "scanViewTooltip3":"Desligar flash",
+    "scanViewTooltip4":"Trocar camera",
+
     "scanResultQrTitle":"Resultado",
     "scanResultQrButtonShare":"Compartilhar",
     "scanResultQrButtonOpen":"Abir",
@@ -125,7 +131,6 @@
     "settingsLanguageNameBrasil":"Português do Brasil",
     "settingsLanguageNameUnitedStates":"Inglês dos Estados Unidos",
     "settingsLanguageNameChina":"Chinês da China",
-    "settingsPopupLanguageNotice":"Feche e abra o app para que a troca de idioma seja feita completamente.",
     "settingsPupupContinue":"Continuar",
     "settingsQRCodeExample":"QR code Exemplo",
     "settingsQRCodePremiumVersion": "Versão Premium",

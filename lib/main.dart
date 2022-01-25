@@ -6,8 +6,9 @@ void main() {
   try {
     WidgetsFlutterBinding.ensureInitialized();
     MobileAds.instance.initialize();
-  } catch (e) {
-    debugPrint(e.toString());
+  } catch (error, stackTrace) {
+    debugPrint(error.toString());
+    debugPrint(stackTrace.toString());
   }
 
   runApp(const MyApp());

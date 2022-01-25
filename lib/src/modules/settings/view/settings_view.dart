@@ -25,7 +25,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
   }
 
@@ -242,7 +242,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                AppLocalizations.of(context)!.settingsVersion + ' 2.1.2',
+                AppLocalizations.of(context)!.settingsVersion + ' 2.2.0',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

@@ -29,6 +29,11 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
     return Container(
       padding: EdgeInsets.only(top: 10.h, bottom: 100.h, left: 20.w),
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+        ),
         onPressed: () => openLink(widget.link, onError: _popupError),
         child: SizedBox(
           width: 130.w,

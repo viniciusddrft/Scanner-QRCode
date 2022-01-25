@@ -17,7 +17,7 @@ class _ButtonSetThemeState extends State<ButtonSetTheme> {
 
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     ThemeApp.getThemeSaved().then((theme) {
       if (theme != null) {
         if (theme == 'system') {

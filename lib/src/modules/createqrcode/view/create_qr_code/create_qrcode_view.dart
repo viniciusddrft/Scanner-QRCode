@@ -26,53 +26,11 @@ class CreateQRCodeView extends StatefulWidget {
 }
 
 class _CreateQRCodeViewState extends State<CreateQRCodeView> {
-  late final Widget _bodyFormQRCodeWidget;
-  late final String _titleAppBar;
   bool _loadingAnchoredBanner = false;
   final ValueNotifier<AdWidget?> _adWidget = ValueNotifier<AdWidget?>(null);
 
   @override
   void didChangeDependencies() {
-    if (widget.typeQRCode == 'text') {
-      _bodyFormQRCodeWidget = BodyFormText();
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleText;
-    } else if (widget.typeQRCode == 'wifi') {
-      _bodyFormQRCodeWidget = BodyFormWifi();
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleWifi;
-    } else if (widget.typeQRCode == 'link') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleLink;
-      _bodyFormQRCodeWidget = BodyFormLink();
-    } else if (widget.typeQRCode == 'contact') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleContact;
-      _bodyFormQRCodeWidget = BodyFormContact();
-    } else if (widget.typeQRCode == 'github') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleGithub;
-      _bodyFormQRCodeWidget = BodyFormGithub();
-    } else if (widget.typeQRCode == 'whatsapp') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleWhatsapp;
-      _bodyFormQRCodeWidget = BodyFormWhatsapp();
-    } else if (widget.typeQRCode == 'instagram') {
-      _bodyFormQRCodeWidget = BodyFormIstagram();
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleInstagram;
-    } else if (widget.typeQRCode == 'tiktok') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTiktok;
-      _bodyFormQRCodeWidget = BodyFormTiktok();
-    } else if (widget.typeQRCode == 'facebook') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleFacebook;
-      _bodyFormQRCodeWidget = BodyFormFacebook();
-    } else if (widget.typeQRCode == 'youtube') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleYoutube;
-      _bodyFormQRCodeWidget = BodyFormYoutube();
-    } else if (widget.typeQRCode == 'twitter') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTwitter;
-      _bodyFormQRCodeWidget = BodyFormTwitter();
-    } else if (widget.typeQRCode == 'twitch') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleTwitch;
-      _bodyFormQRCodeWidget = BodyFormTwitch();
-    } else if (widget.typeQRCode == 'reddit') {
-      _titleAppBar = AppLocalizations.of(context)!.createQRCodeTitleReddit;
-      _bodyFormQRCodeWidget = BodyFormReddit();
-    }
     if (!_loadingAnchoredBanner) {
       Admob.createAnchoredBanner(context).then((banner) {
         if (banner != null) {
@@ -95,13 +53,87 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titleAppBar),
+        title: FutureBuilder(
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (widget.typeQRCode == 'text') {
+              return Text(AppLocalizations.of(context)!.createQRCodeTitleText);
+            } else if (widget.typeQRCode == 'wifi') {
+              return Text(AppLocalizations.of(context)!.createQRCodeTitleWifi);
+            } else if (widget.typeQRCode == 'link') {
+              return Text(AppLocalizations.of(context)!.createQRCodeTitleLink);
+            } else if (widget.typeQRCode == 'contact') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleContact);
+            } else if (widget.typeQRCode == 'github') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleGithub);
+            } else if (widget.typeQRCode == 'whatsapp') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleWhatsapp);
+            } else if (widget.typeQRCode == 'instagram') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleInstagram);
+            } else if (widget.typeQRCode == 'tiktok') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleTiktok);
+            } else if (widget.typeQRCode == 'facebook') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleFacebook);
+            } else if (widget.typeQRCode == 'youtube') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleYoutube);
+            } else if (widget.typeQRCode == 'twitter') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleTwitter);
+            } else if (widget.typeQRCode == 'twitch') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleTwitch);
+            } else if (widget.typeQRCode == 'reddit') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitleReddit);
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
-      body: _bodyFormQRCodeWidget,
+      body: FutureBuilder(
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (widget.typeQRCode == 'text') {
+            return const BodyFormText();
+          } else if (widget.typeQRCode == 'wifi') {
+            return const BodyFormWifi();
+          } else if (widget.typeQRCode == 'link') {
+            return const BodyFormLink();
+          } else if (widget.typeQRCode == 'contact') {
+            return const BodyFormContact();
+          } else if (widget.typeQRCode == 'github') {
+            return const BodyFormGithub();
+          } else if (widget.typeQRCode == 'whatsapp') {
+            return const BodyFormWhatsapp();
+          } else if (widget.typeQRCode == 'instagram') {
+            return const BodyFormIstagram();
+          } else if (widget.typeQRCode == 'tiktok') {
+            return const BodyFormTiktok();
+          } else if (widget.typeQRCode == 'facebook') {
+            return const BodyFormFacebook();
+          } else if (widget.typeQRCode == 'youtube') {
+            return const BodyFormYoutube();
+          } else if (widget.typeQRCode == 'twitter') {
+            return const BodyFormTwitter();
+          } else if (widget.typeQRCode == 'twitch') {
+            return const BodyFormTwitch();
+          } else if (widget.typeQRCode == 'reddit') {
+            return const BodyFormReddit();
+          } else {
+            return Container();
+          }
+        },
+      ),
       bottomNavigationBar: ValueListenableBuilder(
         valueListenable: _adWidget,
         builder: (BuildContext context, AdWidget? value, Widget? child) =>
-            _loadingAnchoredBanner == true
+            _loadingAnchoredBanner
                 ? SizedBox(
                     height: Admob.anchoredBannerHeightAd.toDouble(),
                     width: Admob.anchoredBannerWidthAd.toDouble(),

@@ -6,7 +6,7 @@ class TopAndBottonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 4,
+      height: MediaQuery.of(context).size.height / 3,
       color: Colors.black.withAlpha(100),
     );
   }

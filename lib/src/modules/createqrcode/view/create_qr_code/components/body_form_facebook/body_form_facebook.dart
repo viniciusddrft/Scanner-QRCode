@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormFacebook extends BaseForm {
-  BodyFormFacebook({Key? key}) : super(key: key);
+  const BodyFormFacebook({Key? key}) : super(key: key);
 
   @override
   _BodyFormFacebookState createState() => _BodyFormFacebookState();
@@ -58,7 +58,7 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
@@ -73,7 +73,11 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
                 labelText: AppLocalizations.of(context)!
                         .createQRCodeFacebookLabelDecorate +
                     ' ...',
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

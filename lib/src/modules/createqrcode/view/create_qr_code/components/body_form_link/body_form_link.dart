@@ -4,7 +4,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyFormLink extends BaseForm {
-  BodyFormLink({Key? key}) : super(key: key);
+  const BodyFormLink({Key? key}) : super(key: key);
 
   @override
   _BodyFormWebsiteState createState() => _BodyFormWebsiteState();
@@ -39,7 +39,7 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
             child: TextFormField(
               validator: (value) {
                 if (value != null && value.isNotEmpty) {
@@ -52,7 +52,11 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
               controller: _textEditingController,
               decoration: const InputDecoration(
                 labelText: 'https://',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
               ),
             ),
           ),

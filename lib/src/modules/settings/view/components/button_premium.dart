@@ -15,8 +15,18 @@ class ButtonPremium extends StatefulWidget {
 class _ButtonPremiumState extends State<ButtonPremium> with OpenLink {
   @override
   void initState() {
-    AppTextThemes().addListener(() => setState(() {}));
+    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     super.initState();
+  }
+
+  void popupError() {
+    Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) => const AlertDialog(
+        title: Text('Error  :/'),
+      ),
+    );
   }
 
   @override
@@ -28,7 +38,8 @@ class _ButtonPremiumState extends State<ButtonPremium> with OpenLink {
         height: 45.h,
         child: OutlinedButton(
           onPressed: () => openLink(
-              'https://play.google.com/store/apps/details?id=com.scannerqrcode_premium'),
+              'https://play.google.com/store/apps/details?id=com.scannerqrcode_premium',
+              onError: popupError),
           style: OutlinedButton.styleFrom(
               primary: Colors.white,
               shape: RoundedRectangleBorder(
