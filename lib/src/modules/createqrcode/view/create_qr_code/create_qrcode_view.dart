@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_contact/body_form_contact.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_facebook/body_form_facebook.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_github/body_form_github.dart';
@@ -15,6 +14,7 @@ import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/compo
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_youtube/body_form_youtube.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
+import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
 
 class CreateQRCodeView extends StatefulWidget {
   final String typeQRCode;
@@ -26,29 +26,6 @@ class CreateQRCodeView extends StatefulWidget {
 }
 
 class _CreateQRCodeViewState extends State<CreateQRCodeView> {
-  bool _loadingAnchoredBanner = false;
-  final ValueNotifier<AdWidget?> _adWidget = ValueNotifier<AdWidget?>(null);
-
-  @override
-  void didChangeDependencies() {
-    if (!_loadingAnchoredBanner) {
-      Admob.createAnchoredBanner(context).then((banner) {
-        if (banner != null) {
-          _adWidget.value = AdWidget(key: UniqueKey(), ad: banner..load());
-          Admob.anchoredBannerHeightAd = banner.size.height;
-          Admob.anchoredBannerWidthAd = banner.size.width;
-        }
-      }).whenComplete(() => _loadingAnchoredBanner = true);
-    }
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    _adWidget.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,19 +107,12 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
           }
         },
       ),
-      bottomNavigationBar: ValueListenableBuilder(
-        valueListenable: _adWidget,
-        builder: (BuildContext context, AdWidget? value, Widget? child) =>
-            _loadingAnchoredBanner
-                ? SizedBox(
-                    height: Admob.anchoredBannerHeightAd.toDouble(),
-                    width: Admob.anchoredBannerWidthAd.toDouble(),
-                    child: value,
-                  )
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    color: Colors.transparent,
-                  ),
+      bottomNavigationBar: SizedBox(
+        height: 75,
+        child: AdmobNativeAd(
+          adUnitId: AdmobController.nativeAdUnitIDListTile,
+          factoryId: 'listTile',
+        ),
       ),
     );
   }

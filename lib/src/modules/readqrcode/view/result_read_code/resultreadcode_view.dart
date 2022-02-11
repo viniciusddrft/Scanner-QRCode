@@ -1,10 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/button_url.dart';
-import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
+import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
 import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,7 +20,6 @@ class ResultReadCode extends StatefulWidget {
 }
 
 class _ResultReadCodeState extends State<ResultReadCode> {
-  late final AdWidget _adWidget;
   late final Widget _button;
 
   @override
@@ -31,24 +30,6 @@ class _ResultReadCodeState extends State<ResultReadCode> {
       _button = Container();
     }
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    final Random _ramdom = Random();
-    final int chanceToSeeTheAD = _ramdom.nextInt(100);
-    if (chanceToSeeTheAD >= 50) {
-      Admob.createAndShowInterstitialAd();
-    }
-    _adWidget =
-        AdWidget(key: UniqueKey(), ad: Admob.createBannerRetanguleAd()..load());
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    _adWidget.ad.dispose();
-    super.dispose();
   }
 
   void _popupCopyBoard() {
@@ -141,7 +122,15 @@ class _ResultReadCodeState extends State<ResultReadCode> {
               returnButton()
             ],
           ),
-          Expanded(child: _adWidget),
+          Expanded(
+            child: AdmobNativeAd(
+              adUnitId: AdmobController.nativeAdUnitIDRectangular,
+              factoryId: 'rectangular',
+              nativeAdOptions: NativeAdOptions(
+                videoOptions: VideoOptions(startMuted: false),
+              ),
+            ),
+          ),
         ],
       ),
     );

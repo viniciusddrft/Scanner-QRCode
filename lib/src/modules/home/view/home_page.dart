@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code_menu/create_qrcode_menu_view.dart';
 import 'package:scannerqrcode/src/modules/home/controller/home_controller.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/read_qr_code_menu/read_qr_code_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/settings/view/settings_view.dart';
-import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
+import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -16,27 +16,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final PageController _pageController = PageController(initialPage: 0);
-  final ValueNotifier<AdWidget?> _adWidget = ValueNotifier<AdWidget?>(null);
-  bool _loadingAnchoredBanner = false;
-
-  @override
-  void didChangeDependencies() {
-    if (!_loadingAnchoredBanner) {
-      Admob.createAnchoredBanner(context).then((banner) {
-        if (banner != null) {
-          _adWidget.value = AdWidget(key: UniqueKey(), ad: banner..load());
-          Admob.anchoredBannerHeightAd = banner.size.height;
-          Admob.anchoredBannerWidthAd = banner.size.width;
-        }
-      }).whenComplete(() => _loadingAnchoredBanner = true);
-    }
-    super.didChangeDependencies();
-  }
 
   @override
   void dispose() {
     _pageController.dispose();
-    _adWidget.dispose();
     HomeController.dispose();
     super.dispose();
   }
@@ -102,20 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: ValueListenableBuilder(
-        valueListenable: _adWidget,
-        builder: (BuildContext context, AdWidget? value, Widget? child) =>
-            _loadingAnchoredBanner
-                ? SizedBox(
-                    height: Admob.anchoredBannerHeightAd.toDouble(),
-                    width: Admob.anchoredBannerWidthAd.toDouble(),
-                    child: value,
-                  )
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    color: Colors.transparent,
-                  ),
-      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (valueControllerPage) =>
@@ -125,6 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
           CreateQRCodeMenu(),
           SettingsPage(),
         ],
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 75,
+        child: AdmobNativeAd(
+          adUnitId: AdmobController.nativeAdUnitIDListTile,
+          factoryId: 'listTile',
+        ),
       ),
     );
   }

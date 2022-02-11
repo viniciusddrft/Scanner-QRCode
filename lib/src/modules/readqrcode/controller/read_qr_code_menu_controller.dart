@@ -66,7 +66,6 @@ class ReadQrCodeController {
             }
           } else {
             popupError();
-            throw Exception('Error in reading => could not read code');
           }
           _scanner.close();
         },

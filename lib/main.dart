@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scannerqrcode/core/myapp.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 
 void main() {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    MobileAds.instance.initialize();
+    AdmobController.initialize();
   } catch (error, stackTrace) {
     debugPrint(error.toString());
     debugPrint(stackTrace.toString());

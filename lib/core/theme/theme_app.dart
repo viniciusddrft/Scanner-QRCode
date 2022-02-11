@@ -35,7 +35,11 @@ class ThemeApp {
       SharedPreferences.getInstance().then(
         (value) {
           String? preference = value.getString('theme');
-          if (preference != null) return preference;
+          if (preference != null) {
+            return preference;
+          } else {
+            return null;
+          }
         },
       );
 }

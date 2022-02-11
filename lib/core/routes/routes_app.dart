@@ -58,5 +58,6 @@ class Routes {
           ),
         );
     }
+    return null;
   }
 }
