@@ -26,25 +26,24 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 10.h, bottom: 100.h, left: 20.w),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
         ),
-        onPressed: () => openLink(widget.link, onError: _popupError),
-        child: SizedBox(
-          width: 130.w,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      ),
+      onPressed: () => openLink(widget.link, onError: _popupError),
+      child: SizedBox(
+        width: 130.w,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             Text(
               AppLocalizations.of(context)!.scanResultQrButtonOpen,
               style: AppTextThemes.readQrcodeButtons,
             ),
             const Icon(Icons.open_in_browser)
-          ]),
+          ],
         ),
       ),
     );

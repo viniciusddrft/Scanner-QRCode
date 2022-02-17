@@ -242,7 +242,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Padding(
               padding: EdgeInsets.only(bottom: 15.h, top: 30.h),
               child: Text(
-                AppLocalizations.of(context)!.settingsVersion + ' 2.2.1',
+                AppLocalizations.of(context)!.settingsVersion + ' 2.2.2',
                 style: GoogleFonts.yatraOne(color: Colors.grey),
               ),
             ),

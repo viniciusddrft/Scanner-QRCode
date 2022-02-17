@@ -49,89 +49,104 @@ class _ResultReadCodeState extends State<ResultReadCode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 50.0.h, left: 30.w, bottom: 10.w),
-            child: Text(
-              AppLocalizations.of(context)!.scanResultQrTitle,
-              style: AppTextThemes.readQrcodeResult,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 27.w),
-            width: 500.w,
-            height: 70.h,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 50.0.h, left: 30.w, bottom: 10.h),
+              child: Text(
+                AppLocalizations.of(context)!.scanResultQrTitle,
+                style: AppTextThemes.readQrcodeResult,
               ),
-              color: Colors.transparent.withOpacity(0),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 27.w),
+              width: 500.w,
+              height: 70.h,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                color: Colors.transparent.withOpacity(0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.sp),
+                          child: Text(
+                            widget.result,
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      tooltip:
+                          AppLocalizations.of(context)!.scanResultQrToolTip,
+                      onPressed: () =>
+                          FlutterClipboard.copy(widget.result).then(
+                        (_) => _popupCopyBoard(),
+                      ),
+                      icon: const Icon(Icons.copy),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.h, bottom: 20.h),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0.sp),
-                        child: Text(
-                          widget.result,
+                  Flexible(
+                    flex: 12,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      onPressed: () => Share.share(widget.result),
+                      child: SizedBox(
+                        width: 130.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .scanResultQrButtonShare,
+                              style: AppTextThemes.readQrcodeButtons,
+                            ),
+                            const Icon(Icons.share)
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  IconButton(
-                    tooltip: AppLocalizations.of(context)!.scanResultQrToolTip,
-                    onPressed: () => FlutterClipboard.copy(widget.result).then(
-                      (_) => _popupCopyBoard(),
-                    ),
-                    icon: const Icon(Icons.copy),
-                  )
+                  if (_button is! Container) const Spacer(),
+                  if (_button is! Container)
+                    Flexible(
+                      flex: 12,
+                      child: returnButton(),
+                    )
                 ],
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 10.h, bottom: 100.h),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                  onPressed: () => Share.share(widget.result),
-                  child: SizedBox(
-                    width: 130.w,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.scanResultQrButtonShare,
-                          style: AppTextThemes.readQrcodeButtons,
-                        ),
-                        const Icon(Icons.share)
-                      ],
-                    ),
-                  ),
+            Expanded(
+              child: AdmobNativeAd(
+                adUnitId: AdmobController.nativeAdUnitIDRectangular,
+                factoryId: 'rectangular',
+                nativeAdOptions: NativeAdOptions(
+                  videoOptions: VideoOptions(startMuted: false),
                 ),
               ),
-              returnButton()
-            ],
-          ),
-          Expanded(
-            child: AdmobNativeAd(
-              adUnitId: AdmobController.nativeAdUnitIDRectangular,
-              factoryId: 'rectangular',
-              nativeAdOptions: NativeAdOptions(
-                videoOptions: VideoOptions(startMuted: false),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
