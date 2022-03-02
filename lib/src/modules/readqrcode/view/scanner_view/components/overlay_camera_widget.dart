@@ -8,15 +8,17 @@ class OverlayCameraWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      height: _size.height,
+      width: _size.width,
       child: Row(
         children: [
           const SideBar(),
           SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width / 1.6669,
+            height: _size.height,
+            width: _size.width * 0.6,
             child: Column(
               children: const [
                 TopAndBottonBar(),

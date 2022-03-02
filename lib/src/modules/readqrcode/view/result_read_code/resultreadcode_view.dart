@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/button_url.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
 import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
-import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -47,25 +45,32 @@ class _ResultReadCodeState extends State<ResultReadCode> {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(),
       body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: _size.height,
+        width: _size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 50.0.h, left: 30.w, bottom: 10.h),
+              padding: EdgeInsets.only(
+                top: _size.height * 0.07,
+                left: _size.width * 0.09,
+                bottom: _size.height * 0.008,
+              ),
               child: Text(
                 AppLocalizations.of(context)!.scanResultQrTitle,
-                style: AppTextThemes.readQrcodeResult,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 27.w),
-              width: 500.w,
-              height: 70.h,
+              padding: EdgeInsets.symmetric(
+                horizontal: _size.width * 0.07,
+              ),
+              height: _size.height * 0.09,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
@@ -77,9 +82,12 @@ class _ResultReadCodeState extends State<ResultReadCode> {
                     Expanded(
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: EdgeInsets.all(8.0.sp),
+                          padding: EdgeInsets.all(
+                            _size.height * 0.015,
+                          ),
                           child: Text(
                             widget.result,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ),
                       ),
@@ -91,14 +99,18 @@ class _ResultReadCodeState extends State<ResultReadCode> {
                           FlutterClipboard.copy(widget.result).then(
                         (_) => _popupCopyBoard(),
                       ),
-                      icon: const Icon(Icons.copy),
+                      icon: Icon(Icons.copy,
+                          color: Theme.of(context).iconTheme.color),
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10.h, bottom: 20.h),
+              padding: EdgeInsets.only(
+                top: _size.height * 0.01,
+                bottom: _size.height * 0.02,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -112,14 +124,14 @@ class _ResultReadCodeState extends State<ResultReadCode> {
                       ),
                       onPressed: () => Share.share(widget.result),
                       child: SizedBox(
-                        width: 130.w,
+                        width: _size.width * 0.3,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               AppLocalizations.of(context)!
                                   .scanResultQrButtonShare,
-                              style: AppTextThemes.readQrcodeButtons,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             const Icon(Icons.share)
                           ],

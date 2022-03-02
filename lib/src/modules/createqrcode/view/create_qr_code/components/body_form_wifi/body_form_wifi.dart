@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -43,6 +42,8 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Form(
       key: widget.getKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -50,14 +51,22 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 30.w, right: 30.w, bottom: 50.h),
+            padding: EdgeInsets.only(
+              bottom: _size.height * 0.06,
+              left: _size.width * 0.1,
+              right: _size.width * 0.1,
+            ),
             child: Text(
               AppLocalizations.of(context)!.createQRCodeWiFiMsg1,
-              style: TextStyle(fontSize: 14.sp),
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 20.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(
+              bottom: _size.height * 0.02,
+              left: _size.width * 0.1,
+              right: _size.width * 0.1,
+            ),
             child: TextFormField(
               validator: (input) {
                 if (input != null && input.isNotEmpty) {
@@ -81,13 +90,13 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
+            padding: EdgeInsets.only(bottom: _size.height * 0.04),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   AppLocalizations.of(context)!.createQRCodeWiFiMsg2,
-                  style: TextStyle(fontSize: 14.sp),
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 ValueListenableBuilder(
                   valueListenable: _typeWifiCodeName,
@@ -112,7 +121,11 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 50.h, left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(
+              bottom: _size.height * 0.06,
+              left: _size.width * 0.1,
+              right: _size.width * 0.1,
+            ),
             child: TextFormField(
               validator: (input) {
                 if (input != null && input.isNotEmpty) {
@@ -141,7 +154,7 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 90.w),
+            padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
                 context: context, filter: _filterToCreateQrcodeWifi),
           )

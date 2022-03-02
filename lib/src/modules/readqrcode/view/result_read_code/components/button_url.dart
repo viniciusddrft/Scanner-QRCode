@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;
@@ -26,6 +24,8 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -34,13 +34,13 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
       ),
       onPressed: () => openLink(widget.link, onError: _popupError),
       child: SizedBox(
-        width: 130.w,
+        width: _size.width * 0.3,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               AppLocalizations.of(context)!.scanResultQrButtonOpen,
-              style: AppTextThemes.readQrcodeButtons,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const Icon(Icons.open_in_browser)
           ],

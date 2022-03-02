@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/core/locale/locale.dart';
-import 'package:scannerqrcode/src/shared/themes/text_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ButtonSetLanguage extends StatefulWidget {
-  const ButtonSetLanguage({Key? key}) : super(key: key);
+import '../../../../../../core/locale/locale.dart';
+
+class ButtonSwitchLanguage extends StatefulWidget {
+  const ButtonSwitchLanguage({Key? key}) : super(key: key);
 
   @override
-  State<ButtonSetLanguage> createState() => _ButtonSetLanguageState();
+  State<ButtonSwitchLanguage> createState() => _ButtonSwitchLanguageState();
 }
 
-class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
+class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
 
   List<Map<String, dynamic>> _allLocales(context) => [
@@ -36,9 +35,79 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
 
   List<Map<String, dynamic>> get allLocales => _allLocales(context);
 
+  void _popupLanguageMenu() {
+    final Size _size = MediaQuery.of(context).size;
+
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text(
+          AppLocalizations.of(context)!.settingsLanguagePopup,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              AppLocalizations.of(context)!.settingsPopupButtonCancel,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          )
+        ],
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: _size.width * 0.75,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: 20),
+            itemCount: allLocales.length,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(bottom: 35),
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  side: const BorderSide(color: Colors.transparent, width: 2),
+                ),
+                onPressed: () {
+                  _iconPath.value = allLocales[index]['icon'];
+                  LocaleApp.localeApp.value = allLocales[index]['locale'];
+                  SharedPreferences.getInstance().then(
+                    (value) => value.setString(
+                      'locale',
+                      allLocales[index]['locale'].toString(),
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 45,
+                  color: Colors.transparent, //para ter hit box no row inteira
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        allLocales[index]['text'],
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      Image.asset(
+                        allLocales[index]['icon'],
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
-    AppTextThemes().addListener(() => mounted ? setState(() {}) : null);
     if (LocaleApp.localeApp.value == const Locale('pt', 'BR')) {
       _iconPath.value = 'assets/icons_translations/brazil.png';
     } else if (LocaleApp.localeApp.value == const Locale('en', 'US')) {
@@ -55,108 +124,40 @@ class _ButtonSetLanguageState extends State<ButtonSetLanguage> {
     super.dispose();
   }
 
-  void _popupLanguageMenu() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          AppLocalizations.of(context)!.settingsLanguagePopup,
-          style: AppTextThemes.titlePopupSettings,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child:
-                Text(AppLocalizations.of(context)!.settingsPopupButtonCancel),
-          )
-        ],
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
-          width: MediaQuery.of(context).size.width / 1.5,
-          child: ListView.builder(
-            padding: EdgeInsets.only(top: 20.h),
-            itemCount: allLocales.length,
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 35.h),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  side: BorderSide(color: Colors.black, width: 2.w),
-                ),
-                onPressed: () {
-                  _iconPath.value = allLocales[index]['icon'];
-                  LocaleApp.localeApp.value = allLocales[index]['locale'];
-                  SharedPreferences.getInstance().then(
-                    (value) => value.setString(
-                      'locale',
-                      allLocales[index]['locale'].toString(),
-                    ),
-                  );
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: 45.h,
-                  color: Colors.transparent, //para ter hit box no row inteira
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        allLocales[index]['text'],
-                        style: AppTextThemes.buttonsPopupSettings,
-                      ),
-                      Image.asset(
-                        allLocales[index]['icon'],
-                        height: 30.h,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.only(left: 30.w, right: 30.w, top: 10.h, bottom: 10.h),
-      child: SizedBox(
-        height: 45.h,
-        child: OutlinedButton(
-          onPressed: _popupLanguageMenu,
-          style: OutlinedButton.styleFrom(
-            primary: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            side: BorderSide(color: Colors.black, width: 2.w),
-          ),
+    final Size _size = MediaQuery.of(context).size;
+
+    return SizedBox(
+      height: _size.height * 0.09,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          padding: EdgeInsets.zero,
+          primary: Theme.of(context).backgroundColor,
+        ),
+        onPressed: _popupLanguageMenu,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15.w),
-                child: Text(
-                  AppLocalizations.of(context)!.settingsLanguageTitle,
-                  style: AppTextThemes.buttonsSettings,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 15.w, top: 7.h, bottom: 7.h),
+              Flexible(
+                flex: 5,
                 child: ValueListenableBuilder(
                   valueListenable: _iconPath,
                   builder:
                       (BuildContext context, String? value, Widget? child) =>
-                          Image.asset(value!, height: 26.h),
+                          Image.asset(value!, height: 18),
                 ),
-              )
+              ),
+              const Spacer(),
+              Flexible(
+                flex: 5,
+                child: Text(
+                  AppLocalizations.of(context)!.settingsLanguageTitle,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
             ],
           ),
         ),

@@ -1,19 +1,22 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:scannerqrcode/src/modules/settings/controller/settings_create_qrcode.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class QRCodeExemploSettings extends StatefulWidget {
-  const QRCodeExemploSettings({Key? key}) : super(key: key);
+import '../../../controller/settings_create_qrcode.dart';
+
+class QRCodeExample extends StatefulWidget {
+  const QRCodeExample({Key? key}) : super(key: key);
 
   @override
-  _QRCodeExemploSettingsState createState() => _QRCodeExemploSettingsState();
+  _QRCodeExampleState createState() => _QRCodeExampleState();
 }
 
-class _QRCodeExemploSettingsState extends State<QRCodeExemploSettings> {
+class _QRCodeExampleState extends State<QRCodeExample> {
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return AnimatedBuilder(
       animation: Listenable.merge([
         SettingsCreateQRCode.colorQRBackground,
@@ -24,10 +27,10 @@ class _QRCodeExemploSettingsState extends State<QRCodeExemploSettings> {
         SettingsCreateQRCode.logoPath
       ]),
       builder: (BuildContext context, Widget? child) => QrImage(
-        padding: EdgeInsets.all(10.sp),
+        padding: EdgeInsets.all(_size.height * 0.01),
         version: QrVersions.auto,
         data: 'viniciusddtft',
-        size: 100.sp,
+        size: _size.height * 0.2,
         backgroundColor: SettingsCreateQRCode.colorQRBackground.value,
         eyeStyle: QrEyeStyle(
             color: SettingsCreateQRCode.colorQRCodeEye.value,

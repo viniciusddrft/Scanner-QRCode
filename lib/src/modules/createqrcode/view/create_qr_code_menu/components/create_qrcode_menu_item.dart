@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateQRCodeItemMenu extends StatelessWidget {
   final Color color;
@@ -16,12 +15,17 @@ class CreateQRCodeItemMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(80.sp, 80.sp),
+            fixedSize: Size(
+              _size.height * 0.09,
+              _size.height * 0.09,
+            ),
             primary: color,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(360),
@@ -36,8 +40,11 @@ class CreateQRCodeItemMenu extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 10.h),
-          child: Text(text, style: TextStyle(fontSize: 14.sp)),
+          padding: EdgeInsets.only(top: _size.height * 0.01),
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
         )
       ],
     );

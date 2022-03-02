@@ -43,16 +43,18 @@ class _CenterOfScreenState extends State<CenterOfScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     _animeRedLine();
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 3,
+      height: _size.height * 0.333333,
       child: Column(
         children: [
           Transform.translate(
             offset: Offset(0, _y),
             child: Container(
               height: 1,
-              width: MediaQuery.of(context).size.width / 1.6669,
+              width: _size.width * 0.6,
               color: Colors.red,
             ),
           )

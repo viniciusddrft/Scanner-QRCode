@@ -5,9 +5,11 @@ class SideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width / 5,
+      height: _size.height,
+      width: _size.width * 0.2,
       color: Colors.black.withAlpha(100),
     );
   }

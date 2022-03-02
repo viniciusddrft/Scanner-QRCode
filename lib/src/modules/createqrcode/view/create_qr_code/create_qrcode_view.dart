@@ -30,8 +30,8 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: FutureBuilder(
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        title: Builder(
+          builder: (BuildContext context) {
             if (widget.typeQRCode == 'text') {
               return Text(AppLocalizations.of(context)!.createQRCodeTitleText);
             } else if (widget.typeQRCode == 'wifi') {
@@ -74,8 +74,8 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
           },
         ),
       ),
-      body: FutureBuilder(
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+      body: Builder(
+        builder: (BuildContext context) {
           if (widget.typeQRCode == 'text') {
             return const BodyFormText();
           } else if (widget.typeQRCode == 'wifi') {

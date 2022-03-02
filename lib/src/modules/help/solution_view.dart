@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SolutionView extends StatelessWidget {
   final String problem;
@@ -10,20 +9,21 @@ class SolutionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(problem),
       ),
       body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: _size.width,
+        height: _size.height,
         child: Padding(
-          padding: EdgeInsets.all(30.0.sp),
+          padding: EdgeInsets.all(_size.height * 0.04),
           child: Column(
             children: [
               Text(
                 solution,
-                style: TextStyle(fontSize: 15.sp),
               ),
             ],
           ),

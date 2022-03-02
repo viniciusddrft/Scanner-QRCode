@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ButtonHelpWidget extends StatelessWidget {
-  final String problem;
-  final String solution;
-
-  const ButtonHelpWidget(
-      {required this.problem, required this.solution, Key? key})
-      : super(key: key);
+class ButtonHelp extends StatelessWidget {
+  const ButtonHelp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +16,23 @@ class ButtonHelpWidget extends StatelessWidget {
           padding: EdgeInsets.zero,
           primary: Theme.of(context).backgroundColor,
         ),
-        onPressed: () => Navigator.pushNamed(context, '/Solution',
-            arguments: <String, String>{
-              'problem': problem,
-              'solution': solution
-            }),
+        onPressed: () => Navigator.pushNamed(context, '/Help'),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
           child: Row(
             children: [
+              Flexible(
+                flex: 5,
+                child: Icon(
+                  Icons.help_outline,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+              ),
               const Spacer(),
               Flexible(
-                flex: 15,
+                flex: 5,
                 child: Text(
-                  problem,
+                  AppLocalizations.of(context)!.settingsHelp,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),

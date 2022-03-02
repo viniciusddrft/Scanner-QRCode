@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/overlay_camera_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -64,14 +63,9 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     await previousCameraController?.dispose();
 
     if (mounted) {
-      setState(() {
-        _controller = cameraController;
-        _isLoadCam.value = false;
-      });
+      _controller = cameraController;
+      _isLoadCam.value = false;
     }
-    cameraController.addListener(() {
-      if (mounted) setState(() {});
-    });
 
     try {
       await cameraController.initialize();
@@ -82,7 +76,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
 
     if (mounted) {
-      setState(() => _isLoadCam.value = _controller!.value.isInitialized);
+      _isLoadCam.value = _controller!.value.isInitialized;
     }
   }
 
@@ -183,30 +177,32 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
   @override
   Widget build(BuildContext context) {
+    final Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: ValueListenableBuilder(
         valueListenable: _isLoadCam,
         builder: (BuildContext context, bool value, Widget? child) => value
             ? Stack(children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
+                  height: _size.height,
+                  width: _size.width,
                   child: CameraPreview(_controller!),
                 ),
                 const OverlayCameraWidget()
               ])
             : Stack(
-                children: [
+                children: const [
                   Center(
                     child: SizedBox(
-                      height: 200.h,
-                      width: 200.w,
-                      child: const CircularProgressIndicator(
+                      height: 200,
+                      width: 200,
+                      child: CircularProgressIndicator(
                         strokeWidth: 7,
                       ),
                     ),
                   ),
-                  const OverlayCameraWidget()
+                  OverlayCameraWidget()
                 ],
               ),
       ),

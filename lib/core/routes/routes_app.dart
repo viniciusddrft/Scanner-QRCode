@@ -9,6 +9,8 @@ import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_c
 import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_elastic_out.dart';
 import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_left_to_right.dart';
 
+import '../../src/modules/settings/view/settings_qrcode_page.dart';
+
 class Routes {
   static Route<dynamic>? routes(RouteSettings settings) {
     switch (settings.name) {
@@ -21,6 +23,11 @@ class Routes {
           builder: (BuildContext context) => ScannerCameraView(
             cameras: (settings.arguments as Map<String, dynamic>)['cameras'],
           ),
+        );
+      case '/SettingsQRCode':
+        return AnimatedPageRouteBuilderElasticOut(
+          duration: const Duration(milliseconds: 500),
+          route: const SettingsQRCodePage(),
         );
       case '/Help':
         return AnimatedPageRouteBuilderElasticOut(
