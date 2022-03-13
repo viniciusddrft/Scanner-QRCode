@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl_standalone.dart';
-import 'package:scannerqrcode/core/locale/locale.dart';
-import 'package:scannerqrcode/core/routes/routes_app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/core/theme/theme_app.dart';
 
 import '../src/modules/settings/controller/settings_create_qrcode.dart';
+import 'locale/locale.dart';
+import 'routes/routes_app.dart';
+import 'theme/theme_app.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
                 fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
           ),
         ),
-        initialRoute: '/Home',
+        initialRoute: '/PageView',
         onGenerateRoute: Routes.routes,
       ),
     );

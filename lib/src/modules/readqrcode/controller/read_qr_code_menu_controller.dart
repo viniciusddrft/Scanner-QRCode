@@ -5,8 +5,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:camera/camera.dart';
 
-class ReadQrCodeController {
-  static Future<void> scanCamera(BuildContext context) async {
+import '../../../shared/popup_notices/popup_notices.dart';
+
+class ReadQrCodeController with PopupNotices {
+  final BuildContext context;
+
+  const ReadQrCodeController(this.context);
+
+  Future<void> scanCamera() async {
     PermissionStatus _statusCamera = await Permission.camera.status;
     PermissionStatus _statusMicrophone = await Permission.microphone.status;
 
@@ -28,12 +34,7 @@ class ReadQrCodeController {
         arguments: <String, dynamic>{'cameras': cameras});
   }
 
-  static Future<void> scanFile(
-      BuildContext context, VoidCallback popupError) async {
-    Future<void> _showResult(String code, BarcodeType type) =>
-        Navigator.pushNamed(context, '/ReadQRCodeResult',
-            arguments: <String, dynamic>{'result': code, 'typeCode': type});
-
+  Future<void> scanFile() async {
     PermissionStatus _statusStorage = await Permission.storage.status;
     if (_statusStorage.isDenied) {
       _statusStorage = await Permission.storage.request();
@@ -54,18 +55,21 @@ class ReadQrCodeController {
           if (code.isNotEmpty) {
             if (!code.first.value.rawValue!.contains('typeNumber')) {
               if (!code.first.value.rawValue!.contains('errorCode')) {
-                _showResult(
-                    code.first.value.rawValue as String, code.first.value.type);
+                Navigator.pushNamed(context, '/ReadQRCodeResult',
+                    arguments: <String, dynamic>{
+                      'result': code.first.value.rawValue,
+                      'typeCode': code.first.value.type
+                    });
               } else {
-                popupError();
+                popupError(context);
                 throw Exception('Error in reading => typeNumber in value');
               }
             } else {
-              popupError();
+              popupError(context);
               throw Exception('Error in reading => errorCode in value');
             }
           } else {
-            popupError();
+            popupError(context);
           }
           _scanner.close();
         },

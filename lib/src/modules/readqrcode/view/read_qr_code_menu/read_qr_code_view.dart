@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/controller/read_qr_code_menu_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../controller/read_qr_code_menu_controller.dart';
 
 class ReadQRCodePage extends StatefulWidget {
   const ReadQRCodePage({Key? key}) : super(key: key);
@@ -10,14 +11,12 @@ class ReadQRCodePage extends StatefulWidget {
 }
 
 class _ReadQRCodePageState extends State<ReadQRCodePage> {
-  void popupError() {
-    Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => const AlertDialog(
-        title: Text('Error  :/'),
-      ),
-    );
+  late final ReadQrCodeController _readQrCodeController;
+
+  @override
+  void initState() {
+    _readQrCodeController = ReadQrCodeController(context);
+    super.initState();
   }
 
   @override
@@ -56,7 +55,7 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                onPressed: () async => ReadQrCodeController.scanCamera(context),
+                onPressed: _readQrCodeController.scanCamera,
                 child: SizedBox(
                   height: _size.height * 0.045,
                   width: _size.width * 0.35,
@@ -82,8 +81,7 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                onPressed: () =>
-                    ReadQrCodeController.scanFile(context, popupError),
+                onPressed: _readQrCodeController.scanFile,
                 child: SizedBox(
                   height: _size.height * 0.045,
                   width: _size.width * 0.35,

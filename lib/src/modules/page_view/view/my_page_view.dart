@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code_menu/create_qrcode_menu_view.dart';
-import 'package:scannerqrcode/src/modules/home/controller/home_controller.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/read_qr_code_menu/read_qr_code_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/src/modules/settings/view/settings_page.dart';
-import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
-import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+import '../../../shared/admob/controller/admob_controller.dart';
+import '../../../shared/admob/widget/native_ad.dart';
+import '../../createqrcode/view/create_qr_code_menu/create_qrcode_menu_view.dart';
+import '../../readqrcode/view/read_qr_code_menu/read_qr_code_view.dart';
+import '../../settings/view/settings_page.dart';
+import '../controller/my_page_view_controller.dart';
+
+class MyPageView extends StatefulWidget {
+  const MyPageView({Key? key}) : super(key: key);
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyPageViewState createState() => _MyPageViewState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyPageViewState extends State<MyPageView> {
   final PageController _pageController = PageController(initialPage: 0);
-
+  final MyPageViewController _myPageViewController = MyPageViewController();
   @override
   void dispose() {
     _pageController.dispose();
-    HomeController.dispose();
+    _myPageViewController.dispose();
     super.dispose();
   }
 
@@ -43,10 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       curve: Curves.decelerate),
                   icon: ValueListenableBuilder(
-                    valueListenable: HomeController.qrcodeButton,
+                    valueListenable: _myPageViewController.qrcodeButton,
                     builder: (BuildContext context, value, Widget? child) =>
                         Icon(Icons.qr_code,
-                            color: HomeController.qrcodeButton.value),
+                            color: _myPageViewController.qrcodeButton.value),
                   ),
                 ),
               ),
@@ -61,10 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       curve: Curves.decelerate),
                   icon: ValueListenableBuilder(
-                    valueListenable: HomeController.createButton,
+                    valueListenable: _myPageViewController.createButton,
                     builder: (BuildContext context, value, Widget? child) =>
                         Icon(Icons.border_color,
-                            color: HomeController.createButton.value),
+                            color: _myPageViewController.createButton.value),
                   ),
                 ),
               ),
@@ -79,10 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       curve: Curves.decelerate),
                   icon: ValueListenableBuilder(
-                    valueListenable: HomeController.settingsButton,
+                    valueListenable: _myPageViewController.settingsButton,
                     builder: (BuildContext context, value, Widget? child) =>
                         Icon(Icons.settings,
-                            color: HomeController.settingsButton.value),
+                            color: _myPageViewController.settingsButton.value),
                   ),
                 ),
               )
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: PageView(
         controller: _pageController,
-        onPageChanged: HomeController.appBarControlleIconsColors,
+        onPageChanged: _myPageViewController.appBarControlleIconsColors,
         children: const [
           ReadQRCodePage(),
           CreateQRCodeMenu(),

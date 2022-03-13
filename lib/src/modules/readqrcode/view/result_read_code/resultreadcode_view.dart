@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/components/button_url.dart';
 import 'package:clipboard/clipboard.dart';
-import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
-import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+
+import '../../../../shared/admob/controller/admob_controller.dart';
+import '../../../../shared/admob/widget/native_ad.dart';
+import '../../../../shared/popup_notices/popup_notices.dart';
+import 'components/button_url.dart';
 
 class ResultReadCode extends StatefulWidget {
   final String result;
@@ -17,7 +19,7 @@ class ResultReadCode extends StatefulWidget {
   _ResultReadCodeState createState() => _ResultReadCodeState();
 }
 
-class _ResultReadCodeState extends State<ResultReadCode> {
+class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
   late final Widget _button;
 
   @override
@@ -28,17 +30,6 @@ class _ResultReadCodeState extends State<ResultReadCode> {
       _button = Container();
     }
     super.initState();
-  }
-
-  void _popupCopyBoard() {
-    Future.delayed(
-        const Duration(milliseconds: 500), () => Navigator.pop(context));
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.scanResultPopupCopy + '.'),
-      ),
-    );
   }
 
   Widget returnButton() => _button;
@@ -97,7 +88,7 @@ class _ResultReadCodeState extends State<ResultReadCode> {
                           AppLocalizations.of(context)!.scanResultQrToolTip,
                       onPressed: () =>
                           FlutterClipboard.copy(widget.result).then(
-                        (_) => _popupCopyBoard(),
+                        (_) => popupCopyBoard(context),
                       ),
                       icon: Icon(Icons.copy,
                           color: Theme.of(context).iconTheme.color),

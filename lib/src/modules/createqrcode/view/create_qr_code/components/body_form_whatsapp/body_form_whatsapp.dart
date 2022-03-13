@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/base_for_form/base_for_form.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../base_for_form/base_for_form.dart';
 
 class BodyFormWhatsapp extends BaseForm {
   const BodyFormWhatsapp({Key? key}) : super(key: key);

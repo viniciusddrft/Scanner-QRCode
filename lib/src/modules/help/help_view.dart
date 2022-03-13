@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/help/components/button_help_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'components/button_help_widget.dart';
 
 class HelpView extends StatelessWidget {
   const HelpView({Key? key}) : super(key: key);

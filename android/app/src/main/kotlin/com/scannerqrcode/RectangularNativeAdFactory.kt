@@ -88,9 +88,12 @@ class RectangularNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.N
             // This method tells the Google Mobile Ads SDK that you have finished populating your
             // native ad view with this native ad.
             nativeAdView.setNativeAd(nativeAd)
-            return nativeAdView
+            
+            if (nativeAdView != null ){
+                return nativeAdView
+            }else{
+                return createNativeAd(nativeAd, customOptions)
+            }
         }
-
-
     }
 }

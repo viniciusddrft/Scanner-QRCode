@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_contact/body_form_contact.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_facebook/body_form_facebook.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_github/body_form_github.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_instagram/body_form_instagram.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_link/body_form_link.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_reddit/body_form_reddit.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_text/body_form_text.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_tiktok/body_form_tiktok.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_twitch/body_form_twitch.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_twitter/body_form_twitter.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_whatsapp/body_form_whatsapp.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_wifi/body_form_wifi.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/components/body_form_youtube/body_form_youtube.dart';
-import 'package:scannerqrcode/src/shared/admob/controller/admob_controller.dart';
-import 'package:scannerqrcode/src/shared/admob/widget/native_ad.dart';
+
+import '../../../../shared/admob/controller/admob_controller.dart';
+import '../../../../shared/admob/widget/native_ad.dart';
+import 'components/body_form_contact/body_form_contact.dart';
+import 'components/body_form_facebook/body_form_facebook.dart';
+import 'components/body_form_github/body_form_github.dart';
+import 'components/body_form_instagram/body_form_instagram.dart';
+import 'components/body_form_link/body_form_link.dart';
+import 'components/body_form_reddit/body_form_reddit.dart';
+import 'components/body_form_text/body_form_text.dart';
+import 'components/body_form_tiktok/body_form_tiktok.dart';
+import 'components/body_form_twitch/body_form_twitch.dart';
+import 'components/body_form_twitter/body_form_twitter.dart';
+import 'components/body_form_whatsapp/body_form_whatsapp.dart';
+import 'components/body_form_wifi/body_form_wifi.dart';
+import 'components/body_form_youtube/body_form_youtube.dart';
 
 class CreateQRCodeView extends StatefulWidget {
   final String typeQRCode;

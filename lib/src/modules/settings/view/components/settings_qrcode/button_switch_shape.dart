@@ -161,8 +161,8 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                 child: AnimatedBuilder(
                   animation: Listenable.merge([_color, _shape]),
                   builder: (BuildContext context, Widget? child) => Container(
-                    height: _size.height * 0.025,
-                    width: _size.height * 0.025,
+                    height: _size.height * 0.028,
+                    width: _size.height * 0.028,
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: widget.isEye && !widget.isBody
@@ -187,7 +187,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               ),
               const Spacer(),
               Flexible(
-                flex: 5,
+                flex: 6,
                 child: Text(
                   widget.isEye && !widget.isBody
                       ? AppLocalizations.of(context)!.settingsButtonShapeEyeQR

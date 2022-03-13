@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/components/center_of_screen_widget.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/components/side_bar_overlay_widget.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/components/top_and_botton_bar_overlay_widget.dart';
+
+import 'components/center_of_screen_widget.dart';
+import 'components/side_bar_overlay_widget.dart';
+import 'components/top_and_botton_bar_overlay_widget.dart';
 
 class OverlayCameraWidget extends StatelessWidget {
   const OverlayCameraWidget({Key? key}) : super(key: key);

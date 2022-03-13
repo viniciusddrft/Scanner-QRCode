@@ -21,7 +21,7 @@ class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Criação do qr code'),
+        title: Text(AppLocalizations.of(context)!.settingsQRCodeCreation),
       ),
       body: Column(
         children: [

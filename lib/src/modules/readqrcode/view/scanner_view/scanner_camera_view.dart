@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/components/overlay_camera_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'components/overlay_camera_widget.dart';
 
 class ScannerCameraView extends StatefulWidget {
   final List<CameraDescription> cameras;

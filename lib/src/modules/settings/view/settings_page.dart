@@ -6,6 +6,7 @@ import 'components/settings/button_contact.dart';
 import 'components/settings/button_custom_qrcode.dart';
 import 'components/settings/button_help.dart';
 import 'components/settings/button_premium.dart';
+import 'components/settings/button_rate_app.dart';
 import 'components/settings/button_switch_language.dart';
 import 'components/settings/button_switch_theme.dart';
 
@@ -22,6 +23,7 @@ class SettingsPage extends StatelessWidget {
         const ButtonCustomQRCode(),
         const ButtonSwicthTheme(),
         const ButtonSwitchLanguage(),
+        const ButtonRateApp(),
         const ButtonHelp(),
         const ButtonContact(),
         const Spacer(),
@@ -29,7 +31,7 @@ class SettingsPage extends StatelessWidget {
           padding: EdgeInsets.only(
               bottom: _size.height * 0.04, top: _size.height * 0.04),
           child: Text(
-            AppLocalizations.of(context)!.settingsVersion + ' 2.3.0',
+            AppLocalizations.of(context)!.settingsVersion + ' 2.3.2',
             style: GoogleFonts.yatraOne(color: Colors.grey),
           ),
         ),

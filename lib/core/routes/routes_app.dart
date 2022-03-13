@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code/create_qrcode_view.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/view/create_qr_code_result/create_qrcode_result_view.dart';
-import 'package:scannerqrcode/src/modules/help/help_view.dart';
-import 'package:scannerqrcode/src/modules/help/solution_view.dart';
-import 'package:scannerqrcode/src/modules/home/view/home_page.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
-import 'package:scannerqrcode/src/modules/readqrcode/view/scanner_view/scanner_camera_view.dart';
-import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_elastic_out.dart';
-import 'package:scannerqrcode/core/routes/animations/animated_page_rout_builder_left_to_right.dart';
 
+import '../../src/modules/createqrcode/view/create_qr_code/create_qrcode_view.dart';
+import '../../src/modules/createqrcode/view/create_qr_code_result/create_qrcode_result_view.dart';
+import '../../src/modules/help/help_view.dart';
+import '../../src/modules/help/solution_view.dart';
+import '../../src/modules/page_view/view/my_page_view.dart';
+import '../../src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
+import '../../src/modules/readqrcode/view/scanner_view/scanner_camera_view.dart';
 import '../../src/modules/settings/view/settings_qrcode_page.dart';
+import 'animations/animated_page_rout_builder_elastic_out.dart';
+import 'animations/animated_page_rout_builder_left_to_right.dart';
 
 class Routes {
   static Route<dynamic>? routes(RouteSettings settings) {
     switch (settings.name) {
-      case '/Home':
+      case '/PageView':
         return MaterialPageRoute(
-          builder: (BuildContext context) => const MyHomePage(),
+          builder: (BuildContext context) => const MyPageView(),
         );
       case '/ScannerCamera':
         return MaterialPageRoute(

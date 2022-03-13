@@ -121,7 +121,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
               ),
               const Spacer(),
               Flexible(
-                flex: 5,
+                flex: 6,
                 child: Text(
                     AppLocalizations.of(context)!.settingsQRCodeImageCenter,
                     style: Theme.of(context).textTheme.labelMedium),

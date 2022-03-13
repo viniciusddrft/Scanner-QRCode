@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/shared/launch_link/launch_link.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../../shared/launch_link/launch_link.dart';
+import '../../../../../shared/popup_notices/popup_notices.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;
@@ -10,18 +12,7 @@ class ButtonUrl extends StatefulWidget {
   State<ButtonUrl> createState() => _ButtonUrlState();
 }
 
-class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
-  void _popupError() async {
-    Future.delayed(const Duration(seconds: 1), () => Navigator.pop(context));
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title:
-            Text(AppLocalizations.of(context)!.scanResultpopupError + ' :/ '),
-      ),
-    );
-  }
-
+class _ButtonUrlState extends State<ButtonUrl> with OpenLink, PopupNotices {
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -32,7 +23,10 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink {
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
-      onPressed: () => openLink(widget.link, onError: _popupError),
+      onPressed: () => openLink(
+        widget.link,
+        onError: () => popupError(context),
+      ),
       child: SizedBox(
         width: _size.width * 0.3,
         child: Row(
