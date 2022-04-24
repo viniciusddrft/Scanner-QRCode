@@ -89,11 +89,7 @@ class RectangularNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.N
             // native ad view with this native ad.
             nativeAdView.setNativeAd(nativeAd)
             
-            if (nativeAdView != null ){
-                return nativeAdView
-            }else{
-                return createNativeAd(nativeAd, customOptions)
-            }
+            return nativeAdView
         }
     }
 }

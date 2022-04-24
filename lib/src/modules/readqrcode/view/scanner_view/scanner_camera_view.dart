@@ -2,8 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
 import 'components/overlay_camera_widget.dart';
 
@@ -17,7 +17,7 @@ class ScannerCameraView extends StatefulWidget {
 
 class _ScannerCameraViewState extends State<ScannerCameraView>
     with WidgetsBindingObserver {
-  final BarcodeScanner _scanner = GoogleMlKit.vision.barcodeScanner();
+  final BarcodeScanner _scanner = BarcodeScanner();
   CameraController? _controller;
   final ValueNotifier<bool> _isLoadCam = ValueNotifier<bool>(false);
   bool _isCamBack = true;
@@ -103,12 +103,13 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
           Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
 
       final InputImageRotation _imageRotation =
-          InputImageRotationMethods.fromRawValue(
+          InputImageRotationValue.fromRawValue(
                   widget.cameras.first.sensorOrientation) ??
-              InputImageRotation.Rotation_0deg;
+              InputImageRotation.rotation0deg;
+
       final InputImageFormat _inputImageFormat =
-          InputImageFormatMethods.fromRawValue(cameraImage.format.raw) ??
-              InputImageFormat.NV21;
+          InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
+              InputImageFormat.nv21;
 
       final _planeData = cameraImage.planes.map(
         (Plane plane) {
@@ -133,10 +134,9 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
       _scanner.processImage(_inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
-            if (!code.first.value.rawValue!.contains('typeNumber')) {
-              if (!code.first.value.rawValue!.contains('errorCode')) {
-                _showResult(
-                    code.first.value.rawValue as String, code.first.value.type);
+            if (!code.first.rawValue!.contains('typeNumber')) {
+              if (!code.first.rawValue!.contains('errorCode')) {
+                _showResult(code.first.rawValue as String, code.first.type);
               } else {
                 throw Exception('Error in reading => typeNumber in value');
               }

@@ -5,6 +5,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../shared/popup_notices/popup_notices.dart';
 
@@ -25,9 +26,17 @@ class CreateQrCodeController with PopupNotices {
         await ImageGallerySaver.saveImage(imageQrCode!.buffer.asUint8List());
 
     if ((result!['isSuccess'])) {
-      popupSaved(context);
+      popupNotice(
+        context,
+        notice: AppLocalizations.of(context)!.createResultQrPopupSave + ' !',
+        duration: const Duration(milliseconds: 500),
+      );
     } else {
-      popupError(context);
+      popupNotice(
+        context,
+        notice: 'Error  :/',
+        duration: const Duration(seconds: 1),
+      );
     }
   }
 

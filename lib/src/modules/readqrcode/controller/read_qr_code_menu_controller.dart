@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:camera/camera.dart';
 
 import '../../../shared/popup_notices/popup_notices.dart';
@@ -47,29 +47,32 @@ class ReadQrCodeController with PopupNotices {
     if (_image == null) return;
 
     final InputImage _inputImage = InputImage.fromFilePath(_image.path);
-    final BarcodeScanner _scanner = GoogleMlKit.vision.barcodeScanner();
+    final BarcodeScanner _scanner = BarcodeScanner();
 
     try {
       _scanner.processImage(_inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
-            if (!code.first.value.rawValue!.contains('typeNumber')) {
-              if (!code.first.value.rawValue!.contains('errorCode')) {
+            if (!code.first.rawValue!.contains('typeNumber')) {
+              if (!code.first.rawValue!.contains('errorCode')) {
                 Navigator.pushNamed(context, '/ReadQRCodeResult',
                     arguments: <String, dynamic>{
-                      'result': code.first.value.rawValue,
-                      'typeCode': code.first.value.type
+                      'result': code.first.rawValue,
+                      'typeCode': code.first.type
                     });
               } else {
-                popupError(context);
+                popupNotice(context,
+                    notice: 'Error  :/', duration: const Duration(seconds: 1));
                 throw Exception('Error in reading => typeNumber in value');
               }
             } else {
-              popupError(context);
+              popupNotice(context,
+                  notice: 'Error  :/', duration: const Duration(seconds: 1));
               throw Exception('Error in reading => errorCode in value');
             }
           } else {
-            popupError(context);
+            popupNotice(context,
+                notice: 'Error  :/', duration: const Duration(seconds: 1));
           }
           _scanner.close();
         },

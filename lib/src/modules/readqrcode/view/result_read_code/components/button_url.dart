@@ -25,7 +25,11 @@ class _ButtonUrlState extends State<ButtonUrl> with OpenLink, PopupNotices {
       ),
       onPressed: () => openLink(
         widget.link,
-        onError: () => popupError(context),
+        onError: () => popupNotice(
+          context,
+          notice: 'Error  :/',
+          duration: const Duration(seconds: 1),
+        ),
       ),
       child: SizedBox(
         width: _size.width * 0.3,

@@ -50,11 +50,6 @@ class ListTileNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.Nati
 
             setNativeAd(nativeAd)
         }
-
-        if (nativeAdView != null ){
-            return nativeAdView
-        }else{
-            return createNativeAd(nativeAd, customOptions)
-        }
+        return nativeAdView
     }
 }
