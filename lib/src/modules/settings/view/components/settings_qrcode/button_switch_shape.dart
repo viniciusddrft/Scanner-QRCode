@@ -17,28 +17,34 @@ class ButtonSwitchShape extends StatefulWidget {
   //and though booleans it sets the texts and popup options
 
   const ButtonSwitchShape.eye(
-      {required this.eyeShape, required this.colorEyeShape, Key? key})
+      {required this.eyeShape, required this.colorEyeShape, super.key})
       : isEye = true,
         bodyShape = null,
         colorBodyShape = null,
-        isBody = false,
-        super(key: key);
+        isBody = false;
 
   const ButtonSwitchShape.body(
-      {required this.bodyShape, required this.colorBodyShape, Key? key})
+      {required this.bodyShape, required this.colorBodyShape, super.key})
       : isBody = true,
         eyeShape = null,
         colorEyeShape = null,
-        isEye = false,
-        super(key: key);
+        isEye = false;
 
   @override
-  _ButtonSwitchShapeState createState() => _ButtonSwitchShapeState();
+  State<ButtonSwitchShape> createState() => _ButtonSwitchShapeState();
 }
 
 class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
   late ValueNotifier<Color> _color;
   late ValueNotifier<dynamic> _shape;
+
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
   void _popupChangeShapeQR() {
     showDialog<void>(
@@ -141,8 +147,6 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: _size.height * 0.09,
       child: ElevatedButton(

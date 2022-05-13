@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormIstagram extends BaseForm {
-  const BodyFormIstagram({Key? key}) : super(key: key);
+  const BodyFormIstagram({super.key});
 
   @override
-  _BodyFormIstagramState createState() => _BodyFormIstagramState();
+  State<BodyFormIstagram> createState() => _BodyFormIstagramState();
 }
 
 class _BodyFormIstagramState extends State<BodyFormIstagram> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -22,12 +24,16 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
   String _filterToCreateQrcodeInstagram() =>
       _textEditingController.text.contains('https://www.instagram.com/')
           ? _textEditingController.text
-          : 'https://www.instagram.com/' + _textEditingController.text;
+          : 'https://www.instagram.com/${_textEditingController.text}';
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -74,7 +80,9 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeInstagram),
+                context: context,
+                filter: _filterToCreateQrcodeInstagram,
+                size: _size),
           ),
         ],
       ),

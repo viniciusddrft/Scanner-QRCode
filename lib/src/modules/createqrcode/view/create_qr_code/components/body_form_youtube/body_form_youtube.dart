@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormYoutube extends BaseForm {
-  const BodyFormYoutube({Key? key}) : super(key: key);
+  const BodyFormYoutube({super.key});
 
   @override
-  _BodyFormYoutubeState createState() => _BodyFormYoutubeState();
+  State<BodyFormYoutube> createState() => _BodyFormYoutubeState();
 }
 
 class _BodyFormYoutubeState extends State<BodyFormYoutube> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,17 +21,21 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeYoutube() =>
       _textEditingController.text.contains('https://www.youtube.com/') ||
               _textEditingController.text.contains('https://youtu.be/') ||
               _textEditingController.text.contains('https://youtube.com/')
           ? _textEditingController.text
-          : 'https://youtu.be/' + _textEditingController.text;
+          : 'https://youtu.be/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -82,9 +88,8 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeYoutubeLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeYoutubeLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -96,7 +101,9 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeYoutube),
+                context: context,
+                filter: _filterToCreateQrcodeYoutube,
+                size: _size),
           ),
         ],
       ),

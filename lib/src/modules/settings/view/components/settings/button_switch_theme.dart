@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../core/theme/theme_app.dart';
 
 class ButtonSwicthTheme extends StatefulWidget {
-  const ButtonSwicthTheme({Key? key}) : super(key: key);
+  const ButtonSwicthTheme({super.key});
 
   @override
   State<ButtonSwicthTheme> createState() => _ButtonSwicthThemeState();
@@ -18,6 +18,15 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
       color: ThemeApp.isDarkThemeSystem ? Colors.blue : Colors.yellow,
     ),
   );
+
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+
+    super.didChangeDependencies();
+  }
 
   void setIconSystem() => icon.value = Icon(
         Icons.brightness_4,
@@ -53,88 +62,85 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   List<Map<String, dynamic>> get allThemes => _allThemes(context);
 
-  void _popupChangeTheme() {
-    final Size _size = MediaQuery.of(context).size;
-
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          AppLocalizations.of(context)!.settingsChooseTheTheme,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              AppLocalizations.of(context)!.settingsPopupButtonCancel,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-          )
-        ],
-        content: SizedBox(
-          height: _size.height * 0.3,
-          width: _size.width * 0.75,
-          child: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+  void _popupChangeTheme() => showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text(
+            AppLocalizations.of(context)!.settingsChooseTheTheme,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                AppLocalizations.of(context)!.settingsPopupButtonCancel,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            )
+          ],
+          content: SizedBox(
+            height: _size.height * 0.3,
+            width: _size.width * 0.75,
+            child: ListView.builder(
+              itemCount: 3,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    side: const BorderSide(color: Colors.transparent, width: 2),
                   ),
-                  side: const BorderSide(color: Colors.transparent, width: 2),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
+                  onPressed: () {
+                    Navigator.pop(context);
 
-                  if (allThemes[index]['theme'] == 'system') {
-                    ThemeApp.changeTheme(ThemeApp.themeSystem);
-                    setIconSystem();
-                    SharedPreferences.getInstance().then(
-                      (value) => value.setString('theme', 'system'),
-                    );
-                  } else if (allThemes[index]['theme'] == 'dark') {
-                    ThemeApp.changeTheme(Brightness.dark);
-                    setIconDark();
-                    SharedPreferences.getInstance().then(
-                      (value) => value.setString('theme', 'dark'),
-                    );
-                  } else if (allThemes[index]['theme'] == 'light') {
-                    ThemeApp.changeTheme(Brightness.light);
-                    setIconLight();
-                    SharedPreferences.getInstance().then(
-                      (value) => value.setString('theme', 'light'),
-                    );
-                  }
-                },
-                child: Container(
-                  height: 45,
-                  color: Colors.transparent, //to have hit box on the entire row
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        allThemes[index]['text'],
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      Icon(
-                        allThemes[index]['icon'],
-                        color: allThemes[index]['color'],
-                        size: 28,
-                      )
-                    ],
+                    if (allThemes[index]['theme'] == 'system') {
+                      ThemeApp.changeTheme(ThemeApp.themeSystem);
+                      setIconSystem();
+                      SharedPreferences.getInstance().then(
+                        (value) => value.setString('theme', 'system'),
+                      );
+                    } else if (allThemes[index]['theme'] == 'dark') {
+                      ThemeApp.changeTheme(Brightness.dark);
+                      setIconDark();
+                      SharedPreferences.getInstance().then(
+                        (value) => value.setString('theme', 'dark'),
+                      );
+                    } else if (allThemes[index]['theme'] == 'light') {
+                      ThemeApp.changeTheme(Brightness.light);
+                      setIconLight();
+                      SharedPreferences.getInstance().then(
+                        (value) => value.setString('theme', 'light'),
+                      );
+                    }
+                  },
+                  child: Container(
+                    height: 45,
+                    color:
+                        Colors.transparent, //to have hit box on the entire row
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          allThemes[index]['text'],
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        Icon(
+                          allThemes[index]['icon'],
+                          color: allThemes[index]['color'],
+                          size: 28,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void initState() {
@@ -162,8 +168,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: _size.height * 0.09,
       child: ElevatedButton(

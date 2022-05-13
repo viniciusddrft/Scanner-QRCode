@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormTwitch extends BaseForm {
-  const BodyFormTwitch({Key? key}) : super(key: key);
+  const BodyFormTwitch({super.key});
 
   @override
-  _BodyFormTwitchState createState() => _BodyFormTwitchState();
+  State<BodyFormTwitch> createState() => _BodyFormTwitchState();
 }
 
 class _BodyFormTwitchState extends State<BodyFormTwitch> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,15 +21,19 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeTwitch() =>
       _textEditingController.text.contains('https://www.twitch.tv/')
           ? _textEditingController.text
-          : 'https://www.twitch.tv/' + _textEditingController.text;
+          : 'https://www.twitch.tv/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -61,9 +67,8 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeTwitchLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeTwitchLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -75,7 +80,9 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeTwitch),
+                context: context,
+                filter: _filterToCreateQrcodeTwitch,
+                size: _size),
           )
         ],
       ),

@@ -4,14 +4,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormGithub extends BaseForm {
-  const BodyFormGithub({Key? key}) : super(key: key);
+  const BodyFormGithub({super.key});
 
   @override
-  _BodyFormGithubState createState() => _BodyFormGithubState();
+  State<BodyFormGithub> createState() => _BodyFormGithubState();
 }
 
 class _BodyFormGithubState extends State<BodyFormGithub> {
   final TextEditingController _textEditingController = TextEditingController();
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,15 +20,19 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeGithub() =>
       _textEditingController.text.contains('https://www.github.com/')
           ? _textEditingController.text
-          : 'https://www.github.com/' + _textEditingController.text;
+          : 'https://www.github.com/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -61,9 +66,8 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeGithubLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeGithubLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -75,7 +79,9 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeGithub),
+                context: context,
+                filter: _filterToCreateQrcodeGithub,
+                size: _size),
           ),
         ],
       ),

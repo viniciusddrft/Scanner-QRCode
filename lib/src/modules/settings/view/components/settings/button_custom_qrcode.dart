@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ButtonCustomQRCode extends StatelessWidget {
-  const ButtonCustomQRCode({Key? key}) : super(key: key);
+  const ButtonCustomQRCode({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: _size.height * 0.09,
+      height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -18,7 +18,7 @@ class ButtonCustomQRCode extends StatelessWidget {
         ),
         onPressed: () => Navigator.pushNamed(context, '/SettingsQRCode'),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           child: Row(
             children: [
               Flexible(

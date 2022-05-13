@@ -13,14 +13,15 @@ import 'components/button_url.dart';
 class ResultReadCode extends StatefulWidget {
   final String result;
   final BarcodeType typeCode;
-  const ResultReadCode({required this.result, required this.typeCode, Key? key})
-      : super(key: key);
+  const ResultReadCode(
+      {required this.result, required this.typeCode, super.key});
   @override
-  _ResultReadCodeState createState() => _ResultReadCodeState();
+  State<ResultReadCode> createState() => _ResultReadCodeState();
 }
 
 class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
   late final Widget _button;
+  late final Size _size;
 
   @override
   void initState() {
@@ -32,12 +33,16 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   Widget returnButton() => _button;
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(),
       body: SizedBox(
@@ -90,9 +95,8 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                           FlutterClipboard.copy(widget.result).then(
                         (_) => popupNotice(
                           context,
-                          notice: AppLocalizations.of(context)!
-                                  .scanResultPopupCopy +
-                              '.',
+                          notice:
+                              '${AppLocalizations.of(context)!.scanResultPopupCopy}.',
                           duration: const Duration(milliseconds: 500),
                         ),
                       ),

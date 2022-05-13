@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormTwitter extends BaseForm {
-  const BodyFormTwitter({Key? key}) : super(key: key);
+  const BodyFormTwitter({super.key});
 
   @override
-  _BodyFormTwitterState createState() => _BodyFormTwitterState();
+  State<BodyFormTwitter> createState() => _BodyFormTwitterState();
 }
 
 class _BodyFormTwitterState extends State<BodyFormTwitter> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,15 +21,19 @@ class _BodyFormTwitterState extends State<BodyFormTwitter> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeTwitter() =>
       _textEditingController.text.contains('https://twitter.com/')
           ? _textEditingController.text
-          : 'https://twitter.com/' + _textEditingController.text;
+          : 'https://twitter.com/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -74,7 +80,9 @@ class _BodyFormTwitterState extends State<BodyFormTwitter> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeTwitter),
+                context: context,
+                filter: _filterToCreateQrcodeTwitter,
+                size: _size),
           ),
         ],
       ),

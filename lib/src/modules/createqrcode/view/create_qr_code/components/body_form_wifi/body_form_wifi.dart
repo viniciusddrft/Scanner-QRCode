@@ -4,10 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormWifi extends BaseForm {
-  const BodyFormWifi({Key? key}) : super(key: key);
+  const BodyFormWifi({super.key});
 
   @override
-  _BodyFormWifiState createState() => _BodyFormWifiState();
+  State<BodyFormWifi> createState() => _BodyFormWifiState();
 }
 
 class _BodyFormWifiState extends State<BodyFormWifi> {
@@ -16,22 +16,7 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
   final TextEditingController _textEditingControllerPASS =
       TextEditingController();
 
-  String _filterToCreateQrcodeWifi() =>
-      'WIFI:S:' +
-      _textEditingControllerSSID.text +
-      ';T:' +
-      _typeWifiCode +
-      ';P:' +
-      _textEditingControllerPASS.text +
-      ';;';
-
-  static final List<String> items = <String>['WPA/WPA2', 'WEP'];
-
-  final ValueNotifier<String> _typeWifiCodeName =
-      ValueNotifier<String>(items.first);
-
-  String get _typeWifiCode =>
-      _typeWifiCodeName.value == 'WPA/WPA2' ? 'WPA' : 'WPE';
+  late final Size _size;
 
   @override
   void dispose() {
@@ -42,9 +27,24 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
+  String _filterToCreateQrcodeWifi() =>
+      'WIFI:S:${_textEditingControllerSSID.text};T:$_typeWifiCode;P:${_textEditingControllerPASS.text};;';
+
+  static final List<String> items = <String>['WPA/WPA2', 'WEP'];
+
+  final ValueNotifier<String> _typeWifiCodeName =
+      ValueNotifier<String>(items.first);
+
+  String get _typeWifiCode =>
+      _typeWifiCodeName.value == 'WPA/WPA2' ? 'WPA' : 'WPE';
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: widget.getKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -79,9 +79,8 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
               },
               controller: _textEditingControllerSSID,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeWiFiLabelDecorate1 +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeWiFiLabelDecorate1} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -108,8 +107,8 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
                       items: items
                           .map(
                             (item) => DropdownMenuItem(
-                              child: Text(item),
                               value: item,
+                              child: Text(item),
                             ),
                           )
                           .toList(),
@@ -143,9 +142,8 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
               },
               controller: _textEditingControllerPASS,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeWiFiLabelDecorate2 +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeWiFiLabelDecorate2} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -157,7 +155,9 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeWifi),
+                context: context,
+                filter: _filterToCreateQrcodeWifi,
+                size: _size),
           )
         ],
       ),

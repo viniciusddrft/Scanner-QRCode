@@ -3,25 +3,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
-import 'components/overlay_camera_widget.dart';
+import 'components/mode_scan_enum.dart';
+import 'components/overlay_barcode/overlay_camera_barcode_widget.dart';
+import 'components/overlay_qrcode/overlay_camera_qrcode_widget.dart';
 
 class ScannerCameraView extends StatefulWidget {
   final List<CameraDescription> cameras;
-  const ScannerCameraView({required this.cameras, Key? key}) : super(key: key);
+  const ScannerCameraView({required this.cameras, super.key});
 
   @override
-  _ScannerCameraViewState createState() => _ScannerCameraViewState();
+  State<ScannerCameraView> createState() => _ScannerCameraViewState();
 }
 
 class _ScannerCameraViewState extends State<ScannerCameraView>
     with WidgetsBindingObserver {
+  final ValueNotifier<ModeScan> _modeScan =
+      ValueNotifier<ModeScan>(ModeScan.qrcode);
   final BarcodeScanner _scanner = BarcodeScanner();
   CameraController? _controller;
   final ValueNotifier<bool> _isLoadCam = ValueNotifier<bool>(false);
   bool _isCamBack = true;
   final ValueNotifier<bool> _isFlashOn = ValueNotifier<bool>(false);
+  late final Size _size;
 
   @override
   void initState() {
@@ -30,11 +36,18 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   }
 
   @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _controller?.dispose();
     _scanner.close();
     _isLoadCam.dispose();
     _isFlashOn.dispose();
+    _modeScan.dispose();
     super.dispose();
   }
 
@@ -81,37 +94,39 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
   }
 
-  void _showResult(String code, BarcodeType type) async {
+  void _closeCameraAndShowResult(String code, BarcodeType type) async {
     if (_controller!.value.isStreamingImages) {
       await _controller!.stopImageStream();
       await _scanner.close();
     }
-
-    Navigator.popAndPushNamed(context, '/ReadQRCodeResult',
-        arguments: <String, dynamic>{'result': code, 'typeCode': type});
+    _showResult(code, type);
   }
+
+  void _showResult(String code, BarcodeType type) =>
+      Navigator.popAndPushNamed(context, '/ReadQRCodeResult',
+          arguments: <String, dynamic>{'result': code, 'typeCode': type});
 
   void _processImage(CameraImage cameraImage) {
     try {
-      final WriteBuffer _allBytes = WriteBuffer();
-      for (Plane _plane in cameraImage.planes) {
-        _allBytes.putUint8List(_plane.bytes);
+      final WriteBuffer allBytes = WriteBuffer();
+      for (Plane plane in cameraImage.planes) {
+        allBytes.putUint8List(plane.bytes);
       }
-      final _bytes = _allBytes.done().buffer.asUint8List();
+      final bytes = allBytes.done().buffer.asUint8List();
 
-      final Size _imageSize =
+      final Size imageSize =
           Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
 
-      final InputImageRotation _imageRotation =
+      final InputImageRotation imageRotation =
           InputImageRotationValue.fromRawValue(
                   widget.cameras.first.sensorOrientation) ??
               InputImageRotation.rotation0deg;
 
-      final InputImageFormat _inputImageFormat =
+      final InputImageFormat inputImageFormat =
           InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
               InputImageFormat.nv21;
 
-      final _planeData = cameraImage.planes.map(
+      final planeData = cameraImage.planes.map(
         (Plane plane) {
           return InputImagePlaneMetadata(
             bytesPerRow: plane.bytesPerRow,
@@ -121,22 +136,23 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
         },
       ).toList();
 
-      final _inputImageData = InputImageData(
-        size: _imageSize,
-        imageRotation: _imageRotation,
-        inputImageFormat: _inputImageFormat,
-        planeData: _planeData,
+      final inputImageData = InputImageData(
+        size: imageSize,
+        imageRotation: imageRotation,
+        inputImageFormat: inputImageFormat,
+        planeData: planeData,
       );
 
-      final _inputImage =
-          InputImage.fromBytes(bytes: _bytes, inputImageData: _inputImageData);
+      final inputImage =
+          InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
-      _scanner.processImage(_inputImage).then(
+      _scanner.processImage(inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
             if (!code.first.rawValue!.contains('typeNumber')) {
               if (!code.first.rawValue!.contains('errorCode')) {
-                _showResult(code.first.rawValue as String, code.first.type);
+                _closeCameraAndShowResult(
+                    code.first.rawValue as String, code.first.type);
               } else {
                 throw Exception('Error in reading => typeNumber in value');
               }
@@ -176,34 +192,85 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
   }
 
+  void _changeModeScanBarcode() => _modeScan.value = ModeScan.barcode;
+
+  void _changeModeScanQrcode() => _modeScan.value = ModeScan.qrcode;
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: _isLoadCam,
-        builder: (BuildContext context, bool value, Widget? child) => value
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          toolbarHeight: 90,
+          backgroundColor: Colors.transparent,
+          flexibleSpace: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Text(
+                'Modos de Scan',
+                style: TextStyle(fontSize: 16),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: FloatingActionButton(
+                      heroTag: 'changeToBarcodeMode',
+                      tooltip: 'barcode',
+                      backgroundColor: Colors.red,
+                      onPressed: _changeModeScanBarcode,
+                      child: const Center(
+                        child: Icon(FontAwesomeIcons.barcode),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Flexible(
+                    flex: 2,
+                    child: FloatingActionButton(
+                      heroTag: 'changeToQrcodeMode',
+                      tooltip: 'qrcode',
+                      backgroundColor: Colors.red,
+                      onPressed: _changeModeScanQrcode,
+                      child: const Center(
+                        child: Icon(Icons.qr_code),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )),
+      extendBodyBehindAppBar: true,
+      body: AnimatedBuilder(
+        animation: Listenable.merge([_isLoadCam, _modeScan]),
+        builder: (BuildContext context, Widget? child) => _isLoadCam.value
             ? Stack(children: [
                 SizedBox(
                   height: _size.height,
                   width: _size.width,
                   child: CameraPreview(_controller!),
                 ),
-                const OverlayCameraWidget()
+                _modeScan.value == ModeScan.qrcode
+                    ? const OverlayCameraQrcodeWidget()
+                    : const OlverlayCameraBarcodeWidget()
               ])
             : Stack(
-                children: const [
+                children: [
                   Center(
                     child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: CircularProgressIndicator(
+                      height: _modeScan.value == ModeScan.qrcode ? 200 : 100,
+                      width: _modeScan.value == ModeScan.qrcode ? 200 : 100,
+                      child: const CircularProgressIndicator(
                         strokeWidth: 7,
                       ),
                     ),
                   ),
-                  OverlayCameraWidget()
+                  _modeScan.value == ModeScan.qrcode
+                      ? const OverlayCameraQrcodeWidget()
+                      : const OlverlayCameraBarcodeWidget()
                 ],
               ),
       ),

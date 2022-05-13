@@ -12,16 +12,16 @@ import '../../controller/create_qr_code_controller.dart';
 class CreateQRCodeResult extends StatefulWidget {
   final String dataQRCode;
 
-  const CreateQRCodeResult({required this.dataQRCode, Key? key})
-      : super(key: key);
+  const CreateQRCodeResult({required this.dataQRCode, super.key});
 
   @override
-  _CreateQRCodeResultState createState() => _CreateQRCodeResultState();
+  State<CreateQRCodeResult> createState() => _CreateQRCodeResultState();
 }
 
 class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
+  late final Size _size;
 
   @override
   void initState() {
@@ -33,9 +33,13 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title:

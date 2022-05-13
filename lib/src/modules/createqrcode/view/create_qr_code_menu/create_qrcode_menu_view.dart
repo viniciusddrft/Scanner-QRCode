@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/create_qrcode_menu_item.dart';
 
 class CreateQRCodeMenu extends StatelessWidget {
-  const CreateQRCodeMenu({Key? key}) : super(key: key);
+  const CreateQRCodeMenu({super.key});
 
   List<Map<String, dynamic>> allOptionsQRCodeCreate(
     BuildContext context,
@@ -141,24 +141,24 @@ class CreateQRCodeMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: _size.height,
-      width: _size.width,
+      height: size.height,
+      width: size.width,
       child: GridView.builder(
-        itemCount: allOptionsQRCodeCreate(context, _size).length,
+        itemCount: allOptionsQRCodeCreate(context, size).length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 20,
         ),
         itemBuilder: (context, index) => CreateQRCodeItemMenu(
-          typeQRCode: allOptionsQRCodeCreate(context, _size)[index]
+          typeQRCode: allOptionsQRCodeCreate(context, size)[index]
               ['typeQRCode'],
-          icon: allOptionsQRCodeCreate(context, _size)[index]['icon'],
-          text: allOptionsQRCodeCreate(context, _size)[index]['text'],
-          color: allOptionsQRCodeCreate(context, _size)[index]['color'],
+          icon: allOptionsQRCodeCreate(context, size)[index]['icon'],
+          text: allOptionsQRCodeCreate(context, size)[index]['text'],
+          color: allOptionsQRCodeCreate(context, size)[index]['color'],
         ),
       ),
     );

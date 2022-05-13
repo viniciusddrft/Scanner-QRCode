@@ -6,17 +6,23 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../../../controller/settings_create_qrcode.dart';
 
 class QRCodeExample extends StatefulWidget {
-  const QRCodeExample({Key? key}) : super(key: key);
+  const QRCodeExample({super.key});
 
   @override
-  _QRCodeExampleState createState() => _QRCodeExampleState();
+  State<QRCodeExample> createState() => _QRCodeExampleState();
 }
 
 class _QRCodeExampleState extends State<QRCodeExample> {
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return AnimatedBuilder(
       animation: Listenable.merge([
         SettingsCreateQRCode.colorQRBackground,

@@ -8,16 +8,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controller/settings_create_qrcode.dart';
 
 class ButtonSwitchLogo extends StatefulWidget {
-  const ButtonSwitchLogo({Key? key}) : super(key: key);
+  const ButtonSwitchLogo({super.key});
 
   @override
-  _ButtonSwitchLogoState createState() => _ButtonSwitchLogoState();
+  State<ButtonSwitchLogo> createState() => _ButtonSwitchLogoState();
 }
 
 class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
-  void _popupSetLogo() {
-    final Size _size = MediaQuery.of(context).size;
+  late final Size _size;
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
+  void _popupSetLogo() {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -83,8 +89,6 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: _size.height * 0.09,
       child: ElevatedButton(

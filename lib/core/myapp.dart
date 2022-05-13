@@ -10,7 +10,7 @@ import 'routes/routes_app.dart';
 import 'theme/theme_app.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();

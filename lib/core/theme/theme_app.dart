@@ -10,10 +10,10 @@ class ThemeApp {
   static void changeTheme(Brightness newTheme) => theme.value = newTheme;
 
   static Brightness get themeSystem =>
-      WidgetsBinding.instance!.platformDispatcher.platformBrightness;
+      WidgetsBinding.instance.platformDispatcher.platformBrightness;
 
   static bool get isDarkThemeSystem =>
-      WidgetsBinding.instance!.platformDispatcher.platformBrightness ==
+      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
       Brightness.dark;
 
   static void getThemePreference() => SharedPreferences.getInstance().then(

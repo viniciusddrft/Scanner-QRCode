@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../../core/locale/locale.dart';
 
 class ButtonSwitchLanguage extends StatefulWidget {
-  const ButtonSwitchLanguage({Key? key}) : super(key: key);
+  const ButtonSwitchLanguage({super.key});
 
   @override
   State<ButtonSwitchLanguage> createState() => _ButtonSwitchLanguageState();
@@ -13,6 +13,14 @@ class ButtonSwitchLanguage extends StatefulWidget {
 
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+
+    super.didChangeDependencies();
+  }
 
   List<Map<String, dynamic>> _allLocales(context) => [
         {
@@ -36,8 +44,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   List<Map<String, dynamic>> get allLocales => _allLocales(context);
 
   void _popupLanguageMenu() {
-    final Size _size = MediaQuery.of(context).size;
-
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -126,8 +132,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: _size.height * 0.09,
       child: ElevatedButton(

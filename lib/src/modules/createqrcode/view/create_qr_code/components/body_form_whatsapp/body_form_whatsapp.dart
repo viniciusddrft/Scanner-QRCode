@@ -4,14 +4,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormWhatsapp extends BaseForm {
-  const BodyFormWhatsapp({Key? key}) : super(key: key);
+  const BodyFormWhatsapp({super.key});
 
   @override
-  _BodyFormWhatsappState createState() => _BodyFormWhatsappState();
+  State<BodyFormWhatsapp> createState() => _BodyFormWhatsappState();
 }
 
 class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
   final TextEditingController _textEditingController = TextEditingController();
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,13 +20,17 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeWhatsapp() =>
-      'https://api.whatsapp.com/send?phone=' + _textEditingController.text;
+      'https://api.whatsapp.com/send?phone=${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -49,9 +54,8 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeWhatsappLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeWhatsappLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -63,7 +67,9 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeWhatsapp),
+                context: context,
+                filter: _filterToCreateQrcodeWhatsapp,
+                size: _size),
           ),
         ],
       ),

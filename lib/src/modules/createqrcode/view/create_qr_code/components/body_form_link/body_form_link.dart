@@ -4,20 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormLink extends BaseForm {
-  const BodyFormLink({Key? key}) : super(key: key);
+  const BodyFormLink({super.key});
 
   @override
-  _BodyFormWebsiteState createState() => _BodyFormWebsiteState();
+  State<BodyFormLink> createState() => _BodyFormWebsiteState();
 }
 
 class _BodyFormWebsiteState extends State<BodyFormLink> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  String _filterToCreateQrcodeLink() =>
-      _textEditingController.text.contains('https://')
-          ? _textEditingController.text
-          : 'https://' + _textEditingController.text;
-
+  late final Size _size;
   @override
   void dispose() {
     _textEditingController.dispose();
@@ -25,9 +21,18 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
+  String _filterToCreateQrcodeLink() =>
+      _textEditingController.text.contains('https://')
+          ? _textEditingController.text
+          : 'https://${_textEditingController.text}';
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
       key: widget.getKey,
       child: Column(
@@ -73,7 +78,9 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeLink),
+                context: context,
+                filter: _filterToCreateQrcodeLink,
+                size: _size),
           )
         ],
       ),

@@ -4,14 +4,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 final formkey = GlobalKey<FormState>();
 
 abstract class BaseForm extends StatefulWidget {
-  const BaseForm({Key? key}) : super(key: key);
+  const BaseForm({super.key});
 
   GlobalKey<FormState> get getKey => formkey;
 
   void _onPressed(
       {required BuildContext context, required String Function() filter}) {
-    final _isValid = formkey.currentState!.validate();
-    if (_isValid) {
+    final isValid = formkey.currentState!.validate();
+    if (isValid) {
       Navigator.pushReplacementNamed(context, '/CreateQRCodeResult',
           arguments: <String, String>{
             'dataQRCode': filter(),
@@ -20,10 +20,11 @@ abstract class BaseForm extends StatefulWidget {
   }
 
   Widget makeButtoncreateQRCode(
-      {required BuildContext context, required String Function() filter}) {
-    final Size _size = MediaQuery.of(context).size;
+      {required BuildContext context,
+      required String Function() filter,
+      required Size size}) {
     return SizedBox(
-      height: _size.height * 0.045,
+      height: size.height * 0.045,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(

@@ -9,14 +9,22 @@ import '../../settings/view/settings_page.dart';
 import '../controller/my_page_view_controller.dart';
 
 class MyPageView extends StatefulWidget {
-  const MyPageView({Key? key}) : super(key: key);
+  const MyPageView({super.key});
   @override
-  _MyPageViewState createState() => _MyPageViewState();
+  State<MyPageView> createState() => _MyPageViewState();
 }
 
 class _MyPageViewState extends State<MyPageView> {
   final PageController _pageController = PageController(initialPage: 0);
   final MyPageViewController _myPageViewController = MyPageViewController();
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -26,7 +34,6 @@ class _MyPageViewState extends State<MyPageView> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Padding(

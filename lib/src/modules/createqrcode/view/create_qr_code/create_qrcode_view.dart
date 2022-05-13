@@ -19,11 +19,10 @@ import 'components/body_form_youtube/body_form_youtube.dart';
 
 class CreateQRCodeView extends StatefulWidget {
   final String typeQRCode;
-  const CreateQRCodeView({required this.typeQRCode, Key? key})
-      : super(key: key);
+  const CreateQRCodeView({required this.typeQRCode, super.key});
 
   @override
-  _CreateQRCodeViewState createState() => _CreateQRCodeViewState();
+  State<CreateQRCodeView> createState() => _CreateQRCodeViewState();
 }
 
 class _CreateQRCodeViewState extends State<CreateQRCodeView> {

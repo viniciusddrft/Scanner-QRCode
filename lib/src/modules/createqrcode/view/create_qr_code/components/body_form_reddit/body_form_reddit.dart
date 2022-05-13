@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormReddit extends BaseForm {
-  const BodyFormReddit({Key? key}) : super(key: key);
+  const BodyFormReddit({super.key});
 
   @override
-  _BodyFormRedditState createState() => _BodyFormRedditState();
+  State<BodyFormReddit> createState() => _BodyFormRedditState();
 }
 
 class _BodyFormRedditState extends State<BodyFormReddit> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,15 +21,19 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeReddit() =>
       _textEditingController.text.contains('https://www.reddit.com/')
           ? _textEditingController.text
-          : 'https://www.reddit.com/' + _textEditingController.text;
+          : 'https://www.reddit.com/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -73,9 +79,8 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeRedditLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeRedditLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -87,7 +92,9 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeReddit),
+                context: context,
+                filter: _filterToCreateQrcodeReddit,
+                size: _size),
           )
         ],
       ),

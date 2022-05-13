@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/button_help_widget.dart';
 
 class HelpView extends StatelessWidget {
-  const HelpView({Key? key}) : super(key: key);
+  const HelpView({super.key});
 
   @override
   Widget build(BuildContext context) {

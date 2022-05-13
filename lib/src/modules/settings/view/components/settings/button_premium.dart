@@ -5,14 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../shared/launch_link/launch_link.dart';
 
 class ButtonPremium extends StatelessWidget with OpenLink {
-  const ButtonPremium({Key? key}) : super(key: key);
+  const ButtonPremium({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: _size.height * 0.09,
+      height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             padding: EdgeInsets.zero, primary: Colors.black87),

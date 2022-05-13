@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormFacebook extends BaseForm {
-  const BodyFormFacebook({Key? key}) : super(key: key);
+  const BodyFormFacebook({super.key});
 
   @override
-  _BodyFormFacebookState createState() => _BodyFormFacebookState();
+  State<BodyFormFacebook> createState() => _BodyFormFacebookState();
 }
 
 class _BodyFormFacebookState extends State<BodyFormFacebook> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,15 +21,19 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeFacebook() =>
       _textEditingController.text.contains('https://www.facebook.com/')
           ? _textEditingController.text
-          : 'https://www.facebook.com/' + _textEditingController.text;
+          : 'https://www.facebook.com/${_textEditingController.text}';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -80,9 +86,8 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeFacebookLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeFacebookLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -94,7 +99,9 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeFacebook),
+                context: context,
+                filter: _filterToCreateQrcodeFacebook,
+                size: _size),
           ),
         ],
       ),

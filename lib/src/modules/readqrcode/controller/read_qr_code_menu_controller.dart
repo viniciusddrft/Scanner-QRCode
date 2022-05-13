@@ -12,45 +12,49 @@ class ReadQrCodeController with PopupNotices {
 
   const ReadQrCodeController(this.context);
 
-  Future<void> scanCamera() async {
-    PermissionStatus _statusCamera = await Permission.camera.status;
-    PermissionStatus _statusMicrophone = await Permission.microphone.status;
-
-    if (_statusCamera.isDenied) {
-      _statusCamera = await Permission.camera.request();
-    }
-
-    if (_statusCamera.isDenied) return;
-
-    if (_statusMicrophone.isDenied) {
-      _statusMicrophone = await Permission.microphone.request();
-    }
-
-    if (_statusMicrophone.isDenied || _statusCamera.isDenied) return;
-
-    final List<CameraDescription> cameras = await availableCameras();
-
+  void _moveToScannerCameraPage(List<CameraDescription> cameras) {
     Navigator.pushNamed(context, '/ScannerCamera',
         arguments: <String, dynamic>{'cameras': cameras});
   }
 
-  Future<void> scanFile() async {
-    PermissionStatus _statusStorage = await Permission.storage.status;
-    if (_statusStorage.isDenied) {
-      _statusStorage = await Permission.storage.request();
+  Future<void> scanCamera() async {
+    PermissionStatus statusCamera = await Permission.camera.status;
+    PermissionStatus statusMicrophone = await Permission.microphone.status;
+
+    if (statusCamera.isDenied) {
+      statusCamera = await Permission.camera.request();
     }
 
-    if (_statusStorage.isDenied) return;
+    if (statusCamera.isDenied) return;
 
-    final _image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (statusMicrophone.isDenied) {
+      statusMicrophone = await Permission.microphone.request();
+    }
 
-    if (_image == null) return;
+    if (statusMicrophone.isDenied || statusCamera.isDenied) return;
 
-    final InputImage _inputImage = InputImage.fromFilePath(_image.path);
-    final BarcodeScanner _scanner = BarcodeScanner();
+    final List<CameraDescription> cameras = await availableCameras();
+
+    _moveToScannerCameraPage(cameras);
+  }
+
+  Future<void> scanFile() async {
+    PermissionStatus statusStorage = await Permission.storage.status;
+    if (statusStorage.isDenied) {
+      statusStorage = await Permission.storage.request();
+    }
+
+    if (statusStorage.isDenied) return;
+
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) return;
+
+    final InputImage inputImage = InputImage.fromFilePath(image.path);
+    final BarcodeScanner scanner = BarcodeScanner();
 
     try {
-      _scanner.processImage(_inputImage).then(
+      scanner.processImage(inputImage).then(
         (List<Barcode> code) {
           if (code.isNotEmpty) {
             if (!code.first.rawValue!.contains('typeNumber')) {
@@ -74,7 +78,7 @@ class ReadQrCodeController with PopupNotices {
             popupNotice(context,
                 notice: 'Error  :/', duration: const Duration(seconds: 1));
           }
-          _scanner.close();
+          scanner.close();
         },
       );
     } on PlatformException catch (error, stackStrace) {

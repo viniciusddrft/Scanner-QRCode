@@ -4,10 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormContact extends BaseForm {
-  const BodyFormContact({Key? key}) : super(key: key);
+  const BodyFormContact({super.key});
 
   @override
-  _BodyFormContactState createState() => _BodyFormContactState();
+  State<BodyFormContact> createState() => _BodyFormContactState();
 }
 
 class _BodyFormContactState extends State<BodyFormContact> {
@@ -15,6 +15,7 @@ class _BodyFormContactState extends State<BodyFormContact> {
       TextEditingController();
   final TextEditingController _textEditingControllerNumber =
       TextEditingController();
+  late final Size _size;
 
   @override
   void dispose() {
@@ -23,17 +24,17 @@ class _BodyFormContactState extends State<BodyFormContact> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeContact() =>
-      'MECARD:N:' +
-      _textEditingControllerName.text +
-      ';TEL:' +
-      _textEditingControllerNumber.text +
-      ';;';
+      'MECARD:N:${_textEditingControllerName.text};TEL:${_textEditingControllerNumber.text};;';
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -56,9 +57,8 @@ class _BodyFormContactState extends State<BodyFormContact> {
               },
               controller: _textEditingControllerName,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeContactNameLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeContactNameLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -85,9 +85,8 @@ class _BodyFormContactState extends State<BodyFormContact> {
               },
               controller: _textEditingControllerNumber,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeContactPhoneLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeContactPhoneLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -99,7 +98,9 @@ class _BodyFormContactState extends State<BodyFormContact> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeContact),
+                context: context,
+                filter: _filterToCreateQrcodeContact,
+                size: _size),
           )
         ],
       ),

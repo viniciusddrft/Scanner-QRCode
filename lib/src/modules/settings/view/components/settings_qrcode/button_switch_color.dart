@@ -10,11 +10,10 @@ class ButtonSwitchColor extends StatefulWidget {
       {required this.textButton,
       required this.colorChange,
       required this.savePreferenceKey,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
-  _ButtonSwitchColorState createState() => _ButtonSwitchColorState();
+  State<ButtonSwitchColor> createState() => _ButtonSwitchColorState();
 }
 
 class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
@@ -35,6 +34,15 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
     Colors.teal,
     Color(0xff303030)
   ];
+
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+
+    super.didChangeDependencies();
+  }
 
   void _popupChangeColorQR({
     required ValueNotifier<Color> colorButton,
@@ -91,8 +99,6 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: _size.height * 0.09,
       child: ElevatedButton(

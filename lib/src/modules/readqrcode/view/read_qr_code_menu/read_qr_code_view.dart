@@ -5,14 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../controller/read_qr_code_menu_controller.dart';
 
 class ReadQRCodePage extends StatefulWidget {
-  const ReadQRCodePage({Key? key}) : super(key: key);
+  const ReadQRCodePage({super.key});
   @override
-  _ReadQRCodePageState createState() => _ReadQRCodePageState();
+  State<ReadQRCodePage> createState() => _ReadQRCodePageState();
 }
 
 class _ReadQRCodePageState extends State<ReadQRCodePage> {
   late final ReadQrCodeController _readQrCodeController;
-
+  late final Size _size;
   @override
   void initState() {
     _readQrCodeController = ReadQrCodeController(context);
@@ -20,9 +20,13 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

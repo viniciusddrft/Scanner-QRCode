@@ -11,11 +11,11 @@ import 'components/settings/button_switch_language.dart';
 import 'components/settings/button_switch_theme.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return Column(
       children: [
@@ -29,9 +29,9 @@ class SettingsPage extends StatelessWidget {
         const Spacer(),
         Padding(
           padding: EdgeInsets.only(
-              bottom: _size.height * 0.04, top: _size.height * 0.04),
+              bottom: size.height * 0.04, top: size.height * 0.04),
           child: Text(
-            AppLocalizations.of(context)!.settingsVersion + ' 2.4.0',
+            '${AppLocalizations.of(context)!.settingsVersion} 2.4.0',
             style: GoogleFonts.yatraOne(color: Colors.grey),
           ),
         ),

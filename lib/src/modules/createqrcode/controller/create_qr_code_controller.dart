@@ -26,19 +26,23 @@ class CreateQrCodeController with PopupNotices {
         await ImageGallerySaver.saveImage(imageQrCode!.buffer.asUint8List());
 
     if ((result!['isSuccess'])) {
-      popupNotice(
+      _onSaveSucess();
+    } else {
+      _onSaveFailed();
+    }
+  }
+
+  void _onSaveSucess() => popupNotice(
         context,
-        notice: AppLocalizations.of(context)!.createResultQrPopupSave + ' !',
+        notice: '${AppLocalizations.of(context)!.createResultQrPopupSave} !',
         duration: const Duration(milliseconds: 500),
       );
-    } else {
-      popupNotice(
+
+  void _onSaveFailed() => popupNotice(
         context,
         notice: 'Error  :/',
         duration: const Duration(seconds: 1),
       );
-    }
-  }
 
   Future<void> shareImageQr() => screenshotController
       .captureAndSave(Directory.systemTemp.path)

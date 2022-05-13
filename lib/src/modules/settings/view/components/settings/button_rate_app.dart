@@ -4,14 +4,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../shared/launch_link/launch_link.dart';
 
 class ButtonRateApp extends StatelessWidget with OpenLink {
-  const ButtonRateApp({Key? key}) : super(key: key);
+  const ButtonRateApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: _size.height * 0.09,
+      height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -21,7 +21,7 @@ class ButtonRateApp extends StatelessWidget with OpenLink {
         onPressed: () => openLink(
             'https://play.google.com/store/apps/details?id=com.scannerqrcode'),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           child: Row(
             children: [
               Flexible(

@@ -4,14 +4,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../base_for_form/base_for_form.dart';
 
 class BodyFormText extends BaseForm {
-  const BodyFormText({Key? key}) : super(key: key);
+  const BodyFormText({super.key});
 
   @override
-  _BodyFormState createState() => _BodyFormState();
+  State<BodyFormText> createState() => _BodyFormState();
 }
 
 class _BodyFormState extends State<BodyFormText> {
   final TextEditingController _textEditingController = TextEditingController();
+
+  late final Size _size;
 
   @override
   void dispose() {
@@ -19,12 +21,16 @@ class _BodyFormState extends State<BodyFormText> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   String _filterToCreateQrcodeText() => _textEditingController.text;
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Form(
       key: widget.getKey,
       child: Column(
@@ -47,9 +53,8 @@ class _BodyFormState extends State<BodyFormText> {
               },
               controller: _textEditingController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!
-                        .createQRCodeTextLabelDecorate +
-                    ' ...',
+                labelText:
+                    '${AppLocalizations.of(context)!.createQRCodeTextLabelDecorate} ...',
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(20),
@@ -61,7 +66,9 @@ class _BodyFormState extends State<BodyFormText> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _size.width * 0.22),
             child: widget.makeButtoncreateQRCode(
-                context: context, filter: _filterToCreateQrcodeText),
+                context: context,
+                filter: _filterToCreateQrcodeText,
+                size: _size),
           )
         ],
       ),

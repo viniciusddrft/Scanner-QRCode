@@ -10,12 +10,11 @@ class CreateQRCodeItemMenu extends StatelessWidget {
       required this.text,
       required this.typeQRCode,
       required this.color,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -23,8 +22,8 @@ class CreateQRCodeItemMenu extends StatelessWidget {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             fixedSize: Size(
-              _size.height * 0.09,
-              _size.height * 0.09,
+              size.height * 0.09,
+              size.height * 0.09,
             ),
             primary: color,
             shape: RoundedRectangleBorder(
@@ -40,7 +39,7 @@ class CreateQRCodeItemMenu extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: _size.height * 0.01),
+          padding: EdgeInsets.only(top: size.height * 0.01),
           child: Text(
             text,
             style: Theme.of(context).textTheme.labelMedium,

@@ -6,17 +6,23 @@ import '../../../../../shared/popup_notices/popup_notices.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;
-  const ButtonUrl({required this.link, Key? key}) : super(key: key);
+  const ButtonUrl({required this.link, super.key});
 
   @override
   State<ButtonUrl> createState() => _ButtonUrlState();
 }
 
 class _ButtonUrlState extends State<ButtonUrl> with OpenLink, PopupNotices {
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(

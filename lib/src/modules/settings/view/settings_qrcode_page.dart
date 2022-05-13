@@ -8,17 +8,23 @@ import 'components/settings_qrcode/button_switch_shape.dart';
 import 'components/settings_qrcode/qr_code_example.dart';
 
 class SettingsQRCodePage extends StatefulWidget {
-  const SettingsQRCodePage({Key? key}) : super(key: key);
+  const SettingsQRCodePage({super.key});
 
   @override
-  _SettingsQRCodePageState createState() => _SettingsQRCodePageState();
+  State<SettingsQRCodePage> createState() => _SettingsQRCodePageState();
 }
 
 class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
+  late final Size _size;
+
+  @override
+  void didChangeDependencies() {
+    _size = MediaQuery.of(context).size;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settingsQRCodeCreation),
