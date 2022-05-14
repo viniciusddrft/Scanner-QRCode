@@ -3,7 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../controller/settings_create_qrcode.dart';
+import '../controller/settings_create_qrcode.dart';
 
 class ButtonSwitchShape extends StatefulWidget {
   final ValueNotifier<QrDataModuleShape>? bodyShape;

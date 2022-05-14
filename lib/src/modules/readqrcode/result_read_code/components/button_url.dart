@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../shared/launch_link/launch_link.dart';
-import '../../../../../shared/popup_notices/popup_notices.dart';
+import '../../../../shared/launch_link/launch_link.dart';
+import '../../../../shared/popup_notices/popup_notices.dart';
 
 class ButtonUrl extends StatefulWidget {
   final String link;

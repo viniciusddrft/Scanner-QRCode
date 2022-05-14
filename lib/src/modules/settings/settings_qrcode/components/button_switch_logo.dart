@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../controller/settings_create_qrcode.dart';
+import '../controller/settings_create_qrcode.dart';
 
 class ButtonSwitchLogo extends StatefulWidget {
   const ButtonSwitchLogo({super.key});

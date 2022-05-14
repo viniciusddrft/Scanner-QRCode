@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'components/settings/button_contact.dart';
-import 'components/settings/button_custom_qrcode.dart';
-import 'components/settings/button_help.dart';
-import 'components/settings/button_premium.dart';
-import 'components/settings/button_rate_app.dart';
-import 'components/settings/button_switch_language.dart';
-import 'components/settings/button_switch_theme.dart';
+import 'components/button_contact.dart';
+import 'components/button_custom_qrcode.dart';
+import 'components/button_help.dart';
+import 'components/button_premium.dart';
+import 'components/button_rate_app.dart';
+import 'components/button_switch_language.dart';
+import 'components/button_switch_theme.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

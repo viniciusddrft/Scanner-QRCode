@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../src/modules/createqrcode/view/create_qr_code/create_qrcode_view.dart';
-import '../../src/modules/createqrcode/view/create_qr_code_result/create_qrcode_result_view.dart';
-import '../../src/modules/help/help_view.dart';
-import '../../src/modules/help/solution_view.dart';
+import '../../src/modules/createqrcode/create_qr_code/view/create_qrcode_view.dart';
+import '../../src/modules/createqrcode/create_qr_code_result/create_qrcode_result_view.dart';
+import '../../src/modules/help/help_view/help_view.dart';
+import '../../src/modules/help/solution_view/solution_view.dart';
 import '../../src/modules/page_view/view/my_page_view.dart';
-import '../../src/modules/readqrcode/view/result_read_code/resultreadcode_view.dart';
-import '../../src/modules/readqrcode/view/scanner_view/scanner_camera_view.dart';
-import '../../src/modules/settings/view/settings_qrcode_page.dart';
+import '../../src/modules/readqrcode/result_read_code/resultreadcode_view.dart';
+import '../../src/modules/readqrcode/scanner_view/scanner_camera_view.dart';
+import '../../src/modules/settings/settings_qrcode/settings_qrcode_page.dart';
 import 'animations/animated_page_rout_builder_elastic_out.dart';
 import 'animations/animated_page_rout_builder_left_to_right.dart';
 

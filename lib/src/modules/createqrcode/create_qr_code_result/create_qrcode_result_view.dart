@@ -4,10 +4,11 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../shared/admob/controller/admob_controller.dart';
-import '../../../../shared/admob/widget/native_ad.dart';
-import '../../../settings/controller/settings_create_qrcode.dart';
-import '../../controller/create_qr_code_controller.dart';
+import '../../../shared/admob/controller/admob_controller.dart';
+import '../../../shared/admob/widget/native_ad.dart';
+
+import '../../settings/settings_qrcode/controller/settings_create_qrcode.dart';
+import '../create_qr_code/controller/create_qr_code_controller.dart';
 
 class CreateQRCodeResult extends StatefulWidget {
   final String dataQRCode;

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import '../../../controller/settings_create_qrcode.dart';
+import '../controller/settings_create_qrcode.dart';
 
 class QRCodeExample extends StatefulWidget {
   const QRCodeExample({super.key});

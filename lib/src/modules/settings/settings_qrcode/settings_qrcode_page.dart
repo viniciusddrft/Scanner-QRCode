@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../controller/settings_create_qrcode.dart';
-import 'components/settings_qrcode/button_switch_color.dart';
-import 'components/settings_qrcode/button_switch_logo.dart';
-import 'components/settings_qrcode/button_switch_shape.dart';
-import 'components/settings_qrcode/qr_code_example.dart';
+import 'controller/settings_create_qrcode.dart';
+import 'components/button_switch_color.dart';
+import 'components/button_switch_logo.dart';
+import 'components/button_switch_shape.dart';
+import 'components/qr_code_example.dart';
 
 class SettingsQRCodePage extends StatefulWidget {
   const SettingsQRCodePage({super.key});

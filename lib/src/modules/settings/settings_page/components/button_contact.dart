@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../shared/launch_link/launch_link.dart';
+import '../../../../shared/launch_link/launch_link.dart';
 
-class ButtonRateApp extends StatelessWidget with OpenLink {
-  const ButtonRateApp({super.key});
+class ButtonContact extends StatelessWidget with OpenLink {
+  const ButtonContact({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,24 +18,21 @@ class ButtonRateApp extends StatelessWidget with OpenLink {
           padding: EdgeInsets.zero,
           primary: Theme.of(context).backgroundColor,
         ),
-        onPressed: () => openLink(
-            'https://play.google.com/store/apps/details?id=com.scannerqrcode'),
+        onPressed: () => openLink('mailto:ScannerQRCode@protonmail.com'),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           child: Row(
             children: [
               Flexible(
                 flex: 5,
-                child: Icon(
-                  Icons.rate_review_outlined,
-                  color: Theme.of(context).iconTheme.color,
-                ),
+                child: Icon(Icons.email_outlined,
+                    color: Theme.of(context).iconTheme.color),
               ),
               const Spacer(),
               Flexible(
                 flex: 5,
                 child: Text(
-                  AppLocalizations.of(context)!.settingsRateTheApp,
+                  AppLocalizations.of(context)!.settingsContact,
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),

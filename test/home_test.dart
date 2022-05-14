@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'package:scannerqrcode/src/modules/readqrcode/view/read_qr_code_menu/read_qr_code_view.dart';
+import 'package:scannerqrcode/src/modules/readqrcode/read_qr_code_menu/read_qr_code_view.dart';
 
 void main() {
   group('PageView with reading screen and settings', () {

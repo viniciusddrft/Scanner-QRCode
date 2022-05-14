@@ -7,7 +7,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../shared/popup_notices/popup_notices.dart';
+import '../../../../shared/popup_notices/popup_notices.dart';
 
 class CreateQrCodeController with PopupNotices {
   final BuildContext context;

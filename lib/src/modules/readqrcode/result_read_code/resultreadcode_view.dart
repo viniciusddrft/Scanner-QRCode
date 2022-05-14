@@ -5,9 +5,9 @@ import 'package:clipboard/clipboard.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../shared/admob/controller/admob_controller.dart';
-import '../../../../shared/admob/widget/native_ad.dart';
-import '../../../../shared/popup_notices/popup_notices.dart';
+import '../../../shared/admob/controller/admob_controller.dart';
+import '../../../shared/admob/widget/native_ad.dart';
+import '../../../shared/popup_notices/popup_notices.dart';
 import 'components/button_url.dart';
 
 class ResultReadCode extends StatefulWidget {

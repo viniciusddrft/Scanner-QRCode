@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../controller/read_qr_code_menu_controller.dart';
+import 'controller/read_qr_code_menu_controller.dart';
 
 class ReadQRCodePage extends StatefulWidget {
   const ReadQRCodePage({super.key});
