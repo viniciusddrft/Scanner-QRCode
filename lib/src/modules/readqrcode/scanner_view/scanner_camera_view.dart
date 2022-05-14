@@ -218,7 +218,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                     flex: 2,
                     child: FloatingActionButton(
                       heroTag: 'changeToBarcodeMode',
-                      tooltip: 'barcode',
+                      tooltip: AppLocalizations.of(context)!.scanViewTooltip5,
                       backgroundColor: Colors.red,
                       onPressed: _changeModeScanBarcode,
                       child: const Center(
@@ -231,7 +231,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                     flex: 2,
                     child: FloatingActionButton(
                       heroTag: 'changeToQrcodeMode',
-                      tooltip: 'qrcode',
+                      tooltip: AppLocalizations.of(context)!.scanViewTooltip6,
                       backgroundColor: Colors.red,
                       onPressed: _changeModeScanQrcode,
                       child: const Center(

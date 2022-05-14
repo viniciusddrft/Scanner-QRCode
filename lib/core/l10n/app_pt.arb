@@ -104,6 +104,8 @@
     "scanViewTooltip2":"Ligar flash",
     "scanViewTooltip3":"Desligar flash",
     "scanViewTooltip4":"Trocar camera",
+    "scanViewTooltip5":"Modo Barcode",
+    "scanViewTooltip6":"Modo Qrcode",
 
     "scanResultQrTitle":"Resultado",
     "scanResultQrButtonShare":"Compartilhar",

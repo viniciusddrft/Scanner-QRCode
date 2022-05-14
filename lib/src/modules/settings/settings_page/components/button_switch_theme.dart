@@ -24,7 +24,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
   @override
   void didChangeDependencies() {
     _size = MediaQuery.of(context).size;
-
     super.didChangeDependencies();
   }
 

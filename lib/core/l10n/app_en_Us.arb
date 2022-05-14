@@ -104,6 +104,8 @@
     "scanViewTooltip2":"Turn on flash",
     "scanViewTooltip3":"Turn off flash",
     "scanViewTooltip4":"Change camera",
+    "scanViewTooltip5":"Barcode mode",
+    "scanViewTooltip6":"QRcode mode",
 
     "scanResultQrTitle":"Result",
     "scanResultQrButtonShare":"Share",

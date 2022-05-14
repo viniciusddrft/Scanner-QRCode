@@ -104,6 +104,8 @@
     "scanViewTooltip2":"打开闪光灯",
     "scanViewTooltip3":"关闭闪光灯",
     "scanViewTooltip4":"切换镜头",
+    "scanViewTooltip5":"条码模式",
+    "scanViewTooltip6":"二维码模式",
 
     "scanResultQrTitle":"结果",
     "scanResultQrButtonShare":"分享它",

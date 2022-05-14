@@ -18,7 +18,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   @override
   void didChangeDependencies() {
     _size = MediaQuery.of(context).size;
-
     super.didChangeDependencies();
   }
 
