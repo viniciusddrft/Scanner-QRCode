@@ -15,8 +15,8 @@ Hoje o app cria de maneira fácil qr code para wi-fi, contatos e várias outras 
 
 
 ## Testes Unitários e Testes de Widgets
-Essa fase do projeto está em desenvolvimento ainda 😅, mas eu tenho um motivo pura isso principalmente relacionado a testes de widgets, eu uso um package chamado flutter_screenutil, é um ótimo package me ajudou muito a torna-lo responsivo porém ele quebra totalmente os testes e por esse motivo esse projeto ainda não tem seus testes, estou trabalhando agora na remoção dessa dependência para finalmente subir testes validos.
 
+O package flutter_screenutil já foi removido \o/ esse package causava algumas complicações nos testes, e agora os testes estão sendo desenvolvidos a todo vapor, estou tendo algumas pequenas dificuldades que estão atrasando os testes mas em breve eles estarão aqui.
 
 
 ## Contribua com o projeto
