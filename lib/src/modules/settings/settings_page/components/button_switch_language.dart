@@ -13,13 +13,6 @@ class ButtonSwitchLanguage extends StatefulWidget {
 
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
 
   List<Map<String, dynamic>> _allLocales(context) => [
         {
@@ -42,74 +35,72 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
 
   List<Map<String, dynamic>> get allLocales => _allLocales(context);
 
-  void _popupLanguageMenu() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(
-          AppLocalizations.of(context)!.settingsLanguagePopup,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              AppLocalizations.of(context)!.settingsPopupButtonCancel,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-          )
-        ],
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.3,
-          width: _size.width * 0.75,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(top: 20),
-            itemCount: allLocales.length,
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(bottom: 35),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  side: const BorderSide(color: Colors.transparent, width: 2),
-                ),
-                onPressed: () {
-                  _iconPath.value = allLocales[index]['icon'];
-                  LocaleApp.localeApp.value = allLocales[index]['locale'];
-                  SharedPreferences.getInstance().then(
-                    (value) => value.setString(
-                      'locale',
-                      allLocales[index]['locale'].toString(),
+  void _popupLanguageMenu(Size size) => showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text(
+            AppLocalizations.of(context)!.settingsLanguagePopup,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                AppLocalizations.of(context)!.settingsPopupButtonCancel,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            )
+          ],
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: size.width * 0.75,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 20),
+              itemCount: allLocales.length,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 35),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    primary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                  );
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: 45,
-                  color: Colors.transparent, //para ter hit box no row inteira
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        allLocales[index]['text'],
-                        style: Theme.of(context).textTheme.labelMedium,
+                    side: const BorderSide(color: Colors.transparent, width: 2),
+                  ),
+                  onPressed: () {
+                    _iconPath.value = allLocales[index]['icon'];
+                    LocaleApp.localeApp.value = allLocales[index]['locale'];
+                    SharedPreferences.getInstance().then(
+                      (value) => value.setString(
+                        'locale',
+                        allLocales[index]['locale'].toString(),
                       ),
-                      Image.asset(
-                        allLocales[index]['icon'],
-                        height: 30,
-                      ),
-                    ],
+                    );
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 45,
+                    color: Colors.transparent, //para ter hit box no row inteira
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          allLocales[index]['text'],
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        Image.asset(
+                          allLocales[index]['icon'],
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void initState() {
@@ -131,17 +122,19 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return SizedBox(
-      height: _size.height * 0.09,
+      height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: EdgeInsets.zero,
           primary: Theme.of(context).backgroundColor,
         ),
-        onPressed: _popupLanguageMenu,
+        onPressed: () => _popupLanguageMenu(size),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           child: Row(
             children: [
               Flexible(

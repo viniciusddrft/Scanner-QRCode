@@ -12,7 +12,7 @@ class ReadQRCodePage extends StatefulWidget {
 
 class _ReadQRCodePageState extends State<ReadQRCodePage> {
   late final ReadQrCodeController _readQrCodeController;
-  late final Size _size;
+
   @override
   void initState() {
     _readQrCodeController = ReadQrCodeController(context);
@@ -20,13 +20,9 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
   }
 
   @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -61,8 +57,8 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                 ),
                 onPressed: _readQrCodeController.scanCamera,
                 child: SizedBox(
-                  height: _size.height * 0.045,
-                  width: _size.width * 0.35,
+                  height: size.height * 0.045,
+                  width: size.width * 0.35,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -87,8 +83,8 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                 ),
                 onPressed: _readQrCodeController.scanFile,
                 child: SizedBox(
-                  height: _size.height * 0.045,
-                  width: _size.width * 0.35,
+                  height: size.height * 0.045,
+                  width: size.width * 0.35,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

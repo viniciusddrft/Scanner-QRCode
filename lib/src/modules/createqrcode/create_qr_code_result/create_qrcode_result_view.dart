@@ -22,7 +22,6 @@ class CreateQRCodeResult extends StatefulWidget {
 class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
-  late final Size _size;
 
   @override
   void initState() {
@@ -34,21 +33,17 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
   }
 
   @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title:
             Text(AppLocalizations.of(context)!.createResultQRCodeAppBarTitle),
       ),
       body: SizedBox(
-        height: _size.height,
-        width: _size.width,
+        height: size.height,
+        width: size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -56,11 +51,11 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
               controller: screenshotController,
               child: QrImage(
                 padding: EdgeInsets.all(
-                  _size.height * 0.013,
+                  size.height * 0.013,
                 ),
                 version: QrVersions.auto,
                 data: widget.dataQRCode,
-                size: _size.height * 0.25,
+                size: size.height * 0.25,
                 backgroundColor: SettingsCreateQRCode.colorQRBackground.value,
                 eyeStyle: QrEyeStyle(
                     color: SettingsCreateQRCode.colorQRCodeEye.value,
@@ -77,9 +72,9 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: _size.width * 0.09,
-                right: _size.width * 0.09,
-                top: _size.height * 0.07,
+                left: size.width * 0.09,
+                right: size.width * 0.09,
+                top: size.height * 0.07,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,8 +90,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          height: _size.height * 0.045,
-                          width: _size.width * 0.25,
+                          height: size.height * 0.045,
+                          width: size.width * 0.25,
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!
@@ -123,8 +118,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          height: _size.height * 0.045,
-                          width: _size.width * 0.25,
+                          height: size.height * 0.045,
+                          width: size.width * 0.25,
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!

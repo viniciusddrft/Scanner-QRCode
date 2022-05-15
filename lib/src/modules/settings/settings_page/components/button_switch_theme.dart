@@ -19,14 +19,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
     ),
   );
 
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
-
   void setIconSystem() => icon.value = Icon(
         Icons.brightness_4,
         color: ThemeApp.isDarkThemeSystem ? Colors.blue : Colors.yellow,
@@ -61,7 +53,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   List<Map<String, dynamic>> get allThemes => _allThemes(context);
 
-  void _popupChangeTheme() => showDialog<void>(
+  void _popupChangeTheme(Size size) => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: Text(
@@ -78,8 +70,8 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
             )
           ],
           content: SizedBox(
-            height: _size.height * 0.3,
-            width: _size.width * 0.75,
+            height: size.height * 0.3,
+            width: size.width * 0.75,
             child: ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) => Padding(
@@ -167,17 +159,19 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return SizedBox(
-      height: _size.height * 0.09,
+      height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: EdgeInsets.zero,
           primary: Theme.of(context).backgroundColor,
         ),
-        onPressed: _popupChangeTheme,
+        onPressed: () => _popupChangeTheme(size),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           child: Row(
             children: [
               Flexible(
