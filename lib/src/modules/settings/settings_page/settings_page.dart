@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
           padding: EdgeInsets.only(
               bottom: size.height * 0.04, top: size.height * 0.04),
           child: Text(
-            '${AppLocalizations.of(context)!.settingsVersion} 2.5.0',
+            '${AppLocalizations.of(context)!.settingsVersion} 2.5.1',
             style: GoogleFonts.yatraOne(color: Colors.grey),
           ),
         ),
