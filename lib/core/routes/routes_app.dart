@@ -8,6 +8,7 @@ import '../../src/modules/page_view/view/my_page_view.dart';
 import '../../src/modules/readqrcode/result_read_code/resultreadcode_view.dart';
 import '../../src/modules/readqrcode/scanner_view/scanner_camera_view.dart';
 import '../../src/modules/settings/settings_qrcode/settings_qrcode_page.dart';
+
 import 'animations/animated_page_rout_builder_elastic_out.dart';
 import 'animations/animated_page_rout_builder_left_to_right.dart';
 

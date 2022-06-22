@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../shared/popup_notices/popup_notices.dart';
 
