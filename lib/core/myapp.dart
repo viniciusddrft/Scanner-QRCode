@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl_standalone.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../src/modules/settings/settings_qrcode/controller/settings_create_qrcode.dart';
+
 import 'locale/locale.dart';
 import 'routes/routes_app.dart';
 import 'theme/theme_app.dart';

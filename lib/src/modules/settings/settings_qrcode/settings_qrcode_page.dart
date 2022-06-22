@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'controller/settings_create_qrcode.dart';
 import 'components/button_switch_color.dart';
 import 'components/button_switch_logo.dart';
 import 'components/button_switch_shape.dart';
 import 'components/qr_code_example.dart';
+import 'controller/settings_create_qrcode.dart';
 
 class SettingsQRCodePage extends StatefulWidget {
   const SettingsQRCodePage({super.key});
@@ -48,12 +49,10 @@ class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
             textButton: AppLocalizations.of(context)!.settingsButtonColorEye,
           ),
           ButtonSwitchShape.body(
-            bodyShape: SettingsCreateQRCode.shapeQRCode,
-            colorBodyShape: SettingsCreateQRCode.colorQRCode,
+            color: SettingsCreateQRCode.colorQRCode,
           ),
           ButtonSwitchShape.eye(
-            eyeShape: SettingsCreateQRCode.shapeQRCodeEye,
-            colorEyeShape: SettingsCreateQRCode.colorQRCodeEye,
+            color: SettingsCreateQRCode.colorQRCodeEye,
           ),
           const ButtonSwitchLogo(),
           const Spacer(),

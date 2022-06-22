@@ -141,7 +141,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
           ],
         ),
       ),
-      bottomNavigationBar: SizedBox(
+      bottomNavigationBar: const SizedBox(
         height: 75,
         child: AdmobNativeAd(
           adUnitId: AdmobController.nativeAdUnitIDListTile,

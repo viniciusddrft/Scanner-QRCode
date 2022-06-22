@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../shared/admob/controller/admob_controller.dart';
@@ -98,7 +99,7 @@ class _MyPageViewState extends State<MyPageView> {
           SettingsPage(),
         ],
       ),
-      bottomNavigationBar: SizedBox(
+      bottomNavigationBar: const SizedBox(
         height: 75,
         child: AdmobNativeAd(
           adUnitId: AdmobController.nativeAdUnitIDListTile,

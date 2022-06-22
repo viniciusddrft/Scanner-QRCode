@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class AdmobController {
   static void initialize() => MobileAds.instance.initialize();
 
-  static String get nativeAdUnitIDListTile => 'id ad';
+  static const String nativeAdUnitIDListTile = 'id ad';
 
-  static String get nativeAdUnitIDRectangular => 'id ad';
+  static const String nativeAdUnitIDRectangular = 'id ad';
 }

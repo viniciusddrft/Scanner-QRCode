@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeApp {
@@ -18,7 +19,7 @@ class ThemeApp {
 
   static void getThemePreference() => SharedPreferences.getInstance().then(
         (value) {
-          String? preference = value.getString('theme');
+          final String? preference = value.getString('theme');
           if (preference != null) {
             if (preference == 'system') {
               ThemeApp.theme.value = ThemeApp.themeSystem;
@@ -34,7 +35,7 @@ class ThemeApp {
   static Future<String?> getThemeSaved() =>
       SharedPreferences.getInstance().then(
         (value) {
-          String? preference = value.getString('theme');
+          final String? preference = value.getString('theme');
           if (preference != null) {
             return preference;
           } else {

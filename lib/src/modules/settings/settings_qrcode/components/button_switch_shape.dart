@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../controller/settings_create_qrcode.dart';
 
+enum ShapeType { bodyShape, eyeShape }
+
 class ButtonSwitchShape extends StatefulWidget {
-  final ValueNotifier<QrDataModuleShape>? bodyShape;
-  final ValueNotifier<Color>? colorBodyShape;
-  final bool isBody;
-  final ValueNotifier<QrEyeShape>? eyeShape;
-  final ValueNotifier<Color>? colorEyeShape;
-  final bool isEye;
+  final ShapeType shapeType;
+  final ValueNotifier<Color> color;
 
   //this class has a constructor to change the qr code's body or eye parameters
   //and though booleans it sets the texts and popup options
 
-  const ButtonSwitchShape.eye(
-      {required this.eyeShape, required this.colorEyeShape, super.key})
-      : isEye = true,
-        bodyShape = null,
-        colorBodyShape = null,
-        isBody = false;
+  const ButtonSwitchShape.eye({required this.color, super.key})
+      : shapeType = ShapeType.eyeShape;
 
-  const ButtonSwitchShape.body(
-      {required this.bodyShape, required this.colorBodyShape, super.key})
-      : isBody = true,
-        eyeShape = null,
-        colorEyeShape = null,
-        isEye = false;
+  const ButtonSwitchShape.body({required this.color, super.key})
+      : shapeType = ShapeType.bodyShape;
 
   @override
   State<ButtonSwitchShape> createState() => _ButtonSwitchShapeState();
 }
 
 class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
-  late ValueNotifier<Color> _color;
-  late ValueNotifier<dynamic> _shape;
-
   late final Size _size;
 
   @override
@@ -50,7 +38,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: widget.isEye && !widget.isBody
+        title: widget.shapeType == ShapeType.eyeShape
             ? Text(
                 AppLocalizations.of(context)!.settingsPopupColorEyeTitle,
                 style: Theme.of(context).textTheme.labelLarge,
@@ -65,7 +53,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
           child: Padding(
             padding: const EdgeInsets.only(top: 50),
             child: GridView.builder(
-              itemCount: widget.isEye && !widget.isBody
+              itemCount: widget.shapeType == ShapeType.eyeShape
                   ? QrEyeShape.values.length
                   : QrDataModuleShape.values.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,7 +63,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               ),
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  if (widget.isEye && !widget.isBody) {
+                  if (widget.shapeType == ShapeType.eyeShape) {
                     SettingsCreateQRCode.shapeQRCodeEye.value =
                         QrEyeShape.values[index];
 
@@ -96,7 +84,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.transparent,
-                    borderRadius: widget.isEye && !widget.isBody
+                    borderRadius: widget.shapeType == ShapeType.eyeShape
                         ? BorderRadius.circular(
                             QrEyeShape.values[index] == QrEyeShape.square
                                 ? 0
@@ -108,7 +96,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                                 ? 0
                                 : 360),
                     border: Border.all(
-                      color: widget.isEye && !widget.isBody
+                      color: widget.shapeType == ShapeType.eyeShape
                           ? SettingsCreateQRCode.colorQRCodeEye.value
                           //type Body
                           : SettingsCreateQRCode.colorQRCode.value,
@@ -134,18 +122,6 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
   }
 
   @override
-  void initState() {
-    if (widget.isBody && !widget.isEye) {
-      _color = widget.colorBodyShape!;
-      _shape = widget.bodyShape!;
-    } else if (widget.isEye && !widget.isBody) {
-      _color = widget.colorEyeShape!;
-      _shape = widget.eyeShape!;
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: _size.height * 0.09,
@@ -163,13 +139,18 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               Flexible(
                 flex: 1,
                 child: AnimatedBuilder(
-                  animation: Listenable.merge([_color, _shape]),
+                  animation: Listenable.merge([
+                    widget.color,
+                    widget.shapeType == ShapeType.bodyShape
+                        ? SettingsCreateQRCode.shapeQRCode
+                        : SettingsCreateQRCode.shapeQRCodeEye
+                  ]),
                   builder: (BuildContext context, Widget? child) => Container(
                     height: _size.height * 0.028,
                     width: _size.height * 0.028,
                     decoration: BoxDecoration(
                       color: Colors.transparent,
-                      borderRadius: widget.isEye && !widget.isBody
+                      borderRadius: widget.shapeType == ShapeType.eyeShape
                           ? BorderRadius.circular(
                               SettingsCreateQRCode.shapeQRCodeEye.value ==
                                       QrEyeShape.square
@@ -182,7 +163,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                                   ? 0
                                   : 360),
                       border: Border.all(
-                        color: _color.value,
+                        color: widget.color.value,
                         width: 3,
                       ),
                     ),
@@ -193,7 +174,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               Flexible(
                 flex: 6,
                 child: Text(
-                  widget.isEye && !widget.isBody
+                  widget.shapeType == ShapeType.eyeShape
                       ? AppLocalizations.of(context)!.settingsButtonShapeEyeQR
                       : AppLocalizations.of(context)!.settingsButtonShapeQR,
                   style: Theme.of(context).textTheme.labelMedium,
