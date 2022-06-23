@@ -14,6 +14,7 @@ class ButtonSwitchLanguage extends StatefulWidget {
 
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
+  final LocaleApp localeApp = LocaleApp();
 
   List<Map<String, dynamic>> _allLocales(context) => [
         {
@@ -70,7 +71,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                   ),
                   onPressed: () {
                     _iconPath.value = allLocales[index]['icon'];
-                    LocaleApp.localeApp.value = allLocales[index]['locale'];
+                    localeApp.locale.value = allLocales[index]['locale'];
                     SharedPreferences.getInstance().then(
                       (value) => value.setString(
                         'locale',
@@ -105,11 +106,11 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
 
   @override
   void initState() {
-    if (LocaleApp.localeApp.value == const Locale('pt', 'BR')) {
+    if (localeApp.locale.value == const Locale('pt', 'BR')) {
       _iconPath.value = 'assets/icons_translations/brazil.png';
-    } else if (LocaleApp.localeApp.value == const Locale('en', 'US')) {
+    } else if (localeApp.locale.value == const Locale('en', 'US')) {
       _iconPath.value = 'assets/icons_translations/unitedstates.png';
-    } else if (LocaleApp.localeApp.value == const Locale('zh', 'CN')) {
+    } else if (localeApp.locale.value == const Locale('zh', 'CN')) {
       _iconPath.value = 'assets/icons_translations/china.png';
     }
     super.initState();

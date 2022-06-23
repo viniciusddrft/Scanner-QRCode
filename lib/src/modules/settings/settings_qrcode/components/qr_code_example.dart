@@ -14,6 +14,7 @@ class QRCodeExample extends StatefulWidget {
 }
 
 class _QRCodeExampleState extends State<QRCodeExample> {
+  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
   late final Size _size;
 
   @override
@@ -26,28 +27,28 @@ class _QRCodeExampleState extends State<QRCodeExample> {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: Listenable.merge([
-        SettingsCreateQRCode.colorQRBackground,
-        SettingsCreateQRCode.colorQRCodeEye,
-        SettingsCreateQRCode.shapeQRCodeEye,
-        SettingsCreateQRCode.colorQRCode,
-        SettingsCreateQRCode.shapeQRCode,
-        SettingsCreateQRCode.logoPath
+        settingsCreateQRCode.colorQRBackground,
+        settingsCreateQRCode.colorQRCodeEye,
+        settingsCreateQRCode.shapeQRCodeEye,
+        settingsCreateQRCode.colorQRCode,
+        settingsCreateQRCode.shapeQRCode,
+        settingsCreateQRCode.logoPath
       ]),
       builder: (BuildContext context, Widget? child) => QrImage(
         padding: EdgeInsets.all(_size.height * 0.01),
         version: QrVersions.auto,
         data: 'viniciusddtft',
         size: _size.height * 0.2,
-        backgroundColor: SettingsCreateQRCode.colorQRBackground.value,
+        backgroundColor: settingsCreateQRCode.colorQRBackground.value,
         eyeStyle: QrEyeStyle(
-            color: SettingsCreateQRCode.colorQRCodeEye.value,
-            eyeShape: SettingsCreateQRCode.shapeQRCodeEye.value),
+            color: settingsCreateQRCode.colorQRCodeEye.value,
+            eyeShape: settingsCreateQRCode.shapeQRCodeEye.value),
         dataModuleStyle: QrDataModuleStyle(
-            color: SettingsCreateQRCode.colorQRCode.value,
-            dataModuleShape: SettingsCreateQRCode.shapeQRCode.value),
-        embeddedImage: SettingsCreateQRCode.logoPath.value != null
+            color: settingsCreateQRCode.colorQRCode.value,
+            dataModuleShape: settingsCreateQRCode.shapeQRCode.value),
+        embeddedImage: settingsCreateQRCode.logoPath.value != null
             ? FileImage(
-                File(SettingsCreateQRCode.logoPath.value as String),
+                File(settingsCreateQRCode.logoPath.value as String),
               )
             : null,
       ),

@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeApp {
-  static final ValueNotifier<Brightness> theme =
+  ThemeApp._();
+
+  static final ThemeApp _themeApp = ThemeApp._();
+
+  factory ThemeApp() => _themeApp;
+
+  final ValueNotifier<Brightness> theme =
       ValueNotifier<Brightness>(themeSystem);
 
-  static bool get isDarkThemeApp => theme.value == Brightness.dark;
-
-  static void changeTheme(Brightness newTheme) => theme.value = newTheme;
+  bool get isDarkThemeApp => theme.value == Brightness.dark;
 
   static Brightness get themeSystem =>
       WidgetsBinding.instance.platformDispatcher.platformBrightness;
@@ -17,23 +21,26 @@ class ThemeApp {
       WidgetsBinding.instance.platformDispatcher.platformBrightness ==
       Brightness.dark;
 
-  static void getThemePreference() => SharedPreferences.getInstance().then(
+  void changeTheme(Brightness newTheme) => theme.value = newTheme;
+
+  void dispose() => theme.dispose();
+
+  void getThemePreference() => SharedPreferences.getInstance().then(
         (value) {
           final String? preference = value.getString('theme');
           if (preference != null) {
             if (preference == 'system') {
-              ThemeApp.theme.value = ThemeApp.themeSystem;
+              _themeApp.theme.value = themeSystem;
             } else if (preference == 'dark') {
-              ThemeApp.theme.value = Brightness.dark;
+              _themeApp.theme.value = Brightness.dark;
             } else if (preference == 'light') {
-              ThemeApp.theme.value = Brightness.light;
+              _themeApp.theme.value = Brightness.light;
             }
           }
         },
       );
 
-  static Future<String?> getThemeSaved() =>
-      SharedPreferences.getInstance().then(
+  Future<String?> getThemeSaved() => SharedPreferences.getInstance().then(
         (value) {
           final String? preference = value.getString('theme');
           if (preference != null) {

@@ -16,6 +16,7 @@ class ButtonSwitchLogo extends StatefulWidget {
 }
 
 class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
+  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
   late final Size _size;
 
   @override
@@ -48,7 +49,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
                 tooltip:
                     AppLocalizations.of(context)!.settingsImageTooltipRemove,
                 onPressed: () {
-                  SettingsCreateQRCode.logoPath.value = null;
+                  settingsCreateQRCode.logoPath.value = null;
                   SharedPreferences.getInstance().then(
                     (SharedPreferences preference) => preference.remove('logo'),
                   );
@@ -79,7 +80,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
       ImagePicker().pickImage(source: ImageSource.gallery).then(
         (XFile? value) {
           if (value != null) {
-            SettingsCreateQRCode.logoPath.value = value.path;
+            settingsCreateQRCode.logoPath.value = value.path;
             SharedPreferences.getInstance().then(
               (SharedPreferences preference) =>
                   preference.setString('logo', value.path),
@@ -104,13 +105,13 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
           child: Row(
             children: [
               ValueListenableBuilder(
-                valueListenable: SettingsCreateQRCode.logoPath,
+                valueListenable: settingsCreateQRCode.logoPath,
                 builder: (BuildContext context, value, Widget? child) =>
-                    SettingsCreateQRCode.logoPath.value != null
+                    settingsCreateQRCode.logoPath.value != null
                         ? Flexible(
                             flex: 5,
                             child: Image.file(
-                              File(SettingsCreateQRCode.logoPath.value
+                              File(settingsCreateQRCode.logoPath.value
                                   as String),
                               width: _size.height * 0.05,
                               height: _size.height * 0.05,

@@ -21,6 +21,7 @@ class CreateQRCodeResult extends StatefulWidget {
 }
 
 class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
+  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
 
@@ -57,16 +58,16 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                 version: QrVersions.auto,
                 data: widget.dataQRCode,
                 size: size.height * 0.25,
-                backgroundColor: SettingsCreateQRCode.colorQRBackground.value,
+                backgroundColor: settingsCreateQRCode.colorQRBackground.value,
                 eyeStyle: QrEyeStyle(
-                    color: SettingsCreateQRCode.colorQRCodeEye.value,
-                    eyeShape: SettingsCreateQRCode.shapeQRCodeEye.value),
+                    color: settingsCreateQRCode.colorQRCodeEye.value,
+                    eyeShape: settingsCreateQRCode.shapeQRCodeEye.value),
                 dataModuleStyle: QrDataModuleStyle(
-                    color: SettingsCreateQRCode.colorQRCode.value,
-                    dataModuleShape: SettingsCreateQRCode.shapeQRCode.value),
-                embeddedImage: SettingsCreateQRCode.logoPath.value != null
+                    color: settingsCreateQRCode.colorQRCode.value,
+                    dataModuleShape: settingsCreateQRCode.shapeQRCode.value),
+                embeddedImage: settingsCreateQRCode.logoPath.value != null
                     ? FileImage(
-                        File(SettingsCreateQRCode.logoPath.value as String),
+                        File(settingsCreateQRCode.logoPath.value as String),
                       )
                     : null,
               ),

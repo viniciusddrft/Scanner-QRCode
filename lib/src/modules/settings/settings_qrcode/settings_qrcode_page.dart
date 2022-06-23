@@ -16,6 +16,7 @@ class SettingsQRCodePage extends StatefulWidget {
 }
 
 class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
+  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
   late final Size _size;
 
   @override
@@ -33,26 +34,26 @@ class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
       body: Column(
         children: [
           ButtonSwitchColor(
-            colorChange: SettingsCreateQRCode.colorQRBackground,
+            colorChange: settingsCreateQRCode.colorQRBackground,
             savePreferenceKey: 'colorQRBackground',
             textButton:
                 AppLocalizations.of(context)!.settingsButtonColorbackground,
           ),
           ButtonSwitchColor(
-            colorChange: SettingsCreateQRCode.colorQRCode,
+            colorChange: settingsCreateQRCode.colorQRCode,
             savePreferenceKey: 'colorQRCode',
             textButton: AppLocalizations.of(context)!.settingsButtonColorCode,
           ),
           ButtonSwitchColor(
-            colorChange: SettingsCreateQRCode.colorQRCodeEye,
+            colorChange: settingsCreateQRCode.colorQRCodeEye,
             savePreferenceKey: 'colorQRCodeEye',
             textButton: AppLocalizations.of(context)!.settingsButtonColorEye,
           ),
           ButtonSwitchShape.body(
-            color: SettingsCreateQRCode.colorQRCode,
+            color: settingsCreateQRCode.colorQRCode,
           ),
           ButtonSwitchShape.eye(
-            color: SettingsCreateQRCode.colorQRCodeEye,
+            color: settingsCreateQRCode.colorQRCodeEye,
           ),
           const ButtonSwitchLogo(),
           const Spacer(),
