@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -93,8 +93,9 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                     IconButton(
                       tooltip:
                           AppLocalizations.of(context)!.scanResultQrToolTip,
-                      onPressed: () =>
-                          FlutterClipboard.copy(widget.result).then(
+                      onPressed: () => Clipboard.setData(
+                        ClipboardData(text: widget.result),
+                      ).then(
                         (_) => popupNotice(
                           context,
                           notice:
