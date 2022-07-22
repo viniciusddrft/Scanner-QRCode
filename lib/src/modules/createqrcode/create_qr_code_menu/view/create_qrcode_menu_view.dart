@@ -22,13 +22,13 @@ class CreateQRCodeMenu extends StatelessWidget {
       ),
       itemBuilder: (context, index) => CreateQRCodeItemMenu(
         typeQRCode: CreateQrcodeMenuController.allOptionsQRCodeCreate(
-            context, size)[index]['typeQRCode'],
+            context, size)[index]['typeQRCode'] as String,
         icon: CreateQrcodeMenuController.allOptionsQRCodeCreate(
-            context, size)[index]['icon'],
+            context, size)[index]['icon'] as Icon,
         text: CreateQrcodeMenuController.allOptionsQRCodeCreate(
-            context, size)[index]['text'],
+            context, size)[index]['text'] as String,
         color: CreateQrcodeMenuController.allOptionsQRCodeCreate(
-            context, size)[index]['color'],
+            context, size)[index]['color'] as Color,
       ),
     );
   }

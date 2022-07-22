@@ -105,7 +105,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
   void _showResult(String code, BarcodeType type) =>
       Navigator.popAndPushNamed(context, '/ReadQRCodeResult',
-          arguments: <String, dynamic>{'result': code, 'typeCode': type});
+          arguments: <String, Object>{'result': code, 'typeCode': type});
 
   void _processImage(CameraImage cameraImage) {
     try {

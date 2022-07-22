@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:camera/camera.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
+
 import '../../src/modules/createqrcode/create_qr_code/view/create_qrcode_view.dart';
 import '../../src/modules/createqrcode/create_qr_code_result/create_qrcode_result_view.dart';
 import '../../src/modules/help/help_view/help_view.dart';
@@ -22,7 +25,8 @@ class Routes {
       case '/ScannerCamera':
         return MaterialPageRoute(
           builder: (BuildContext context) => ScannerCameraView(
-            cameras: (settings.arguments as Map<String, dynamic>)['cameras'],
+            cameras: (settings.arguments
+                as Map<String, List<CameraDescription>>)['cameras']!,
           ),
         );
       case '/SettingsQRCode':
@@ -61,8 +65,9 @@ class Routes {
         return AnimatedPageRouteBuilderElasticOut(
           duration: const Duration(milliseconds: 500),
           route: ResultReadCode(
-            result: (settings.arguments as Map<String, dynamic>)['result'],
-            typeCode: (settings.arguments as Map<String, dynamic>)['typeCode'],
+            result: (settings.arguments as Map<String, String>)['result']!,
+            typeCode:
+                (settings.arguments as Map<String, BarcodeType>)['typeCode']!,
           ),
         );
     }

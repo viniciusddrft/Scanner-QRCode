@@ -16,7 +16,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
   final LocaleApp localeApp = LocaleApp();
 
-  List<Map<String, dynamic>> _allLocales(context) => [
+  List<Map<String, Object>> _allLocales(context) => [
         {
           'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
           'icon': 'assets/icons_translations/brazil.png',
@@ -35,7 +35,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
         },
       ];
 
-  List<Map<String, dynamic>> get allLocales => _allLocales(context);
+  List<Map<String, Object>> get allLocales => _allLocales(context);
 
   void _popupLanguageMenu(Size size) => showDialog<void>(
         context: context,
@@ -70,8 +70,9 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                     side: const BorderSide(color: Colors.transparent, width: 2),
                   ),
                   onPressed: () {
-                    _iconPath.value = allLocales[index]['icon'];
-                    localeApp.locale.value = allLocales[index]['locale'];
+                    _iconPath.value = allLocales[index]['icon'] as String;
+                    localeApp.locale.value =
+                        allLocales[index]['locale'] as Locale;
                     SharedPreferences.getInstance().then(
                       (value) => value.setString(
                         'locale',
@@ -87,11 +88,11 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          allLocales[index]['text'],
+                          allLocales[index]['text'] as String,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                         Image.asset(
-                          allLocales[index]['icon'],
+                          allLocales[index]['icon'] as String,
                           height: 30,
                         ),
                       ],

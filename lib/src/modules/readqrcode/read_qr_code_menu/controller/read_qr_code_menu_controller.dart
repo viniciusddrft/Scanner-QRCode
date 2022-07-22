@@ -15,7 +15,7 @@ class ReadQrCodeController with PopupNotices {
 
   void _moveToScannerCameraPage(List<CameraDescription> cameras) {
     Navigator.pushNamed(context, '/ScannerCamera',
-        arguments: <String, dynamic>{'cameras': cameras});
+        arguments: <String, Object>{'cameras': cameras});
   }
 
   Future<void> scanCamera() async {
@@ -61,8 +61,8 @@ class ReadQrCodeController with PopupNotices {
             if (!code.first.rawValue!.contains('typeNumber')) {
               if (!code.first.rawValue!.contains('errorCode')) {
                 Navigator.pushNamed(context, '/ReadQRCodeResult',
-                    arguments: <String, dynamic>{
-                      'result': code.first.rawValue,
+                    arguments: <String, Object>{
+                      'result': code.first.rawValue!,
                       'typeCode': code.first.type
                     });
               } else {

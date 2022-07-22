@@ -32,7 +32,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
   void setIconLight() =>
       icon.value = const Icon(Icons.light_mode, color: Colors.yellow);
 
-  List<Map<String, dynamic>> _allThemes(context) => [
+  List<Map<String, Object>> _allThemes(context) => [
         {
           'text': AppLocalizations.of(context)!.settingsSystemTheme,
           'icon': Icons.brightness_4,
@@ -53,7 +53,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
         },
       ];
 
-  List<Map<String, dynamic>> get allThemes => _allThemes(context);
+  List<Map<String, Object>> get allThemes => _allThemes(context);
 
   void _popupChangeTheme(Size size) => showDialog<void>(
         context: context,
@@ -117,12 +117,12 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          allThemes[index]['text'],
+                          allThemes[index]['text'] as String,
                           style: Theme.of(context).textTheme.labelMedium,
                         ),
                         Icon(
-                          allThemes[index]['icon'],
-                          color: allThemes[index]['color'],
+                          allThemes[index]['icon'] as IconData,
+                          color: allThemes[index]['color'] as Color,
                           size: 28,
                         )
                       ],
