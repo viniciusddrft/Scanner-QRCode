@@ -15,7 +15,7 @@ class ReadQrCodeController with PopupNotices {
 
   void _moveToScannerCameraPage(List<CameraDescription> cameras) {
     Navigator.pushNamed(context, '/ScannerCamera',
-        arguments: <String, Object>{'cameras': cameras});
+        arguments: <String, List<CameraDescription>>{'cameras': cameras});
   }
 
   Future<void> scanCamera() async {
