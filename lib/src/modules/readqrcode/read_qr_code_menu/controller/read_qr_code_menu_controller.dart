@@ -18,6 +18,10 @@ class ReadQrCodeController with PopupNotices {
         arguments: <String, List<CameraDescription>>{'cameras': cameras});
   }
 
+  Never _errorInReadQrCode(String message) {
+    throw Exception(message);
+  }
+
   Future<void> scanCamera() async {
     PermissionStatus statusCamera = await Permission.camera.status;
     PermissionStatus statusMicrophone = await Permission.microphone.status;
@@ -68,12 +72,12 @@ class ReadQrCodeController with PopupNotices {
               } else {
                 popupNotice(context,
                     notice: 'Error  :/', duration: const Duration(seconds: 1));
-                throw Exception('Error in reading => typeNumber in value');
+                _errorInReadQrCode('Error in reading => typeNumber in value');
               }
             } else {
               popupNotice(context,
                   notice: 'Error  :/', duration: const Duration(seconds: 1));
-              throw Exception('Error in reading => errorCode in value');
+              _errorInReadQrCode('Error in reading => errorCode in value');
             }
           } else {
             popupNotice(context,

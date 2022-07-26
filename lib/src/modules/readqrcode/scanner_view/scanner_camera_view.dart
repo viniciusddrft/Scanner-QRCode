@@ -67,6 +67,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
   }
 
+  Never _errorInReadQrCodeCamera(String message) {
+    throw Exception(message);
+  }
+
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = _controller;
 
@@ -155,10 +159,12 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                 _closeCameraAndShowResult(
                     code.first.rawValue as String, code.first.type);
               } else {
-                throw Exception('Error in reading => typeNumber in value');
+                _errorInReadQrCodeCamera(
+                    'Error in reading => typeNumber in value');
               }
             } else {
-              throw Exception('Error in reading => errorCode in value');
+              _errorInReadQrCodeCamera(
+                  'Error in reading => errorCode in value');
             }
           }
           _scanner.close();
