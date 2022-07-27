@@ -23,7 +23,7 @@ O package flutter_screenutil já foi removido \o/ esse package causava algumas c
 
 Sinta se a vontade para contribuir com o projeto com código, issues, etc. ...
 
-Se você quiser me apoiar nesse projeto de forma financeira o projeto possui uma versão Premium que sua única diferença é não ter anúncios, atualmente essa versão está custando R$ 2,79.
+Se você quiser me apoiar nesse projeto de forma financeira o projeto possui uma versão Premium que sua única diferença é não ter anúncios, atualmente essa versão está custando R$ 3,99.
 
 
 App Premium 👉 <a href="https://play.google.com/store/apps/details?id=com.scannerqrcode_premium" target="_blank"> <img align="center" height="70" width="70" src="https://github.com/viniciusddrft/Scanner-QRCode-Premium/blob/main/assets/splash/splash.png">
