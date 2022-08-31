@@ -78,7 +78,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
               ),
               itemBuilder: (context, index) => ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: _colors[index],
+                  backgroundColor: _colors[index],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(360),
                   ),
@@ -105,8 +105,8 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: Theme.of(context).backgroundColor,
           padding: EdgeInsets.zero,
-          primary: Theme.of(context).backgroundColor,
         ),
         onPressed: () {
           _popupChangeColorQR(

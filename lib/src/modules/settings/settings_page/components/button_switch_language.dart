@@ -63,7 +63,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                 padding: const EdgeInsets.only(bottom: 35),
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -132,8 +132,8 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: Theme.of(context).backgroundColor,
           padding: EdgeInsets.zero,
-          primary: Theme.of(context).backgroundColor,
         ),
         onPressed: () => _popupLanguageMenu(size),
         child: Padding(

@@ -129,8 +129,8 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: Theme.of(context).backgroundColor,
           padding: EdgeInsets.zero,
-          primary: Theme.of(context).backgroundColor,
         ),
         onPressed: _popupChangeShapeQR,
         child: Padding(

@@ -16,8 +16,8 @@ class ButtonRateApp extends StatelessWidget with OpenLink {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
+          backgroundColor: Theme.of(context).backgroundColor,
           padding: EdgeInsets.zero,
-          primary: Theme.of(context).backgroundColor,
         ),
         onPressed: () => openLink(
             'https://play.google.com/store/apps/details?id=com.scannerqrcode'),

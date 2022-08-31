@@ -25,7 +25,7 @@ class CreateQRCodeItemMenu extends StatelessWidget {
               size.height * 0.09,
               size.height * 0.09,
             ),
-            primary: color,
+            backgroundColor: color,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(360),
             ),
