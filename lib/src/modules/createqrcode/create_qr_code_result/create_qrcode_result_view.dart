@@ -8,7 +8,7 @@ import 'package:screenshot/screenshot.dart';
 
 import '../../../shared/admob/controller/admob_controller.dart';
 import '../../../shared/admob/widget/native_ad.dart';
-import '../../settings/settings_qrcode/controller/settings_create_qrcode.dart';
+import '../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 import '../create_qr_code/controller/create_qr_code_controller.dart';
 
 class CreateQRCodeResult extends StatefulWidget {
@@ -21,7 +21,6 @@ class CreateQRCodeResult extends StatefulWidget {
 }
 
 class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
-  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
 
@@ -58,18 +57,23 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                 version: QrVersions.auto,
                 data: widget.dataQRCode,
                 size: size.height * 0.25,
-                backgroundColor: settingsCreateQRCode.colorQRBackground.value,
+                backgroundColor:
+                    SettingsCreateQRCodeController.colorQRBackground.value,
                 eyeStyle: QrEyeStyle(
-                    color: settingsCreateQRCode.colorQRCodeEye.value,
-                    eyeShape: settingsCreateQRCode.shapeQRCodeEye.value),
+                    color: SettingsCreateQRCodeController.colorQRCodeEye.value,
+                    eyeShape:
+                        SettingsCreateQRCodeController.shapeQRCodeEye.value),
                 dataModuleStyle: QrDataModuleStyle(
-                    color: settingsCreateQRCode.colorQRCode.value,
-                    dataModuleShape: settingsCreateQRCode.shapeQRCode.value),
-                embeddedImage: settingsCreateQRCode.logoPath.value != null
-                    ? FileImage(
-                        File(settingsCreateQRCode.logoPath.value as String),
-                      )
-                    : null,
+                    color: SettingsCreateQRCodeController.colorQRCode.value,
+                    dataModuleShape:
+                        SettingsCreateQRCodeController.shapeQRCode.value),
+                embeddedImage:
+                    SettingsCreateQRCodeController.logoPath.value != null
+                        ? FileImage(
+                            File(SettingsCreateQRCodeController.logoPath.value
+                                as String),
+                          )
+                        : null,
               ),
             ),
             Padding(

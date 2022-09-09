@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../controller/settings_create_qrcode.dart';
+import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
 class ButtonSwitchLogo extends StatefulWidget {
   const ButtonSwitchLogo({super.key});
@@ -16,14 +16,7 @@ class ButtonSwitchLogo extends StatefulWidget {
 }
 
 class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
-  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
+  late final Size _size = MediaQuery.of(context).size;
 
   void _popupSetLogo() {
     showDialog<void>(
@@ -49,7 +42,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
                 tooltip:
                     AppLocalizations.of(context)!.settingsImageTooltipRemove,
                 onPressed: () {
-                  settingsCreateQRCode.logoPath.value = null;
+                  SettingsCreateQRCodeController.logoPath.value = null;
                   SharedPreferences.getInstance().then(
                     (SharedPreferences preference) => preference.remove('logo'),
                   );
@@ -80,7 +73,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
       ImagePicker().pickImage(source: ImageSource.gallery).then(
         (XFile? value) {
           if (value != null) {
-            settingsCreateQRCode.logoPath.value = value.path;
+            SettingsCreateQRCodeController.logoPath.value = value.path;
             SharedPreferences.getInstance().then(
               (SharedPreferences preference) =>
                   preference.setString('logo', value.path),
@@ -105,13 +98,13 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
           child: Row(
             children: [
               ValueListenableBuilder(
-                valueListenable: settingsCreateQRCode.logoPath,
+                valueListenable: SettingsCreateQRCodeController.logoPath,
                 builder: (BuildContext context, value, Widget? child) =>
-                    settingsCreateQRCode.logoPath.value != null
+                    SettingsCreateQRCodeController.logoPath.value != null
                         ? Flexible(
                             flex: 5,
                             child: Image.file(
-                              File(settingsCreateQRCode.logoPath.value
+                              File(SettingsCreateQRCodeController.logoPath.value
                                   as String),
                               width: _size.height * 0.05,
                               height: _size.height * 0.05,

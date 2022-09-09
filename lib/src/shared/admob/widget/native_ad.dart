@@ -58,8 +58,15 @@ class _AdmobNativeAdState extends State<AdmobNativeAd> {
           ? AdWidget(
               ad: _nativeAd,
             )
-          : const Center(
-              child: CircularProgressIndicator(),
+          : Stack(
+              children: const [
+                Center(
+                  child: Text('Ad'),
+                ),
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+              ],
             ),
     );
   }

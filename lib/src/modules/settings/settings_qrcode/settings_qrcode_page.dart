@@ -6,7 +6,7 @@ import 'components/button_switch_color.dart';
 import 'components/button_switch_logo.dart';
 import 'components/button_switch_shape.dart';
 import 'components/qr_code_example.dart';
-import 'controller/settings_create_qrcode.dart';
+import '../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
 class SettingsQRCodePage extends StatefulWidget {
   const SettingsQRCodePage({super.key});
@@ -16,14 +16,7 @@ class SettingsQRCodePage extends StatefulWidget {
 }
 
 class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
-  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
+  late final Size _size = MediaQuery.of(context).size;
 
   @override
   Widget build(BuildContext context) {
@@ -34,26 +27,26 @@ class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
       body: Column(
         children: [
           ButtonSwitchColor(
-            colorChange: settingsCreateQRCode.colorQRBackground,
+            colorChange: SettingsCreateQRCodeController.colorQRBackground,
             savePreferenceKey: 'colorQRBackground',
             textButton:
                 AppLocalizations.of(context)!.settingsButtonColorbackground,
           ),
           ButtonSwitchColor(
-            colorChange: settingsCreateQRCode.colorQRCode,
+            colorChange: SettingsCreateQRCodeController.colorQRCode,
             savePreferenceKey: 'colorQRCode',
             textButton: AppLocalizations.of(context)!.settingsButtonColorCode,
           ),
           ButtonSwitchColor(
-            colorChange: settingsCreateQRCode.colorQRCodeEye,
+            colorChange: SettingsCreateQRCodeController.colorQRCodeEye,
             savePreferenceKey: 'colorQRCodeEye',
             textButton: AppLocalizations.of(context)!.settingsButtonColorEye,
           ),
           ButtonSwitchShape.body(
-            color: settingsCreateQRCode.colorQRCode,
+            color: SettingsCreateQRCodeController.colorQRCode,
           ),
           ButtonSwitchShape.eye(
-            color: settingsCreateQRCode.colorQRCodeEye,
+            color: SettingsCreateQRCodeController.colorQRCodeEye,
           ),
           const ButtonSwitchLogo(),
           const Spacer(),

@@ -13,7 +13,6 @@ class ButtonSwicthTheme extends StatefulWidget {
 }
 
 class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
-  final ThemeApp themeApp = ThemeApp();
   final ValueNotifier<Icon> icon = ValueNotifier<Icon>(
     Icon(
       Icons.brightness_4,
@@ -90,19 +89,19 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
                     Navigator.pop(context);
 
                     if (allThemes[index]['theme'] == 'system') {
-                      themeApp.changeTheme(ThemeApp.themeSystem);
+                      ThemeApp.changeTheme(ThemeApp.themeSystem);
                       setIconSystem();
                       SharedPreferences.getInstance().then(
                         (value) => value.setString('theme', 'system'),
                       );
                     } else if (allThemes[index]['theme'] == 'dark') {
-                      themeApp.changeTheme(Brightness.dark);
+                      ThemeApp.changeTheme(Brightness.dark);
                       setIconDark();
                       SharedPreferences.getInstance().then(
                         (value) => value.setString('theme', 'dark'),
                       );
                     } else if (allThemes[index]['theme'] == 'light') {
-                      themeApp.changeTheme(Brightness.light);
+                      ThemeApp.changeTheme(Brightness.light);
                       setIconLight();
                       SharedPreferences.getInstance().then(
                         (value) => value.setString('theme', 'light'),
@@ -137,7 +136,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   @override
   void initState() {
-    themeApp.getThemeSaved().then((theme) {
+    ThemeApp.getThemeSaved().then((theme) {
       if (theme != null) {
         if (theme == 'system') {
           setIconSystem();

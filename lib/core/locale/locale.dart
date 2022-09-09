@@ -5,13 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocaleApp {
-  LocaleApp._();
-
-  static final LocaleApp _localeApp = LocaleApp._();
-
-  factory LocaleApp() => _localeApp;
-
-  final ValueNotifier<Locale> locale = ValueNotifier<Locale>(
+  static final ValueNotifier<Locale> locale = ValueNotifier<Locale>(
     AppLocalizations.supportedLocales.contains(Locale(
             Intl.systemLocale.split('_')[0], Intl.systemLocale.split('_')[1]))
         ? Locale(
@@ -21,9 +15,9 @@ class LocaleApp {
         : const Locale('en', 'Us'),
   );
 
-  void dispose() => locale.dispose();
+  static void dispose() => locale.dispose();
 
-  void getLocalePreference() => SharedPreferences.getInstance().then(
+  static void getLocalePreference() => SharedPreferences.getInstance().then(
         (value) {
           String? preference = value.getString('locale');
           if (preference != null) {

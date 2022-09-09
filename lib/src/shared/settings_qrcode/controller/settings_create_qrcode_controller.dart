@@ -3,31 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsCreateQRCode {
-  SettingsCreateQRCode._();
-
-  static final SettingsCreateQRCode _settingsCreateQRCode =
-      SettingsCreateQRCode._();
-
-  factory SettingsCreateQRCode() => _settingsCreateQRCode;
-
-  final ValueNotifier<Color> colorQRCodeEye =
+class SettingsCreateQRCodeController {
+  static final ValueNotifier<Color> colorQRCodeEye =
       ValueNotifier<Color>(Colors.black);
 
-  final ValueNotifier<Color> colorQRBackground =
+  static final ValueNotifier<Color> colorQRBackground =
       ValueNotifier<Color>(Colors.white);
 
-  final ValueNotifier<Color> colorQRCode = ValueNotifier<Color>(Colors.black);
+  static final ValueNotifier<Color> colorQRCode =
+      ValueNotifier<Color>(Colors.black);
 
-  final ValueNotifier<QrEyeShape> shapeQRCodeEye =
+  static final ValueNotifier<QrEyeShape> shapeQRCodeEye =
       ValueNotifier<QrEyeShape>(QrEyeShape.square);
 
-  final ValueNotifier<QrDataModuleShape> shapeQRCode =
+  static final ValueNotifier<QrDataModuleShape> shapeQRCode =
       ValueNotifier<QrDataModuleShape>(QrDataModuleShape.square);
 
-  final ValueNotifier<String?> logoPath = ValueNotifier<String?>(null);
+  static final ValueNotifier<String?> logoPath = ValueNotifier<String?>(null);
 
-  void getPreferenceShape() => SharedPreferences.getInstance().then(
+  static void getPreferenceShape() => SharedPreferences.getInstance().then(
         (preference) {
           final int? responseQRCode = preference.getInt('shapeQRCode');
           if (responseQRCode == 0) {
@@ -44,7 +38,7 @@ class SettingsCreateQRCode {
         },
       );
 
-  void getPreferencesColors() => SharedPreferences.getInstance().then(
+  static void getPreferencesColors() => SharedPreferences.getInstance().then(
         (preference) {
           final int? responseBackground =
               preference.getInt('colorQRBackground');
@@ -62,20 +56,20 @@ class SettingsCreateQRCode {
         },
       );
 
-  void getPreferencesLogo() => SharedPreferences.getInstance().then(
+  static void getPreferencesLogo() => SharedPreferences.getInstance().then(
         (preference) {
           final String? response = preference.getString('logo');
           if (response != null) logoPath.value = response;
         },
       );
 
-  void loadAllPreferences() {
+  static void loadAllPreferences() {
     getPreferencesColors();
     getPreferenceShape();
     getPreferencesLogo();
   }
 
-  void dispose() {
+  static void dispose() {
     colorQRCodeEye.dispose();
     colorQRBackground.dispose();
     colorQRCodeEye.dispose();

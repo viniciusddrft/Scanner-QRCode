@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../controller/settings_create_qrcode.dart';
+import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
 enum ShapeType { bodyShape, eyeShape }
 
@@ -26,14 +26,7 @@ class ButtonSwitchShape extends StatefulWidget {
 }
 
 class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
-  final SettingsCreateQRCode settingsCreateQRCode = SettingsCreateQRCode();
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
+  late final Size _size = MediaQuery.of(context).size;
 
   void _popupChangeShapeQR() {
     showDialog<void>(
@@ -65,7 +58,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
                   if (widget.shapeType == ShapeType.eyeShape) {
-                    settingsCreateQRCode.shapeQRCodeEye.value =
+                    SettingsCreateQRCodeController.shapeQRCodeEye.value =
                         QrEyeShape.values[index];
 
                     SharedPreferences.getInstance().then((preference) =>
@@ -73,7 +66,7 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
 
                     Navigator.pop(context);
                   } else {
-                    settingsCreateQRCode.shapeQRCode.value =
+                    SettingsCreateQRCodeController.shapeQRCode.value =
                         QrDataModuleShape.values[index];
 
                     SharedPreferences.getInstance().then((preference) =>
@@ -98,9 +91,9 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                                 : 360),
                     border: Border.all(
                       color: widget.shapeType == ShapeType.eyeShape
-                          ? settingsCreateQRCode.colorQRCodeEye.value
+                          ? SettingsCreateQRCodeController.colorQRCodeEye.value
                           //type Body
-                          : settingsCreateQRCode.colorQRCode.value,
+                          : SettingsCreateQRCodeController.colorQRCode.value,
                       width: 10,
                     ),
                   ),
@@ -143,8 +136,8 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                   animation: Listenable.merge([
                     widget.color,
                     widget.shapeType == ShapeType.bodyShape
-                        ? settingsCreateQRCode.shapeQRCode
-                        : settingsCreateQRCode.shapeQRCodeEye
+                        ? SettingsCreateQRCodeController.shapeQRCode
+                        : SettingsCreateQRCodeController.shapeQRCodeEye
                   ]),
                   builder: (BuildContext context, Widget? child) => Container(
                     height: _size.height * 0.028,
@@ -152,17 +145,17 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: widget.shapeType == ShapeType.eyeShape
-                          ? BorderRadius.circular(
-                              settingsCreateQRCode.shapeQRCodeEye.value ==
-                                      QrEyeShape.square
-                                  ? 0
-                                  : 360)
+                          ? BorderRadius.circular(SettingsCreateQRCodeController
+                                      .shapeQRCodeEye.value ==
+                                  QrEyeShape.square
+                              ? 0
+                              : 360)
                           //type Body
-                          : BorderRadius.circular(
-                              settingsCreateQRCode.shapeQRCode.value ==
-                                      QrDataModuleShape.square
-                                  ? 0
-                                  : 360),
+                          : BorderRadius.circular(SettingsCreateQRCodeController
+                                      .shapeQRCode.value ==
+                                  QrDataModuleShape.square
+                              ? 0
+                              : 360),
                       border: Border.all(
                         color: widget.color.value,
                         width: 3,
