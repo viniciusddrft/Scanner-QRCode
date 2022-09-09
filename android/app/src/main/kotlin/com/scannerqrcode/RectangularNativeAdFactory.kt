@@ -38,50 +38,50 @@ class RectangularNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.N
 
             // The headline and mediaContent are guaranteed to be in every NativeAd.
             (nativeAdView.getHeadlineView() as TextView).setText(nativeAd.getHeadline())
-            nativeAdView.getMediaView().setMediaContent(nativeAd.getMediaContent())
+            nativeAdView.getMediaView()?.setMediaContent(nativeAd.getMediaContent()!!)
 
             // These assets aren't guaranteed to be in every NativeAd, so it's important to
             // check before trying to display them.
             if (nativeAd.getBody() == null) {
-                nativeAdView.getBodyView().setVisibility(View.INVISIBLE)
+                nativeAdView.getBodyView()!!.setVisibility(View.INVISIBLE)
             } else {
-                nativeAdView.getBodyView().setVisibility(View.VISIBLE)
-                (nativeAdView.getBodyView() as TextView).setText(nativeAd.getBody())
+                nativeAdView.getBodyView()!!.setVisibility(View.VISIBLE)
+                (nativeAdView.getBodyView() as TextView)!!.setText(nativeAd.getBody())
             }
             if (nativeAd.getCallToAction() == null) {
-                nativeAdView.getCallToActionView().setVisibility(View.INVISIBLE)
+                nativeAdView.getCallToActionView()!!.setVisibility(View.INVISIBLE)
             } else {
-                nativeAdView.getCallToActionView().setVisibility(View.VISIBLE)
-                (nativeAdView.getCallToActionView() as Button).setText(nativeAd.getCallToAction())
+                nativeAdView.getCallToActionView()!!.setVisibility(View.VISIBLE)
+                (nativeAdView.getCallToActionView() as Button)!!.setText(nativeAd.getCallToAction())
             }
             if (nativeAd.getIcon() == null) {
-                nativeAdView.getIconView().setVisibility(View.GONE)
+                nativeAdView.getIconView()!!.setVisibility(View.GONE)
             } else {
-                (nativeAdView.getIconView() as ImageView).setImageDrawable(nativeAd.getIcon().getDrawable())
-                nativeAdView.getIconView().setVisibility(View.VISIBLE)
+                (nativeAdView.getIconView() as ImageView)!!.setImageDrawable(nativeAd.getIcon()!!.getDrawable())
+                nativeAdView.getIconView()!!.setVisibility(View.VISIBLE)
             }
             if (nativeAd.getPrice() == null) {
-                nativeAdView.getPriceView().setVisibility(View.INVISIBLE)
+                nativeAdView.getPriceView()!!.setVisibility(View.INVISIBLE)
             } else {
-                nativeAdView.getPriceView().setVisibility(View.VISIBLE)
+                nativeAdView.getPriceView()!!.setVisibility(View.VISIBLE)
                 (nativeAdView.getPriceView() as TextView).setText(nativeAd.getPrice())
             }
             if (nativeAd.getStore() == null) {
-                nativeAdView.getStoreView().setVisibility(View.INVISIBLE)
+                nativeAdView.getStoreView()!!.setVisibility(View.INVISIBLE)
             } else {
-                nativeAdView.getStoreView().setVisibility(View.VISIBLE)
-                (nativeAdView.getStoreView() as TextView).setText(nativeAd.getStore())
+                nativeAdView.getStoreView()!!.setVisibility(View.VISIBLE)
+                (nativeAdView.getStoreView() as TextView)!!.setText(nativeAd.getStore())
             }
-           // if (nativeAd.getStarRating() == null) {
-            //    nativeAdView.getStarRatingView().setVisibility(View.INVISIBLE)
-           // }// else {
-            //    (nativeAdView.getStarRatingView() as RatingBar).setRating(nativeAd.getStarRating().floatValue())
-            //    nativeAdView.getStarRatingView().setVisibility(View.VISIBLE)
-            //}
-            if (nativeAd.getAdvertiser() == null) {
-                nativeAdView.getAdvertiserView().setVisibility(View.INVISIBLE)
+            if (nativeAd.getStarRating() == null) {
+                nativeAdView.getStarRatingView()!!.setVisibility(View.INVISIBLE)
             } else {
-                nativeAdView.getAdvertiserView().setVisibility(View.VISIBLE)
+                (nativeAdView.getStarRatingView() as RatingBar)!!.setRating(nativeAd.getStarRating()!!.toFloat()!!)
+                nativeAdView.getStarRatingView()!!.setVisibility(View.VISIBLE)
+            }
+            if (nativeAd.getAdvertiser() == null) {
+                nativeAdView.getAdvertiserView()!!.setVisibility(View.INVISIBLE)
+            } else {
+                nativeAdView.getAdvertiserView()!!.setVisibility(View.VISIBLE)
                 (nativeAdView.getAdvertiserView() as TextView).setText(nativeAd.getAdvertiser())
             }
 
