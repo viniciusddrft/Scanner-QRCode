@@ -56,14 +56,14 @@
                 android:textSize="14sp"
                 android:textStyle="bold"/>
 
-           <!-- <RatingBar
+           <RatingBar
                 android:id="@+id/ad_stars"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:stepSize="0.5" /> -->
+                android:stepSize="0.5" /> 
           </LinearLayout>
 
         </LinearLayout>

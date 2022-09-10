@@ -65,9 +65,10 @@ class Routes {
         return AnimatedPageRouteBuilderElasticOut(
           duration: const Duration(milliseconds: 500),
           route: ResultReadCode(
-            result: (settings.arguments as Map<String, String>)['result']!,
-            typeCode:
-                (settings.arguments as Map<String, BarcodeType>)['typeCode']!,
+            result: (settings.arguments as Map<String, Object>)['result']!
+                as String,
+            typeCode: (settings.arguments as Map<String, Object>)['typeCode']!
+                as BarcodeType,
           ),
         );
     }

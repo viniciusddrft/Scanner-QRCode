@@ -32,7 +32,7 @@ class RectangularNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.N
             nativeAdView.setCallToActionView(nativeAdView.findViewById(R.id.ad_call_to_action))
             nativeAdView.setIconView(nativeAdView.findViewById(R.id.ad_app_icon))
             nativeAdView.setPriceView(nativeAdView.findViewById(R.id.ad_price))
-            //nativeAdView.setStarRatingView(nativeAdView.findViewById(R.id.ad_stars))
+            nativeAdView.setStarRatingView(nativeAdView.findViewById(R.id.ad_stars))
             nativeAdView.setStoreView(nativeAdView.findViewById(R.id.ad_store))
             nativeAdView.setAdvertiserView(nativeAdView.findViewById(R.id.ad_advertiser))
 
