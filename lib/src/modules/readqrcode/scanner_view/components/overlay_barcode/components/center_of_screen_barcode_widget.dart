@@ -11,17 +11,18 @@ class CenterOfScreenBarcodeWidget extends StatefulWidget {
 
 class _CenterOfScreenBarcodeWidgetState
     extends State<CenterOfScreenBarcodeWidget> {
-  final ValueNotifier<double> _x = ValueNotifier<double>(0);
-  int _speedMove = 2;
+  late final ValueNotifier<double> _x =
+      ValueNotifier<double>((MediaQuery.of(context).size.width * 0.17));
   late Ticker _ticker;
   late final double sizeCenterSpaceX;
-
+  int _speedMove = 2;
   late final double sizeRedLine;
 
   @override
   void initState() {
     _ticker = Ticker((Duration duration) => _animeRedLine());
     _ticker.start();
+
     super.initState();
   }
 
@@ -31,7 +32,6 @@ class _CenterOfScreenBarcodeWidgetState
         MediaQuery.of(context).size.height * 0.66666666666666666666666666666;
     sizeCenterSpaceX =
         (MediaQuery.of(context).size.width * 0.1666666666666666666666666666666);
-
     super.didChangeDependencies();
   }
 
@@ -43,14 +43,14 @@ class _CenterOfScreenBarcodeWidgetState
 
   //there is a change of sign to add or subtract without looping and thus control the fps
   void _animeRedLine() {
-    if (_x.value <= sizeCenterSpaceX) {
+    if (_x.value < sizeCenterSpaceX) {
       _x.value += _speedMove;
     }
     if (_x.value >= sizeCenterSpaceX) {
       _speedMove = -_speedMove;
       _x.value += _speedMove;
     }
-    if (_x.value <= -sizeCenterSpaceX) {
+    if (_x.value < -sizeCenterSpaceX) {
       _speedMove = _speedMove.toUnsigned(2);
     }
   }
