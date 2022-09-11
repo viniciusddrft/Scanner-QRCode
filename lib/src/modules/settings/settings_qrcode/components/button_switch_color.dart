@@ -36,14 +36,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
     Color(0xff303030)
   ];
 
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-
-    super.didChangeDependencies();
-  }
+  late final Size _size = MediaQuery.of(context).size;
 
   void _popupChangeColorQR({
     required ValueNotifier<Color> colorButton,

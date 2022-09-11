@@ -14,13 +14,7 @@ class ButtonUrl extends StatefulWidget {
 }
 
 class _ButtonUrlState extends State<ButtonUrl> with OpenLink, PopupNotices {
-  late final Size _size;
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
+  late final Size _size = MediaQuery.of(context).size;
 
   @override
   Widget build(BuildContext context) {

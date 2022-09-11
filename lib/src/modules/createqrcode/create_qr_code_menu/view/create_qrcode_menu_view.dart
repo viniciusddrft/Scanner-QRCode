@@ -4,30 +4,38 @@ import '../controller/create_qr_code_menu_controller.dart';
 
 import 'components/create_qrcode_menu_item.dart';
 
-class CreateQRCodeMenu extends StatelessWidget {
+class CreateQRCodeMenu extends StatefulWidget {
   const CreateQRCodeMenu({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+  State<CreateQRCodeMenu> createState() => _CreateQRCodeMenuState();
+}
 
+class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
+  final CreateQrcodeMenuController _createQrcodeMenuController =
+      CreateQrcodeMenuController();
+
+  late final Size size = MediaQuery.of(context).size;
+
+  @override
+  Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount:
-          CreateQrcodeMenuController.allOptionsQRCodeCreate(context, size)
-              .length,
+      itemCount: _createQrcodeMenuController
+          .allOptionsQRCodeCreate(context, size)
+          .length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 20,
       ),
       itemBuilder: (context, index) => CreateQRCodeItemMenu(
-        typeQRCode: CreateQrcodeMenuController.allOptionsQRCodeCreate(
+        typeQRCode: _createQrcodeMenuController.allOptionsQRCodeCreate(
             context, size)[index]['typeQRCode'] as String,
-        icon: CreateQrcodeMenuController.allOptionsQRCodeCreate(
+        icon: _createQrcodeMenuController.allOptionsQRCodeCreate(
             context, size)[index]['icon'] as Icon,
-        text: CreateQrcodeMenuController.allOptionsQRCodeCreate(
+        text: _createQrcodeMenuController.allOptionsQRCodeCreate(
             context, size)[index]['text'] as String,
-        color: CreateQrcodeMenuController.allOptionsQRCodeCreate(
+        color: _createQrcodeMenuController.allOptionsQRCodeCreate(
             context, size)[index]['color'] as Color,
       ),
     );

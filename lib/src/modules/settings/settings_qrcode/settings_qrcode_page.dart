@@ -16,8 +16,6 @@ class SettingsQRCodePage extends StatefulWidget {
 }
 
 class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
-  late final Size _size = MediaQuery.of(context).size;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +48,8 @@ class _SettingsQRCodePageState extends State<SettingsQRCodePage> {
           ),
           const ButtonSwitchLogo(),
           const Spacer(),
-          Padding(
-            padding: EdgeInsets.only(bottom: _size.height * 0.07),
-            child: const QRCodeExample(),
-          )
+          const QRCodeExample(),
+          const Spacer(),
         ],
       ),
     );

@@ -1,7 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scannerqrcode/src/shared/popup_notices/popup_notices.dart';
 
 import 'controller/read_qr_code_menu_controller.dart';
 
@@ -11,19 +13,13 @@ class ReadQRCodePage extends StatefulWidget {
   State<ReadQRCodePage> createState() => _ReadQRCodePageState();
 }
 
-class _ReadQRCodePageState extends State<ReadQRCodePage> {
-  late final ReadQrCodeController _readQrCodeController;
-
-  @override
-  void initState() {
-    _readQrCodeController = ReadQrCodeController(context);
-    super.initState();
-  }
+class _ReadQRCodePageState extends State<ReadQRCodePage> with PopupNotices {
+  final ReadQrCodeController _readQrCodeController =
+      const ReadQrCodeController();
+  late final Size size = MediaQuery.of(context).size;
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -56,7 +52,14 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                onPressed: _readQrCodeController.scanCamera,
+                onPressed: () => _readQrCodeController
+                    .getAvailableCameras()
+                    .then((List<CameraDescription>? value) {
+                  if (value != null) {
+                    Navigator.pushNamed(context, '/ScannerCamera',
+                        arguments: value);
+                  }
+                }),
                 child: SizedBox(
                   height: size.height * 0.045,
                   width: size.width * 0.35,
@@ -82,7 +85,18 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> {
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                onPressed: _readQrCodeController.scanFile,
+                onPressed: () => _readQrCodeController
+                    .scanFile()
+                    .then((Map<String, Object>? value) {
+                  if (value != null) {
+                    Navigator.pushNamed(context, '/ReadQRCodeResult',
+                        arguments: value);
+                  } else {
+                    popupNotice(context,
+                        notice: 'Error :/',
+                        duration: const Duration(seconds: 1));
+                  }
+                }),
                 child: SizedBox(
                   height: size.height * 0.045,
                   width: size.width * 0.35,

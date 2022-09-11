@@ -13,7 +13,7 @@ class _CenterOfScreenBarcodeWidgetState
     extends State<CenterOfScreenBarcodeWidget> {
   late final ValueNotifier<double> _x =
       ValueNotifier<double>((MediaQuery.of(context).size.width * 0.17));
-  late Ticker _ticker;
+  late final Ticker _ticker;
   late final double sizeCenterSpaceX;
   int _speedMove = 2;
   late final double sizeRedLine;

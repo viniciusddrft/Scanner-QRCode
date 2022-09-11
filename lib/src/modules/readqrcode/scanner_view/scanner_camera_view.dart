@@ -28,18 +28,12 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   final ValueNotifier<bool> _isLoadCam = ValueNotifier<bool>(false);
   bool _isCamBack = true;
   final ValueNotifier<bool> _isFlashOn = ValueNotifier<bool>(false);
-  late final Size _size;
+  late final Size _size = MediaQuery.of(context).size;
 
   @override
   void initState() {
     onNewCameraSelected(widget.cameras.first);
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
   }
 
   @override
@@ -76,7 +70,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
     final CameraController cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.medium,
+      ResolutionPreset.low,
       enableAudio: false,
     );
     await previousCameraController?.dispose();
@@ -117,7 +111,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
       for (Plane plane in cameraImage.planes) {
         allBytes.putUint8List(plane.bytes);
       }
-      final bytes = allBytes.done().buffer.asUint8List();
+      final Uint8List bytes = allBytes.done().buffer.asUint8List();
 
       final Size imageSize =
           Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
@@ -167,9 +161,8 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                   'Error in reading => errorCode in value');
             }
           }
-          _scanner.close();
         },
-      );
+      ).whenComplete(() => _scanner.close());
     } on PlatformException catch (error, stackStrace) {
       debugPrint('ERROR PlatformException --> $error');
       debugPrint('ERROR PlatformException --> $stackStrace');

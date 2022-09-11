@@ -25,8 +25,7 @@ class Routes {
       case '/ScannerCamera':
         return MaterialPageRoute(
           builder: (BuildContext context) => ScannerCameraView(
-            cameras: (settings.arguments
-                as Map<String, List<CameraDescription>>)['cameras']!,
+            cameras: (settings.arguments as List<CameraDescription>),
           ),
         );
       case '/SettingsQRCode':

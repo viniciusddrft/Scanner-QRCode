@@ -13,6 +13,8 @@ class ButtonSwicthTheme extends StatefulWidget {
 }
 
 class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
+  late final Size size = MediaQuery.of(context).size;
+
   final ValueNotifier<Icon> icon = ValueNotifier<Icon>(
     Icon(
       Icons.brightness_4,
@@ -160,8 +162,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: size.height * 0.09,
       child: ElevatedButton(

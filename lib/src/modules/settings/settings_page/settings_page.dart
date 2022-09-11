@@ -16,8 +16,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         const ButtonPremium(),
@@ -27,15 +25,14 @@ class SettingsPage extends StatelessWidget {
         const ButtonRateApp(),
         const ButtonHelp(),
         const ButtonContact(),
-        const Spacer(),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: size.height * 0.04, top: size.height * 0.04),
-          child: Text(
-            '${AppLocalizations.of(context)!.settingsVersion} 2.5.3',
-            style: GoogleFonts.yatraOne(color: Colors.grey),
-          ),
+        const Spacer(
+          flex: 3,
         ),
+        Text(
+          '${AppLocalizations.of(context)!.settingsVersion} 2.5.4',
+          style: GoogleFonts.yatraOne(color: Colors.grey),
+        ),
+        const Spacer(),
       ],
     );
   }

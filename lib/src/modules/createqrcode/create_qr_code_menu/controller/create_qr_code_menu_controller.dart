@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateQrcodeMenuController {
-  static List<Map<String, Object>> allOptionsQRCodeCreate(
+  List<Map<String, Object>> allOptionsQRCodeCreate(
     BuildContext context,
     Size size,
   ) =>

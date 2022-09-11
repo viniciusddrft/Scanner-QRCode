@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:scannerqrcode/src/shared/popup_notices/popup_notices.dart';
 import 'package:screenshot/screenshot.dart';
 
 import '../../../shared/admob/controller/admob_controller.dart';
@@ -20,14 +21,15 @@ class CreateQRCodeResult extends StatefulWidget {
   State<CreateQRCodeResult> createState() => _CreateQRCodeResultState();
 }
 
-class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
+class _CreateQRCodeResultState extends State<CreateQRCodeResult>
+    with PopupNotices {
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
+  late final Size size = MediaQuery.of(context).size;
 
   @override
   void initState() {
     _createQrCodeController = CreateQrCodeController(
-      context,
       screenshotController: screenshotController,
     );
     super.initState();
@@ -35,8 +37,6 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         title:
@@ -91,7 +91,11 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult> {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
-                    onPressed: _createQrCodeController.saveImageQR,
+                    onPressed: () async => popupNotice(context,
+                        notice: (await _createQrCodeController.saveImageQR())
+                            ? 'Salvo!'
+                            : 'Error :/',
+                        duration: const Duration(seconds: 1)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

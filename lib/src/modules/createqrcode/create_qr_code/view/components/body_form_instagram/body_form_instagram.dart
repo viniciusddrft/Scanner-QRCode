@@ -14,7 +14,7 @@ class BodyFormIstagram extends BaseForm {
 class _BodyFormIstagramState extends State<BodyFormIstagram> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size;
+  late final Size _size = MediaQuery.of(context).size;
 
   @override
   void dispose() {
@@ -26,12 +26,6 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
       _textEditingController.text.contains('https://www.instagram.com/')
           ? _textEditingController.text
           : 'https://www.instagram.com/${_textEditingController.text}';
-
-  @override
-  void didChangeDependencies() {
-    _size = MediaQuery.of(context).size;
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,8 @@ class ButtonSwitchLanguage extends StatefulWidget {
 }
 
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
+  late final Size size = MediaQuery.of(context).size;
+
   final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
 
   List<Map<String, Object>> _allLocales(context) => [
@@ -124,8 +126,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return SizedBox(
       height: size.height * 0.09,
       child: ElevatedButton(

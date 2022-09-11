@@ -13,7 +13,7 @@ class _CenterOfScreenQrcodeWidgetState
     extends State<CenterOfScreenQrcodeWidget> {
   final ValueNotifier<double> _y = ValueNotifier<double>(0);
   int _speedMove = 2;
-  late Ticker _ticker;
+  late final Ticker _ticker;
   late final double sizeCenterSpaceY;
 
   @override
