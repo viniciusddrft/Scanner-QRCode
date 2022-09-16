@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl_standalone.dart';
+import 'package:scannerqrcode/core/locale/locale.dart';
 
 import '../src/shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
-import 'locale/locale.dart';
 import 'routes/routes_app.dart';
 import 'theme/theme_app.dart';
 
@@ -22,7 +22,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     ThemeApp.getThemePreference();
-    LocaleApp.getLocalePreference();
     findSystemLocale();
     SystemChrome.setPreferredOrientations(const [
       DeviceOrientation.portraitUp,
@@ -33,10 +32,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeDependencies() {
+    LocaleAppNotifier.of(context).getLocale();
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
-    LocaleApp.dispose();
     ThemeApp.dispose();
     SettingsCreateQRCodeController.dispose();
+    LocaleAppNotifier.of(context).dispose();
     super.dispose();
   }
 
@@ -44,13 +49,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: Listenable.merge([
-        LocaleApp.locale,
+        LocaleAppNotifier.of(context),
         ThemeApp.theme,
       ]),
       builder: (BuildContext context, Widget? child) => MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: LocaleApp.locale.value,
+        locale: LocaleAppNotifier.of(context).value,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: ThemeApp.theme.value,

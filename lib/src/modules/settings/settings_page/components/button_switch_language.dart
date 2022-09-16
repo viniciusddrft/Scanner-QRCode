@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/locale/locale.dart';
 
@@ -15,7 +14,29 @@ class ButtonSwitchLanguage extends StatefulWidget {
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   late final Size size = MediaQuery.of(context).size;
 
-  final ValueNotifier<String?> _iconPath = ValueNotifier<String?>(null);
+  final ValueNotifier<String?> _iconPath =
+      ValueNotifier<String?>('assets/icons_translations/unitedstates.png');
+  List<Map<String, Object>> get allLocales => _allLocales(context);
+
+  @override
+  void didChangeDependencies() {
+    if (LocaleAppNotifier.of(context).value == const Locale('pt', 'BR')) {
+      _iconPath.value = 'assets/icons_translations/brazil.png';
+    } else if (LocaleAppNotifier.of(context).value ==
+        const Locale('en', 'US')) {
+      _iconPath.value = 'assets/icons_translations/unitedstates.png';
+    } else if (LocaleAppNotifier.of(context).value ==
+        const Locale('zh', 'CN')) {
+      _iconPath.value = 'assets/icons_translations/china.png';
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _iconPath.dispose();
+    super.dispose();
+  }
 
   List<Map<String, Object>> _allLocales(context) => [
         {
@@ -35,8 +56,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
           'locale': const Locale('zh', 'CN'),
         },
       ];
-
-  List<Map<String, Object>> get allLocales => _allLocales(context);
 
   void _popupLanguageMenu(Size size) => showDialog<void>(
         context: context,
@@ -72,14 +91,8 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                   ),
                   onPressed: () {
                     _iconPath.value = allLocales[index]['icon'] as String;
-                    LocaleApp.locale.value =
-                        allLocales[index]['locale'] as Locale;
-                    SharedPreferences.getInstance().then(
-                      (value) => value.setString(
-                        'locale',
-                        allLocales[index]['locale'].toString(),
-                      ),
-                    );
+                    LocaleAppNotifier.of(context)
+                        .saveLocale(allLocales[index]['locale'] as Locale);
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -105,24 +118,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
           ),
         ),
       );
-
-  @override
-  void initState() {
-    if (LocaleApp.locale.value == const Locale('pt', 'BR')) {
-      _iconPath.value = 'assets/icons_translations/brazil.png';
-    } else if (LocaleApp.locale.value == const Locale('en', 'US')) {
-      _iconPath.value = 'assets/icons_translations/unitedstates.png';
-    } else if (LocaleApp.locale.value == const Locale('zh', 'CN')) {
-      _iconPath.value = 'assets/icons_translations/china.png';
-    }
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _iconPath.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
