@@ -20,4 +20,10 @@ class LocalStorageSharedPreferrence implements ILocalStorage {
       }
     });
   }
+
+  @override
+  void remove(String key) {
+    SharedPreferences.getInstance()
+        .then((SharedPreferences preferences) => preferences.remove(key));
+  }
 }

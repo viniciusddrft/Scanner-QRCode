@@ -6,45 +6,30 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
-class QRCodeExample extends StatefulWidget {
+class QRCodeExample extends StatelessWidget {
   const QRCodeExample({super.key});
 
   @override
-  State<QRCodeExample> createState() => _QRCodeExampleState();
-}
-
-class _QRCodeExampleState extends State<QRCodeExample> {
-  late final Size _size = MediaQuery.of(context).size;
-
-  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([
-        SettingsCreateQRCodeController.colorQRBackground,
-        SettingsCreateQRCodeController.colorQRCodeEye,
-        SettingsCreateQRCodeController.shapeQRCodeEye,
-        SettingsCreateQRCodeController.colorQRCode,
-        SettingsCreateQRCodeController.shapeQRCode,
-        SettingsCreateQRCodeController.logoPath
-      ]),
-      builder: (BuildContext context, Widget? child) => QrImage(
-        padding: EdgeInsets.all(_size.height * 0.01),
-        version: QrVersions.auto,
-        data: 'viniciusddtft',
-        size: _size.height * 0.2,
-        backgroundColor: SettingsCreateQRCodeController.colorQRBackground.value,
-        eyeStyle: QrEyeStyle(
-            color: SettingsCreateQRCodeController.colorQRCodeEye.value,
-            eyeShape: SettingsCreateQRCodeController.shapeQRCodeEye.value),
-        dataModuleStyle: QrDataModuleStyle(
-            color: SettingsCreateQRCodeController.colorQRCode.value,
-            dataModuleShape: SettingsCreateQRCodeController.shapeQRCode.value),
-        embeddedImage: SettingsCreateQRCodeController.logoPath.value != null
-            ? FileImage(
-                File(SettingsCreateQRCodeController.logoPath.value as String),
-              )
-            : null,
-      ),
+    final Size size = MediaQuery.of(context).size;
+
+    return QrImage(
+      padding: EdgeInsets.all(size.height * 0.01),
+      version: QrVersions.auto,
+      data: 'viniciusddtft',
+      size: size.height * 0.2,
+      backgroundColor: SettingsQRCodeNotifier.of(context).colorQRBackground,
+      eyeStyle: QrEyeStyle(
+          color: SettingsQRCodeNotifier.of(context).colorQRCodeEye,
+          eyeShape: SettingsQRCodeNotifier.of(context).shapeQRCodeEye),
+      dataModuleStyle: QrDataModuleStyle(
+          color: SettingsQRCodeNotifier.of(context).colorQRCode,
+          dataModuleShape: SettingsQRCodeNotifier.of(context).shapeQRCode),
+      embeddedImage: SettingsQRCodeNotifier.of(context).logoPath != null
+          ? FileImage(
+              File(SettingsQRCodeNotifier.of(context).logoPath as String),
+            )
+          : null,
     );
   }
 }

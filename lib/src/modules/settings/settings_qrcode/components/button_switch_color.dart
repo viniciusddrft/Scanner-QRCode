@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:scannerqrcode/src/shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
+
+enum ColorType { colorQRBackground, colorQRCode, colorQRCodeEye }
 
 class ButtonSwitchColor extends StatefulWidget {
-  final String textButton;
-  final ValueNotifier<Color> colorChange;
-  final String savePreferenceKey;
-  const ButtonSwitchColor(
-      {required this.textButton,
-      required this.colorChange,
-      required this.savePreferenceKey,
-      super.key});
+  final ColorType colorType;
+
+  const ButtonSwitchColor.colorQRBackground({super.key})
+      : colorType = ColorType.colorQRBackground;
+  const ButtonSwitchColor.colorQRCode({super.key})
+      : colorType = ColorType.colorQRCode;
+  const ButtonSwitchColor.colorQRCodeEye({super.key})
+      : colorType = ColorType.colorQRCodeEye;
 
   @override
   State<ButtonSwitchColor> createState() => _ButtonSwitchColorState();
@@ -38,12 +40,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  void _popupChangeColorQR({
-    required ValueNotifier<Color> colorButton,
-    required String savePreferenceKey,
-    required Size size,
-  }) =>
-      showDialog<void>(
+  void _popupChangeColorQR() => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: Text(
@@ -60,8 +57,8 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
             )
           ],
           content: SizedBox(
-            height: size.height * 0.5,
-            width: size.width * 0.6,
+            height: _size.height * 0.5,
+            width: _size.width * 0.6,
             child: GridView.builder(
               itemCount: _colors.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -77,11 +74,13 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
                   ),
                 ),
                 onPressed: () {
-                  colorButton.value = _colors[index];
-                  SharedPreferences.getInstance().then(
-                    (preference) => preference.setInt(
-                        savePreferenceKey, _colors[index].value),
-                  );
+                  SettingsQRCodeNotifier.of(context).changeColor(
+                      widget.colorType == ColorType.colorQRBackground
+                          ? 'colorQRBackground'
+                          : widget.colorType == ColorType.colorQRCode
+                              ? 'colorQRCode'
+                              : 'colorQRCodeEye',
+                      _colors[index]);
                   Navigator.pop(context);
                 },
                 child: Container(),
@@ -101,13 +100,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
           backgroundColor: Theme.of(context).backgroundColor,
           padding: EdgeInsets.zero,
         ),
-        onPressed: () {
-          _popupChangeColorQR(
-            colorButton: widget.colorChange,
-            savePreferenceKey: widget.savePreferenceKey,
-            size: _size,
-          );
-        },
+        onPressed: _popupChangeColorQR,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
           child: Row(
@@ -116,20 +109,26 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
                 flex: 5,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: ValueListenableBuilder(
-                    valueListenable: widget.colorChange,
-                    builder:
-                        (BuildContext context, Color value, Widget? child) =>
-                            Container(
-                      height: _size.height * 0.025,
-                      width: _size.height * 0.025,
-                      decoration: BoxDecoration(
-                        color: value,
-                        borderRadius: BorderRadius.circular(360),
-                        border: Border.all(
-                          color: value,
-                          width: 3,
-                        ),
+                  child: Container(
+                    height: _size.height * 0.025,
+                    width: _size.height * 0.025,
+                    decoration: BoxDecoration(
+                      color: widget.colorType == ColorType.colorQRBackground
+                          ? SettingsQRCodeNotifier.of(context).colorQRBackground
+                          : widget.colorType == ColorType.colorQRCode
+                              ? SettingsQRCodeNotifier.of(context).colorQRCode
+                              : SettingsQRCodeNotifier.of(context)
+                                  .colorQRCodeEye,
+                      borderRadius: BorderRadius.circular(360),
+                      border: Border.all(
+                        color: widget.colorType == ColorType.colorQRBackground
+                            ? SettingsQRCodeNotifier.of(context)
+                                .colorQRBackground
+                            : widget.colorType == ColorType.colorQRCode
+                                ? SettingsQRCodeNotifier.of(context).colorQRCode
+                                : SettingsQRCodeNotifier.of(context)
+                                    .colorQRCodeEye,
+                        width: 3,
                       ),
                     ),
                   ),
@@ -138,7 +137,15 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
               const Spacer(),
               Flexible(
                 flex: 5,
-                child: Text(widget.textButton,
+                child: Text(
+                    widget.colorType == ColorType.colorQRBackground
+                        ? AppLocalizations.of(context)!
+                            .settingsButtonColorbackground
+                        : widget.colorType == ColorType.colorQRCode
+                            ? AppLocalizations.of(context)!
+                                .settingsButtonColorCode
+                            : AppLocalizations.of(context)!
+                                .settingsButtonColorEye,
                     style: Theme.of(context).textTheme.labelMedium),
               ),
             ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
@@ -10,16 +9,13 @@ enum ShapeType { bodyShape, eyeShape }
 
 class ButtonSwitchShape extends StatefulWidget {
   final ShapeType shapeType;
-  final ValueNotifier<Color> color;
 
   //this class has a constructor to change the qr code's body or eye parameters
   //and though booleans it sets the texts and popup options
 
-  const ButtonSwitchShape.eye({required this.color, super.key})
-      : shapeType = ShapeType.eyeShape;
+  const ButtonSwitchShape.eye({super.key}) : shapeType = ShapeType.eyeShape;
 
-  const ButtonSwitchShape.body({required this.color, super.key})
-      : shapeType = ShapeType.bodyShape;
+  const ButtonSwitchShape.body({super.key}) : shapeType = ShapeType.bodyShape;
 
   @override
   State<ButtonSwitchShape> createState() => _ButtonSwitchShapeState();
@@ -42,8 +38,8 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                 style: Theme.of(context).textTheme.labelLarge,
               ),
         content: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.25,
-          width: MediaQuery.of(context).size.width * 0.75,
+          height: _size.height * 0.25,
+          width: _size.width * 0.75,
           child: Padding(
             padding: const EdgeInsets.only(top: 50),
             child: GridView.builder(
@@ -58,19 +54,18 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
                   if (widget.shapeType == ShapeType.eyeShape) {
-                    SettingsCreateQRCodeController.shapeQRCodeEye.value =
+                    SettingsQRCodeNotifier.of(context).shapeQRCodeEye =
                         QrEyeShape.values[index];
 
-                    SharedPreferences.getInstance().then((preference) =>
-                        preference.setInt('shapeQRCodeEye', index));
-
+                    SettingsQRCodeNotifier.of(context)
+                        .changeShape('shapeQRCodeEye', index);
                     Navigator.pop(context);
                   } else {
-                    SettingsCreateQRCodeController.shapeQRCode.value =
+                    SettingsQRCodeNotifier.of(context).shapeQRCode =
                         QrDataModuleShape.values[index];
 
-                    SharedPreferences.getInstance().then((preference) =>
-                        preference.setInt('shapeQRCode', index));
+                    SettingsQRCodeNotifier.of(context)
+                        .changeShape('shapeQRCode', index);
 
                     Navigator.pop(context);
                   }
@@ -91,9 +86,10 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
                                 : 360),
                     border: Border.all(
                       color: widget.shapeType == ShapeType.eyeShape
-                          ? SettingsCreateQRCodeController.colorQRCodeEye.value
+                          ? SettingsQRCodeNotifier.of(context).colorQRCodeEye
+
                           //type Body
-                          : SettingsCreateQRCodeController.colorQRCode.value,
+                          : SettingsQRCodeNotifier.of(context).colorQRCode,
                       width: 10,
                     ),
                   ),
@@ -132,34 +128,28 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
             children: [
               Flexible(
                 flex: 1,
-                child: AnimatedBuilder(
-                  animation: Listenable.merge([
-                    widget.color,
-                    widget.shapeType == ShapeType.bodyShape
-                        ? SettingsCreateQRCodeController.shapeQRCode
-                        : SettingsCreateQRCodeController.shapeQRCodeEye
-                  ]),
-                  builder: (BuildContext context, Widget? child) => Container(
-                    height: _size.height * 0.028,
-                    width: _size.height * 0.028,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: widget.shapeType == ShapeType.eyeShape
-                          ? BorderRadius.circular(SettingsCreateQRCodeController
-                                      .shapeQRCodeEye.value ==
-                                  QrEyeShape.square
-                              ? 0
-                              : 360)
-                          //type Body
-                          : BorderRadius.circular(SettingsCreateQRCodeController
-                                      .shapeQRCode.value ==
-                                  QrDataModuleShape.square
-                              ? 0
-                              : 360),
-                      border: Border.all(
-                        color: widget.color.value,
-                        width: 3,
-                      ),
+                child: Container(
+                  height: _size.height * 0.028,
+                  width: _size.height * 0.028,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: widget.shapeType == ShapeType.eyeShape
+                        ? BorderRadius.circular(
+                            SettingsQRCodeNotifier.of(context).shapeQRCodeEye ==
+                                    QrEyeShape.square
+                                ? 0
+                                : 360)
+                        //type Body
+                        : BorderRadius.circular(
+                            SettingsQRCodeNotifier.of(context).shapeQRCode ==
+                                    QrDataModuleShape.square
+                                ? 0
+                                : 360),
+                    border: Border.all(
+                      color: widget.shapeType == ShapeType.eyeShape
+                          ? SettingsQRCodeNotifier.of(context).colorQRCodeEye
+                          : SettingsQRCodeNotifier.of(context).colorQRCode,
+                      width: 3,
                     ),
                   ),
                 ),

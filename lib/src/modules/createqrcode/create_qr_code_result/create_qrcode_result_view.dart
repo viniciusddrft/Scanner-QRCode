@@ -58,19 +58,19 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
                 data: widget.dataQRCode,
                 size: size.height * 0.25,
                 backgroundColor:
-                    SettingsCreateQRCodeController.colorQRBackground.value,
+                    SettingsQRCodeNotifier.of(context).colorQRBackground,
                 eyeStyle: QrEyeStyle(
-                    color: SettingsCreateQRCodeController.colorQRCodeEye.value,
+                    color: SettingsQRCodeNotifier.of(context).colorQRCodeEye,
                     eyeShape:
-                        SettingsCreateQRCodeController.shapeQRCodeEye.value),
+                        SettingsQRCodeNotifier.of(context).shapeQRCodeEye),
                 dataModuleStyle: QrDataModuleStyle(
-                    color: SettingsCreateQRCodeController.colorQRCode.value,
+                    color: SettingsQRCodeNotifier.of(context).colorQRCode,
                     dataModuleShape:
-                        SettingsCreateQRCodeController.shapeQRCode.value),
+                        SettingsQRCodeNotifier.of(context).shapeQRCode),
                 embeddedImage:
-                    SettingsCreateQRCodeController.logoPath.value != null
+                    SettingsQRCodeNotifier.of(context).logoPath != null
                         ? FileImage(
-                            File(SettingsCreateQRCodeController.logoPath.value
+                            File(SettingsQRCodeNotifier.of(context).logoPath
                                 as String),
                           )
                         : null,

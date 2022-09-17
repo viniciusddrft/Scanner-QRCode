@@ -1,80 +1,91 @@
 import 'package:flutter/material.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
 
-class SettingsCreateQRCodeController {
-  static final ValueNotifier<Color> colorQRCodeEye =
-      ValueNotifier<Color>(Colors.black);
+class SettingsQRCodeNotifier extends ChangeNotifier {
+  final ILocalStorage localStorage;
 
-  static final ValueNotifier<Color> colorQRBackground =
-      ValueNotifier<Color>(Colors.white);
+  SettingsQRCodeNotifier({required this.localStorage});
 
-  static final ValueNotifier<Color> colorQRCode =
-      ValueNotifier<Color>(Colors.black);
+  static SettingsQRCodeNotifier of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<SettingsQRCodeApp>()!
+      .notifier!;
 
-  static final ValueNotifier<QrEyeShape> shapeQRCodeEye =
-      ValueNotifier<QrEyeShape>(QrEyeShape.square);
+  Color colorQRCodeEye = Colors.black;
 
-  static final ValueNotifier<QrDataModuleShape> shapeQRCode =
-      ValueNotifier<QrDataModuleShape>(QrDataModuleShape.square);
+  Color colorQRBackground = Colors.white;
 
-  static final ValueNotifier<String?> logoPath = ValueNotifier<String?>(null);
+  Color colorQRCode = Colors.black;
 
-  static void getPreferenceShape() => SharedPreferences.getInstance().then(
-        (preference) {
-          final int? responseQRCode = preference.getInt('shapeQRCode');
-          if (responseQRCode == 0) {
-            shapeQRCode.value = QrDataModuleShape.square;
-          } else if (responseQRCode == 1) {
-            shapeQRCode.value = QrDataModuleShape.circle;
-          }
-          final int? responseQRCodeEye = preference.getInt('shapeQRCodeEye');
-          if (responseQRCodeEye == 0) {
-            shapeQRCodeEye.value = QrEyeShape.square;
-          } else if (responseQRCodeEye == 1) {
-            shapeQRCodeEye.value = QrEyeShape.circle;
-          }
-        },
-      );
+  QrEyeShape shapeQRCodeEye = QrEyeShape.square;
 
-  static void getPreferencesColors() => SharedPreferences.getInstance().then(
-        (preference) {
-          final int? responseBackground =
-              preference.getInt('colorQRBackground');
-          if (responseBackground != null) {
-            colorQRBackground.value = Color(responseBackground);
-          }
-          final int? responseQRCode = preference.getInt('colorQRCode');
-          if (responseQRCode != null) {
-            colorQRCode.value = Color(responseQRCode);
-          }
-          final int? responseQRCodeEye = preference.getInt('colorQRCodeEye');
-          if (responseQRCodeEye != null) {
-            colorQRCodeEye.value = Color(responseQRCodeEye);
-          }
-        },
-      );
+  QrDataModuleShape shapeQRCode = QrDataModuleShape.square;
 
-  static void getPreferencesLogo() => SharedPreferences.getInstance().then(
-        (preference) {
-          final String? response = preference.getString('logo');
-          if (response != null) logoPath.value = response;
-        },
-      );
+  String? logoPath;
 
-  static void loadAllPreferences() {
-    getPreferencesColors();
-    getPreferenceShape();
-    getPreferencesLogo();
+  void changeColor(String savePreferenceKey, Color color) {
+    localStorage.saveValue<int>(savePreferenceKey, color.value);
+    notifyListeners();
   }
 
-  static void dispose() {
-    colorQRCodeEye.dispose();
-    colorQRBackground.dispose();
-    colorQRCodeEye.dispose();
-    shapeQRCodeEye.dispose();
-    shapeQRCode.dispose();
-    logoPath.dispose();
+  void changeShape(String savePreferenceKey, int value) {
+    localStorage.saveValue<int>(savePreferenceKey, value);
+    notifyListeners();
   }
+
+  void changeLogo(String logoPath) {
+    localStorage.saveValue<String>('logo', logoPath);
+    notifyListeners();
+  }
+
+  void removeLogo() {
+    logoPath = null;
+    localStorage.remove('logo');
+    notifyListeners();
+  }
+
+  void _getPreferenceShape() async {
+    if (await localStorage.getValue<int>('shapeQRCode') == 0) {
+      shapeQRCode = QrDataModuleShape.square;
+    } else {
+      shapeQRCode = QrDataModuleShape.circle;
+    }
+    if (await localStorage.getValue<int>('shapeQRCodeEye') == 0) {
+      shapeQRCodeEye = QrEyeShape.square;
+    } else {
+      shapeQRCodeEye = QrEyeShape.circle;
+    }
+  }
+
+  void _getPreferencesColors() async {
+    final int? colorQRBackgroundRaw =
+        await localStorage.getValue<int>('colorQRBackground');
+    final int? colorQRCodeRaw = await localStorage.getValue<int>('colorQRCode');
+    final int? colorQRCodeEyeRaw =
+        await localStorage.getValue<int>('colorQRCodeEye');
+    if (colorQRBackgroundRaw != null) {
+      colorQRBackground = Color(colorQRBackgroundRaw);
+    }
+    if (colorQRCodeRaw != null) {
+      colorQRCode = Color(colorQRCodeRaw);
+    }
+    if (colorQRCodeEyeRaw != null) {
+      colorQRCodeEye = Color(colorQRCodeEyeRaw);
+    }
+  }
+
+  void _getPreferencesLogo() async {
+    logoPath = await localStorage.getValue<String>('logo');
+  }
+
+  void loadAllPreferences() {
+    _getPreferencesColors();
+    _getPreferenceShape();
+    _getPreferencesLogo();
+  }
+}
+
+class SettingsQRCodeApp extends InheritedNotifier<SettingsQRCodeNotifier> {
+  const SettingsQRCodeApp({super.key, required super.child, super.notifier});
 }

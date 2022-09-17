@@ -27,20 +27,20 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    SettingsCreateQRCodeController.loadAllPreferences();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     LocaleAppNotifier.of(context).getLocale();
+    SettingsQRCodeNotifier.of(context).loadAllPreferences();
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
     ThemeApp.dispose();
-    SettingsCreateQRCodeController.dispose();
+    SettingsQRCodeNotifier.of(context).dispose();
     LocaleAppNotifier.of(context).dispose();
     super.dispose();
   }

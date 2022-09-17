@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
 
@@ -42,10 +41,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
                 tooltip:
                     AppLocalizations.of(context)!.settingsImageTooltipRemove,
                 onPressed: () {
-                  SettingsCreateQRCodeController.logoPath.value = null;
-                  SharedPreferences.getInstance().then(
-                    (SharedPreferences preference) => preference.remove('logo'),
-                  );
+                  SettingsQRCodeNotifier.of(context).removeLogo();
                   Navigator.pop(context);
                 },
                 icon: const Icon(
@@ -73,11 +69,8 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
       ImagePicker().pickImage(source: ImageSource.gallery).then(
         (XFile? value) {
           if (value != null) {
-            SettingsCreateQRCodeController.logoPath.value = value.path;
-            SharedPreferences.getInstance().then(
-              (SharedPreferences preference) =>
-                  preference.setString('logo', value.path),
-            );
+            SettingsQRCodeNotifier.of(context).logoPath = value.path;
+            SettingsQRCodeNotifier.of(context).changeLogo(value.path);
           }
         },
       );
@@ -97,27 +90,23 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
           padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
           child: Row(
             children: [
-              ValueListenableBuilder(
-                valueListenable: SettingsCreateQRCodeController.logoPath,
-                builder: (BuildContext context, value, Widget? child) =>
-                    SettingsCreateQRCodeController.logoPath.value != null
-                        ? Flexible(
-                            flex: 5,
-                            child: Image.file(
-                              File(SettingsCreateQRCodeController.logoPath.value
-                                  as String),
-                              width: _size.height * 0.05,
-                              height: _size.height * 0.05,
-                            ),
-                          )
-                        : Flexible(
-                            flex: 1,
-                            child: Icon(
-                              Icons.photo_outlined,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-              ),
+              SettingsQRCodeNotifier.of(context).logoPath != null
+                  ? Flexible(
+                      flex: 5,
+                      child: Image.file(
+                        File(SettingsQRCodeNotifier.of(context).logoPath
+                            as String),
+                        width: _size.height * 0.05,
+                        height: _size.height * 0.05,
+                      ),
+                    )
+                  : Flexible(
+                      flex: 1,
+                      child: Icon(
+                        Icons.photo_outlined,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                    ),
               const Spacer(),
               Flexible(
                 flex: 6,
