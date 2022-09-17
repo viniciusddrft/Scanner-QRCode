@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
 import 'package:scannerqrcode/src/shared/services/local_storage_shared_preferrence.dart';
 
 import 'core/locale/locale.dart';
@@ -10,14 +11,17 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   AdmobController.initialize();
 
+  final ILocalStorage localStorage = LocalStorageSharedPreferrence();
+
   runApp(
     LocaleApp(
       notifier: LocaleAppNotifier(
-        localStorage: LocalStorageSharedPreferrence(),
+        localStorage: localStorage,
       ),
       child: SettingsQRCodeApp(
         notifier: SettingsQRCodeNotifier(
-            localStorage: LocalStorageSharedPreferrence()),
+          localStorage: localStorage,
+        ),
         child: const MyApp(),
       ),
     ),
