@@ -81,6 +81,12 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
                               ? 'colorQRCode'
                               : 'colorQRCodeEye',
                       _colors[index]);
+                  debugPrint(widget.colorType == ColorType.colorQRBackground
+                      ? 'colorQRBackground'
+                      : widget.colorType == ColorType.colorQRCode
+                          ? 'colorQRCode'
+                          : 'colorQRCodeEye');
+                  debugPrint(_colors[index].toString());
                   Navigator.pop(context);
                 },
                 child: Container(),

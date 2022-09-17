@@ -53,22 +53,12 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
               ),
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  if (widget.shapeType == ShapeType.eyeShape) {
-                    SettingsQRCodeNotifier.of(context).shapeQRCodeEye =
-                        QrEyeShape.values[index];
-
-                    SettingsQRCodeNotifier.of(context)
-                        .changeShape('shapeQRCodeEye', index);
-                    Navigator.pop(context);
-                  } else {
-                    SettingsQRCodeNotifier.of(context).shapeQRCode =
-                        QrDataModuleShape.values[index];
-
-                    SettingsQRCodeNotifier.of(context)
-                        .changeShape('shapeQRCode', index);
-
-                    Navigator.pop(context);
-                  }
+                  SettingsQRCodeNotifier.of(context).changeShape(
+                      widget.shapeType == ShapeType.eyeShape
+                          ? 'shapeQRCodeEye'
+                          : 'shapeQRCode',
+                      index);
+                  Navigator.pop(context);
                 },
                 child: Container(
                   decoration: BoxDecoration(
