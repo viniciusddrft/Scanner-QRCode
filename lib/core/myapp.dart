@@ -21,7 +21,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    ThemeApp.getThemePreference();
     findSystemLocale();
     SystemChrome.setPreferredOrientations(const [
       DeviceOrientation.portraitUp,
@@ -32,14 +31,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void didChangeDependencies() {
-    LocaleAppNotifier.of(context).getLocale();
+    LocaleAppNotifier.of(context).getLocalePreference();
+    ThemeAppNotifier.of(context).getThemePreference();
     SettingsQRCodeNotifier.of(context).loadAllPreferences();
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    ThemeApp.dispose();
+    ThemeAppNotifier.of(context).dispose();
     SettingsQRCodeNotifier.of(context).dispose();
     LocaleAppNotifier.of(context).dispose();
     super.dispose();
@@ -47,52 +47,62 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([
-        LocaleAppNotifier.of(context),
-        ThemeApp.theme,
-      ]),
-      builder: (BuildContext context, Widget? child) => MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: LocaleAppNotifier.of(context).value,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: ThemeApp.theme.value,
-          primarySwatch: Colors.red,
-          appBarTheme: ThemeApp.isDarkThemeApp
-              ? const AppBarTheme(color: Color(0xff202020))
-              : const AppBarTheme(color: Color(0xff777777)),
-          cardColor: ThemeApp.isDarkThemeApp ? null : const Color(0xffe7e7ee),
-          backgroundColor: ThemeApp.isDarkThemeApp
-              ? const Color(0xff303030)
-              : const Color(0xfffbfbfb),
-          iconTheme: IconThemeData(
-            color: ThemeApp.isDarkThemeApp ? Colors.white : Colors.black,
+    return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: LocaleAppNotifier.of(context).value,
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeAppNotifier.of(context).value,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.red,
+        appBarTheme: const AppBarTheme(color: Color(0xff777777)),
+        cardColor: const Color(0xffe7e7ee),
+        backgroundColor: const Color(0xfffbfbfb),
+        iconTheme: const IconThemeData(color: Colors.black),
+        textTheme: TextTheme(
+          labelMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.black),
+          labelLarge: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 22, color: Colors.black),
+          displayMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.red),
+          displayLarge: GoogleFonts.roboto(
+            fontWeight: FontWeight.w400,
+            color: Colors.red,
+            textStyle: const TextStyle(fontSize: 22),
           ),
-          textTheme: TextTheme(
-            labelMedium: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: ThemeApp.isDarkThemeApp ? Colors.white : Colors.black),
-            labelLarge: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 22,
-                color: ThemeApp.isDarkThemeApp ? Colors.white : Colors.black),
-            displayMedium: const TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 14, color: Colors.red),
-            displayLarge: GoogleFonts.roboto(
-              fontWeight: FontWeight.w400,
-              color: Colors.red,
-              textStyle: const TextStyle(fontSize: 22),
-            ),
-            bodyMedium: const TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
-          ),
+          bodyMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
         ),
-        initialRoute: '/PageView',
-        onGenerateRoute: Routes.routes,
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.red,
+        appBarTheme: const AppBarTheme(color: Color(0xff202020)),
+        cardColor: null,
+        backgroundColor: const Color(0xff303030),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        textTheme: TextTheme(
+          labelMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
+          labelLarge: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 22, color: Colors.white),
+          displayMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.red),
+          displayLarge: GoogleFonts.roboto(
+            fontWeight: FontWeight.w400,
+            color: Colors.red,
+            textStyle: const TextStyle(fontSize: 22),
+          ),
+          bodyMedium: const TextStyle(
+              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
+        ),
+      ),
+      initialRoute: '/PageView',
+      onGenerateRoute: Routes.routes,
     );
   }
 }

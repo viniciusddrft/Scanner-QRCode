@@ -11,7 +11,7 @@ class LocaleAppNotifier extends ValueNotifier<Locale> {
   static LocaleAppNotifier of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<LocaleApp>()!.notifier!;
 
-  void getLocale() async {
+  void getLocalePreference() async {
     final String? preference = await localStorage.getValue<String>('locale');
     if (preference != null) {
       value = Locale(preference.split('_')[0], preference.split('_')[1]);

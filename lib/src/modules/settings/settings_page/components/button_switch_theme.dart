@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/theme/theme_app.dart';
 
@@ -15,16 +14,39 @@ class ButtonSwicthTheme extends StatefulWidget {
 class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
   late final Size size = MediaQuery.of(context).size;
 
-  final ValueNotifier<Icon> icon = ValueNotifier<Icon>(
+  late final ValueNotifier<Icon> icon = ValueNotifier<Icon>(
     Icon(
       Icons.brightness_4,
-      color: ThemeApp.isDarkThemeSystem ? Colors.blue : Colors.yellow,
+      color: ThemeAppNotifier.of(context).value == ThemeMode.dark
+          ? Colors.blue
+          : Colors.yellow,
     ),
   );
 
+  @override
+  void didChangeDependencies() {
+    if (ThemeAppNotifier.of(context).value == ThemeMode.system) {
+      setIconSystem();
+    } else if (ThemeAppNotifier.of(context).value == ThemeMode.dark) {
+      setIconDark();
+    } else {
+      setIconLight();
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    icon.dispose();
+    super.dispose();
+  }
+
   void setIconSystem() => icon.value = Icon(
         Icons.brightness_4,
-        color: ThemeApp.isDarkThemeSystem ? Colors.blue : Colors.yellow,
+        color: WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark
+            ? Colors.blue
+            : Colors.yellow,
       );
 
   void setIconDark() =>
@@ -37,7 +59,11 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
         {
           'text': AppLocalizations.of(context)!.settingsSystemTheme,
           'icon': Icons.brightness_4,
-          'color': ThemeApp.isDarkThemeSystem ? Colors.blue : Colors.yellow,
+          'color':
+              WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                      Brightness.dark
+                  ? Colors.blue
+                  : Colors.yellow,
           'theme': 'system',
         },
         {
@@ -91,23 +117,15 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
                     Navigator.pop(context);
 
                     if (allThemes[index]['theme'] == 'system') {
-                      ThemeApp.changeTheme(ThemeApp.themeSystem);
+                      ThemeAppNotifier.of(context)
+                          .changeTheme(ThemeMode.system);
                       setIconSystem();
-                      SharedPreferences.getInstance().then(
-                        (value) => value.setString('theme', 'system'),
-                      );
                     } else if (allThemes[index]['theme'] == 'dark') {
-                      ThemeApp.changeTheme(Brightness.dark);
+                      ThemeAppNotifier.of(context).changeTheme(ThemeMode.dark);
                       setIconDark();
-                      SharedPreferences.getInstance().then(
-                        (value) => value.setString('theme', 'dark'),
-                      );
                     } else if (allThemes[index]['theme'] == 'light') {
-                      ThemeApp.changeTheme(Brightness.light);
+                      ThemeAppNotifier.of(context).changeTheme(ThemeMode.light);
                       setIconLight();
-                      SharedPreferences.getInstance().then(
-                        (value) => value.setString('theme', 'light'),
-                      );
                     }
                   },
                   child: Container(
@@ -135,30 +153,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
           ),
         ),
       );
-
-  @override
-  void initState() {
-    ThemeApp.getThemeSaved().then((theme) {
-      if (theme != null) {
-        if (theme == 'system') {
-          setIconSystem();
-        } else if (theme == 'dark') {
-          setIconDark();
-        } else if (theme == 'light') {
-          setIconLight();
-        }
-      } else {
-        setIconSystem();
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    icon.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

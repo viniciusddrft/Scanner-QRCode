@@ -1,48 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+class ThemeAppNotifier extends ValueNotifier<ThemeMode> {
+  final ILocalStorage localStorage;
 
-class ThemeApp {
-  static final ValueNotifier<Brightness> theme =
-      ValueNotifier<Brightness>(themeSystem);
+  ThemeAppNotifier({required this.localStorage}) : super(ThemeMode.dark);
 
-  static bool get isDarkThemeApp => theme.value == Brightness.dark;
+  static ThemeAppNotifier of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<ThemeAppA>()!.notifier!;
 
-  static Brightness get themeSystem =>
-      WidgetsBinding.instance.platformDispatcher.platformBrightness;
+  void changeTheme(ThemeMode newThemeMode) {
+    value = newThemeMode;
+    if (newThemeMode == ThemeMode.dark) {
+      localStorage.saveValue<String>('theme', 'dark');
+    } else if (newThemeMode == ThemeMode.light) {
+      localStorage.saveValue<String>('theme', 'light');
+    } else {
+      localStorage.saveValue<String>('theme', 'system');
+    }
+  }
 
-  static bool get isDarkThemeSystem =>
-      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-      Brightness.dark;
+  void getThemePreference() {
+    localStorage.getValue<String>('theme').then((String? preference) {
+      if (preference != null) {
+        if (preference == 'dark') {
+          value = ThemeMode.dark;
+        } else if (preference == 'light') {
+          value = ThemeMode.light;
+        } else {
+          value = ThemeMode.system;
+        }
+      }
+    });
+  }
+}
 
-  static void changeTheme(Brightness newTheme) => theme.value = newTheme;
-
-  static void dispose() => theme.dispose();
-
-  static void getThemePreference() => SharedPreferences.getInstance().then(
-        (value) {
-          final String? preference = value.getString('theme');
-          if (preference != null) {
-            if (preference == 'system') {
-              theme.value = themeSystem;
-            } else if (preference == 'dark') {
-              theme.value = Brightness.dark;
-            } else if (preference == 'light') {
-              theme.value = Brightness.light;
-            }
-          }
-        },
-      );
-
-  static Future<String?> getThemeSaved() =>
-      SharedPreferences.getInstance().then(
-        (value) {
-          final String? preference = value.getString('theme');
-          if (preference != null) {
-            return preference;
-          } else {
-            return null;
-          }
-        },
-      );
+class ThemeAppA extends InheritedNotifier<ThemeAppNotifier> {
+  const ThemeAppA({super.key, required super.child, super.notifier});
 }
