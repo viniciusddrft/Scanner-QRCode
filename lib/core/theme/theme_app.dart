@@ -4,10 +4,10 @@ import 'package:scannerqrcode/src/shared/services/interface/local_storage_interf
 class ThemeAppNotifier extends ValueNotifier<ThemeMode> {
   final ILocalStorage localStorage;
 
-  ThemeAppNotifier({required this.localStorage}) : super(ThemeMode.dark);
+  ThemeAppNotifier({required this.localStorage}) : super(ThemeMode.system);
 
   static ThemeAppNotifier of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<ThemeAppA>()!.notifier!;
+      context.dependOnInheritedWidgetOfExactType<ThemeApp>()!.notifier!;
 
   void changeTheme(ThemeMode newThemeMode) {
     value = newThemeMode;
@@ -35,6 +35,6 @@ class ThemeAppNotifier extends ValueNotifier<ThemeMode> {
   }
 }
 
-class ThemeAppA extends InheritedNotifier<ThemeAppNotifier> {
-  const ThemeAppA({super.key, required super.child, super.notifier});
+class ThemeApp extends InheritedNotifier<ThemeAppNotifier> {
+  const ThemeApp({super.key, required super.child, super.notifier});
 }

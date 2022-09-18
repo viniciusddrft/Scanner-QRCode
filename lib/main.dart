@@ -15,7 +15,7 @@ void main() {
   final ILocalStorage localStorage = LocalStorageSharedPreferrence();
 
   runApp(
-    ThemeAppA(
+    ThemeApp(
       notifier: ThemeAppNotifier(
         localStorage: localStorage,
       ),

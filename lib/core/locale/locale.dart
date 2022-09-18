@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
 
 class LocaleAppNotifier extends ValueNotifier<Locale> {
@@ -15,10 +16,18 @@ class LocaleAppNotifier extends ValueNotifier<Locale> {
     final String? preference = await localStorage.getValue<String>('locale');
     if (preference != null) {
       value = Locale(preference.split('_')[0], preference.split('_')[1]);
+    } else {
+      value = AppLocalizations.supportedLocales.contains(Locale(
+              Intl.systemLocale.split('_')[0], Intl.systemLocale.split('_')[1]))
+          ? Locale(
+              Intl.systemLocale.split('_')[0],
+              Intl.systemLocale.split('_')[1],
+            )
+          : const Locale('en', 'Us');
     }
   }
 
-  void saveLocale(Locale newLocale) {
+  void changeLocale(Locale newLocale) {
     value = newLocale;
     localStorage.saveValue<String>('locale', newLocale.toString());
   }

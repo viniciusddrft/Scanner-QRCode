@@ -92,7 +92,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                   onPressed: () {
                     _iconPath.value = allLocales[index]['icon'] as String;
                     LocaleAppNotifier.of(context)
-                        .saveLocale(allLocales[index]['locale'] as Locale);
+                        .changeLocale(allLocales[index]['locale'] as Locale);
                     Navigator.pop(context);
                   },
                   child: Container(
