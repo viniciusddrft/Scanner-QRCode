@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
+
+import '../../src/shared/services/interface/local_storage_interface.dart';
 
 class LocaleAppNotifier extends ValueNotifier<Locale> {
   final ILocalStorage localStorage;

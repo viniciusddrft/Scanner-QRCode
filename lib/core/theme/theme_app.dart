@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
+import '../../src/shared/services/interface/local_storage_interface.dart';
 
 class ThemeAppNotifier extends ValueNotifier<ThemeMode> {
   final ILocalStorage localStorage;
