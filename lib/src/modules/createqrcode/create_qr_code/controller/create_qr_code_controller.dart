@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -29,5 +30,5 @@ class CreateQrCodeController {
 
   Future<void> shareImageQr() => screenshotController
       .captureAndSave(Directory.systemTemp.path)
-      .then((file) => Share.shareFiles([file!]));
+      .then((file) => Share.shareXFiles([XFile(file!)]));
 }

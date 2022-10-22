@@ -200,63 +200,84 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          toolbarHeight: 90,
-          backgroundColor: Colors.transparent,
-          flexibleSpace: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Text(
-                'Modos de Scan',
-                style: TextStyle(fontSize: 16),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(
-                    flex: 2,
-                    child: FloatingActionButton(
-                      heroTag: 'changeToBarcodeMode',
-                      tooltip: AppLocalizations.of(context)!.scanViewTooltip5,
-                      backgroundColor: Colors.red,
-                      onPressed: _changeModeScanBarcode,
-                      child: const Center(
-                        child: Icon(FontAwesomeIcons.barcode),
-                      ),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        toolbarHeight: 90,
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text(
+              'Modos de Scan',
+              style: TextStyle(fontSize: 16),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: FloatingActionButton(
+                    heroTag: 'changeToBarcodeMode',
+                    tooltip: AppLocalizations.of(context)!.scanViewTooltip5,
+                    backgroundColor: Colors.red,
+                    onPressed: _changeModeScanBarcode,
+                    child: const Center(
+                      child: Icon(FontAwesomeIcons.barcode),
                     ),
                   ),
-                  const Spacer(),
-                  Flexible(
-                    flex: 2,
-                    child: FloatingActionButton(
-                      heroTag: 'changeToQrcodeMode',
-                      tooltip: AppLocalizations.of(context)!.scanViewTooltip6,
-                      backgroundColor: Colors.red,
-                      onPressed: _changeModeScanQrcode,
-                      child: const Center(
-                        child: Icon(Icons.qr_code),
-                      ),
+                ),
+                const Spacer(),
+                Flexible(
+                  flex: 2,
+                  child: FloatingActionButton(
+                    heroTag: 'changeToQrcodeMode',
+                    tooltip: AppLocalizations.of(context)!.scanViewTooltip6,
+                    backgroundColor: Colors.red,
+                    onPressed: _changeModeScanQrcode,
+                    child: const Center(
+                      child: Icon(Icons.qr_code),
                     ),
                   ),
-                ],
-              ),
-            ],
-          )),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       extendBodyBehindAppBar: true,
       body: AnimatedBuilder(
         animation: Listenable.merge([_isLoadCam, _modeScan]),
         builder: (BuildContext context, Widget? child) => _isLoadCam.value
-            ? Stack(children: [
-                SizedBox(
-                  height: _size.height,
-                  width: _size.width,
-                  child: CameraPreview(_controller!),
-                ),
-                _modeScan.value == ModeScan.qrcode
-                    ? const OverlayCameraQrcodeWidget()
-                    : const OlverlayCameraBarcodeWidget()
-              ])
+            ? GestureDetector(
+                onScaleUpdate: (ScaleUpdateDetails details) async {
+                  final double maxZoomLevel =
+                      await _controller!.getMaxZoomLevel();
+
+                  final double mimZoomLevel =
+                      await _controller!.getMinZoomLevel();
+
+                  final double dragIntensity = details.scale;
+
+                  if (dragIntensity < 1) {
+                    _controller!.setZoomLevel(mimZoomLevel);
+                  } else if (dragIntensity > 1 &&
+                      dragIntensity < maxZoomLevel) {
+                    _controller!.setZoomLevel(dragIntensity);
+                  } else {
+                    _controller!.setZoomLevel(maxZoomLevel);
+                  }
+                },
+                child: Stack(children: [
+                  SizedBox(
+                    height: _size.height,
+                    width: _size.width,
+                    child: CameraPreview(_controller!),
+                  ),
+                  _modeScan.value == ModeScan.qrcode
+                      ? const OverlayCameraQrcodeWidget()
+                      : const OlverlayCameraBarcodeWidget()
+                ]),
+              )
             : Stack(
                 children: [
                   Center(
