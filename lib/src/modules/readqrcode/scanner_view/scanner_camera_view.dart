@@ -70,7 +70,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
     final CameraController cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.low,
+      ResolutionPreset.medium,
       enableAudio: false,
     );
     await previousCameraController?.dispose();
