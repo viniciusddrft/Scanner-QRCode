@@ -27,25 +27,25 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0 
   font_awesome_flutter: ^10.2.1
-  google_mobile_ads: ^2.1.0
+  google_mobile_ads: ^2.3.0
   permission_handler: ^10.2.0
   qr_flutter: ^4.0.0
-  share_plus: ^6.0.1
+  share_plus: ^6.3.0
   url_launcher: ^6.1.6
   image_gallery_saver: ^1.7.1
   screenshot: ^1.2.3
   shared_preferences: ^2.0.15
   google_fonts: ^3.0.1
   image_picker: ^0.8.6
-  google_mlkit_barcode_scanning: ^0.4.0
+  google_mlkit_barcode_scanning: ^0.5.0
   camera: ^0.10.0+4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.1
-  flutter_launcher_icons: ^0.10.0
-  flutter_native_splash: ^2.2.11
+  flutter_launcher_icons: ^0.11.0
+  flutter_native_splash: ^2.2.14
 
 flutter_native_splash:
   color: "#ffffff"
