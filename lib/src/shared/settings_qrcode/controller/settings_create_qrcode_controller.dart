@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
+import 'package:scannerqrcode/src/shared/services/local_storage_shared_preferrence.dart';
 
 class SettingsQRCodeNotifier extends ChangeNotifier {
-  final ILocalStorage localStorage;
+  final ILocalStorage _localStorage = LocalStorageSharedPreferrence();
 
-  SettingsQRCodeNotifier({required this.localStorage});
+  SettingsQRCodeNotifier();
 
   static SettingsQRCodeNotifier of(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<SettingsQRCodeApp>()!
@@ -25,7 +26,7 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
   String? logoPath;
 
   void changeColor(String savePreferenceKey, Color color) {
-    localStorage.saveValue<int>(savePreferenceKey, color.value);
+    _localStorage.saveValue<int>(savePreferenceKey, color.value);
     if (savePreferenceKey == 'colorQRBackground') {
       colorQRBackground = color;
     } else if (savePreferenceKey == 'colorQRCode') {
@@ -37,7 +38,7 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
   }
 
   void changeShape(String savePreferenceKey, int value) {
-    localStorage.saveValue<int>(savePreferenceKey, value);
+    _localStorage.saveValue<int>(savePreferenceKey, value);
     if (savePreferenceKey == 'shapeQRCodeEye') {
       shapeQRCodeEye = value == 0 ? QrEyeShape.square : QrEyeShape.circle;
     } else {
@@ -48,24 +49,24 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
   }
 
   void changeLogo(String newlogoPath) {
-    localStorage.saveValue<String>('logo', newlogoPath);
+    _localStorage.saveValue<String>('logo', newlogoPath);
     logoPath = newlogoPath;
     notifyListeners();
   }
 
   void removeLogo() {
     logoPath = null;
-    localStorage.remove('logo');
+    _localStorage.remove('logo');
     notifyListeners();
   }
 
   void _getPreferenceShape() async {
-    if (await localStorage.getValue<int>('shapeQRCode') == 0) {
+    if (await _localStorage.getValue<int>('shapeQRCode') == 0) {
       shapeQRCode = QrDataModuleShape.square;
     } else {
       shapeQRCode = QrDataModuleShape.circle;
     }
-    if (await localStorage.getValue<int>('shapeQRCodeEye') == 0) {
+    if (await _localStorage.getValue<int>('shapeQRCodeEye') == 0) {
       shapeQRCodeEye = QrEyeShape.square;
     } else {
       shapeQRCodeEye = QrEyeShape.circle;
@@ -74,10 +75,11 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
 
   void _getPreferencesColors() async {
     final int? colorQRBackgroundRaw =
-        await localStorage.getValue<int>('colorQRBackground');
-    final int? colorQRCodeRaw = await localStorage.getValue<int>('colorQRCode');
+        await _localStorage.getValue<int>('colorQRBackground');
+    final int? colorQRCodeRaw =
+        await _localStorage.getValue<int>('colorQRCode');
     final int? colorQRCodeEyeRaw =
-        await localStorage.getValue<int>('colorQRCodeEye');
+        await _localStorage.getValue<int>('colorQRCodeEye');
     if (colorQRBackgroundRaw != null) {
       colorQRBackground = Color(colorQRBackgroundRaw);
     }
@@ -90,7 +92,7 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
   }
 
   void _getPreferencesLogo() async {
-    logoPath = await localStorage.getValue<String>('logo');
+    logoPath = await _localStorage.getValue<String>('logo');
   }
 
   void loadAllPreferences() {
