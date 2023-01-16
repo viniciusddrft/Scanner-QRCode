@@ -19,14 +19,6 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingControllerSSID.dispose();
-    _textEditingControllerPASS.dispose();
-    _typeWifiCodeName.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeWifi() =>
       'WIFI:S:${_textEditingControllerSSID.text};T:$_typeWifiCode;P:${_textEditingControllerPASS.text};;';
 
@@ -157,5 +149,13 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingControllerSSID.dispose();
+    _textEditingControllerPASS.dispose();
+    _typeWifiCodeName.dispose();
+    super.dispose();
   }
 }

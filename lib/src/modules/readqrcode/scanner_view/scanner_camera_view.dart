@@ -37,16 +37,6 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   }
 
   @override
-  void dispose() {
-    _controller?.dispose();
-    _scanner.close();
-    _isLoadCam.dispose();
-    _isFlashOn.dispose();
-    _modeScan.dispose();
-    super.dispose();
-  }
-
-  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final CameraController? cameraController = _controller;
 
@@ -330,5 +320,15 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    _scanner.close();
+    _isLoadCam.dispose();
+    _isFlashOn.dispose();
+    _modeScan.dispose();
+    super.dispose();
   }
 }

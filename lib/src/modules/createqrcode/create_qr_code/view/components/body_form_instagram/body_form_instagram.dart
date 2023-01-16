@@ -16,12 +16,6 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeInstagram() =>
       _textEditingController.text.contains('https://www.instagram.com/')
           ? _textEditingController.text
@@ -82,5 +76,11 @@ class _BodyFormIstagramState extends State<BodyFormIstagram> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

@@ -32,12 +32,6 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
     super.didChangeDependencies();
   }
 
-  @override
-  void dispose() {
-    _iconPath.dispose();
-    super.dispose();
-  }
-
   List<Map<String, Object>> _allLocales(context) => [
         {
           'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
@@ -156,5 +150,11 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _iconPath.dispose();
+    super.dispose();
   }
 }

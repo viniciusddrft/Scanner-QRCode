@@ -16,12 +16,6 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeTwitch() =>
       _textEditingController.text.contains('https://www.twitch.tv/')
           ? _textEditingController.text
@@ -82,5 +76,11 @@ class _BodyFormTwitchState extends State<BodyFormTwitch> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

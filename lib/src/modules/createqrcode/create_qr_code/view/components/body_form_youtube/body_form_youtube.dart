@@ -16,12 +16,6 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeYoutube() =>
       _textEditingController.text.contains('https://www.youtube.com/') ||
               _textEditingController.text.contains('https://youtu.be/') ||
@@ -103,5 +97,11 @@ class _BodyFormYoutubeState extends State<BodyFormYoutube> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

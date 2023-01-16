@@ -16,12 +16,6 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeFacebook() =>
       _textEditingController.text.contains('https://www.facebook.com/')
           ? _textEditingController.text
@@ -101,5 +95,11 @@ class _BodyFormFacebookState extends State<BodyFormFacebook> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

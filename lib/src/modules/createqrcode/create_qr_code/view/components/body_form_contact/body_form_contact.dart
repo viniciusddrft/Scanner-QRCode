@@ -18,13 +18,6 @@ class _BodyFormContactState extends State<BodyFormContact> {
       TextEditingController();
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingControllerName.dispose();
-    _textEditingControllerNumber.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeContact() =>
       'MECARD:N:${_textEditingControllerName.text};TEL:${_textEditingControllerNumber.text};;';
 
@@ -100,5 +93,12 @@ class _BodyFormContactState extends State<BodyFormContact> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingControllerName.dispose();
+    _textEditingControllerNumber.dispose();
+    super.dispose();
   }
 }

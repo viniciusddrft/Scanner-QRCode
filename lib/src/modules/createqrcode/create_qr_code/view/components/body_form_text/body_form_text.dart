@@ -16,12 +16,6 @@ class _BodyFormState extends State<BodyFormText> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeText() => _textEditingController.text;
 
   @override
@@ -68,5 +62,11 @@ class _BodyFormState extends State<BodyFormText> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

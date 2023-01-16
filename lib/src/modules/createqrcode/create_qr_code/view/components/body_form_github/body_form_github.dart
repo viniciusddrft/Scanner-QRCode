@@ -15,12 +15,6 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
   final TextEditingController _textEditingController = TextEditingController();
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeGithub() =>
       _textEditingController.text.contains('https://www.github.com/')
           ? _textEditingController.text
@@ -81,5 +75,11 @@ class _BodyFormGithubState extends State<BodyFormGithub> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

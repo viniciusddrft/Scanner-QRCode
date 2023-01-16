@@ -20,13 +20,6 @@ class _MyPageViewState extends State<MyPageView> {
   final MyPageViewController _myPageViewController = MyPageViewController();
 
   @override
-  void dispose() {
-    _pageController.dispose();
-    _myPageViewController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -107,5 +100,12 @@ class _MyPageViewState extends State<MyPageView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _myPageViewController.dispose();
+    super.dispose();
   }
 }

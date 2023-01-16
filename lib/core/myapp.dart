@@ -38,14 +38,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void dispose() {
-    ThemeAppNotifier.of(context).dispose();
-    SettingsQRCodeNotifier.of(context).dispose();
-    LocaleAppNotifier.of(context).dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -104,5 +96,13 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/PageView',
       onGenerateRoute: Routes.routes,
     );
+  }
+
+  @override
+  void dispose() {
+    ThemeAppNotifier.of(context).dispose();
+    SettingsQRCodeNotifier.of(context).dispose();
+    LocaleAppNotifier.of(context).dispose();
+    super.dispose();
   }
 }

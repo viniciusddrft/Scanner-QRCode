@@ -24,13 +24,6 @@ class _CenterOfScreenQrcodeWidgetState
   }
 
   @override
-  void dispose() {
-    _y.dispose();
-    _ticker.dispose();
-    super.dispose();
-  }
-
-  @override
   void didChangeDependencies() {
     sizeCenterSpaceY = ((MediaQuery.of(context).size.width * 0.2) * 3);
     super.didChangeDependencies();
@@ -66,5 +59,12 @@ class _CenterOfScreenQrcodeWidgetState
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _y.dispose();
+    _ticker.dispose();
+    super.dispose();
   }
 }

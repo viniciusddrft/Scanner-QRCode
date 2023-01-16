@@ -35,12 +35,6 @@ class _CenterOfScreenBarcodeWidgetState
     super.didChangeDependencies();
   }
 
-  @override
-  void dispose() {
-    _ticker.dispose();
-    super.dispose();
-  }
-
   //there is a change of sign to add or subtract without looping and thus control the fps
   void _animeRedLine() {
     if (_x.value < sizeCenterSpaceX) {
@@ -72,5 +66,11 @@ class _CenterOfScreenBarcodeWidgetState
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
   }
 }

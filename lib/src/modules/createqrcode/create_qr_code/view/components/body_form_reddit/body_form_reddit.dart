@@ -16,12 +16,6 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeReddit() =>
       _textEditingController.text.contains('https://www.reddit.com/')
           ? _textEditingController.text
@@ -94,5 +88,11 @@ class _BodyFormRedditState extends State<BodyFormReddit> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

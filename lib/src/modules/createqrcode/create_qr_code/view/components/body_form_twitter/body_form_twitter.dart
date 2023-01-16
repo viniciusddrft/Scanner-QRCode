@@ -16,12 +16,6 @@ class _BodyFormTwitterState extends State<BodyFormTwitter> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeTwitter() =>
       _textEditingController.text.contains('https://twitter.com/')
           ? _textEditingController.text
@@ -82,5 +76,11 @@ class _BodyFormTwitterState extends State<BodyFormTwitter> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

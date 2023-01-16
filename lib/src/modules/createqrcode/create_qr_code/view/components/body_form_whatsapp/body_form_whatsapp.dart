@@ -15,12 +15,6 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
   final TextEditingController _textEditingController = TextEditingController();
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeWhatsapp() =>
       'https://api.whatsapp.com/send?phone=${_textEditingController.text}';
 
@@ -69,5 +63,11 @@ class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

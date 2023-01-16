@@ -16,12 +16,6 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
 
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeLink() =>
       _textEditingController.text.contains('https://')
           ? _textEditingController.text
@@ -81,5 +75,11 @@ class _BodyFormWebsiteState extends State<BodyFormLink> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

@@ -15,12 +15,6 @@ class _BodyFormTiktokState extends State<BodyFormTiktok> {
   final TextEditingController _textEditingController = TextEditingController();
   late final Size _size = MediaQuery.of(context).size;
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   String _filterToCreateQrcodeTiktok() =>
       _textEditingController.text.contains('https://www.tiktok.com/@')
           ? _textEditingController.text
@@ -81,5 +75,11 @@ class _BodyFormTiktokState extends State<BodyFormTiktok> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 }

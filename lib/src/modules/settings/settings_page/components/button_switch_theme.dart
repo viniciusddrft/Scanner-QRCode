@@ -35,12 +35,6 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
     super.didChangeDependencies();
   }
 
-  @override
-  void dispose() {
-    icon.dispose();
-    super.dispose();
-  }
-
   void setIconSystem() => icon.value = Icon(
         Icons.brightness_4,
         color: WidgetsBinding.instance.platformDispatcher.platformBrightness ==
@@ -190,5 +184,11 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    icon.dispose();
+    super.dispose();
   }
 }
