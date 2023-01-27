@@ -46,11 +46,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeAppNotifier.of(context).value,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
-        primarySwatch: Colors.red,
         appBarTheme: const AppBarTheme(color: Color(0xff777777)),
         cardColor: const Color(0xffe7e7ee),
-        backgroundColor: const Color(0xfffbfbfb),
         iconTheme: const IconThemeData(color: Colors.black),
         textTheme: TextTheme(
           labelMedium: const TextStyle(
@@ -67,13 +66,14 @@ class _MyAppState extends State<MyApp> {
           bodyMedium: const TextStyle(
               fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
         ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+            .copyWith(background: const Color(0xfffbfbfb)),
       ),
       darkTheme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
-        primarySwatch: Colors.red,
         appBarTheme: const AppBarTheme(color: Color(0xff202020)),
         cardColor: null,
-        backgroundColor: const Color(0xff303030),
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
@@ -92,6 +92,8 @@ class _MyAppState extends State<MyApp> {
           bodyMedium: const TextStyle(
               fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
         ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+            .copyWith(background: const Color(0xff303030)),
       ),
       initialRoute: '/PageView',
       onGenerateRoute: Routes.routes,

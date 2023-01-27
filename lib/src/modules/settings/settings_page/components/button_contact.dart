@@ -15,7 +15,8 @@ class ButtonContact extends StatelessWidget with OpenLink {
       height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          elevation: 0, backgroundColor: Theme.of(context).backgroundColor,
+          elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.background,
           padding: EdgeInsets.zero,
         ),
         onPressed: () => openLink('mailto:ScannerQRCode@protonmail.com'),

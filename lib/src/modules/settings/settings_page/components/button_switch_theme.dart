@@ -155,7 +155,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           padding: EdgeInsets.zero,
         ),
         onPressed: () => _popupChangeTheme(size),
