@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SolutionView extends StatelessWidget {
-  final String problem;
-  final String solution;
+  final String problem, solution;
 
   const SolutionView(
       {required this.problem, required this.solution, super.key});

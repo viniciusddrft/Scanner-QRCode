@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class CreateQRCodeItemMenu extends StatelessWidget {
   final Color color;
   final Icon icon;
-  final String text;
-  final String typeQRCode;
+  final String text, typeQRCode;
   const CreateQRCodeItemMenu(
       {required this.icon,
       required this.text,
