@@ -16,7 +16,12 @@ class ButtonPremium extends StatelessWidget with OpenLink {
       height: size.height * 0.09,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.zero, backgroundColor: Colors.black87),
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.black87,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+        ),
         onPressed: () => openLink(
             'https://play.google.com/store/apps/details?id=com.scannerqrcode_premium'),
         child: Row(

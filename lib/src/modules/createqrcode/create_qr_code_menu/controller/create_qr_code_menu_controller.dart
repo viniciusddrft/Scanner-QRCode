@@ -66,7 +66,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.instagram,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuInstagram,
@@ -76,7 +75,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.tiktok,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuTiktok,
@@ -86,7 +84,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.facebook,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuFacebook,
@@ -96,7 +93,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.youtube,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuYoutube,
@@ -106,7 +102,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.twitter,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuTwitter,
@@ -116,7 +111,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.twitch,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuTwitch,
@@ -126,7 +120,6 @@ class CreateQrcodeMenuController {
         {
           'icon': Icon(
             FontAwesomeIcons.reddit,
-            color: Colors.white,
             size: size.height * 0.05,
           ),
           'text': AppLocalizations.of(context)!.createQRCodeMenuReddit,

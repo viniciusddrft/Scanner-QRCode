@@ -66,8 +66,18 @@ class _MyAppState extends State<MyApp> {
           bodyMedium: const TextStyle(
               fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
         ),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
-            .copyWith(background: const Color(0xfffbfbfb)),
+        colorScheme: const ColorScheme(
+            background: Color(0xfffbfbfb),
+            brightness: Brightness.light,
+            error: Colors.red,
+            onBackground: Colors.black,
+            onError: Colors.red,
+            onPrimary: Colors.red,
+            onSecondary: Colors.red,
+            onSurface: Colors.white,
+            primary: Colors.white,
+            secondary: Colors.red,
+            surface: Colors.red),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
@@ -92,8 +102,18 @@ class _MyAppState extends State<MyApp> {
           bodyMedium: const TextStyle(
               fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
         ),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
-            .copyWith(background: const Color(0xff303030)),
+        colorScheme: const ColorScheme(
+            background: Color(0xff303030),
+            brightness: Brightness.dark,
+            error: Colors.red,
+            onBackground: Colors.white,
+            onError: Colors.red,
+            onPrimary: Colors.red,
+            onSecondary: Colors.red,
+            onSurface: Colors.white,
+            primary: Colors.white,
+            secondary: Colors.red,
+            surface: Colors.red),
       ),
       initialRoute: '/PageView',
       onGenerateRoute: Routes.routes,
