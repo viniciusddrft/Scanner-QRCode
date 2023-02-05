@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: camera
-      sha256: "045e7739f9362f3c01d5c7187ac7e2ba9e2bc9f2ae6470ecdcc5e34d060ed81c"
+      sha256: e7ac55af24a890d20276821eb3c95857074d03b7de6f9892b99a205ee30bd179
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.2+1"
+    version: "0.10.3"
   camera_android:
     dependency: transitive
     description:
@@ -233,10 +233,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: "8f099045e2f2a30e4d4d0a35f40c6bc941a8f2ca0e10ad9d214ee9edd3f37483"
+      sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "4.0.3"
   google_mlkit_barcode_scanning:
     dependency: "direct main"
     description:
