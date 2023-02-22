@@ -14,16 +14,39 @@ void main() {
   group('PageView with appbar reading screen and settings -> ', () {
     testWidgets('AppBar icons', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: MyPageView(),
+          home: ThemeApp(
+            notifier: ThemeAppNotifier(),
+            child: LocaleApp(
+              notifier: LocaleAppNotifier(),
+              child: SettingsQRCodeApp(
+                notifier: SettingsQRCodeNotifier(),
+                child: const MyPageView(),
+              ),
+            ),
+          ),
           onGenerateRoute: Routes.routes,
         ),
       );
       expect(find.widgetWithIcon(AppBar, Icons.qr_code), findsOneWidget);
       expect(find.widgetWithIcon(AppBar, Icons.border_color), findsOneWidget);
       expect(find.widgetWithIcon(AppBar, Icons.settings), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.border_color));
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(seconds: 1));
+      }
+
+      expect(find.byType(CreateQRCodeMenu), findsOneWidget);
+      expect(find.byType(SettingsPage), findsNothing);
+
+      await tester.tap(find.byIcon(Icons.settings));
+      for (int i = 0; i < 5; i++) {
+        await tester.pump(const Duration(seconds: 1));
+      }
+
+      expect(find.byType(SettingsPage), findsOneWidget);
     });
     testWidgets('Scroll horizontal', (WidgetTester tester) async {
       await tester.pumpWidget(
@@ -74,6 +97,17 @@ void main() {
           findsOneWidget);
       expect(find.widgetWithIcon(ElevatedButton, Icons.photo), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
+    });
+
+    testWidgets(' To do -> Menu criar qrcode ', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: CreateQRCodeMenu(),
+          onGenerateRoute: Routes.routes,
+        ),
+      );
     });
   });
 }
