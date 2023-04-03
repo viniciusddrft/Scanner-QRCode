@@ -12,19 +12,15 @@ class CreateQrCodeController {
   const CreateQrCodeController({required this.screenshotController});
 
   Future<bool> saveImageQR() async {
-    PermissionStatus status = await Permission.storage.status;
+    final PermissionStatus status = await Permission.storage.status;
     if (status.isDenied) await Permission.storage.request();
 
-    Uint8List? imageQrCode = await screenshotController.capture();
+    final Uint8List? imageQrCode = await screenshotController.capture();
 
-    final result =
+    final Map result =
         await ImageGallerySaver.saveImage(imageQrCode!.buffer.asUint8List());
 
-    if ((result!['isSuccess'])) {
-      return true;
-    } else {
-      return false;
-    }
+    return (result['isSuccess']);
   }
 
   Future<void> shareImageQr() => screenshotController
