@@ -12,13 +12,11 @@ class CreateQRCodeMenu extends StatefulWidget {
 }
 
 class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
-  final CreateQrcodeMenuController _createQrcodeMenuController =
-      CreateQrcodeMenuController();
-
-  late final Size size = MediaQuery.of(context).size;
+  final _createQrcodeMenuController = CreateQrcodeMenuController();
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return GridView.builder(
       itemCount: _createQrcodeMenuController
           .allOptionsQRCodeCreate(context, size)

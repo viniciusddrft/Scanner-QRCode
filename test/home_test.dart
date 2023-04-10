@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/core/locale/locale.dart';
 import 'package:scannerqrcode/core/routes/routes_app.dart';
 import 'package:scannerqrcode/core/theme/theme_app.dart';
+import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code_menu/view/components/create_qrcode_menu_item.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code_menu/view/create_qrcode_menu_view.dart';
 import 'package:scannerqrcode/src/modules/page_view/view/my_page_view.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/read_qr_code_menu/read_qr_code_view.dart';
@@ -27,7 +28,6 @@ void main() {
               ),
             ),
           ),
-          onGenerateRoute: Routes.routes,
         ),
       );
       expect(find.widgetWithIcon(AppBar, Icons.qr_code), findsOneWidget);
@@ -90,7 +90,6 @@ void main() {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: ReadQRCodePage(),
-          onGenerateRoute: Routes.routes,
         ),
       );
       expect(find.widgetWithIcon(ElevatedButton, Icons.camera_alt),
@@ -99,15 +98,16 @@ void main() {
       expect(find.byType(Image), findsOneWidget);
     });
 
-    testWidgets(' To do -> Menu criar qrcode ', (WidgetTester tester) async {
+    testWidgets('Menu create qrcode button icons', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: CreateQRCodeMenu(),
-          onGenerateRoute: Routes.routes,
         ),
       );
+
+      expect(find.byType(CreateQRCodeItemMenu), findsNWidgets(9), skip: true);
     });
   });
 }
