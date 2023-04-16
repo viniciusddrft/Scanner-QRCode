@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../shared/models/create_qrcode_item_model.dart';
+
 class CreateQRCodeItemMenu extends StatelessWidget {
-  final Color color;
-  final Icon icon;
-  final String text, typeQRCode;
-  const CreateQRCodeItemMenu(
-      {required this.icon,
-      required this.text,
-      required this.typeQRCode,
-      required this.color,
-      super.key});
+  final CreateQRCodeItemModel qrcode;
+  const CreateQRCodeItemMenu({required this.qrcode, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +19,23 @@ class CreateQRCodeItemMenu extends StatelessWidget {
               size.height * 0.09,
               size.height * 0.09,
             ),
-            backgroundColor: color,
+            backgroundColor: qrcode.color,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(360),
             ),
           ),
           onPressed: () => Navigator.pushNamed(context, '/CreateQRCode',
               arguments: <String, String>{
-                'typeQRCode': typeQRCode,
+                'typeQRCode': qrcode.typeQRCode,
               }),
           child: Center(
-            child: icon,
+            child: qrcode.icon,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(top: size.height * 0.01),
           child: Text(
-            text,
+            qrcode.text,
             style: Theme.of(context).textTheme.labelMedium,
           ),
         )
