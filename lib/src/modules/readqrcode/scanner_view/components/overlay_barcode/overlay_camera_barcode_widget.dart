@@ -9,14 +9,14 @@ class OlverlayCameraBarcodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
-        const Flexible(
+        Flexible(
           child: SideBarBarcodeWidget(),
         ),
         Flexible(
           child: Column(
-            children: const [
+            children: [
               Flexible(
                 child: TopAndBottonBarBarcodeWidget(),
               ),
@@ -30,7 +30,7 @@ class OlverlayCameraBarcodeWidget extends StatelessWidget {
             ],
           ),
         ),
-        const Flexible(
+        Flexible(
           child: SideBarBarcodeWidget(),
         )
       ],

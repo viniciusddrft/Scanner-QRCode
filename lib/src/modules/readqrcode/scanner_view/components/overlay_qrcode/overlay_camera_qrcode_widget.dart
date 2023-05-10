@@ -9,16 +9,16 @@ class OverlayCameraQrcodeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
-        const Flexible(
+        Flexible(
           child: SideBarQrcodeWidget(),
         ),
         Flexible(
           flex: 3,
           child: SizedBox(
             child: Column(
-              children: const [
+              children: [
                 Flexible(
                   flex: 7,
                   child: TopAndBottonBarQrcodeWidget(),
@@ -35,7 +35,7 @@ class OverlayCameraQrcodeWidget extends StatelessWidget {
             ),
           ),
         ),
-        const Flexible(
+        Flexible(
           child: SideBarQrcodeWidget(),
         )
       ],

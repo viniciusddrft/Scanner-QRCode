@@ -16,8 +16,8 @@ class SettingsQRCodePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settingsQRCodeCreation),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           ButtonSwitchColor.colorQRBackground(),
           ButtonSwitchColor.colorQRCode(),
           ButtonSwitchColor.colorQRCodeEye(),
