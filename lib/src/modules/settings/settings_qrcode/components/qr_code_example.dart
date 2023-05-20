@@ -13,7 +13,7 @@ class QRCodeExample extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return QrImage(
+    return QrImageView(
       padding: EdgeInsets.all(size.height * 0.01),
       version: QrVersions.auto,
       data: 'viniciusddtft',

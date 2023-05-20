@@ -50,7 +50,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
           children: [
             Screenshot(
               controller: screenshotController,
-              child: QrImage(
+              child: QrImageView(
                 padding: EdgeInsets.all(
                   size.height * 0.013,
                 ),
