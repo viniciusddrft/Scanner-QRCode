@@ -16,7 +16,7 @@ class ReadQRCodePage extends StatefulWidget {
 class _ReadQRCodePageState extends State<ReadQRCodePage> with PopupNotices {
   final ReadQrCodeController _readQrCodeController =
       const ReadQrCodeController();
-  late final Size size = MediaQuery.of(context).size;
+  late final Size size = MediaQuery.sizeOf(context);
 
   @override
   Widget build(BuildContext context) {

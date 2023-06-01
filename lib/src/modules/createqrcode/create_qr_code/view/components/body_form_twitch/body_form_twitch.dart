@@ -14,7 +14,7 @@ class BodyFormTwitch extends BaseForm {
 class _BodyFormTwitchState extends State<BodyFormTwitch> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeTwitch() =>
       _textEditingController.text.contains('https://www.twitch.tv/')

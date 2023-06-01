@@ -14,7 +14,7 @@ class BodyFormYoutube extends BaseForm {
 class _BodyFormYoutubeState extends State<BodyFormYoutube> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeYoutube() =>
       _textEditingController.text.contains('https://www.youtube.com/') ||

@@ -14,7 +14,7 @@ class BodyFormLink extends BaseForm {
 class _BodyFormWebsiteState extends State<BodyFormLink> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeLink() =>
       _textEditingController.text.contains('https://')

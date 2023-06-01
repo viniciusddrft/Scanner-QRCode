@@ -22,7 +22,7 @@ class ButtonSwitchShape extends StatefulWidget {
 }
 
 class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   void _popupChangeShapeQR() {
     showDialog<void>(

@@ -7,7 +7,7 @@ class ButtonHelp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.sizeOf(context);
 
     return SizedBox(
       height: size.height * 0.09,

@@ -12,7 +12,7 @@ class ButtonSwitchLanguage extends StatefulWidget {
 }
 
 class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
-  late final Size size = MediaQuery.of(context).size;
+  late final Size size = MediaQuery.sizeOf(context);
 
   final ValueNotifier<String?> _iconPath =
       ValueNotifier<String?>('assets/icons_translations/unitedstates.png');
@@ -68,7 +68,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
             )
           ],
           content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.sizeOf(context).height * 0.3,
             width: size.width * 0.75,
             child: ListView.builder(
               padding: const EdgeInsets.only(top: 20),

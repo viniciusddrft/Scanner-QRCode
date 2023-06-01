@@ -14,7 +14,7 @@ class BodyFormText extends BaseForm {
 class _BodyFormState extends State<BodyFormText> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeText() => _textEditingController.text;
 

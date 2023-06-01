@@ -25,7 +25,7 @@ class _CenterOfScreenQrcodeWidgetState
 
   @override
   void didChangeDependencies() {
-    sizeCenterSpaceY = ((MediaQuery.of(context).size.width * 0.2) * 3);
+    sizeCenterSpaceY = ((MediaQuery.sizeOf(context).width * 0.2) * 3);
     super.didChangeDependencies();
   }
 

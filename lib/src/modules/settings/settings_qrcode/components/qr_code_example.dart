@@ -11,7 +11,7 @@ class QRCodeExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.sizeOf(context);
 
     return QrImageView(
       padding: EdgeInsets.all(size.height * 0.01),

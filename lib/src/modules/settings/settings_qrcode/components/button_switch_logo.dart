@@ -15,7 +15,7 @@ class ButtonSwitchLogo extends StatefulWidget {
 }
 
 class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   void _popupSetLogo() {
     showDialog<void>(

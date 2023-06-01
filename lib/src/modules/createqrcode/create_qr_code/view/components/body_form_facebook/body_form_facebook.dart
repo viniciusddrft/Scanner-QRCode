@@ -14,7 +14,7 @@ class BodyFormFacebook extends BaseForm {
 class _BodyFormFacebookState extends State<BodyFormFacebook> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeFacebook() =>
       _textEditingController.text.contains('https://www.facebook.com/')

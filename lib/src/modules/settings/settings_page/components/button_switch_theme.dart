@@ -12,7 +12,7 @@ class ButtonSwicthTheme extends StatefulWidget {
 }
 
 class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
-  late final Size size = MediaQuery.of(context).size;
+  late final Size size = MediaQuery.sizeOf(context);
 
   late final ValueNotifier<Icon> icon = ValueNotifier<Icon>(
     Icon(

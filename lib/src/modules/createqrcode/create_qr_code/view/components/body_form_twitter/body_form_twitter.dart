@@ -14,7 +14,7 @@ class BodyFormTwitter extends BaseForm {
 class _BodyFormTwitterState extends State<BodyFormTwitter> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeTwitter() =>
       _textEditingController.text.contains('https://twitter.com/')

@@ -14,7 +14,7 @@ class BodyFormIstagram extends BaseForm {
 class _BodyFormIstagramState extends State<BodyFormIstagram> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeInstagram() =>
       _textEditingController.text.contains('https://www.instagram.com/')

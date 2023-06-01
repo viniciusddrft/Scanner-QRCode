@@ -38,7 +38,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
     Color(0xff303030)
   ];
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   void _popupChangeColorQR() => showDialog<void>(
         context: context,

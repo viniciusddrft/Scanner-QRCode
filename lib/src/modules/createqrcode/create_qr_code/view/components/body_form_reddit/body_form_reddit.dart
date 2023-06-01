@@ -14,7 +14,7 @@ class BodyFormReddit extends BaseForm {
 class _BodyFormRedditState extends State<BodyFormReddit> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeReddit() =>
       _textEditingController.text.contains('https://www.reddit.com/')

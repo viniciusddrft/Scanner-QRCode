@@ -13,7 +13,7 @@ class BodyFormGithub extends BaseForm {
 
 class _BodyFormGithubState extends State<BodyFormGithub> {
   final TextEditingController _textEditingController = TextEditingController();
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeGithub() =>
       _textEditingController.text.contains('https://www.github.com/')

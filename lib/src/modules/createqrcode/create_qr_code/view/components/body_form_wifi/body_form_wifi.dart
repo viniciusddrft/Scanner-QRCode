@@ -17,7 +17,7 @@ class _BodyFormWifiState extends State<BodyFormWifi> {
   final TextEditingController _textEditingControllerPASS =
       TextEditingController();
 
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeWifi() =>
       'WIFI:S:${_textEditingControllerSSID.text};T:$_typeWifiCode;P:${_textEditingControllerPASS.text};;';

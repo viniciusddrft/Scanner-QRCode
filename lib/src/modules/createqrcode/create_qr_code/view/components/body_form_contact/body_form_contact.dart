@@ -16,7 +16,7 @@ class _BodyFormContactState extends State<BodyFormContact> {
       TextEditingController();
   final TextEditingController _textEditingControllerNumber =
       TextEditingController();
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeContact() =>
       'MECARD:N:${_textEditingControllerName.text};TEL:${_textEditingControllerNumber.text};;';

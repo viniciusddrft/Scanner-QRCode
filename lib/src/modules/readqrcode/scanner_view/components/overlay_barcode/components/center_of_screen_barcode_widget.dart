@@ -12,7 +12,7 @@ class CenterOfScreenBarcodeWidget extends StatefulWidget {
 class _CenterOfScreenBarcodeWidgetState
     extends State<CenterOfScreenBarcodeWidget> {
   late final ValueNotifier<double> _x =
-      ValueNotifier<double>((MediaQuery.of(context).size.width * 0.17));
+      ValueNotifier<double>((MediaQuery.sizeOf(context).width * 0.17));
   late final Ticker _ticker;
   late final double sizeCenterSpaceX;
   int _speedMove = 2;
@@ -29,9 +29,9 @@ class _CenterOfScreenBarcodeWidgetState
   @override
   void didChangeDependencies() {
     sizeRedLine =
-        MediaQuery.of(context).size.height * 0.66666666666666666666666666666;
+        MediaQuery.sizeOf(context).height * 0.66666666666666666666666666666;
     sizeCenterSpaceX =
-        (MediaQuery.of(context).size.width * 0.1666666666666666666666666666666);
+        (MediaQuery.sizeOf(context).width * 0.1666666666666666666666666666666);
     super.didChangeDependencies();
   }
 

@@ -13,7 +13,7 @@ class BodyFormWhatsapp extends BaseForm {
 
 class _BodyFormWhatsappState extends State<BodyFormWhatsapp> {
   final TextEditingController _textEditingController = TextEditingController();
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeWhatsapp() =>
       'https://api.whatsapp.com/send?phone=${_textEditingController.text}';

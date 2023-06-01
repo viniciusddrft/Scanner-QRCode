@@ -28,7 +28,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   final ValueNotifier<bool> _isLoadCam = ValueNotifier<bool>(false);
   bool _isCamBack = true;
   final ValueNotifier<bool> _isFlashOn = ValueNotifier<bool>(false);
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   @override
   void initState() {

@@ -25,7 +25,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
     with PopupNotices {
   final ScreenshotController screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
-  late final Size size = MediaQuery.of(context).size;
+  late final Size size = MediaQuery.sizeOf(context);
 
   @override
   void initState() {

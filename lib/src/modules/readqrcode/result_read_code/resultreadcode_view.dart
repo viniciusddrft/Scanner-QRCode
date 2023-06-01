@@ -23,7 +23,7 @@ class ResultReadCode extends StatefulWidget {
 
 class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
   late final Widget _button;
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   @override
   void initState() {

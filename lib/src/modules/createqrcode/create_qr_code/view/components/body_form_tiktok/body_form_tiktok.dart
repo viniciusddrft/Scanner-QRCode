@@ -13,7 +13,7 @@ class BodyFormTiktok extends BaseForm {
 
 class _BodyFormTiktokState extends State<BodyFormTiktok> {
   final TextEditingController _textEditingController = TextEditingController();
-  late final Size _size = MediaQuery.of(context).size;
+  late final Size _size = MediaQuery.sizeOf(context);
 
   String _filterToCreateQrcodeTiktok() =>
       _textEditingController.text.contains('https://www.tiktok.com/@')
