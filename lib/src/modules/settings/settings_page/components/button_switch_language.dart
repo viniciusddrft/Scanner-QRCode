@@ -101,7 +101,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
                         ),
                         Image.asset(
                           allLocales[index]['icon'] as String,
-                          height: 30,
+                          height: 20,
                         ),
                       ],
                     ),

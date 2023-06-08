@@ -115,44 +115,35 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
           InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
               InputImageFormat.nv21;
 
-      final planeData = cameraImage.planes.map(
-        (Plane plane) {
-          return InputImagePlaneMetadata(
-            bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
-            width: plane.width,
-          );
-        },
-      ).toList();
+      for (var plane in cameraImage.planes) {
+        final inputImage = InputImage.fromBytes(
+          bytes: bytes,
+          metadata: InputImageMetadata(
+              bytesPerRow: plane.bytesPerRow,
+              size: imageSize,
+              format: inputImageFormat,
+              rotation: imageRotation),
+        );
 
-      final inputImageData = InputImageData(
-        size: imageSize,
-        imageRotation: imageRotation,
-        inputImageFormat: inputImageFormat,
-        planeData: planeData,
-      );
-
-      final inputImage =
-          InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
-
-      _scanner.processImage(inputImage).then(
-        (List<Barcode> code) {
-          if (code.isNotEmpty) {
-            if (!code.first.rawValue!.contains('typeNumber')) {
-              if (!code.first.rawValue!.contains('errorCode')) {
-                _closeCameraAndShowResult(
-                    code.first.rawValue as String, code.first.type);
+        _scanner.processImage(inputImage).then(
+          (List<Barcode> code) {
+            if (code.isNotEmpty) {
+              if (!code.first.rawValue!.contains('typeNumber')) {
+                if (!code.first.rawValue!.contains('errorCode')) {
+                  _closeCameraAndShowResult(
+                      code.first.rawValue as String, code.first.type);
+                } else {
+                  _errorInReadQrCodeCamera(
+                      'Error in reading => typeNumber in value');
+                }
               } else {
                 _errorInReadQrCodeCamera(
-                    'Error in reading => typeNumber in value');
+                    'Error in reading => errorCode in value');
               }
-            } else {
-              _errorInReadQrCodeCamera(
-                  'Error in reading => errorCode in value');
             }
-          }
-        },
-      ).whenComplete(() => _scanner.close());
+          },
+        ).whenComplete(() => _scanner.close());
+      }
     } on PlatformException catch (error, stackStrace) {
       debugPrint('ERROR PlatformException --> $error');
       debugPrint('ERROR PlatformException --> $stackStrace');
@@ -212,7 +203,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                     backgroundColor: Colors.red,
                     onPressed: _changeModeScanBarcode,
                     child: const Center(
-                      child: Icon(FontAwesomeIcons.barcode),
+                      child: Icon(
+                        FontAwesomeIcons.barcode,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -225,7 +219,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                     backgroundColor: Colors.red,
                     onPressed: _changeModeScanQrcode,
                     child: const Center(
-                      child: Icon(Icons.qr_code),
+                      child: Icon(
+                        Icons.qr_code,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -295,7 +292,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
             tooltip: AppLocalizations.of(context)!.scanViewTooltip1,
             backgroundColor: Colors.red,
             onPressed: () => Navigator.of(context).pop(),
-            child: const Icon(Icons.arrow_back),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
           ),
           FloatingActionButton(
             heroTag: 'controllFlash',
@@ -307,7 +307,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
             child: ValueListenableBuilder(
               valueListenable: _isFlashOn,
               builder: (BuildContext context, bool value, Widget? child) =>
-                  Icon(value ? Icons.flash_on : Icons.flash_off),
+                  Icon(
+                value ? Icons.flash_on : Icons.flash_off,
+                color: Colors.white,
+              ),
             ),
           ),
           FloatingActionButton(
@@ -315,7 +318,10 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
             tooltip: AppLocalizations.of(context)!.scanViewTooltip4,
             backgroundColor: Colors.red,
             onPressed: controllFromAndBackCamera,
-            child: const Icon(Icons.cameraswitch),
+            child: const Icon(
+              Icons.cameraswitch,
+              color: Colors.white,
+            ),
           ),
         ],
       ),

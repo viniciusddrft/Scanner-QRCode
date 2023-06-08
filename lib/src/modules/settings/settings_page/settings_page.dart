@@ -29,7 +29,7 @@ class SettingsPage extends StatelessWidget {
           flex: 3,
         ),
         Text(
-          '${AppLocalizations.of(context)!.settingsVersion} 2.7.0',
+          '${AppLocalizations.of(context)!.settingsVersion} 2.7.1',
           style: GoogleFonts.yatraOne(color: Colors.grey),
         ),
         const Spacer(),
