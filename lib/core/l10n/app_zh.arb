@@ -15,6 +15,7 @@
     "createQRCodeMenuInstagram":"TikTok",
     "createQRCodeMenuTiktok":"Instagram",
     "createQRCodeMenuFacebook":"Facebook",
+    "createQRCodeMenuOnlyfans":"Onlyfans",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -86,6 +87,10 @@
     "createQRCodeRedditMsg2":"例如：r/*** |你/***",
     "createQRCodeRedditLabelDecorate":"写",
     "createQRCodeRedditValidatorError":"不能为空",
+
+    "createQRCodeOnlyfansMsg":"输入您的个人资料或用户的链接",
+    "createQRCodeOnlyfansLabelDecorate":"写",
+    "createQRCodeOnlyfansValidatorError":"不能为空",
 
     "createQRCodeGithubMsg":"输入您的链接或 github 用户，二维码将带您进入您的个人资料。",
     "createQRCodeGithubLabelDecorate":"写",

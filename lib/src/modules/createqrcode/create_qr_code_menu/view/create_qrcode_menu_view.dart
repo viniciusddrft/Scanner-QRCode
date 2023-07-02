@@ -73,6 +73,15 @@ class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
         color: const Color(0xff3b5998),
       ),
       CreateQRCodeItemModel(
+        icon: const ImageIcon(
+          AssetImage('assets/icons/onlyfans.png'),
+          size: 32,
+        ),
+        text: AppLocalizations.of(context)!.createQRCodeMenuOnlyfans,
+        typeQRCode: 'onlyfans',
+        color: const Color(0xff00aaea),
+      ),
+      CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.youtube),
         text: AppLocalizations.of(context)!.createQRCodeMenuYoutube,
         typeQRCode: 'youtube',

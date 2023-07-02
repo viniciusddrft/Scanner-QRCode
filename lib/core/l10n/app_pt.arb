@@ -15,6 +15,7 @@
     "createQRCodeMenuTiktok":"TikTok",
     "createQRCodeMenuInstagram":"Instagram",
     "createQRCodeMenuFacebook":"Facebook",
+    "createQRCodeMenuOnlyfans":"Onlyfans",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -86,6 +87,10 @@
     "createQRCodeRedditMsg2":"exemplo : r/***  |  u/***",
     "createQRCodeRedditLabelDecorate":"Digite",
     "createQRCodeRedditValidatorError":"Não pode ficar vazio",
+
+    "createQRCodeOnlyfansMsg":"Coloque o link do seu perfil ou usuario",
+    "createQRCodeOnlyfansLabelDecorate":"Digite",
+    "createQRCodeOnlyfansValidatorError":"Não pode ficar vazio",
 
     "createQRCodeGithubMsg":"Coloque seu link ou usuario do github e o qrcode levara ao seu perfil.",
     "createQRCodeGithubLabelDecorate":"Digite",

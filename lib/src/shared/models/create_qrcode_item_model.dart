@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CreateQRCodeItemModel {
   final String text, typeQRCode;
-  final Icon icon;
+  final Widget icon;
   final Color color;
 
   const CreateQRCodeItemModel(

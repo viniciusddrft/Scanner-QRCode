@@ -15,6 +15,7 @@
     "createQRCodeMenuInstagram":"Instagram",
     "createQRCodeMenuTiktok":"TikTok",
     "createQRCodeMenuFacebook":"Facebook",
+    "createQRCodeMenuOnlyfans":"Onlyfans",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -86,6 +87,10 @@
     "createQRCodeRedditMsg2":"example: r/*** | u/***",
     "createQRCodeRedditLabelDecorate":"Write",
     "createQRCodeRedditValidatorError":"Can't be empty",
+
+    "createQRCodeOnlyfansMsg":"Put the link of your profile or user",
+    "createQRCodeOnlyfansLabelDecorate":"Write",
+    "createQRCodeOnlyfansValidatorError":"Can't be empty",
 
     "createQRCodeGithubMsg":"Put your link or github user and the qrcode will take you to your profile.",
     "createQRCodeGithubLabelDecorate":"Write",
