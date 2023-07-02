@@ -16,6 +16,7 @@
     "createQRCodeMenuInstagram":"Instagram",
     "createQRCodeMenuFacebook":"Facebook",
     "createQRCodeMenuOnlyfans":"Onlyfans",
+    "createQRCodeMenuPrivacy":"Privacy",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -34,6 +35,8 @@
     "createQRCodeTitleTwitter":"Criar para Twitter",
     "createQRCodeTitleTwitch":"Criar para Twitch",
     "createQRCodeTitleReddit":"Criar para Reddit",
+    "createQRCodeTitleOnlyfans":"Criar para Onlyfans",
+    "createQRCodeTitlePrivacy":"Criar para Privacy",
 
     "createQRCodeALLButton":"Criar QRCode",
 
@@ -91,6 +94,10 @@
     "createQRCodeOnlyfansMsg":"Coloque o link do seu perfil ou usuario",
     "createQRCodeOnlyfansLabelDecorate":"Digite",
     "createQRCodeOnlyfansValidatorError":"Não pode ficar vazio",
+
+    "createQRCodePrivacyMsg":"Coloque o link do seu perfil ou usuario",
+    "createQRCodePrivacyLabelDecorate":"Digite",
+    "createQRCodePrivacyValidatorError":"Não pode ficar vazio",
 
     "createQRCodeGithubMsg":"Coloque seu link ou usuario do github e o qrcode levara ao seu perfil.",
     "createQRCodeGithubLabelDecorate":"Digite",

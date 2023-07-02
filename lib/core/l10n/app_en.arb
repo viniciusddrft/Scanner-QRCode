@@ -16,6 +16,7 @@
     "createQRCodeMenuTiktok":"TikTok",
     "createQRCodeMenuFacebook":"Facebook",
     "createQRCodeMenuOnlyfans":"Onlyfans",
+    "createQRCodeMenuPrivacy":"Privacy",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -34,6 +35,8 @@
     "createQRCodeTitleTwitter":"Create for Twitter",
     "createQRCodeTitleTwitch":"Create for Twitch",
     "createQRCodeTitleReddit":"Create for Reddit",
+    "createQRCodeTitleOnlyfans":"Create for Onlyfans",
+    "createQRCodeTitlePrivacy":"Create for Privacy",
 
     "createQRCodeALLButton":"Create QRCode",
 
@@ -91,6 +94,10 @@
     "createQRCodeOnlyfansMsg":"Put the link of your profile or user",
     "createQRCodeOnlyfansLabelDecorate":"Write",
     "createQRCodeOnlyfansValidatorError":"Can't be empty",
+
+    "createQRCodePrivacyMsg":"Put the link of your profile or user",
+    "createQRCodePrivacyLabelDecorate":"Write",
+    "createQRCodePrivacyValidatorError":"Can't be empty",
 
     "createQRCodeGithubMsg":"Put your link or github user and the qrcode will take you to your profile.",
     "createQRCodeGithubLabelDecorate":"Write",

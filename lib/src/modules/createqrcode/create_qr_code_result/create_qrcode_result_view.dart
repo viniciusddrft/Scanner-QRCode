@@ -78,8 +78,8 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: size.width * 0.09,
-                right: size.width * 0.09,
+                left: size.width * 0.08,
+                right: size.width * 0.08,
                 top: size.height * 0.07,
               ),
               child: Row(
@@ -101,7 +101,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
                       children: [
                         SizedBox(
                           height: size.height * 0.045,
-                          width: size.width * 0.25,
+                          width: size.width * 0.225,
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!
@@ -129,7 +129,7 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
                       children: [
                         SizedBox(
                           height: size.height * 0.045,
-                          width: size.width * 0.25,
+                          width: size.width * 0.225,
                           child: Center(
                             child: Text(
                               AppLocalizations.of(context)!

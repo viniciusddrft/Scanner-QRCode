@@ -43,12 +43,6 @@ class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
         color: Colors.orange,
       ),
       CreateQRCodeItemModel(
-        icon: const Icon(FontAwesomeIcons.github),
-        text: AppLocalizations.of(context)!.createQRCodeMenuGithub,
-        typeQRCode: 'github',
-        color: const Color(0xff2B2D30),
-      ),
-      CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.whatsapp),
         text: AppLocalizations.of(context)!.createQRCodeMenuWhatsapp,
         typeQRCode: 'whatsapp',
@@ -61,25 +55,29 @@ class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
         color: const Color(0xffD23F98),
       ),
       CreateQRCodeItemModel(
-        icon: const Icon(FontAwesomeIcons.tiktok),
-        text: AppLocalizations.of(context)!.createQRCodeMenuTiktok,
-        typeQRCode: 'tiktok',
-        color: const Color(0xff010101),
-      ),
-      CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.facebook),
         text: AppLocalizations.of(context)!.createQRCodeMenuFacebook,
         typeQRCode: 'facebook',
         color: const Color(0xff3b5998),
       ),
       CreateQRCodeItemModel(
+          icon: const ImageIcon(
+            AssetImage('assets/icons/onlyfans.png'),
+            size: 32,
+            color: Color(0xff00aaea),
+          ),
+          text: AppLocalizations.of(context)!.createQRCodeMenuOnlyfans,
+          typeQRCode: 'onlyfans',
+          color: Colors.white),
+      CreateQRCodeItemModel(
         icon: const ImageIcon(
-          AssetImage('assets/icons/onlyfans.png'),
+          AssetImage('assets/icons/privacy.png'),
           size: 32,
+          color: Color(0xffea4b35),
         ),
-        text: AppLocalizations.of(context)!.createQRCodeMenuOnlyfans,
-        typeQRCode: 'onlyfans',
-        color: const Color(0xff00aaea),
+        text: AppLocalizations.of(context)!.createQRCodeMenuPrivacy,
+        typeQRCode: 'privacy',
+        color: Colors.black,
       ),
       CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.youtube),
@@ -88,10 +86,22 @@ class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
         color: Colors.red,
       ),
       CreateQRCodeItemModel(
+        icon: const Icon(FontAwesomeIcons.tiktok),
+        text: AppLocalizations.of(context)!.createQRCodeMenuTiktok,
+        typeQRCode: 'tiktok',
+        color: const Color(0xff010101),
+      ),
+      CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.twitter),
         text: AppLocalizations.of(context)!.createQRCodeMenuTwitter,
         typeQRCode: 'twitter',
         color: const Color(0xff1DA1F2),
+      ),
+      CreateQRCodeItemModel(
+        icon: const Icon(FontAwesomeIcons.github),
+        text: AppLocalizations.of(context)!.createQRCodeMenuGithub,
+        typeQRCode: 'github',
+        color: const Color(0xff2B2D30),
       ),
       CreateQRCodeItemModel(
         icon: const Icon(FontAwesomeIcons.twitch),

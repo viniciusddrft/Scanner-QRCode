@@ -16,6 +16,7 @@
     "createQRCodeMenuTiktok":"Instagram",
     "createQRCodeMenuFacebook":"Facebook",
     "createQRCodeMenuOnlyfans":"Onlyfans",
+    "createQRCodeMenuPrivacy":"Privacy",
     "createQRCodeMenuYoutube":"Youtube",
     "createQRCodeMenuTwitter":"Twitter",
     "createQRCodeMenuTwitch":"Twitch",
@@ -34,6 +35,8 @@
     "createQRCodeTitleTwitter":"为 Twitter 创建",
     "createQRCodeTitleTwitch":"为 Twitch 创建",
     "createQRCodeTitleReddit":"为 reddit 创建",
+    "createQRCodeTitleOnlyfans":"为 Onlyfans 创建",
+    "createQRCodeTitlePrivacy":"为 Privacy 创建",
 
     "createQRCodeALLButton":"创建二维码",
 
@@ -91,6 +94,10 @@
     "createQRCodeOnlyfansMsg":"输入您的个人资料或用户的链接",
     "createQRCodeOnlyfansLabelDecorate":"写",
     "createQRCodeOnlyfansValidatorError":"不能为空",
+
+    "createQRCodePrivacyMsg":"输入您的个人资料或用户的链接",
+    "createQRCodePrivacyLabelDecorate":"写",
+    "createQRCodePrivacyValidatorError":"不能为空",
 
     "createQRCodeGithubMsg":"输入您的链接或 github 用户，二维码将带您进入您的个人资料。",
     "createQRCodeGithubLabelDecorate":"写",

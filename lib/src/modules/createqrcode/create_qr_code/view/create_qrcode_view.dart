@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code/view/components/body_form_onlyfans/body_form_onlyfans.dart';
+import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code/view/components/body_form_privacy/body_form_privacy.dart';
 
 import '../../../../shared/admob/controller/admob_controller.dart';
 import '../../../../shared/admob/widget/native_ad.dart';
@@ -73,7 +74,10 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
                   AppLocalizations.of(context)!.createQRCodeTitleReddit);
             } else if (widget.typeQRCode == 'onlyfans') {
               return Text(
-                  AppLocalizations.of(context)!.createQRCodeMenuOnlyfans);
+                  AppLocalizations.of(context)!.createQRCodeTitleOnlyfans);
+            } else if (widget.typeQRCode == 'privacy') {
+              return Text(
+                  AppLocalizations.of(context)!.createQRCodeTitlePrivacy);
             } else {
               throw Exception('tipo inválido');
             }
@@ -110,6 +114,8 @@ class _CreateQRCodeViewState extends State<CreateQRCodeView> {
             return const BodyFormReddit();
           } else if (widget.typeQRCode == 'onlyfans') {
             return const BodyFormOnlyfans();
+          } else if (widget.typeQRCode == 'privacy') {
+            return const BodyFormPrivacy();
           } else {
             throw Exception('tipo inválido');
           }
