@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -51,16 +52,15 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
   }
 
-  Never _errorInReadQrCodeCamera(String message) {
-    throw Exception(message);
-  }
-
   void onNewCameraSelected(CameraDescription cameraDescription) async {
     final previousCameraController = _controller;
 
     final CameraController cameraController = CameraController(
       cameraDescription,
       ResolutionPreset.medium,
+      imageFormatGroup: Platform.isAndroid
+          ? ImageFormatGroup.nv21
+          : ImageFormatGroup.bgra8888,
       enableAudio: false,
     );
     await previousCameraController?.dispose();
@@ -72,8 +72,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
     try {
       await cameraController.initialize();
-      cameraController
-          .startImageStream((CameraImage image) => _processImage(image));
+      cameraController.startImageStream(_processImage);
     } on CameraException catch (e) {
       debugPrint('Error initializing camera: $e');
     }
@@ -95,54 +94,40 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
       Navigator.popAndPushNamed(context, '/ReadQRCodeResult',
           arguments: <String, Object>{'result': code, 'typeCode': type});
 
-  void _processImage(CameraImage cameraImage) {
+  InputImage? _inputImageFromCameraImage(CameraImage image) {
+    final camera = _isCamBack ? widget.cameras.first : widget.cameras.last;
+    final rotation =
+        InputImageRotationValue.fromRawValue(camera.sensorOrientation);
+    if (rotation == null) return null;
+    final format = InputImageFormatValue.fromRawValue(image.format.raw);
+    if (format == null ||
+        (Platform.isAndroid && format != InputImageFormat.nv21) ||
+        (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
+    if (image.planes.length != 1) return null;
+    final plane = image.planes.first;
+    return InputImage.fromBytes(
+      bytes: plane.bytes,
+      metadata: InputImageMetadata(
+        size: Size(image.width.toDouble(), image.height.toDouble()),
+        rotation: rotation,
+        format: format,
+        bytesPerRow: plane.bytesPerRow,
+      ),
+    );
+  }
+
+  void _processImage(CameraImage cameraImage) async {
     try {
-      final WriteBuffer allBytes = WriteBuffer();
-      for (Plane plane in cameraImage.planes) {
-        allBytes.putUint8List(plane.bytes);
-      }
-      final Uint8List bytes = allBytes.done().buffer.asUint8List();
-
-      final Size imageSize =
-          Size(cameraImage.width.toDouble(), cameraImage.height.toDouble());
-
-      final InputImageRotation imageRotation =
-          InputImageRotationValue.fromRawValue(
-                  widget.cameras.first.sensorOrientation) ??
-              InputImageRotation.rotation0deg;
-
-      final InputImageFormat inputImageFormat =
-          InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
-              InputImageFormat.nv21;
-
-      for (var plane in cameraImage.planes) {
-        final inputImage = InputImage.fromBytes(
-          bytes: bytes,
-          metadata: InputImageMetadata(
-              bytesPerRow: plane.bytesPerRow,
-              size: imageSize,
-              format: inputImageFormat,
-              rotation: imageRotation),
-        );
-
-        _scanner.processImage(inputImage).then(
-          (List<Barcode> code) {
-            if (code.isNotEmpty) {
-              if (!code.first.rawValue!.contains('typeNumber')) {
-                if (!code.first.rawValue!.contains('errorCode')) {
-                  _closeCameraAndShowResult(
-                      code.first.rawValue as String, code.first.type);
-                } else {
-                  _errorInReadQrCodeCamera(
-                      'Error in reading => typeNumber in value');
-                }
-              } else {
-                _errorInReadQrCodeCamera(
-                    'Error in reading => errorCode in value');
-              }
-            }
-          },
-        ).whenComplete(() => _scanner.close());
+      final inputImage = _inputImageFromCameraImage(cameraImage);
+      if (inputImage != null) {
+        final codes = await _scanner.processImage(inputImage);
+        for (final code in codes) {
+          if (code.rawValue != null &&
+              !code.rawValue!.contains('errorCode') &&
+              !code.rawValue!.contains('typeNumber')) {
+            _closeCameraAndShowResult(code.rawValue as String, code.type);
+          }
+        }
       }
     } on PlatformException catch (error, stackStrace) {
       debugPrint('ERROR PlatformException --> $error');
