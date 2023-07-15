@@ -15,7 +15,7 @@ abstract class BaseForm extends StatefulWidget {
     if (isValid) {
       Navigator.pushReplacementNamed(context, '/CreateQRCodeResult',
           arguments: <String, String>{
-            'dataQRCode': filter(),
+            'dataQRCode': filter().trim(),
           });
     }
   }
