@@ -129,6 +129,7 @@ class _CreateQRCodeMenuState extends State<CreateQRCodeMenu> {
         mainAxisSpacing: 20,
       ),
       itemBuilder: (context, index) => CreateQRCodeItemMenu(
+        key: Key(listButtons[index].typeQRCode),
         qrcode: listButtons[index],
       ),
     );
