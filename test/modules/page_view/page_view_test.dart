@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scannerqrcode/core/locale/locale.dart';
 import 'package:scannerqrcode/core/routes/routes_app.dart';
 import 'package:scannerqrcode/core/theme/theme_app.dart';
-import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code_menu/view/components/create_qrcode_menu_item.dart';
 import 'package:scannerqrcode/src/modules/createqrcode/create_qr_code_menu/view/create_qrcode_menu_view.dart';
 import 'package:scannerqrcode/src/modules/page_view/view/my_page_view.dart';
 import 'package:scannerqrcode/src/modules/readqrcode/read_qr_code_menu/read_qr_code_view.dart';
@@ -130,22 +129,15 @@ void main() {
           home: CreateQRCodeMenu(),
         ),
       );
-      // deveria ser 15 esse teste tá falhando
-      var sla = 0;
 
+      // para o teste dar certo precisava usar scroll
+
+      final gesture = await tester.startGesture(Offset.zero);
+      await gesture.moveBy(const Offset(0, -300));
       await tester.pump();
-      for (var element in tester.allWidgets) {
-        for (var key in types) {
-          if (Key(key) == element.key) {
-            sla++;
-          }
-        }
+      for (String key in types) {
+        expect(find.byKey(Key(key), skipOffstage: false), findsOneWidget);
       }
-      debugPrint(sla.toString());
-
-      // for (String key in types) {
-      //   expect(find.byKey(Key(key), skipOffstage: false), findsOneWidget);
-      // }
     });
 
     testWidgets('Menu settings deve mostrar todas opções ',

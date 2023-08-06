@@ -23,7 +23,7 @@ class CreateQRCodeResult extends StatefulWidget {
 
 class _CreateQRCodeResultState extends State<CreateQRCodeResult>
     with PopupNotices {
-  final ScreenshotController screenshotController = ScreenshotController();
+  final screenshotController = ScreenshotController();
   late final CreateQrCodeController _createQrCodeController;
   late final Size size = MediaQuery.sizeOf(context);
 
