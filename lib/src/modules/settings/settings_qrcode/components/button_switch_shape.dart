@@ -24,82 +24,80 @@ class ButtonSwitchShape extends StatefulWidget {
 class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
   late final Size _size = MediaQuery.sizeOf(context);
 
-  void _popupChangeShapeQR() {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: widget.shapeType == ShapeType.eyeShape
-            ? Text(
-                AppLocalizations.of(context)!.settingsPopupColorEyeTitle,
-                style: Theme.of(context).textTheme.labelLarge,
-              )
-            : Text(
-                AppLocalizations.of(context)!.settingsPopupColorShapeTitle,
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-        content: SizedBox(
-          height: _size.height * 0.25,
-          width: _size.width * 0.75,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: GridView.builder(
-              itemCount: widget.shapeType == ShapeType.eyeShape
-                  ? QrEyeShape.values.length
-                  : QrDataModuleShape.values.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 30,
-                mainAxisSpacing: 30,
-              ),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  SettingsQRCodeNotifier.of(context).changeShape(
-                      widget.shapeType == ShapeType.eyeShape
-                          ? 'shapeQRCodeEye'
-                          : 'shapeQRCode',
-                      index);
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: widget.shapeType == ShapeType.eyeShape
-                        ? BorderRadius.circular(
-                            QrEyeShape.values[index] == QrEyeShape.square
-                                ? 0
-                                : 360)
-                        //type Body
-                        : BorderRadius.circular(
-                            QrDataModuleShape.values[index] ==
-                                    QrDataModuleShape.square
-                                ? 0
-                                : 360),
-                    border: Border.all(
-                      color: widget.shapeType == ShapeType.eyeShape
-                          ? SettingsQRCodeNotifier.of(context).colorQRCodeEye
-
+  void _popupChangeShapeQR() => showDialog<void>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: widget.shapeType == ShapeType.eyeShape
+              ? Text(
+                  AppLocalizations.of(context)!.settingsPopupColorEyeTitle,
+                  style: Theme.of(context).textTheme.labelLarge,
+                )
+              : Text(
+                  AppLocalizations.of(context)!.settingsPopupColorShapeTitle,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+          content: SizedBox(
+            height: _size.height * 0.25,
+            width: _size.width * 0.75,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: GridView.builder(
+                itemCount: widget.shapeType == ShapeType.eyeShape
+                    ? QrEyeShape.values.length
+                    : QrDataModuleShape.values.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 30,
+                  mainAxisSpacing: 30,
+                ),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    SettingsQRCodeNotifier.of(context).changeShape(
+                        widget.shapeType == ShapeType.eyeShape
+                            ? 'shapeQRCodeEye'
+                            : 'shapeQRCode',
+                        index);
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: widget.shapeType == ShapeType.eyeShape
+                          ? BorderRadius.circular(
+                              QrEyeShape.values[index] == QrEyeShape.square
+                                  ? 0
+                                  : 360)
                           //type Body
-                          : SettingsQRCodeNotifier.of(context).colorQRCode,
-                      width: 10,
+                          : BorderRadius.circular(
+                              QrDataModuleShape.values[index] ==
+                                      QrDataModuleShape.square
+                                  ? 0
+                                  : 360),
+                      border: Border.all(
+                        color: widget.shapeType == ShapeType.eyeShape
+                            ? SettingsQRCodeNotifier.of(context).colorQRCodeEye
+
+                            //type Body
+                            : SettingsQRCodeNotifier.of(context).colorQRCode,
+                        width: 10,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                AppLocalizations.of(context)!.settingsPopupButtonCancel,
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            )
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              AppLocalizations.of(context)!.settingsPopupButtonCancel,
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-          )
-        ],
-      ),
-    );
-  }
+      );
 
   @override
   Widget build(BuildContext context) {

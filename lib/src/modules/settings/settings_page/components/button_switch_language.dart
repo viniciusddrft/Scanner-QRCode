@@ -54,6 +54,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
   void _popupLanguageMenu(Size size) => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
+          key: const Key('popup change language'),
           title: Text(
             AppLocalizations.of(context)!.settingsLanguagePopup,
             style: Theme.of(context).textTheme.labelLarge,

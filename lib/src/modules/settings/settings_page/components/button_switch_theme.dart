@@ -79,6 +79,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
   void _popupChangeTheme(Size size) => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
+          key: const Key('popup change theme'),
           title: Text(
             AppLocalizations.of(context)!.settingsChooseTheTheme,
             style: Theme.of(context).textTheme.labelLarge,
