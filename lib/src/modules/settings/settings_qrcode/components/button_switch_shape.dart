@@ -28,7 +28,6 @@ class _ButtonSwitchShapeState extends State<ButtonSwitchShape> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        key: const Key('popup change shape'),
         title: widget.shapeType == ShapeType.eyeShape
             ? Text(
                 AppLocalizations.of(context)!.settingsPopupColorEyeTitle,
