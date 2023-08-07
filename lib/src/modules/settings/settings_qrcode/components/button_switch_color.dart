@@ -43,6 +43,7 @@ class _ButtonSwitchColorState extends State<ButtonSwitchColor> {
   void _popupChangeColorQR() => showDialog<void>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
+           key: const Key('popup change color'),
           title: Text(
             AppLocalizations.of(context)!.settingsPopupColorTitle,
             style: Theme.of(context).textTheme.labelLarge,

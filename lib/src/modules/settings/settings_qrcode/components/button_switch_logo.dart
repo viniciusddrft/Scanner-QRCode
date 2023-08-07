@@ -21,6 +21,7 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
+        key: const Key('popup change logo'),
         content: SizedBox(
           height: _size.height * 0.20,
           width: _size.width * 0.25,
