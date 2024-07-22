@@ -14,7 +14,7 @@ class ButtonHelp extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           padding: EdgeInsets.zero,
         ),
         onPressed: () => Navigator.pushNamed(context, '/Help'),

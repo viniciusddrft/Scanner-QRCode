@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -12,15 +11,22 @@ class CreateQrCodeController {
   const CreateQrCodeController({required this.screenshotController});
 
   Future<bool> saveImageQR() async {
-    final PermissionStatus status = await Permission.storage.status;
-    if (status.isDenied) await Permission.storage.request();
+    try {
+      final PermissionStatus status = await Permission.storage.status;
+      if (status.isDenied) await Permission.storage.request();
 
-    final Uint8List? imageQrCode = await screenshotController.capture();
+      final Uint8List? imageQrCode = await screenshotController.capture();
 
-    final Map result =
-        await ImageGallerySaver.saveImage(imageQrCode!.buffer.asUint8List());
+      final directory = await getExternalStorageDirectory();
+      final filePath = '${directory?.path}/$DateTime.now()';
+      final file = File(filePath);
 
-    return (result['isSuccess']);
+      await file.writeAsBytes(imageQrCode!.buffer.asUint8List());
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<void> shareImageQr() => screenshotController

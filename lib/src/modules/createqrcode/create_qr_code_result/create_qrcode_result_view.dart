@@ -91,11 +91,17 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
-                    onPressed: () async => popupNotice(context,
-                        notice: (await _createQrCodeController.saveImageQR())
-                            ? 'Salvo!'
-                            : 'Error :/',
-                        duration: const Duration(seconds: 1)),
+                    onPressed: () {
+                      if (mounted) {
+                        _createQrCodeController
+                            .saveImageQR()
+                            .then((bool value) {
+                          popupNotice(context,
+                              notice: value ? 'Salvo!' : 'Error :/',
+                              duration: const Duration(seconds: 1));
+                        });
+                      }
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -36,8 +36,6 @@ class ReadQrCodeController {
       statusStorage = await Permission.storage.request();
     }
 
-    if (statusStorage.isDenied) return null;
-
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image == null) return null;

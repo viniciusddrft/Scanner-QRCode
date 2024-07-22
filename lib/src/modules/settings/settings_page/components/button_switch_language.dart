@@ -121,7 +121,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           padding: EdgeInsets.zero,
         ),
         onPressed: () => _popupLanguageMenu(size),

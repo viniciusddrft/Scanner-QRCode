@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scannerqrcode/src/shared/services/interface/local_storage_interface.dart';
 import 'package:scannerqrcode/src/shared/services/local_storage_shared_preferrence.dart';
