@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scannerqrcode/src/shared/popup_notices/popup_notices.dart';
 
@@ -56,8 +56,10 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> with PopupNotices {
                     .getAvailableCameras()
                     .then((List<CameraDescription>? value) {
                   if (value != null) {
-                    Navigator.pushNamed(context, '/ScannerCamera',
-                        arguments: value);
+                    if (context.mounted) {
+                      Navigator.pushNamed(context, '/ScannerCamera',
+                          arguments: value);
+                    }
                   }
                 }),
                 child: SizedBox(
@@ -89,12 +91,16 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> with PopupNotices {
                     .scanFile()
                     .then((Map<String, Object>? value) {
                   if (value != null) {
-                    Navigator.pushNamed(context, '/ReadQRCodeResult',
-                        arguments: value);
+                    if (context.mounted) {
+                      Navigator.pushNamed(context, '/ReadQRCodeResult',
+                          arguments: value);
+                    }
                   } else {
-                    popupNotice(context,
-                        notice: 'Error :/',
-                        duration: const Duration(seconds: 1));
+                    if (context.mounted) {
+                      popupNotice(context,
+                          notice: 'Error :/',
+                          duration: const Duration(seconds: 1));
+                    }
                   }
                 }),
                 child: SizedBox(

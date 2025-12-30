@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
@@ -31,7 +31,11 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
               IconButton(
                 tooltip: AppLocalizations.of(context)!.settingsImageTooltipAdd,
                 onPressed: () => _setLogo().then(
-                  (_) => Navigator.pop(context),
+                  (_) {
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                  },
                 ),
                 icon: const Icon(
                   Icons.add_photo_alternate_outlined,
@@ -70,8 +74,10 @@ class _ButtonSwitchLogoState extends State<ButtonSwitchLogo> {
       ImagePicker().pickImage(source: ImageSource.gallery).then(
         (XFile? value) {
           if (value != null) {
-            SettingsQRCodeNotifier.of(context).logoPath = value.path;
-            SettingsQRCodeNotifier.of(context).changeLogo(value.path);
+            if (mounted) {
+              SettingsQRCodeNotifier.of(context).logoPath = value.path;
+              SettingsQRCodeNotifier.of(context).changeLogo(value.path);
+            }
           }
         },
       );

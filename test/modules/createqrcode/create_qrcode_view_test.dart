@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scannerqrcode/core/locale/locale.dart';
 import 'package:scannerqrcode/core/theme/theme_app.dart';

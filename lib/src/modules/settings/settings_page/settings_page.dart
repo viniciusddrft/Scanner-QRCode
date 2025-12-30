@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'components/button_contact.dart';
@@ -29,7 +29,7 @@ class SettingsPage extends StatelessWidget {
           flex: 3,
         ),
         Text(
-          '${AppLocalizations.of(context)!.settingsVersion} 2.7.3',
+          '${AppLocalizations.of(context)!.settingsVersion} 2.8.1',
           style: GoogleFonts.yatraOne(color: Colors.grey),
         ),
         const Spacer(),

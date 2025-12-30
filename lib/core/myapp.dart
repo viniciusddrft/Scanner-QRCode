@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl_standalone.dart';
 import '../src/shared/settings_qrcode/controller/settings_create_qrcode_controller.dart';
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
-        appBarTheme: const AppBarTheme(color: Color(0xff777777)),
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0xff777777)),
         cardColor: const Color(0xffe7e7ee),
         iconTheme: const IconThemeData(color: Colors.black),
         textTheme: TextTheme(
@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
           useMaterial3: true,
           brightness: Brightness.dark,
-          appBarTheme: const AppBarTheme(color: Color(0xff202020)),
+          appBarTheme: const AppBarTheme(backgroundColor: Color(0xff202020)),
           cardColor: null,
           iconTheme: const IconThemeData(
             color: Colors.white,

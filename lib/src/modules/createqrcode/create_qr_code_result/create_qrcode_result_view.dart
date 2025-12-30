@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:scannerqrcode/src/shared/popup_notices/popup_notices.dart';
 import 'package:screenshot/screenshot.dart';
@@ -96,9 +96,11 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
                         _createQrCodeController
                             .saveImageQR()
                             .then((bool value) {
-                          popupNotice(context,
-                              notice: value ? 'Salvo!' : 'Error :/',
-                              duration: const Duration(seconds: 1));
+                          if (context.mounted) {
+                            popupNotice(context,
+                                notice: value ? 'Salvo!' : 'Error :/',
+                                duration: const Duration(seconds: 1));
+                          }
                         });
                       }
                     },

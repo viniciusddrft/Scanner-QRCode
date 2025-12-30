@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
@@ -67,7 +67,7 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Colors.transparent.withOpacity(0),
+                color: Colors.transparent.withAlpha(0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -90,12 +90,16 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                       onPressed: () => Clipboard.setData(
                         ClipboardData(text: widget.result),
                       ).then(
-                        (_) => popupNotice(
-                          context,
-                          notice:
-                              '${AppLocalizations.of(context)!.scanResultPopupCopy}.',
-                          duration: const Duration(milliseconds: 500),
-                        ),
+                        (_) {
+                          if (context.mounted) {
+                            popupNotice(
+                              context,
+                              notice:
+                                  '${AppLocalizations.of(context)!.scanResultPopupCopy}.',
+                              duration: const Duration(milliseconds: 500),
+                            );
+                          }
+                        },
                       ),
                       icon: Icon(Icons.copy,
                           color: Theme.of(context).iconTheme.color),

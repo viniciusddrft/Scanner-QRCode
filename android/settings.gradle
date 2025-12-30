@@ -1,11 +1,44 @@
+pluginManagement {
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }()
+    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins {
+        id "com.android.application" version "8.9.1"
+        id "com.android.library" version "8.9.1"
+        id "org.jetbrains.kotlin.android" version "2.2.0"
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+def pluginsFile = new File(rootProject.projectDir.parent, '.flutter-plugins-dependencies')
+if (pluginsFile.exists()) {
+    def jsonSlurper = new groovy.json.JsonSlurper()
+    def pluginsData = jsonSlurper.parse(pluginsFile)
+    pluginsData.plugins.android.each { plugin ->
+        if (plugin.native_build) {
+            def pluginName = plugin.name
+            def pluginPath = "${plugin.path}/android"
+            include ":$pluginName"
+            project(":$pluginName").projectDir = new File(pluginPath)
+        }
+    }
+}
+
 include ':app'
-
-def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
-def properties = new Properties()
-
-assert localPropertiesFile.exists()
-localPropertiesFile.withReader("UTF-8") { reader -> properties.load(reader) }
-
-def flutterSdkPath = properties.getProperty("flutter.sdk")
-assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
-apply from: "$flutterSdkPath/packages/flutter_tools/gradle/app_plugin_loader.gradle"

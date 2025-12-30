@@ -19,40 +19,37 @@ class ListTileNativeAdFactory(val context: Context) : GoogleMobileAdsPlugin.Nati
         val nativeAdView = LayoutInflater.from(context)
                 .inflate(R.layout.list_tile_native_ad, null) as NativeAdView
 
-        with(nativeAdView) {
-            val attributionViewSmall =
-                    findViewById<TextView>(R.id.tv_list_tile_native_ad_attribution_small)
-            val attributionViewLarge =
-                    findViewById<TextView>(R.id.tv_list_tile_native_ad_attribution_large)
+        val attributionViewSmall =
+                nativeAdView.findViewById<TextView>(R.id.tv_list_tile_native_ad_attribution_small)
+        val attributionViewLarge =
+                nativeAdView.findViewById<TextView>(R.id.tv_list_tile_native_ad_attribution_large)
 
-            val iconView = findViewById<ImageView>(R.id.iv_list_tile_native_ad_icon)
-            val icon = nativeAd.icon
-            if (icon != null) {
-                attributionViewSmall.visibility = View.VISIBLE
-                attributionViewLarge.visibility = View.INVISIBLE
-                iconView.setImageDrawable(icon.drawable)
-            } else {
-                attributionViewSmall.visibility = View.INVISIBLE
-                attributionViewLarge.visibility = View.VISIBLE
-            }
-            this.iconView = iconView
-
-            val headlineView = findViewById<TextView>(R.id.tv_list_tile_native_ad_headline)
-            headlineView.text = nativeAd.headline
-            this.headlineView = headlineView
-
-            val bodyView = findViewById<TextView>(R.id.tv_list_tile_native_ad_body)
-            with(bodyView) {
-                text = nativeAd.body
-                if(text !=null){
-                    visibility = View.VISIBLE
-                }else{
-                    visibility = View.INVISIBLE
-                }
-            }
-            this.bodyView = bodyView
-            setNativeAd(nativeAd)
+        val iconView = nativeAdView.findViewById<ImageView>(R.id.iv_list_tile_native_ad_icon)
+        val icon = nativeAd.icon
+        if (icon != null) {
+            attributionViewSmall.visibility = View.VISIBLE
+            attributionViewLarge.visibility = View.INVISIBLE
+            iconView.setImageDrawable(icon.drawable)
+        } else {
+            attributionViewSmall.visibility = View.INVISIBLE
+            attributionViewLarge.visibility = View.VISIBLE
         }
+        nativeAdView.iconView = iconView
+
+        val headlineView = nativeAdView.findViewById<TextView>(R.id.tv_list_tile_native_ad_headline)
+        headlineView.text = nativeAd.headline
+        nativeAdView.headlineView = headlineView
+
+        val bodyView = nativeAdView.findViewById<TextView>(R.id.tv_list_tile_native_ad_body)
+        bodyView.text = nativeAd.body
+        if (bodyView.text != null) {
+            bodyView.visibility = View.VISIBLE
+        } else {
+            bodyView.visibility = View.INVISIBLE
+        }
+        nativeAdView.bodyView = bodyView
+        nativeAdView.setNativeAd(nativeAd)
+        
         return nativeAdView
     }
 }
