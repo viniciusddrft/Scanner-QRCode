@@ -190,7 +190,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
                     backgroundColor: Colors.red,
                     onPressed: _changeModeScanBarcode,
                     child: const Center(
-                      child: Icon(
+                      child: FaIcon(
                         FontAwesomeIcons.barcode,
                         color: Colors.white,
                       ),

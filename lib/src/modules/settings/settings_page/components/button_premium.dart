@@ -27,7 +27,7 @@ class ButtonPremium extends StatelessWidget with OpenLink {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Icon(
+            const FaIcon(
               FontAwesomeIcons.crown,
               color: Colors.red,
             ),
@@ -36,7 +36,7 @@ class ButtonPremium extends StatelessWidget with OpenLink {
                   .settingsQRCodeDownloadPremiumVersion,
               style: const TextStyle(fontSize: 16),
             ),
-            const Icon(
+            const FaIcon(
               FontAwesomeIcons.crown,
               color: Colors.red,
             )

@@ -25,7 +25,7 @@ class SettingsQRCodeNotifier extends ChangeNotifier {
   String? logoPath;
 
   void changeColor(String savePreferenceKey, Color color) {
-    _localStorage.saveValue<int>(savePreferenceKey, color.value);
+    _localStorage.saveValue<int>(savePreferenceKey, color.toARGB32());
     if (savePreferenceKey == 'colorQRBackground') {
       colorQRBackground = color;
     } else if (savePreferenceKey == 'colorQRCode') {

@@ -124,7 +124,8 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
-                      onPressed: () => Share.share(widget.result),
+                      onPressed: () =>
+                          SharePlus.instance.share(ShareParams(text: widget.result)),
                       child: SizedBox(
                         width: _size.width * 0.3,
                         child: Row(

@@ -45,7 +45,7 @@ void main() {
       await tester.pump();
       expect(find.byType(OverlayCameraQrcodeWidget), findsOneWidget);
 
-      await tester.tap(find.byIcon(FontAwesomeIcons.barcode));
+      await tester.tap(find.byIcon(FontAwesomeIcons.barcode.data));
 
       await tester.pump();
 

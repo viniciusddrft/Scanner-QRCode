@@ -31,5 +31,5 @@ class CreateQrCodeController {
 
   Future<void> shareImageQr() => screenshotController
       .captureAndSave(Directory.systemTemp.path)
-      .then((file) => Share.shareXFiles([XFile(file!)]));
+      .then((file) => SharePlus.instance.share(ShareParams(files: [XFile(file!)])));
 }

@@ -32,7 +32,7 @@ class _ButtonSwitchLanguageState extends State<ButtonSwitchLanguage> {
     super.didChangeDependencies();
   }
 
-  List<Map<String, Object>> _allLocales(context) => [
+  List<Map<String, Object>> _allLocales(BuildContext context) => [
         {
           'text': AppLocalizations.of(context)!.settingsLanguageNameBrasil,
           'icon': 'assets/icons_translations/brazil.png',

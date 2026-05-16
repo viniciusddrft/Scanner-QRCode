@@ -49,7 +49,7 @@ class _ButtonSwicthThemeState extends State<ButtonSwicthTheme> {
   void setIconLight() =>
       icon.value = const Icon(Icons.light_mode, color: Colors.yellow);
 
-  List<Map<String, Object>> _allThemes(context) => [
+  List<Map<String, Object>> _allThemes(BuildContext context) => [
         {
           'text': AppLocalizations.of(context)!.settingsSystemTheme,
           'icon': Icons.brightness_4,
