@@ -10,32 +10,15 @@ class ReadQrCodeController {
   const ReadQrCodeController();
 
   Future<List<CameraDescription>?> getAvailableCameras() async {
-    PermissionStatus statusCamera = await Permission.camera.status;
-    PermissionStatus statusMicrophone = await Permission.microphone.status;
+    final PermissionStatus statusCamera = await Permission.camera.request();
+    if (!statusCamera.isGranted) return null;
 
-    if (statusCamera.isDenied) {
-      statusCamera = await Permission.camera.request();
-    }
-
-    if (statusCamera.isDenied) return null;
-
-    if (statusMicrophone.isDenied) {
-      statusMicrophone = await Permission.microphone.request();
-    }
-
-    if (statusMicrophone.isDenied || statusCamera.isDenied) return null;
-
-    final List<CameraDescription> cameras = await availableCameras();
-
-    return cameras;
+    return availableCameras();
   }
 
+  /// O image_picker usa o seletor de fotos do sistema, que não precisa de
+  /// permissão de armazenamento.
   Future<Map<String, Object>?> scanFile() async {
-    PermissionStatus statusStorage = await Permission.storage.status;
-    if (statusStorage.isDenied) {
-      statusStorage = await Permission.storage.request();
-    }
-
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image == null) return null;
@@ -44,32 +27,24 @@ class ReadQrCodeController {
     final BarcodeScanner scanner = BarcodeScanner();
 
     try {
-      return scanner.processImage(inputImage).then(
-        (List<Barcode> code) {
-          if (code.isNotEmpty) {
-            if (!code.first.rawValue!.contains('typeNumber')) {
-              if (!code.first.rawValue!.contains('errorCode')) {
-                return {
-                  'result': code.first.rawValue!,
-                  'typeCode': code.first.type
-                };
-              } else {
-                return null;
-              }
-            } else {
-              return null;
-            }
-          } else {
-            return null;
-          }
-        },
-      ).whenComplete(() => scanner.close());
+      final List<Barcode> barcodes = await scanner.processImage(inputImage);
+      final Barcode? code = barcodes
+          .where((Barcode b) =>
+              b.rawValue != null &&
+              !b.rawValue!.contains('typeNumber') &&
+              !b.rawValue!.contains('errorCode'))
+          .firstOrNull;
+
+      if (code == null) return null;
+      return {'result': code.rawValue!, 'typeCode': code.type};
     } on PlatformException catch (error, stackStrace) {
       debugPrint('ERROR PlatformException --> $error');
       debugPrint('ERROR PlatformException --> $stackStrace');
     } catch (error, stackStrace) {
       debugPrint('ERROR --> $error');
       debugPrint('ERROR --> $stackStrace');
+    } finally {
+      scanner.close();
     }
     return null;
   }

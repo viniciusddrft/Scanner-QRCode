@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/core/flavor.dart';
 import 'core/locale/locale.dart';
 import 'core/myapp.dart';
 import 'core/theme/theme_app.dart';
@@ -7,7 +8,7 @@ import 'src/shared/settings_qrcode/controller/settings_create_qrcode_controller.
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  AdmobController.initialize();
+  if (!isPremium) AdmobController.initialize();
 
   runApp(
     ThemeApp(

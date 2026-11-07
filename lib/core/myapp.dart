@@ -16,6 +16,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool _prefsLoaded = false;
+
   @override
   void initState() {
     findSystemLocale();
@@ -28,10 +30,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_prefsLoaded) return;
+    _prefsLoaded = true;
     LocaleAppNotifier.of(context).getLocalePreference();
     ThemeAppNotifier.of(context).getThemePreference();
     SettingsQRCodeNotifier.of(context).loadAllPreferences();
-    super.didChangeDependencies();
   }
 
   @override
@@ -116,13 +120,5 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/PageView',
       onGenerateRoute: Routes.routes,
     );
-  }
-
-  @override
-  void dispose() {
-    ThemeAppNotifier.of(context).dispose();
-    SettingsQRCodeNotifier.of(context).dispose();
-    LocaleAppNotifier.of(context).dispose();
-    super.dispose();
   }
 }

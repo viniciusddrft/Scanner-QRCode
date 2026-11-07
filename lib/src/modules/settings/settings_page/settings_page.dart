@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/core/flavor.dart';
 
 import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +19,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ButtonPremium(),
+        if (!isPremium) const ButtonPremium(),
         const ButtonCustomQRCode(),
         const ButtonSwicthTheme(),
         const ButtonSwitchLanguage(),

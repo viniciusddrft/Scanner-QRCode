@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:scannerqrcode/core/flavor.dart';
 
 import 'package:flutter/material.dart';
 
@@ -159,13 +160,15 @@ class _CreateQRCodeResultState extends State<CreateQRCodeResult>
           ],
         ),
       ),
-      bottomNavigationBar: const SizedBox(
-        height: 75,
-        child: AdmobNativeAd(
-          adUnitId: AdmobController.nativeAdUnitIDListTile,
-          factoryId: 'listTile',
-        ),
-      ),
+      bottomNavigationBar: isPremium
+          ? null
+          : const SizedBox(
+              height: 75,
+              child: AdmobNativeAd(
+                adUnitId: AdmobController.nativeAdUnitIDListTile,
+                factoryId: 'listTile',
+              ),
+            ),
     );
   }
 }

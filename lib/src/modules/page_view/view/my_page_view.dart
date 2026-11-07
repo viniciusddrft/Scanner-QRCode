@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/core/flavor.dart';
 
 import 'package:scannerqrcode/core/l10n/app_localizations.dart';
 
@@ -92,13 +93,15 @@ class _MyPageViewState extends State<MyPageView> {
           SettingsPage(),
         ],
       ),
-      bottomNavigationBar: const SizedBox(
-        height: 75,
-        child: AdmobNativeAd(
-          adUnitId: AdmobController.nativeAdUnitIDListTile,
-          factoryId: 'listTile',
-        ),
-      ),
+      bottomNavigationBar: isPremium
+          ? null
+          : const SizedBox(
+              height: 75,
+              child: AdmobNativeAd(
+                adUnitId: AdmobController.nativeAdUnitIDListTile,
+                factoryId: 'listTile',
+              ),
+            ),
     );
   }
 

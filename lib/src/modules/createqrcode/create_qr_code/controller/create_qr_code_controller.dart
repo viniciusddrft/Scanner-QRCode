@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -12,13 +11,12 @@ class CreateQrCodeController {
 
   Future<bool> saveImageQR() async {
     try {
-      final PermissionStatus status = await Permission.storage.status;
-      if (status.isDenied) await Permission.storage.request();
-
       final Uint8List? imageQrCode = await screenshotController.capture();
 
+      // Pasta do próprio app: não precisa de permissão de armazenamento.
       final directory = await getExternalStorageDirectory();
-      final filePath = '${directory?.path}/$DateTime.now()';
+      final filePath =
+          '${directory!.path}/qrcode_${DateTime.now().millisecondsSinceEpoch}.png';
       final file = File(filePath);
 
       await file.writeAsBytes(imageQrCode!.buffer.asUint8List());
@@ -31,5 +29,6 @@ class CreateQrCodeController {
 
   Future<void> shareImageQr() => screenshotController
       .captureAndSave(Directory.systemTemp.path)
-      .then((file) => SharePlus.instance.share(ShareParams(files: [XFile(file!)])));
+      .then((file) =>
+          SharePlus.instance.share(ShareParams(files: [XFile(file!)])));
 }

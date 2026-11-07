@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scannerqrcode/core/flavor.dart';
 import 'package:flutter/services.dart';
 
 import 'package:scannerqrcode/core/l10n/app_localizations.dart';
@@ -124,8 +125,8 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
-                      onPressed: () =>
-                          SharePlus.instance.share(ShareParams(text: widget.result)),
+                      onPressed: () => SharePlus.instance
+                          .share(ShareParams(text: widget.result)),
                       child: SizedBox(
                         width: _size.width * 0.3,
                         child: Row(
@@ -151,15 +152,16 @@ class _ResultReadCodeState extends State<ResultReadCode> with PopupNotices {
                 ],
               ),
             ),
-            Expanded(
-              child: AdmobNativeAd(
-                adUnitId: AdmobController.nativeAdUnitIDRectangular,
-                factoryId: 'rectangular',
-                nativeAdOptions: NativeAdOptions(
-                  videoOptions: VideoOptions(startMuted: false),
+            if (!isPremium)
+              Expanded(
+                child: AdmobNativeAd(
+                  adUnitId: AdmobController.nativeAdUnitIDRectangular,
+                  factoryId: 'rectangular',
+                  nativeAdOptions: NativeAdOptions(
+                    videoOptions: VideoOptions(startMuted: false),
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),

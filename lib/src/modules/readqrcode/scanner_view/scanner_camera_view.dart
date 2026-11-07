@@ -31,24 +31,34 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   final ValueNotifier<bool> _isFlashOn = ValueNotifier<bool>(false);
   late final Size _size = MediaQuery.sizeOf(context);
 
+  /// Já encontrou um código e está navegando para o resultado.
+  bool _handled = false;
+
+  /// Um frame está sendo processado pelo ML Kit; frames novos são descartados.
+  bool _isProcessing = false;
+
+  CameraDescription get _currentCamera =>
+      _isCamBack ? widget.cameras.first : widget.cameras.last;
+
   @override
   void initState() {
-    onNewCameraSelected(widget.cameras.first);
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    onNewCameraSelected(widget.cameras.first);
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final CameraController? cameraController = _controller;
-
-    if (cameraController == null || !cameraController.value.isInitialized) {
-      return;
-    }
+    if (_handled) return;
 
     if (state == AppLifecycleState.inactive) {
+      final CameraController? cameraController = _controller;
+      if (cameraController == null) return;
+      _controller = null;
+      _isLoadCam.value = false;
       cameraController.dispose();
-    } else if (state == AppLifecycleState.resumed) {
-      onNewCameraSelected(cameraController.description);
+    } else if (state == AppLifecycleState.resumed && _controller == null) {
+      onNewCameraSelected(_currentCamera);
     }
   }
 
@@ -78,16 +88,16 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     }
 
     if (mounted) {
-      _isLoadCam.value = _controller!.value.isInitialized;
+      _isLoadCam.value = _controller?.value.isInitialized ?? false;
     }
   }
 
   void _closeCameraAndShowResult(String code, BarcodeType type) async {
-    if (_controller!.value.isStreamingImages) {
-      await _controller!.stopImageStream();
-      await _scanner.close();
+    final CameraController? controller = _controller;
+    if (controller != null && controller.value.isStreamingImages) {
+      await controller.stopImageStream();
     }
-    _showResult(code, type);
+    if (mounted) _showResult(code, type);
   }
 
   void _showResult(String code, BarcodeType type) =>
@@ -95,7 +105,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
           arguments: <String, Object>{'result': code, 'typeCode': type});
 
   InputImage? _inputImageFromCameraImage(CameraImage image) {
-    final camera = _isCamBack ? widget.cameras.first : widget.cameras.last;
+    final camera = _currentCamera;
     final rotation =
         InputImageRotationValue.fromRawValue(camera.sensorOrientation);
     if (rotation == null) return null;
@@ -119,15 +129,21 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
   }
 
   void _processImage(CameraImage cameraImage) async {
+    if (_handled || _isProcessing) return;
+    _isProcessing = true;
     try {
       final inputImage = _inputImageFromCameraImage(cameraImage);
       if (inputImage != null) {
         final codes = await _scanner.processImage(inputImage);
         for (final code in codes) {
-          if (code.rawValue != null &&
-              !code.rawValue!.contains('errorCode') &&
-              !code.rawValue!.contains('typeNumber')) {
-            _closeCameraAndShowResult(code.rawValue as String, code.type);
+          final String? value = code.rawValue;
+          if (!_handled &&
+              value != null &&
+              !value.contains('errorCode') &&
+              !value.contains('typeNumber')) {
+            _handled = true;
+            _closeCameraAndShowResult(value, code.type);
+            break;
           }
         }
       }
@@ -137,6 +153,8 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
     } catch (error, stackStrace) {
       debugPrint('ERROR --> $error');
       debugPrint('ERROR --> $stackStrace');
+    } finally {
+      _isProcessing = false;
     }
   }
 
@@ -317,6 +335,7 @@ class _ScannerCameraViewState extends State<ScannerCameraView>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller?.dispose();
     _scanner.close();
     _isLoadCam.dispose();

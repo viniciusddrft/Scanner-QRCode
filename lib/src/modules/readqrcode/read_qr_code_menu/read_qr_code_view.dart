@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:scannerqrcode/core/flavor.dart';
 import 'package:flutter/material.dart';
 
 import 'package:scannerqrcode/core/l10n/app_localizations.dart';
@@ -26,7 +27,9 @@ class _ReadQRCodePageState extends State<ReadQRCodePage> with PopupNotices {
         Flexible(
           flex: 5,
           child: Image.asset(
-            'assets/icons/logo.png',
+            isPremium
+                ? 'assets/premium/icons/logo.png'
+                : 'assets/icons/logo.png',
             height: 220,
             width: 220,
           ),

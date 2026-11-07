@@ -8,6 +8,27 @@ Esse app é um projeto feito em flutter que lê códigos de barra qr code e outr
 
 <img src="assets/readme/demo.gif">
 
+## Versões (flavors)
+
+O mesmo código gera os dois apps da Play Store:
+
+| Flavor | Pacote | Diferença |
+|---|---|---|
+| `free` | `com.scannerqrcode` | anúncios AdMob + botão para o Premium |
+| `premium` | `com.scannerqrcode_premium` | sem anúncios |
+
+```bash
+flutter run --flavor free
+flutter build appbundle --release --flavor free      # build/app/outputs/bundle/freeRelease/
+flutter build appbundle --release --flavor premium   # build/app/outputs/bundle/premiumRelease/
+```
+
+- No Dart, use `isPremium` (`lib/core/flavor.dart`) para diferenciar.
+- Recursos Android só do premium (ícone, splash, permissões removidas) ficam em `android/app/src/premium/`.
+- Assets só do premium ficam em `assets/premium/`.
+- Assinatura: `android/key.properties` (free) e `android/key-premium.properties` (premium), ambos fora do git.
+- `lib/src/shared/admob/controller/admob_controller.dart` também fica fora do git e precisa existir para compilar.
+
 ## Problemas atuais do projeto
 
 Hoje o app cria de maneira fácil qr code para wi-fi, contatos e várias outras coisas porém quando você lê um qr code de um contato por mais que ele leia o qr code ele não abre o app de contatos já adicionando o novo contato no telefone isso acontece pq o flutter precisa se comunicar via intent para fazer todo esse processo que facilita a vida do usuário, mas usar esse tipo de intent no flutter ainda é um mistério para mim fiz muitas pesquisas e testes e o que dificulta esse processo é ser algo totalmente nativo, até achei packages que fazem isso porém na documentação não mostra como usar para esse proposito especifico.
