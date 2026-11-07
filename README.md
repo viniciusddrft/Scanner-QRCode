@@ -33,6 +33,20 @@ flutter build appbundle --release --flavor premium   # build/app/outputs/bundle/
 
 Hoje o app cria de maneira fácil qr code para wi-fi, contatos e várias outras coisas porém quando você lê um qr code de um contato por mais que ele leia o qr code ele não abre o app de contatos já adicionando o novo contato no telefone isso acontece pq o flutter precisa se comunicar via intent para fazer todo esse processo que facilita a vida do usuário, mas usar esse tipo de intent no flutter ainda é um mistério para mim fiz muitas pesquisas e testes e o que dificulta esse processo é ser algo totalmente nativo, até achei packages que fazem isso porém na documentação não mostra como usar para esse proposito especifico.
 
+## Próximas melhorias
+
+Planejadas para a próxima versão:
+
+- [ ] **Histórico de leituras e de QR codes criados**
+  - lista local com data e tipo, busca e favoritos
+  - abrir de novo o resultado de uma leitura antiga
+  - QRs criados salvos com o estilo (cor, formato, logo), com opção de compartilhar ou gerar de novo
+  - sugestão: `sqflite`, ou `shared_preferences` para começar simples
+- [ ] **Ações no resultado da leitura** (resolve o problema descrito acima)
+  - Wi-Fi: botão "Conectar", com a intent `Settings.ACTION_WIFI_ADD_NETWORKS` (Android 11+, que já é o minSdk)
+  - Contato: botão "Adicionar aos contatos", com a intent `ContactsContract.Intents.Insert.ACTION` via `MethodChannel` no `MainActivity.kt`, preenchendo nome, telefone e e-mail do vCard
+  - Telefone, SMS, e-mail e evento: abrir o app correspondente (`url_launcher` com `tel:`, `sms:`, `mailto:`)
+
 ## Testes Unitários e Testes de Widgets
 
 Os testes finalmente foram feitos \o/ o package não era o problema mas quando eu entendi já tinha removido kkkkk
